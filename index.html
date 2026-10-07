@@ -69,7 +69,7 @@ dialog textarea{min-height:100px;resize:vertical}
 .err{color:#c0392b;font-size:13px;min-height:18px;margin:8px 0 0}
 .dbtn{display:flex;gap:8px;justify-content:flex-end;margin-top:14px}
 .note{margin:14px 0 0;padding:10px 14px;border-radius:12px;background:var(--tint);font-size:13px}
-.art{aspect-ratio:3/4;padding:0;align-items:center;overflow:hidden}.art img.ph{width:100%;height:100%;max-width:none;object-fit:cover;cursor:zoom-in;background:#000}#zImg{width:100%;max-height:75vh;object-fit:contain;background:#000;border-radius:12px}.phrow{display:flex;gap:12px;align-items:center}.phbox{flex:none;width:72px;height:96px;border-radius:10px;background:#000 center/cover no-repeat;border:1px solid var(--line)}.phbtns{display:flex;flex-direction:column;gap:8px}.phbtns .btn{margin:0;color:var(--ink);font-size:13px;text-align:center}.tags .fam{background:var(--tint);color:var(--ink);cursor:pointer}.guide{margin:14px 0 0;font-size:13px;color:var(--mute)}.guide summary{cursor:pointer;color:var(--ink);font-weight:600}.guide p{margin:8px 0}.guide b.fam{color:var(--ink);cursor:pointer;border-bottom:1px dotted var(--mute)}.famgrid{display:flex;flex-wrap:wrap;gap:6px}.famgrid label{display:inline-flex;align-items:center;gap:6px;margin:0;padding:4px 10px;border:1px solid var(--line);border-radius:999px;font-size:13px;color:var(--ink)}.famgrid input{width:auto;padding:0}</style>
+.art{aspect-ratio:3/4;padding:0;align-items:center;overflow:hidden}.art img.ph{width:100%;height:100%;max-width:none;object-fit:cover;cursor:zoom-in;background:#000}#zImg{width:100%;max-height:75vh;object-fit:contain;background:#000;border-radius:12px}.phrow{display:flex;gap:12px;align-items:center}.phbox{flex:none;width:72px;height:96px;border-radius:10px;background:#000 center/cover no-repeat;border:1px solid var(--line)}.phbtns{display:flex;flex-direction:column;gap:8px}.phbtns .btn{margin:0;color:var(--ink);font-size:13px;text-align:center}.tags .fam{background:var(--tint);color:var(--ink);cursor:pointer}.guide{margin:14px 0 0;font-size:13px;color:var(--mute)}.guide summary{cursor:pointer;color:var(--ink);font-weight:600}.guide p{margin:8px 0}.guide b.fam{color:var(--ink);cursor:pointer;border-bottom:1px dotted var(--mute)}.famgrid{display:flex;flex-wrap:wrap;gap:6px}.famgrid label{display:inline-flex;align-items:center;gap:6px;margin:0;padding:4px 10px;border:1px solid var(--line);border-radius:999px;font-size:13px;color:var(--ink)}.famgrid input{width:auto;padding:0}.guide .sel{margin-left:8px;color:var(--mute);font-weight:500}.guide>.row{margin-top:10px}</style>
 </head>
 <body>
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
@@ -100,12 +100,9 @@ dialog textarea{min-height:100px;resize:vertical}
   </div>
   <p class="lab">Частые ноты</p>
   <div class="row" id="notes"></div>
-  <p class="lab">Категория и тип</p>
-  <div class="row" id="cats"></div>
-  <div class="row" id="types" style="margin-top:8px"></div>
-  <p class="lab">Группа аромата</p>
-  <div class="row" id="fams"></div>
-  <details class="guide"><summary>Что входит в группы ароматов</summary><p><b class="fam" data-f="Восточные">Восточные</b>: дерево уд, ладан, табак, амбра, мускус, бобы тонка, ваниль, пряности и специи, кофе, чёрный чай, роза</p><p><b class="fam" data-f="Древесные">Древесные</b>: кедр, сандал, гуайк, пачули, ветивер</p><p><b class="fam" data-f="Цветочные">Цветочные</b>: жасмин, роза, сирень, ландыш, нарцисс, тубероза, гардения, флердоранж, пион, фиалка, ирис</p><p><b class="fam" data-f="Фруктовые">Фруктовые</b>: персик, яблоко, ревень, ежевика, личи, слива, ананас, смородина, инжир, груша</p><p><b class="fam" data-f="Цитрусовые">Цитрусовые</b>: лимон, бергамот, апельсин, грейпфрут, юзу, лайм, мандарин, вербена</p><p><b class="fam" data-f="Фужерные">Фужерные</b>: мох, кумарин, бергамот, лаванда, розмарин, дерево</p><p><b class="fam" data-f="Шипровые">Шипровые</b>: бергамот, мох, пачули, кожа, ладан, нероли, ветивер</p><p><b>Морские</b>: цитрусы, лаванда, мята, зелень</p><p><b class="fam" data-f="Гурманские">Гурманские</b>: карамель, сливки, печенье, мёд, пралине, миндаль, какао, шоколад</p></details>
+  <details class="guide" id="dCat" open><summary>Категория<span class="sel" id="selCat"></span></summary><div class="row" id="cats"></div></details>
+  <details class="guide" id="dFam"><summary>Группа аромата<span class="sel" id="selFam"></span></summary><div class="row" id="fams"></div></details>
+  <details class="guide"><summary>Что входит в группы ароматов</summary><p><b class="fam" data-f="Восточные">Восточные</b>: дерево уд, ладан, табак, амбра, мускус, бобы тонка, ваниль, пряности и специи, кофе, чёрный чай, роза</p><p><b class="fam" data-f="Древесные">Древесные</b>: кедр, сандал, гуайк, пачули, ветивер</p><p><b class="fam" data-f="Цветочные">Цветочные</b>: жасмин, роза, сирень, ландыш, нарцисс, тубероза, гардения, флердоранж, пион, фиалка, ирис</p><p><b class="fam" data-f="Фруктовые">Фруктовые</b>: персик, яблоко, ревень, ежевика, личи, слива, ананас, смородина, инжир, груша</p><p><b class="fam" data-f="Цитрусовые">Цитрусовые</b>: лимон, бергамот, апельсин, грейпфрут, юзу, лайм, мандарин, вербена</p><p><b class="fam" data-f="Фужерные">Фужерные</b>: мох, кумарин, бергамот, лаванда, розмарин, дерево</p><p><b class="fam" data-f="Шипровые">Шипровые</b>: бергамот, мох, пачули, кожа, ладан, нероли, ветивер</p><p><b>Морские</b>: цитрусы, лаванда, мята, зелень</p><p><b class="fam" data-f="Гурманские">Гурманские</b>: карамель, сливки, печенье, мёд, пралине, миндаль, какао, шоколад</p><p><b class="fam" data-f="Свежие">Свежие</b> и <b class="fam" data-f="Сладкие">Сладкие</b>: по типу аромата. «Свежий/сладкий» входит в обе группы</p></details>
   <p id="count" aria-live="polite"></p>
   <main class="grid" id="grid"></main>
   <footer>Если фото аромата ещё нет, показан условный флакон: голубой — свежий, персиковый — сладкий, переход цвета — свежий/сладкий. Нажмите на фото, чтобы увеличить.</footer>
@@ -177,7 +174,9 @@ const persist=()=>{
 const clean=({number,name,category,type,composition,ph,families})=>({number,name,category,type,composition,ph,families});
 try{admin=sessionStorage.getItem('etib-adm')==='1'}catch(e){}
 const FAMS=["Цветочные", "Фруктовые", "Восточные", "Сладковатые", "Сладкие", "Древесные", "Шипровые", "Фужерные", "Пряные", "Мускусные", "Гурманские", "Цитрусовые", "Свежие", "Терпкие", "Пудровые", "Водные", "Ванильные", "Акватические", "Табачные", "Спокойные", "Кожаные"];
-let cat=null,typ=null,fam=null;
+let cat=null,fam=[];
+const TYPE_FAM={'Свежий':['Свежие'],'Сладкий':['Сладкие'],'Свежий/Сладкий':['Свежие','Сладкие']};
+const inFam=(d,f)=>d.fam.includes(f)||(TYPE_FAM[d.type]||[]).includes(f);
 
 /* ---- поиск ---- */
 
@@ -231,19 +230,19 @@ function render(){
   const isEx=d=>ex.some(r=>r.test(norm(d.number)));
   const rows=[];
   DATA.forEach((d,i)=>{
-    if((cat&&d.category!==cat)||(typ&&d.type!==typ)||(fam&&!d.fam.includes(fam))||neg.some(r=>test(r,d.hay)))return;
+    if((cat&&d.category!==cat)||(fam.length&&!fam.every(f=>inFam(d,f)))||neg.some(r=>test(r,d.hay)))return;
     let s=0;for(const t of tok){const x=tscore(t,d);if(x===Infinity){s=Infinity;break}s+=x}
     if(s<Infinity)rows.push([s,i,d])});
   rows.sort((a,b)=>(ex.length?isEx(b[2])-isEx(a[2]):0)||a[0]-b[0]||a[1]-b[1]);
   const m=rows.length?Math.min(...rows.map(r=>r[0])):0;const keep=rows.filter(r=>r[0]<=(m===0?.6:m+.6));rows.length=0;rows.push(...keep);
   const n=rows.length,e=rows.filter(r=>r[0]===0).length;
-  $('count').textContent=(q||cat||typ||fam)?(e<n?`Найдено: ${n}. Точных: ${e}, похожих по звучанию: ${n-e}`:`Найдено: ${n} из ${DATA.length}`):`Всего ароматов: ${DATA.length}`;
+  $('count').textContent=(q||cat||fam.length)?(e<n?`Найдено: ${n}. Точных: ${e}, похожих по звучанию: ${n-e}`:`Найдено: ${n} из ${DATA.length}`):`Всего ароматов: ${DATA.length}`;
   $('grid').innerHTML=n?rows.map(r=>card(r[2],regs,tok)).join(''):'<p class="empty">Ничего не нашлось. Попробуйте написать иначе или уберите часть слов.</p>';
   const words=norm(q).split(/[\s,;]+/);
   document.querySelectorAll('#notes .chip').forEach(b=>b.setAttribute('aria-pressed',words.includes(norm(b.dataset.w))));
   document.querySelectorAll('#cats .chip').forEach(b=>b.setAttribute('aria-pressed',(b.dataset.v||null)===cat));
-  document.querySelectorAll('#types .chip').forEach(b=>b.setAttribute('aria-pressed',(b.dataset.v||null)===typ));
-  document.querySelectorAll('#fams .chip').forEach(b=>b.setAttribute('aria-pressed',(b.dataset.v||null)===fam));
+  document.querySelectorAll('#fams .chip').forEach(b=>b.setAttribute('aria-pressed',b.dataset.v?fam.includes(b.dataset.v):!fam.length));
+  syncFilters();
 }
 function chips(el,items,onclick){el.innerHTML=items.map(([l,v])=>`<button class="chip" type="button" data-v="${esc(v||'')}" data-w="${esc(v||'')}">${esc(l)}</button>`).join('');
   el.onclick=e=>{const b=e.target.closest('.chip');if(b)onclick(b.dataset.v)}}
@@ -256,12 +255,19 @@ function notes(){
     $('q').value=(t.includes(n)?t.filter(x=>x!==n):[...t,n]).join(' ');render()})}
 notes();
 chips($('cats'),[['Все',''],...Object.entries(CAT).map(([k,v])=>[v[0],k])],v=>{cat=v||null;render()});
-chips($('fams'),[['Все группы',''],...FAMS.map(f=>[f,f])],v=>{fam=v||null;render()});
-chips($('types'),[['Любой тип',''],['Свежий','Свежий'],['Сладкий','Сладкий'],['Свежий/Сладкий','Свежий/Сладкий']],v=>{typ=v||null;render()});
+const FAM_ORDER=['Свежие','Сладкие',...FAMS.filter(f=>f!=='Свежие'&&f!=='Сладкие')];
+chips($('fams'),[['Все группы',''],...FAM_ORDER.map(f=>[f,f])],v=>{fam=v?(fam.includes(v)?fam.filter(x=>x!==v):[...fam,v]):[];render()});
 $('q').addEventListener('input',render);
 $('q').addEventListener('keydown',e=>{if(e.key==='Enter')e.target.blur()});
 $('clr').addEventListener('click',()=>{$('q').value='';render();$('q').focus()});
-document.addEventListener('click',e=>{const c=e.target.closest('[data-close]');if(c)c.closest('dialog').close();const ft=e.target.closest('.fam');if(ft&&ft.dataset.f){fam=ft.dataset.f;render();window.scrollTo({top:0,behavior:'smooth'})}});
+document.addEventListener('click',e=>{const c=e.target.closest('[data-close]');if(c)c.closest('dialog').close();const ft=e.target.closest('.fam');if(ft&&ft.dataset.f){if(!fam.includes(ft.dataset.f))fam=[...fam,ft.dataset.f];render();window.scrollTo({top:0,behavior:'smooth'})}});
+
+/* ---- вкладки «Категория» и «Группа аромата» ---- */
+try{$('dCat').open=localStorage.getItem('etib-cat-open')!=='0'}catch(e){}
+$('dCat').addEventListener('toggle',()=>{try{localStorage.setItem('etib-cat-open',$('dCat').open?'1':'0')}catch(e){}});
+function syncFilters(){
+  $('selCat').textContent=cat?'· '+CAT[cat][0]:'';
+  $('selFam').textContent=fam.length?'· '+fam.join(', '):''}
 
 /* ---- администратор ---- */
 async function sha(s){const b=await crypto.subtle.digest('SHA-256',new TextEncoder().encode(s));return[...new Uint8Array(b)].map(x=>x.toString(16).padStart(2,'0')).join('')}
