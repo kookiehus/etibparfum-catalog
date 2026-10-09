@@ -74,6 +74,13 @@ footer{padding:28px 0 36px;color:var(--mute);font-size:12.5px}
 .btn.danger{background:#a3283a;border-color:#a3283a;color:#fff}
 .btn:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
 .btn.plus{width:40px;height:40px;padding:0;font-size:24px;line-height:1}
+.adm-ico{margin-left:auto;flex:none;display:flex;flex-direction:column;align-items:center;gap:2px;padding:4px 6px;border:0;background:transparent;color:var(--ink);cursor:pointer;font:600 10.5px/1 var(--sans);letter-spacing:.14em;text-transform:uppercase;opacity:.85;transition:opacity .15s}
+.adm-ico[hidden]{display:none}
+.adm-ico svg{width:40px;height:42px;display:block}
+.adm-ico span{color:var(--mute)}
+.adm-ico:hover{opacity:1}
+.adm-ico:hover span{color:var(--ink)}
+.adm-ico:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:8px}
 .tools{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin:12px 0 0}
 .tools[hidden]{display:none}
 .act{display:flex;gap:6px;padding:0 14px 14px}
@@ -146,7 +153,7 @@ dialog textarea{min-height:100px;resize:vertical}
 <header class="hd wrap">
   <div class="mark" aria-hidden="true">E</div>
   <div><h1>ETIB PARFUM</h1><small>Каталог ароматов</small></div>
-  <button class="btn sec adm" id="adm" type="button">Вход для админа</button>
+  <button class="adm-ico adm" id="adm" type="button" title="Вход для админа" aria-label="Вход для админа"><svg viewBox="0 0 48 50" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M16.2 15.2C15.6 8.6 18 6.4 21.6 7Q24 8.2 26.4 7C30 6.4 32.4 8.6 31.8 15.2"/><path d="M16.3 12.4Q24 14.2 31.7 12.4"/><ellipse cx="24" cy="15.8" rx="14.5" ry="3"/><path d="M17.3 18.3C17 26 19.6 31.4 24 31.4S31 26 30.7 18.3"/><path d="M4 49Q5 35 18.4 32L24 40.5 29.6 32Q43 35 44 49"/><path d="M22.6 36.2h2.8l-.5 2.1h-1.8zM22.9 38.3L21.6 46.5 24 49l2.4-2.5-1.3-8.2"/></svg><span>Вход</span></button>
 </header>
 <div class="bar"><div class="wrap"><div class="srow">
   <div class="search">
