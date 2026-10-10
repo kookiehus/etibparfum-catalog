@@ -258,7 +258,7 @@ const pTol=n=>n<=3?0:n<=5?1:n<=8?2:3;
 
 /* ---- данные ---- */
 let uid=0,admin=false;
-const prep=d=>{d.id=d.id||++uid;d.nm=d.name.replace(/\s*-\s*unisex$/i,'');d.fam=d.families||[];d.kw=d.kw||'';d.hay=norm(d.nm+' | '+d.composition+' | '+d.fam.join(' ')+' | '+d.kw+' | '+d.number);d.nw=(norm(d.nm+' '+d.kw).match(/[a-zа-я0-9]+/g)||[]).map(w=>[latin(w),sk(w,0),sk(w,1),pk(w)]);d.cw=[...new Set(norm(d.composition+' '+d.fam.join(' ')).match(/[а-яa-z]+/g)||[])].map(w=>[latin(w),sk(w,0)]);return d};
+const prep=d=>{d.id=d.id||++uid;d.nm=d.name.replace(/\s*-\s*unisex$/i,'');d.fam=d.families||[];d.kw=d.kw||'';d.nh=norm(d.nm+' '+d.kw);d.hay=norm(d.nm+' | '+d.composition+' | '+d.fam.join(' ')+' | '+d.kw+' | '+d.number);d.nw=(norm(d.nm+' '+d.kw).match(/[a-zа-я0-9]+/g)||[]).map(w=>[latin(w),sk(w,0),sk(w,1),pk(w)]);d.cw=[...new Set(norm(d.composition+' '+d.fam.join(' ')).match(/[а-яa-z]+/g)||[])].map(w=>[latin(w),sk(w,0)]);return d};
 const cmpNo=(a,b)=>a.localeCompare(b,'en',{numeric:true});
 function place(d){/* порядок файла не меняется; новый аромат встаёт в свою категорию по номеру */
   DATA=DATA.filter(x=>x!==d);
@@ -295,11 +295,14 @@ ALIAS.forEach(([r,lat])=>{
     out.forEach(s=>ALP.push([s,lat]))})});
 const aliasPre=t=>{if(t.length<2||isNum(t))return[];
   let r=ALP.filter(a=>a[0].startsWith(t));
-  if(!r.length&&t.length>=4){const T=t.length<=5?1:2;/* опечатка в неполном названии: «движан» ≈ «дживан» */
+  if(!r.length&&t.length>=5){const T=t.length<=5?1:2;/* опечатка в неполном названии: «движан» ≈ «дживан» */
     r=ALP.filter(a=>a[0].length>=t.length-1&&[t.length-1,t.length,t.length+1].some(n=>lev(t,a[0].slice(0,n))<=T))}
   return[...new Set(r.map(a=>a[1]))]};
+const LK={a:'а',c:'с',e:'е',o:'о',p:'р',x:'х',y:'у',k:'к',m:'м',t:'т',h:'н',b:'в'};
+/* слово из смеси кириллицы и похожих латинских букв («кaро» с латинской a) приводим к кириллице */
+const mixfix=t=>/[а-я]/.test(t)&&/[a-z]/.test(t)?t.replace(/[a-z]/g,c=>LK[c]||c):t;
 function parse(q){const tok=[],neg=[],ex=[];
-  norm(q).split(/[\s,;]+/).filter(Boolean).forEach(t=>{
+  norm(q).split(/[\s,;]+/).filter(Boolean).map(mixfix).forEach(t=>{
     if(t[0]==='-'){if(t.length>1)neg.push(rx(alias(t.slice(1))))}
     else{const t0=t;t=alias(t);const n=isNum(t);tok.push({r:rx(t),s:n?'':sk(t),l:latin(t),k:n?'':pk(t),al:t===t0?aliasPre(t).map(rx):[]});if(n)ex.push(new RegExp('^['+(CY[t[0]]||t[0])+']'+t.slice(1)+'$'))}});
   return{tok,neg,ex}}
@@ -335,6 +338,15 @@ function tscore(t,d,relax){
     for(const w of d.cw){const x=wscore(t,[w[1]],w[0],true);if(x<b)b=x}}
   if(b===Infinity||relax)for(const w of d.nw){const x=pscore(t,w[3],w[0],relax);if(x<b)b=x}
   return b}
+/* название важнее состава: [балл, 1 — слово найдено в НАЗВАНИИ (или звучит как оно), 0 — только в составе/группах] */
+function tscore2(t,d,relax){
+  if(!relax){
+    if(test(t.r,d.nh)||t.al.some(r=>test(r,d.nh)))return[0,1];
+    if(!t.s){const x=tscore(t,d,false);return[x,x===0?1:0]}
+    let b=Infinity;
+    for(const w of d.nw){const x=wscore(t,[w[1],w[2]],w[0],false);if(x<b)b=x;const y=pscore(t,w[3],w[0],false);if(y<b)b=y}
+    if(b<=.15)return[b,1]}
+  return[tscore(t,d,relax),relax?1:0]}
 function fzRanges(text,toks,c){const R=[];if(!toks.length)return R;const re=/[A-Za-zА-Яа-яЁё0-9]+/g;let m;
   while((m=re.exec(text))){const w=m[0],sks=c?[sk(w,0)]:[sk(w,0),sk(w,1)];if(toks.some(t=>wscore(t,sks,latin(w),c)<Infinity||(!c&&pscore(t,pk(w),latin(w),RELAX)<Infinity)))R.push([m.index,m.index+w.length])}
   return R}
@@ -358,17 +370,17 @@ function render(){
   const rows=[];
   DATA.forEach((d,i)=>{
     if((cat&&d.category!==cat)||(typ&&d.type!==typ)||(gl.length&&!gl.every(f=>d.fam.includes(f)))||neg.some(r=>test(r,d.hay)))return;
-    let s=0;for(const t of tok){const x=tscore(t,d);if(x===Infinity){s=Infinity;break}s+=x}
-    if(s<Infinity)rows.push([s,i,d])});
+    let s=0,nm=0;for(const t of tok){const [x,h]=tscore2(t,d,false);if(x===Infinity){s=Infinity;break}s+=x;nm|=h}
+    if(s<Infinity)rows.push([s,i,d,nm||!tok.length?0:1])});
   RELAX=false;
   if(!rows.length&&tok.length&&tok.every(t=>t.k)){/* ничего не нашлось — показываем самые похожие, а не пустую страницу */
     DATA.forEach((d,i)=>{
       if((cat&&d.category!==cat)||(typ&&d.type!==typ)||(gl.length&&!gl.every(f=>d.fam.includes(f)))||neg.some(r=>test(r,d.hay)))return;
       let s=0;for(const t of tok){const x=tscore(t,d,true);if(x===Infinity){s=Infinity;break}s+=x}
-      if(s<Infinity)rows.push([s,i,d])});
+      if(s<Infinity)rows.push([s,i,d,0])});
     if(rows.length){RELAX=true;rows.sort((a,b)=>a[0]-b[0]||a[1]-b[1]);rows.length=Math.min(rows.length,8)}}
-  rows.sort((a,b)=>(ex.length?isEx(b[2])-isEx(a[2]):0)||a[0]-b[0]||a[1]-b[1]);
-  const m=rows.length?Math.min(...rows.map(r=>r[0])):0;const keep=RELAX?[...rows]:rows.filter(r=>r[0]<=(m===0?.6:m+.6));rows.length=0;rows.push(...keep);
+  rows.sort((a,b)=>(ex.length?isEx(b[2])-isEx(a[2]):0)||a[3]-b[3]||a[0]-b[0]||a[1]-b[1]);
+  const mt=[0,1].map(g=>{const a=rows.filter(r=>r[3]===g).map(r=>r[0]);return a.length?Math.min(...a):0});const keep=RELAX?[...rows]:rows.filter(r=>{const m=mt[r[3]];return r[0]<=(m===0?.6:m+.6)});rows.length=0;rows.push(...keep);
   if(sortMode!=='file')rows.sort((a,b)=>{const x=a[2].price,y=b[2].price;if(!x&&!y)return a[1]-b[1];if(!x)return 1;if(!y)return -1;return sortMode==='asc'?x-y:y-x});
   const n=rows.length,e=rows.filter(r=>r[0]===0).length;
   $('count').textContent=(q||cat||typ||gl.length)?(RELAX&&n?`Точных совпадений нет. Показаны самые похожие: ${n}`:e<n?`Найдено: ${n}. Точных: ${e}, похожих по звучанию: ${n-e}`:`Найдено: ${n} из ${DATA.length}`):`Всего ароматов: ${DATA.length}`;
