@@ -233,9 +233,32 @@ function sk(s,soft){
 const latin=s=>norm(s).replace(/[а-я]/g,c=>CYR[c]).replace(/[^a-z0-9]/g,'');
 function lev(a,b){const m=[...Array(b.length+1).keys()];for(let i=1;i<=a.length;i++){let p=m[0];m[0]=i;for(let j=1;j<=b.length;j++){const t=m[j];m[j]=Math.min(m[j]+1,m[j-1]+1,p+(a[i-1]===b[j-1]?0:1));p=t}}return m[b.length]}
 
+/* ---- неполные слова: ключ звучания с гласными; русская и латинская запись сводятся к одному виду ---- */
+const CY2={а:'a',б:'b',в:'v',г:'g',д:'d',е:'e',ё:'o',ж:'j',з:'z',и:'i',й:'i',к:'k',л:'l',м:'m',н:'n',о:'o',п:'p',р:'r',с:'s',т:'t',у:'u',ф:'f',х:'h',ц:'ts',ч:'ch',ш:'sh',щ:'sh',ъ:'',ы:'i',ь:'',э:'e',ю:'u',я:'a'};
+function pk(s){
+  return norm(s).replace(/[а-яё]/g,c=>CY2[c]).replace(/[^a-z]/g,'')
+   .replace(/tsch|tch|sch|sh|ch|dzh|dj|zh|j/g,'S').replace(/cc(?=[eiy])/g,'S').replace(/g(?=[eiy])/g,'S')
+   .replace(/ph/g,'f').replace(/qu/g,'kv').replace(/ck|q/g,'k').replace(/x/g,'ks').replace(/th/g,'t').replace(/w/g,'v')
+   .replace(/c(?=[eiy])/g,'s').replace(/ts/g,'s').replace(/c/g,'k').replace(/h/g,'')
+   .replace(/[eiy]/g,'i').replace(/[ao]/g,'a')
+   .replace(/b/g,'p').replace(/d/g,'t').replace(/g/g,'k').replace(/v/g,'f').replace(/z/g,'s')
+   .replace(/(.)\1+/g,'$1')}
+/* расстояние от неполного запроса до НАЧАЛА слова; ошибки в гласных «дешевле», чем в согласных */
+const isV=c=>c==='a'||c==='i'||c==='u';
+function wlev(a,b){const A=a.length,B=b.length,m=[];for(let i=0;i<=A;i++){m.push([]);for(let j=0;j<=B;j++)m[i].push(i&&j?0:i?i*(isV(a[i-1])?.5:1):j*(isV(b[j-1])?.5:1))}
+  for(let i=1;i<=A;i++)for(let j=1;j<=B;j++){
+    const x=a[i-1],y=b[j-1];let s=x===y?0:isV(x)&&isV(y)?.5:1;
+    let v=Math.min(m[i-1][j]+(isV(x)?.5:1),m[i][j-1]+(isV(y)?.5:1),m[i-1][j-1]+s);
+    if(i>1&&j>1&&x===b[j-2]&&a[i-2]===y)v=Math.min(v,m[i-2][j-2]+.8);
+    m[i][j]=v}
+  return m[A][B]}
+function pdist(k,wk){if(wk.startsWith(k))return 0;let m=Infinity;
+  for(let n=k.length-1;n<=k.length+1;n++){if(n<1)continue;const x=wlev(k,wk.slice(0,n));if(x<m)m=x}return m}
+const pTol=n=>n<=3?0:n<=5?1:n<=8?2:3;
+
 /* ---- данные ---- */
 let uid=0,admin=false;
-const prep=d=>{d.id=d.id||++uid;d.nm=d.name.replace(/\s*-\s*unisex$/i,'');d.fam=d.families||[];d.kw=d.kw||'';d.hay=norm(d.nm+' | '+d.composition+' | '+d.fam.join(' ')+' | '+d.kw+' | '+d.number);d.nw=(norm(d.nm+' '+d.kw).match(/[a-zа-я0-9]+/g)||[]).map(w=>[latin(w),sk(w,0),sk(w,1)]);d.cw=[...new Set(norm(d.composition+' '+d.fam.join(' ')).match(/[а-яa-z]+/g)||[])].map(w=>[latin(w),sk(w,0)]);return d};
+const prep=d=>{d.id=d.id||++uid;d.nm=d.name.replace(/\s*-\s*unisex$/i,'');d.fam=d.families||[];d.kw=d.kw||'';d.hay=norm(d.nm+' | '+d.composition+' | '+d.fam.join(' ')+' | '+d.kw+' | '+d.number);d.nw=(norm(d.nm+' '+d.kw).match(/[a-zа-я0-9]+/g)||[]).map(w=>[latin(w),sk(w,0),sk(w,1),pk(w)]);d.cw=[...new Set(norm(d.composition+' '+d.fam.join(' ')).match(/[а-яa-z]+/g)||[])].map(w=>[latin(w),sk(w,0)]);return d};
 const cmpNo=(a,b)=>a.localeCompare(b,'en',{numeric:true});
 function place(d){/* порядок файла не меняется; новый аромат встаёт в свою категорию по номеру */
   DATA=DATA.filter(x=>x!==d);
@@ -253,17 +276,32 @@ const clean=({number,name,category,type,composition,ph,families,price,kw})=>({nu
 try{admin=sessionStorage.getItem('etib-adm')==='1'}catch(e){}
 const FAMS=["Цветочные", "Фруктовые", "Восточные", "Сладковатые", "Сладкие", "Древесные", "Шипровые", "Фужерные", "Пряные", "Мускусные", "Гурманские", "Цитрусовые", "Свежие", "Терпкие", "Пудровые", "Водные", "Ванильные", "Акватические", "Табачные", "Спокойные", "Кожаные"];
 const grpType=(fm,old)=>{const f=fm.includes('Свежие'),s=fm.includes('Сладкие');return f&&s?'Свежий/Сладкий':f?'Свежий':s?'Сладкий':(old||'Свежий')};
-let sortMode='file';
+let sortMode='file',RELAX=false;
 let cat=null,typ=null;const gsel=new Set();
 
 /* ---- поиск ---- */
 
 const ALIAS=[[/^(д?живанши|живенши|живанши|гивенчи|дживенши)$/,'givenchy'],[/^(шанель|шанел)$/,'chanel'],[/^диор$/,'dior'],[/^армани$/,'armani'],[/^(гуччи|гучи)$/,'gucci'],[/^(версаче|версач)$/,'versace'],[/^(булгари|бульгари|бвлгари)$/,'bvlgari'],[/^(дольче|долче)$/,'dolce'],[/^(габбана|габана)$/,'gabbana'],[/^лакост[а]?$/,'lacoste'],[/^(эрмес|гермес|эрмэс)$/,'hermes'],[/^ланком$/,'lancome'],[/^ланвин$/,'lanvin'],[/^(барберри|бербери|барбери)$/,'burberry'],[/^труссарди$/,'trussardi'],[/^москино$/,'moschino'],[/^(феррагамо|ферагамо)$/,'ferragamo'],[/^кензо$/,'kenzo'],[/^(амуаж|амуадж)$/,'amouage'],[/^задиг$/,'zadig'],[/^вольтер$/,'voltaire'],[/^клиник$/,'clinique'],[/^бандерас$/,'banderas'],[/^(монблан|монбланк)$/,'montblanc'],[/^(данхилл|данхил)$/,'dunhill'],[/^(риччи|ричи)$/,'ricci'],[/^нина$/,'nina'],[/^марк$/,'marc'],[/^(джейкобс|якобс|джекобс)$/,'jacobs'],[/^(малон|мэлоун|мелон)$/,'malone'],[/^ариана$/,'ariana'],[/^гранде$/,'grande'],[/^бритни$/,'britney'],[/^спирс$/,'spears'],[/^килиан$/,'kilian'],[/^(марли|марлей)$/,'marly'],[/^(виттон|вуиттон|вуитон|витон)$/,'vuitton'],[/^луи$/,'louis'],[/^(крид|креед)$/,'creed'],[/^том$/,'tom'],[/^форд$/,'ford'],[/^(байредо|байреддо)$/,'byredo'],[/^(монталь|монтале)$/,'montale'],[/^эскада$/,'escada'],[/^(хуго|хьюго|хюго)$/,'hugo'],[/^босс$/,'boss'],[/^пако$/,'paco'],[/^(рабан|рабанн|рабанне)$/,'rabanne'],[/^готье$/,'gaultier'],[/^жан$/,'jean'],[/^(поль|пол)$/,'paul'],[/^ив$/,'yves'],[/^(сен|сент)$/,'saint'],[/^лоран$/,'laurent'],[/^каролина$/,'carolina'],[/^(эррера|херрера|эрера)$/,'herrera'],[/^(кельвин|кальвин)$/,'calvin'],[/^(кляйн|клейн)$/,'klein'],[/^(виктория|викториас)$/,'victoria'],[/^(сикрет|секрет|сикрэт)$/,'secret'],[/^(кристиан|христиан)$/,'christian'],[/^(джо|жо)$/,'jo'],[/^донна$/,'donna'],[/^каран$/,'karan'],[/^(авентус|авантус)$/,'aventus'],[/^(бакарат|баккарат|бакара|баккара)$/,'baccarat'],[/^(эклад|эклат)$/,'eclat'],[/^нихило$/,'nihilo'],[/^(диорама)$/,'diorama'],[/^тиг[ея]р$/,'tygar'],[/^(молекул[ыа]?)$/,'molecules']];
 const alias=t=>{const m=ALIAS.find(a=>a[0].test(t));return m?m[1]:t};
+/* неполное имя бренда по-русски («дживан», «булг»): раскрываем написания из ALIAS и ищем по началу */
+const ALP=[];
+ALIAS.forEach(([r,lat])=>{
+  const src=r.source.replace(/^\^\(?/,'').replace(/\)?\$$/,'');
+  src.split('|').forEach(v=>{let out=[''];
+    for(let i=0;i<v.length;i++){let opts,c=v[i];
+      if(c==='['){const j=v.indexOf(']',i);opts=v.slice(i+1,j).split('');i=j}else opts=[c];
+      if(v[i+1]==='?'){opts=[...opts,''];i++}
+      out=out.flatMap(o=>opts.map(x=>o+x))}
+    out.forEach(s=>ALP.push([s,lat]))})});
+const aliasPre=t=>{if(t.length<2||isNum(t))return[];
+  let r=ALP.filter(a=>a[0].startsWith(t));
+  if(!r.length&&t.length>=4){const T=t.length<=5?1:2;/* опечатка в неполном названии: «движан» ≈ «дживан» */
+    r=ALP.filter(a=>a[0].length>=t.length-1&&[t.length-1,t.length,t.length+1].some(n=>lev(t,a[0].slice(0,n))<=T))}
+  return[...new Set(r.map(a=>a[1]))]};
 function parse(q){const tok=[],neg=[],ex=[];
   norm(q).split(/[\s,;]+/).filter(Boolean).forEach(t=>{
     if(t[0]==='-'){if(t.length>1)neg.push(rx(alias(t.slice(1))))}
-    else{t=alias(t);const n=isNum(t);tok.push({r:rx(t),s:n?'':sk(t),l:latin(t)});if(n)ex.push(new RegExp('^['+(CY[t[0]]||t[0])+']'+t.slice(1)+'$'))}});
+    else{const t0=t;t=alias(t);const n=isNum(t);tok.push({r:rx(t),s:n?'':sk(t),l:latin(t),k:n?'':pk(t),al:t===t0?aliasPre(t).map(rx):[]});if(n)ex.push(new RegExp('^['+(CY[t[0]]||t[0])+']'+t.slice(1)+'$'))}});
   return{tok,neg,ex}}
 const test=(r,s)=>{r.lastIndex=0;return r.test(s)};
 function hl(text,regs,extra=[]){
@@ -284,14 +322,21 @@ function wscore(t,sks,orig,c){
   const T=L<=2?0:c?(L<=4?0:1):(L<=4?1:2);let m=Infinity;
   for(const w of sks){if(L<=4&&w[0]!==t.s[0])continue;const x=dist(t.s,w);if(x<m)m=x}
   return m<=T?m+.02*lev(t.l,orig):Infinity}
-function tscore(t,d){
-  if(test(t.r,d.hay))return 0;
+/* неполное слово: запрос похож на начало слова названия. relax — мягкий режим «показать хоть самое похожее» */
+function pscore(t,wk,orig,relax){
+  const L=t.k?t.k.length:0;if(!L||!wk||(L<2&&(relax||!wk.startsWith(t.k))))return Infinity;
+  const x=pdist(t.k,wk);if(x>(relax?Math.ceil(L*.45):pTol(L)))return Infinity;
+  return .3*x+.02*lev(t.l,orig.slice(0,t.l.length+1))}
+function tscore(t,d,relax){
+  if(!relax&&(test(t.r,d.hay)||t.al.some(r=>test(r,d.hay))))return 0;
   let b=Infinity;
-  for(const w of d.nw){const x=wscore(t,[w[1],w[2]],w[0],false);if(x<b)b=x}
-  for(const w of d.cw){const x=wscore(t,[w[1]],w[0],true);if(x<b)b=x}
+  if(!relax){
+    for(const w of d.nw){const x=wscore(t,[w[1],w[2]],w[0],false);if(x<b)b=x}
+    for(const w of d.cw){const x=wscore(t,[w[1]],w[0],true);if(x<b)b=x}}
+  if(b===Infinity||relax)for(const w of d.nw){const x=pscore(t,w[3],w[0],relax);if(x<b)b=x}
   return b}
 function fzRanges(text,toks,c){const R=[];if(!toks.length)return R;const re=/[A-Za-zА-Яа-яЁё0-9]+/g;let m;
-  while((m=re.exec(text))){const w=m[0],sks=c?[sk(w,0)]:[sk(w,0),sk(w,1)];if(toks.some(t=>wscore(t,sks,latin(w),c)<Infinity))R.push([m.index,m.index+w.length])}
+  while((m=re.exec(text))){const w=m[0],sks=c?[sk(w,0)]:[sk(w,0),sk(w,1)];if(toks.some(t=>wscore(t,sks,latin(w),c)<Infinity||(!c&&pscore(t,pk(w),latin(w),RELAX)<Infinity)))R.push([m.index,m.index+w.length])}
   return R}
 
 const fmt=n=>new Intl.NumberFormat('ru-RU').format(n)+'\u00a0₽';
@@ -306,7 +351,7 @@ function card(d,regs,qs){
   return `<article class="card"><div class="art">${art}<span class="no">${hl(d.number,regs)}</span></div><div class="body"><h3>${hl(d.nm,regs,fzRanges(d.nm,qs,false))}</h3><p class="cat">${cn}</p>${grp}<p class="comp">${hl(d.composition,regs,fzRanges(d.composition,qs,true))}</p>${price}</div>${act}</article>`}
 
 function render(){
-  const q=$('q').value,{tok,neg,ex}=parse(q),regs=tok.map(t=>t.r);
+  const q=$('q').value,{tok,neg,ex}=parse(q),regs=tok.flatMap(t=>[t.r,...t.al]);
   $('clr').hidden=!q;$('tools').hidden=!admin;$('adm').hidden=admin;$('sortbox').hidden=!DATA.some(d=>d.price);
   const gl=[...gsel];$('gcur').textContent=gl.map(f=>f.toLowerCase()).join(' + ');$('gclr').hidden=!gl.length;$('gtog').classList.toggle('on',gl.length>0);
   const isEx=d=>ex.some(r=>r.test(norm(d.number)));
@@ -315,11 +360,18 @@ function render(){
     if((cat&&d.category!==cat)||(typ&&d.type!==typ)||(gl.length&&!gl.every(f=>d.fam.includes(f)))||neg.some(r=>test(r,d.hay)))return;
     let s=0;for(const t of tok){const x=tscore(t,d);if(x===Infinity){s=Infinity;break}s+=x}
     if(s<Infinity)rows.push([s,i,d])});
+  RELAX=false;
+  if(!rows.length&&tok.length&&tok.every(t=>t.k)){/* ничего не нашлось — показываем самые похожие, а не пустую страницу */
+    DATA.forEach((d,i)=>{
+      if((cat&&d.category!==cat)||(typ&&d.type!==typ)||(gl.length&&!gl.every(f=>d.fam.includes(f)))||neg.some(r=>test(r,d.hay)))return;
+      let s=0;for(const t of tok){const x=tscore(t,d,true);if(x===Infinity){s=Infinity;break}s+=x}
+      if(s<Infinity)rows.push([s,i,d])});
+    if(rows.length){RELAX=true;rows.sort((a,b)=>a[0]-b[0]||a[1]-b[1]);rows.length=Math.min(rows.length,8)}}
   rows.sort((a,b)=>(ex.length?isEx(b[2])-isEx(a[2]):0)||a[0]-b[0]||a[1]-b[1]);
-  const m=rows.length?Math.min(...rows.map(r=>r[0])):0;const keep=rows.filter(r=>r[0]<=(m===0?.6:m+.6));rows.length=0;rows.push(...keep);
+  const m=rows.length?Math.min(...rows.map(r=>r[0])):0;const keep=RELAX?[...rows]:rows.filter(r=>r[0]<=(m===0?.6:m+.6));rows.length=0;rows.push(...keep);
   if(sortMode!=='file')rows.sort((a,b)=>{const x=a[2].price,y=b[2].price;if(!x&&!y)return a[1]-b[1];if(!x)return 1;if(!y)return -1;return sortMode==='asc'?x-y:y-x});
   const n=rows.length,e=rows.filter(r=>r[0]===0).length;
-  $('count').textContent=(q||cat||typ||gl.length)?(e<n?`Найдено: ${n}. Точных: ${e}, похожих по звучанию: ${n-e}`:`Найдено: ${n} из ${DATA.length}`):`Всего ароматов: ${DATA.length}`;
+  $('count').textContent=(q||cat||typ||gl.length)?(RELAX&&n?`Точных совпадений нет. Показаны самые похожие: ${n}`:e<n?`Найдено: ${n}. Точных: ${e}, похожих по звучанию: ${n-e}`:`Найдено: ${n} из ${DATA.length}`):`Всего ароматов: ${DATA.length}`;
   $('grid').innerHTML=n?rows.map(r=>card(r[2],regs,tok)).join(''):'<p class="empty">Ничего не нашлось. Попробуйте написать иначе или уберите часть слов.</p>';
   const words=norm(q).split(/[\s,;]+/);
   document.querySelectorAll('#notes .chip').forEach(b=>b.setAttribute('aria-pressed',words.includes(norm(b.dataset.w))));
