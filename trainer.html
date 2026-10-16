@@ -1,0 +1,493 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#f7f2f1" media="(prefers-color-scheme:light)"><meta name="theme-color" content="#0f0a0d" media="(prefers-color-scheme:dark)">
+<link rel="manifest" href="manifest.webmanifest"><link rel="icon" href="icons/favicon.svg" type="image/svg+xml"><link rel="apple-touch-icon" href="icons/apple-touch-icon.png"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="ETIB">
+<title>ETIB PARFUM — тренажёр</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+<style>
+:root{--paper:#f7f2f1;--ink:#1a1215;--mute:#6b5f62;--line:#e0d3d2;--card:#fffdfc;--tint:#f0e6e5;--accent:#7a2e3f;--hl:#f2d6dc;--gold:#b8935a;
+--serif:'Playfair Display',Georgia,'Times New Roman',serif;--sans:Manrope,system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--paper:#0f0a0d;--ink:#f3eee6;--mute:#b3a6a8;--line:#33252b;--card:#171015;--tint:#1e151a;--accent:#e3a2b1;--hl:#4a2432}}
+*,*::before,*::after{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);font:15px/1.5 var(--sans);min-height:100vh}
+.wrap{max-width:560px;margin:0 auto;padding:0 16px 28px;min-height:100vh;min-height:100dvh;display:flex;flex-direction:column}
+main{margin-top:auto}
+.hd{display:flex;gap:14px;align-items:center;padding:32px 0 22px}
+.mark{flex:none;width:52px;height:52px;border:2px solid var(--ink);border-radius:50%;display:grid;place-items:center;font:700 27px/1 var(--serif)}
+h1{margin:0;font:700 23px/1.1 var(--serif);letter-spacing:.14em}
+.hd small{display:block;margin-top:6px;color:var(--mute);font-size:14px}
+a.tile{display:block;color:inherit;text-decoration:none;border-radius:var(--r-l,22px)}
+a.tile:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
+a.hero{background:var(--accent);color:var(--paper);padding:30px 24px 24px;min-height:210px;display:flex;flex-direction:column;justify-content:space-between}
+.hero h2{margin:0;font:700 32px/1.1 var(--serif)}
+.hero p{margin:10px 0 0;font-size:15px;opacity:.92;max-width:30ch}
+.go{align-self:flex-start;margin-top:22px;font:700 14px var(--sans);padding:11px 20px;border-radius:var(--r-pill,999px);background:var(--paper);color:var(--ink)}
+.list{display:grid;gap:10px;margin-top:12px}
+a.row{display:flex;align-items:center;gap:14px;padding:18px 20px;background:var(--card);border:1.5px solid var(--ink);border-radius:var(--r-m,18px)}
+.row h3{margin:0;font:700 18px/1.2 var(--serif)}
+.row p{margin:3px 0 0;color:var(--mute);font-size:13.5px}
+.row svg{flex:none;margin-left:auto;width:22px;height:22px;color:var(--accent)}
+@media (hover:hover){.row:hover{background:var(--hl)}.hero:hover .go{background:var(--hl)}}
+.foot{margin-top:26px;color:var(--mute);font-size:12.5px;text-align:center}
+.adm-ico{flex:none;display:flex;flex-direction:column;align-items:center;gap:2px;padding:4px 6px;color:var(--ink);text-decoration:none;font:600 10.5px/1 var(--sans);letter-spacing:.14em;text-transform:uppercase;opacity:.85;transition:opacity .15s}
+.adm-ico[hidden]{display:none}
+.adm-ico svg{width:40px;height:42px;display:block}
+.adm-ico span{color:var(--mute)}
+.adm-ico:hover{opacity:1}
+.adm-ico:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:8px}
+.adm{margin-left:auto}
+
+/* ---- стиль «стекло» ---- */
+:root{--g-bg:rgba(255,255,255,.55);--g-bd:rgba(255,255,255,.9);--g-sh:0 8px 28px rgba(60,30,40,.14),inset 0 1px 0 rgba(255,255,255,.95);--g-bl:blur(18px) saturate(160%)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--g-bg:rgba(255,255,255,.07);--g-bd:rgba(255,255,255,.16);--g-sh:0 8px 28px rgba(0,0,0,.35),inset 0 1px 0 rgba(255,255,255,.1)}}
+:root[data-theme="dark"]{--g-bg:rgba(255,255,255,.07);--g-bd:rgba(255,255,255,.16);--g-sh:0 8px 28px rgba(0,0,0,.35),inset 0 1px 0 rgba(255,255,255,.1)}
+body{background:radial-gradient(120% 60% at 50% -8%,rgba(176,86,108,.14) 0%,rgba(176,86,108,0) 62%) fixed no-repeat,linear-gradient(180deg,#fbf7f6 0%,#efe5e4 100%) fixed no-repeat;background-color:var(--paper)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) body{background:radial-gradient(120% 60% at 50% -8%,#2b1620 0%,rgba(43,22,32,0) 62%) fixed no-repeat,linear-gradient(180deg,#130c10 0%,#0b070a 100%) fixed no-repeat;background-color:var(--paper)}}
+:root[data-theme="dark"] body{background:radial-gradient(120% 60% at 50% -8%,#2b1620 0%,rgba(43,22,32,0) 62%) fixed no-repeat,linear-gradient(180deg,#130c10 0%,#0b070a 100%) fixed no-repeat;background-color:var(--paper)}
+.mark,.adm-ico{background:var(--g-bg);box-shadow:var(--g-sh);-webkit-backdrop-filter:var(--g-bl);backdrop-filter:var(--g-bl)}
+.adm-ico{width:50px;height:50px;padding:0;justify-content:center;border:1px solid var(--g-bd);border-radius:50%;opacity:1;color:var(--ink)}
+.adm-ico span{display:none}
+.adm-ico svg{width:33px;height:35px;stroke-width:1.5}
+.adm-ico.home svg{width:27px;height:28px}
+@media (max-width:380px){.adm-ico{width:44px;height:44px}.adm-ico svg{width:29px;height:31px}.adm-ico.home svg{width:24px;height:25px}}
+a.row{background:var(--g-bg);border:1px solid var(--g-bd);box-shadow:var(--g-sh);-webkit-backdrop-filter:var(--g-bl);backdrop-filter:var(--g-bl)}
+a.hero{background:color-mix(in srgb,var(--accent) 90%,transparent);border:1px solid rgba(255,255,255,.35);box-shadow:0 12px 36px rgba(80,25,40,.35),inset 0 1px 0 rgba(255,255,255,.35);-webkit-backdrop-filter:blur(20px);backdrop-filter:blur(20px)}
+/* ---- логотип ---- */
+.mark{border:0;border-radius:0;background:none;box-shadow:none;-webkit-backdrop-filter:none;backdrop-filter:none;display:block;color:var(--ink)}
+.mark svg{display:block;width:100%;height:100%}
+/* ---- анимации ---- */
+:root{--spring:cubic-bezier(.34,1.45,.5,1);--ease:cubic-bezier(.22,1,.36,1)}
+@view-transition{navigation:auto}
+::view-transition-group(root){animation-duration:.3s}
+a,button,summary,.chip{-webkit-tap-highlight-color:transparent}
+@keyframes rise{from{opacity:0;transform:translateY(18px) scale(.98)}to{opacity:1;transform:none}}
+@keyframes tabin{from{opacity:0;transform:translateX(var(--dx,0px)) scale(.985)}to{opacity:1;transform:none}}
+@keyframes dlgin{from{opacity:0;transform:translateY(18px) scale(.96)}to{opacity:1;transform:none}}
+@keyframes sheetin{from{transform:translateY(100%)}to{transform:none}}
+@keyframes fadein{from{opacity:0}to{opacity:1}}
+@media (prefers-reduced-motion:no-preference){
+a.tile,.btn,.chip,.tipbtn,.adm-ico,.seg button,.gtog,.gclr,.x,.zx,.card{transition:transform .38s var(--spring),background-color .25s,color .25s,box-shadow .25s,border-color .25s}
+a.tile:active,.btn:active,.chip:active,.tipbtn:active,.adm-ico:active,.seg button:active,.gtog:active,.gclr:active,.x:active,.zx:active{transform:scale(.94);transition-duration:.1s}
+summary:active{transform:scale(.99)}
+dialog[open]{animation:dlgin .38s var(--ease) backwards}
+dialog[open]::backdrop{animation:fadein .3s ease backwards}
+.gbox:not([hidden]){animation:tabin .32s var(--ease) backwards}
+section[id^="p-"]:not([hidden]){animation:tabin .42s var(--ease) backwards}
+@media (max-width:699px){#dTip[open],#dFilters[open]{animation:sheetin .42s var(--ease) backwards}}
+@media (hover:hover){a.tile:hover{transform:translateY(-2px)}.card:hover{transform:translateY(-3px);box-shadow:0 14px 34px rgba(60,30,40,.2)}}
+}
+/* плашка-стекло, которая перетекает */
+.seg{position:relative}
+.seg>button,.seg>.chip{position:relative;z-index:1}
+.pill{position:absolute;top:3px;bottom:3px;left:0;width:0;border-radius:var(--r-pill,999px);z-index:0;pointer-events:none;background:rgba(255,255,255,.8);border:1px solid rgba(255,255,255,.95);box-shadow:0 3px 12px rgba(60,30,40,.2),inset 0 1px 0 #fff;-webkit-backdrop-filter:blur(8px) saturate(160%);backdrop-filter:blur(8px) saturate(160%)}
+@media (prefers-reduced-motion:no-preference){.pill{transition:left .5s var(--spring),width .5s var(--spring),background-color .4s,border-color .4s}}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .pill{background:rgba(255,255,255,.17);border-color:rgba(255,255,255,.3);box-shadow:0 3px 12px rgba(0,0,0,.4),inset 0 1px 0 rgba(255,255,255,.25)}}
+@media (prefers-reduced-motion:no-preference){
+.hd{animation:rise .5s var(--ease) backwards}
+.list a.tile{animation:rise .55s var(--ease) backwards}
+.list a.tile:nth-child(1){animation-delay:.07s}.list a.tile:nth-child(2){animation-delay:.14s}.list a.tile:nth-child(3){animation-delay:.21s}.list a.tile:nth-child(4){animation-delay:.28s}
+a.hero{animation:rise .6s var(--ease) .35s backwards}
+}
+
+/* ---- стеклянные значки «Главная» и «Админ» ---- */
+:root{--gi-a:#fff;--gi-ao:.85;--gi-bo:.05;--gl-bg1:rgba(255,255,255,.34);--gl-bg2:rgba(255,255,255,.06);--gl-bd:rgba(255,255,255,.85);--gl-sh:0 10px 26px rgba(70,35,45,.16),0 2px 6px rgba(70,35,45,.08);--gl-in:inset 0 1.5px 0 rgba(255,255,255,.95),inset 0 -1.5px 0 rgba(255,255,255,.35),inset 0 0 12px rgba(255,255,255,.35)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--gi-a:#fff;--gi-ao:.26;--gi-bo:.05;--gl-bg1:rgba(255,255,255,.2);--gl-bg2:rgba(255,255,255,.04);--gl-bd:rgba(255,255,255,.28);--gl-sh:0 10px 26px rgba(0,0,0,.45),0 2px 6px rgba(0,0,0,.3);--gl-in:inset 0 1.5px 0 rgba(255,255,255,.4),inset 0 -1.5px 0 rgba(255,255,255,.08),inset 0 0 12px rgba(255,255,255,.08)}}
+.hd .adm-ico,.adm-ico{background:linear-gradient(150deg,var(--gl-bg1),var(--gl-bg2));-webkit-backdrop-filter:blur(18px) saturate(1.7);backdrop-filter:blur(18px) saturate(1.7);border:1px solid var(--gl-bd);box-shadow:var(--gl-sh),var(--gl-in);color:var(--ink)}
+.adm-ico svg{filter:drop-shadow(0 1px 1px rgba(70,35,45,.12))}
+
+/* ---- значки: один размер, по центру кружка ---- */
+.adm-ico{display:flex;align-items:center;justify-content:center}
+.adm-ico svg,.adm-ico.home svg{width:30px;height:34px;display:block;flex:none}
+@media (max-width:380px){.adm-ico svg,.adm-ico.home svg{width:26px;height:29px}}
+/* ---- значки «Главная» и «Админ»: плотнее, почти непрозрачные ---- */
+:root{--gi-ao:1;--gi-bo:.22;--gl-bg1:#fffdfc;--gl-bg2:#ebdfdd;--gl-bd:#fff;--gl-sh:0 6px 16px rgba(70,35,45,.24),0 1px 3px rgba(70,35,45,.16);--gl-in:inset 0 1.5px 0 #fff,inset 0 -2px 5px rgba(110,70,80,.14)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--gi-ao:.6;--gi-bo:.14;--gl-bg1:#3a2a32;--gl-bg2:#241a20;--gl-bd:rgba(255,255,255,.32);--gl-sh:0 6px 16px rgba(0,0,0,.55),0 1px 3px rgba(0,0,0,.4);--gl-in:inset 0 1.5px 0 rgba(255,255,255,.28),inset 0 -2px 5px rgba(0,0,0,.35)}}
+.adm-ico svg path,.adm-ico svg circle{stroke-opacity:.95}
+.adm-ico svg [stroke="#fff"]{stroke-opacity:.9}
+
+/* ---- тренажёр ---- */
+main{margin-top:0}
+.hd .home{margin-left:auto}.hd .adm{margin-left:0}
+.panel{background:var(--g-bg);border:1px solid var(--g-bd);box-shadow:var(--g-sh);-webkit-backdrop-filter:var(--g-bl);backdrop-filter:var(--g-bl);border-radius:var(--r-m,18px);padding:16px 18px;margin:12px 0}
+.lvl h2{margin:0 0 2px;font:700 22px/1.2 var(--serif)}
+.lvl p{margin:2px 0;color:var(--mute);font-size:13.5px}
+.steps{display:flex;gap:6px;margin:12px 0 4px}
+.steps i{flex:1;height:6px;border-radius:var(--r-pill,999px);background:var(--line)}
+.steps i.on{background:var(--accent)}
+.stat{display:flex;gap:18px;margin-top:10px;font-size:13px;color:var(--mute)}
+.stat b{display:block;font:700 20px/1.1 var(--serif);color:var(--ink)}
+h3.sec{font:700 12px var(--sans);letter-spacing:.12em;text-transform:uppercase;color:var(--mute);margin:22px 4px 8px}
+.modes{display:grid;gap:10px}
+button.modebtn{all:unset;box-sizing:border-box;display:flex;align-items:center;gap:14px;width:100%;padding:16px 18px;border-radius:var(--r-m,18px);cursor:pointer;background:var(--g-bg);border:1px solid var(--g-bd);box-shadow:var(--g-sh);-webkit-backdrop-filter:var(--g-bl);backdrop-filter:var(--g-bl)}
+button.modebtn:focus-visible,.opt:focus-visible,.nav:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.modebtn h4{margin:0;font:700 17px/1.2 var(--serif)}
+.modebtn p{margin:2px 0 0;color:var(--mute);font-size:13px}
+.modebtn svg{flex:none;margin-left:auto;width:20px;height:20px;color:var(--accent)}
+.modebtn .pct{margin-left:auto;font:700 13px var(--sans);color:var(--accent)}
+.modebtn.main{background:color-mix(in srgb,var(--accent) 90%,transparent);color:var(--paper);border-color:rgba(255,255,255,.35)}
+.modebtn.main p{color:inherit;opacity:.9}.modebtn.main svg{color:inherit}
+.modebtn[disabled]{opacity:.5;cursor:default}
+.seg{display:flex;gap:2px;padding:3px;background:var(--tint);border-radius:var(--r-pill,999px);margin:6px 0 0}
+.seg button{all:unset;box-sizing:border-box;flex:1;min-width:0;padding:10px 2px;border-radius:var(--r-pill,999px);text-align:center;cursor:pointer;color:var(--mute);font:700 10.5px/1.2 var(--sans);letter-spacing:.05em;text-transform:uppercase}
+.seg button[aria-pressed=true]{background:var(--ink);color:var(--paper)}
+/* ---- как в каталоге: цвета разделов и перетекающая плашка ---- */
+:root{--c-f:#b8315d;--c-m:#2a5d99;--c-u:#1b7253;--c-p:#7f5d0c}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--c-f:#f09ab6;--c-m:#8ab8ee;--c-u:#7fd1ae;--c-p:#e0bb70}}
+:root[data-theme="dark"]{--c-f:#f09ab6;--c-m:#8ab8ee;--c-u:#7fd1ae;--c-p:#e0bb70}
+.seg{background:var(--g-bg);border:1px solid var(--g-bd);box-shadow:var(--g-sh);-webkit-backdrop-filter:var(--g-bl);backdrop-filter:var(--g-bl)}
+#fseg button{position:relative;z-index:1}
+#fseg button[data-v="ЖЕНСКИЕ"]{color:var(--c-f)}
+#fseg button[data-v="МУЖСКИЕ"]{color:var(--c-m)}
+#fseg button[data-v="УНИСЕКС"]{color:var(--c-u)}
+#fseg button[data-v="ПРЕМИУМ"]{color:var(--c-p)}
+#fseg button[aria-pressed=true]{background:transparent}
+#fseg button[data-v=""][aria-pressed=true]{color:var(--ink)}
+#fseg[data-sel="ЖЕНСКИЕ"] .pill{background:color-mix(in srgb,var(--c-f) 22%,rgba(255,255,255,.75));border-color:var(--c-f)}
+#fseg[data-sel="МУЖСКИЕ"] .pill{background:color-mix(in srgb,var(--c-m) 22%,rgba(255,255,255,.75));border-color:var(--c-m)}
+#fseg[data-sel="УНИСЕКС"] .pill{background:color-mix(in srgb,var(--c-u) 22%,rgba(255,255,255,.75));border-color:var(--c-u)}
+#fseg[data-sel="ПРЕМИУМ"] .pill{background:color-mix(in srgb,var(--c-p) 24%,rgba(255,255,255,.75));border-color:var(--c-p)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) #fseg[data-sel="ЖЕНСКИЕ"] .pill{background:color-mix(in srgb,var(--c-f) 32%,rgba(255,255,255,.08))}:root:not([data-theme="light"]) #fseg[data-sel="МУЖСКИЕ"] .pill{background:color-mix(in srgb,var(--c-m) 32%,rgba(255,255,255,.08))}:root:not([data-theme="light"]) #fseg[data-sel="УНИСЕКС"] .pill{background:color-mix(in srgb,var(--c-u) 32%,rgba(255,255,255,.08))}:root:not([data-theme="light"]) #fseg[data-sel="ПРЕМИУМ"] .pill{background:color-mix(in srgb,var(--c-p) 32%,rgba(255,255,255,.08))}}
+.seg button:focus-visible{outline:3px solid var(--accent)}
+.top{display:flex;align-items:center;gap:12px;margin:2px 0 10px}
+.nav{all:unset;cursor:pointer;font:700 13px var(--sans);color:var(--accent);padding:8px 4px}
+.bar{flex:1;height:6px;border-radius:var(--r-pill,999px);background:var(--line);overflow:hidden}
+.bar i{display:block;height:100%;background:var(--accent);border-radius:var(--r-pill,999px);transition:width .35s}
+.cnt{font:700 13px var(--sans);color:var(--mute)}
+.wr{display:flex;flex-direction:column;gap:10px}
+.wr input{width:100%;padding:14px 16px;border-radius:var(--r-m,18px);border:1.5px solid var(--line);background:var(--card);color:var(--ink);font:16px/1.3 var(--sans)}
+.wr input:focus-visible{outline:3px solid var(--accent);outline-offset:1px}
+.wmsg{margin:0;min-height:1.2em;font-size:13px;color:var(--mute)}
+/* цвета уровней сложности */
+:root{--d-e:#1b7253;--d-h:#9a5b00;--d-x:#b3261e}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--d-e:#7fd1ae;--d-h:#f0b45a;--d-x:#ff8a80}}
+:root[data-theme="dark"]{--d-e:#7fd1ae;--d-h:#f0b45a;--d-x:#ff8a80}
+#dseg button{position:relative;z-index:1}
+#dseg button[data-v="e"]{color:var(--d-e)}
+#dseg button[data-v="h"]{color:var(--d-h)}
+#dseg button[data-v="x"]{color:var(--d-x)}
+#dseg button[aria-pressed=true]{background:transparent;text-shadow:0 0 .5px currentColor}
+#dseg[data-sel="e"] .pill{background:color-mix(in srgb,var(--d-e) 22%,rgba(255,255,255,.75));border-color:var(--d-e)}
+#dseg[data-sel="h"] .pill{background:color-mix(in srgb,var(--d-h) 22%,rgba(255,255,255,.75));border-color:var(--d-h)}
+#dseg[data-sel="x"] .pill{background:color-mix(in srgb,var(--d-x) 22%,rgba(255,255,255,.75));border-color:var(--d-x)}
+:root:not([data-theme="light"]) #dseg[data-sel="e"] .pill{background:color-mix(in srgb,var(--d-e) 32%,rgba(255,255,255,.08))}
+:root:not([data-theme="light"]) #dseg[data-sel="h"] .pill{background:color-mix(in srgb,var(--d-h) 32%,rgba(255,255,255,.08))}
+:root:not([data-theme="light"]) #dseg[data-sel="x"] .pill{background:color-mix(in srgb,var(--d-x) 32%,rgba(255,255,255,.08))}
+#dseg[data-sel="e"]+.ddesc{border-left:3px solid var(--d-e)}
+#dseg[data-sel="h"]+.ddesc{border-left:3px solid var(--d-h)}
+#dseg[data-sel="x"]+.ddesc{border-left:3px solid var(--d-x)}
+.ddesc{padding-left:10px}
+.ddesc{margin:8px 4px 0;font-size:13px;line-height:1.45;color:var(--mute)}
+.tmr{height:4px;border-radius:var(--r-pill,999px);background:var(--line);overflow:hidden;margin:-2px 0 10px}
+.tmr i{display:block;height:100%;background:var(--accent);transform-origin:left;animation:tmr linear forwards}
+@keyframes tmr{from{transform:scaleX(1)}to{transform:scaleX(0)}}
+.q small{display:block;margin-bottom:6px;font:700 11.5px var(--sans);letter-spacing:.1em;text-transform:uppercase;color:var(--mute)}
+.q h2{margin:0;font:700 21px/1.3 var(--serif)}
+.q .nt{margin:8px 0 0;padding:0;list-style:none}
+.q .nt li{margin:5px 0;font-size:16px}.q .nt b{color:var(--accent)}
+.opts{display:grid;gap:10px;margin:12px 0}
+.opt{all:unset;box-sizing:border-box;width:100%;padding:15px 16px;border-radius:var(--r-m,18px);cursor:pointer;font:600 15.5px/1.35 var(--sans);background:var(--g-bg);border:1.5px solid var(--g-bd);box-shadow:var(--g-sh);-webkit-backdrop-filter:var(--g-bl);backdrop-filter:var(--g-bl);display:flex;gap:10px;align-items:center}
+.opt .mk{margin-left:auto;font-weight:700;flex:none}
+.opt.ok{border-color:#2f7d54;background:color-mix(in srgb,#2f7d54 20%,var(--card))}
+.opt.bad{border-color:#b3382c;background:color-mix(in srgb,#b3382c 16%,var(--card))}
+.opt.dim{opacity:.55}
+.opt[disabled]{cursor:default}
+.expl{font-size:14px}
+.expl b{font-weight:700}
+.expl ul{margin:6px 0 0;padding-left:18px}
+.verdict{font:700 15px var(--sans);margin:0 0 6px}
+.verdict.ok{color:#2f7d54}.verdict.bad{color:#b3382c}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .verdict.ok{color:#7fcf9f}:root:not([data-theme="light"]) .verdict.bad{color:#f1948a}}
+.go2{all:unset;box-sizing:border-box;display:block;width:100%;text-align:center;cursor:pointer;padding:15px;border-radius:var(--r-pill,999px);background:var(--ink);color:var(--paper);font:700 15px var(--sans);margin:6px 0}
+.go2.sec{background:var(--g-bg);color:var(--ink);border:1.5px solid var(--ink)}
+.go2:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.score{font:700 54px/1 var(--serif);margin:4px 0;color:var(--accent)}
+.wrongl{margin:8px 0 0;padding:0;list-style:none}
+.wrongl li{padding:8px 0;border-top:1px solid var(--line);font-size:14px}
+.wrongl b{color:var(--accent)}
+.snd{display:flex;flex-direction:column;gap:10px;text-align:center}.snd input{font:inherit;font-size:16px;padding:12px 14px;border-radius:var(--r-m,18px);border:1px solid var(--line,rgba(0,0,0,.15));background:transparent;color:inherit;text-align:center}.snd .go2{margin:0}
+.reset{all:unset;cursor:pointer;display:block;margin:22px auto 0;font-size:12.5px;color:var(--mute);text-decoration:underline;padding:6px}
+</style>
+<link rel="stylesheet" href="etib-ui.css"><script src="etib-ui.js" defer></script>
+</head>
+<body data-sec="train">
+<div class="wrap">
+<header class="hd"><div class="mark" aria-hidden="true"><svg viewBox="0 0 152.4 145.8" fill="currentColor" aria-hidden="true" focusable="false"><path fill-rule="evenodd" d="M47.6 32.6 47.2 33.0 47.2 33.6 47.8 34.1 51.0 34.8 53.5 36.0 54.9 37.4 55.2 38.1 55.8 40.0 55.8 41.9 55.9 42.0 55.8 100.6 55.4 102.1 54.9 103.1 53.8 104.2 51.9 105.1 50.4 105.5 47.4 105.9 46.6 106.6 46.8 107.4 47.2 107.8 56.2 107.6 56.4 107.5 73.0 107.5 73.1 107.6 89.6 107.6 89.8 107.8 92.4 107.8 92.5 107.6 98.0 107.8 98.8 107.6 98.9 107.8 100.6 107.8 100.8 107.6 107.8 107.6 108.4 107.1 108.4 96.4 108.2 96.2 108.4 95.9 108.4 90.4 108.1 89.8 107.8 89.5 106.8 89.5 106.4 89.9 106.0 90.9 105.6 93.2 104.9 95.5 103.9 97.5 102.6 99.2 100.6 101.2 98.5 102.8 96.8 103.6 94.0 104.5 92.1 104.9 89.6 105.0 89.5 105.1 86.8 105.1 86.6 105.2 71.6 105.4 70.0 104.9 68.2 103.5 67.2 101.9 66.9 100.0 66.9 93.4 67.0 93.2 66.9 92.6 67.0 92.1 66.9 71.0 67.0 70.4 67.4 69.9 68.4 69.5 69.0 69.5 69.1 69.6 73.4 69.6 73.5 69.8 85.2 69.8 86.9 70.1 88.1 70.6 89.2 71.4 90.9 73.1 91.8 74.5 92.5 76.4 93.1 79.0 93.5 79.4 94.4 79.4 94.6 79.0 94.5 63.5 94.6 63.4 94.8 59.2 94.5 58.5 93.6 58.5 93.4 58.8 92.5 62.0 91.2 64.0 89.5 65.8 88.4 66.5 86.1 67.4 80.6 67.5 80.5 67.6 68.2 67.8 67.6 67.5 67.1 67.0 66.9 66.0 67.0 65.1 67.0 37.4 67.4 36.1 68.0 35.5 68.9 35.2 85.4 35.4 85.5 35.5 92.2 35.6 96.6 36.8 98.2 37.6 99.6 38.6 101.8 41.0 102.6 42.4 103.6 44.8 104.6 48.9 104.9 49.4 105.9 49.5 106.4 49.0 106.4 33.5 106.2 33.2 105.6 32.9 69.6 32.9 69.5 33.0 67.4 33.0 67.2 32.9 56.0 32.9 55.9 32.8ZM66.6 2.8 60.2 4.0 53.0 6.1 52.4 6.5 50.2 7.1 49.0 7.8 48.2 7.9 47.0 8.5 45.8 8.9 37.5 13.0 31.6 16.9 26.1 21.2 21.0 26.2 15.4 32.9 12.2 37.4 10.2 40.8 8.0 45.1 5.4 51.6 3.2 59.4 2.1 66.8 2.1 68.6 2.0 68.8 2.0 77.0 2.4 80.9 3.0 84.1 3.0 84.9 4.9 92.4 7.0 98.1 10.4 105.0 14.1 111.0 18.1 116.2 23.9 122.5 26.8 125.1 30.9 128.5 36.4 132.4 41.2 135.2 47.5 138.1 51.5 139.5 52.4 139.6 57.9 141.4 63.6 142.6 65.1 142.8 68.1 143.4 70.6 143.5 70.8 143.6 78.9 143.8 79.0 143.6 85.4 143.5 94.0 142.4 96.1 141.8 98.0 141.5 99.0 141.1 102.5 140.4 103.8 139.9 105.9 139.4 112.9 136.6 115.6 135.2 119.9 132.8 123.4 130.4 127.2 127.4 132.0 123.1 134.9 120.1 138.6 115.8 141.8 111.6 144.6 107.4 147.6 102.2 149.4 98.6 149.9 97.1 150.4 96.2 150.2 95.4 149.1 94.9 148.0 94.9 147.2 95.5 144.5 101.2 141.8 105.9 137.5 112.0 133.2 117.0 129.9 120.4 126.4 123.4 122.0 126.6 116.1 130.4 109.8 133.8 108.9 134.0 108.1 134.5 106.4 135.1 105.5 135.6 104.1 136.0 102.4 136.8 98.5 137.9 94.4 138.8 87.8 139.8 83.8 139.9 83.6 140.0 73.9 139.9 69.4 139.2 63.0 137.8 59.9 136.8 54.9 134.8 50.6 132.6 44.4 128.8 40.6 126.0 35.9 122.0 32.8 118.9 29.0 114.6 25.6 110.1 22.9 105.9 21.0 102.6 17.8 95.9 15.6 89.9 15.4 88.4 14.6 86.1 14.2 83.2 13.8 81.0 13.5 76.9 13.4 76.8 13.5 66.2 13.9 62.6 14.9 57.2 15.5 55.1 15.9 53.0 16.4 51.9 16.8 50.1 17.4 48.8 17.6 47.6 21.0 40.2 23.1 36.5 25.8 32.5 27.8 29.9 32.0 25.0 36.5 20.6 39.8 17.9 45.6 13.9 48.6 12.1 53.8 9.6 58.1 8.0 61.8 7.0 66.0 6.2 67.1 5.9 73.0 5.1 77.4 5.0 77.5 4.9 82.0 5.0 88.5 5.6 93.2 6.5 97.1 7.6 99.9 8.9 102.1 10.4 104.1 12.5 106.1 16.2 106.5 16.5 107.5 16.5 107.8 16.1 107.9 8.1 107.5 7.0 106.8 6.6 95.6 3.9 93.5 3.6 90.1 2.9 84.6 2.2 80.0 2.1 79.9 2.0 75.2 2.0 75.1 2.1 72.4 2.1Z"/></svg></div><div><h1>ETIB PARFUM</h1><small>Тренажёр</small></div><a class="adm-ico home" href="index.html" title="На главную" aria-label="Главная"><svg viewBox="0 0 48 54" aria-hidden="true" fill="none" stroke-linecap="round" stroke-linejoin="round"><defs><linearGradient id="glh" x1="0" y1="0" x2="0.35" y2="1"><stop offset="0" style="stop-color:var(--gi-a);stop-opacity:var(--gi-ao)"/><stop offset="1" style="stop-color:currentColor;stop-opacity:var(--gi-bo)"/></linearGradient></defs><g transform="translate(24 27) scale(1.12) translate(-24 -26.75)"><path d="M9 23V45.5h30V23" fill="url(#glh)" stroke="currentColor" stroke-opacity=".6" stroke-width="1.6"/><path d="M34.5 15V9.5h4V19" fill="url(#glh)" stroke="currentColor" stroke-opacity=".6" stroke-width="1.6"/><path d="M4.5 25.5 24 8l19.5 17.5" fill="url(#glh)" stroke="currentColor" stroke-opacity=".6" stroke-width="1.7"/><path d="M20 45.5V33.5h8v12" fill="url(#glh)" stroke="currentColor" stroke-opacity=".6" stroke-width="1.4"/><path d="M12 25.5v17" stroke="#fff" stroke-opacity=".8" stroke-width="1.5"/><path d="M8 22.5 20 12" stroke="#fff" stroke-opacity=".85" stroke-width="1.6"/><circle cx="26.2" cy="40" r=".9" fill="currentColor" fill-opacity=".55" stroke="none"/></g></svg><span>Главная</span></a><a class="adm-ico adm" id="adm" href="catalog.html#admin" title="Вход для админа" aria-label="Вход для админа"><svg viewBox="0 0 48 54" aria-hidden="true" fill="none" stroke-linecap="round" stroke-linejoin="round"><defs><linearGradient id="gla" x1="0" y1="0" x2="0.35" y2="1"><stop offset="0" style="stop-color:var(--gi-a);stop-opacity:var(--gi-ao)"/><stop offset="1" style="stop-color:currentColor;stop-opacity:var(--gi-bo)"/></linearGradient></defs><path d="M5 48.5Q6 35.5 18.6 32.5L24 39.5 29.4 32.5Q42 35.5 43 48.5Z" fill="url(#gla)" stroke="currentColor" stroke-opacity=".6" stroke-width="1.6"/><path d="M24 39.5 22.6 42.5 24 47.5 25.4 42.5Z" fill="currentColor" fill-opacity=".38" stroke="none"/><path d="M17.3 17.5C17 25 19.6 30.5 24 30.5S31 25 30.7 17.5" fill="url(#gla)" stroke="currentColor" stroke-opacity=".6" stroke-width="1.5"/><path d="M16.8 13.6C16.2 7.4 18.4 5.4 21.6 6 24 7.2 26 7.2 26.4 6.2 29.8 5.6 32 7.6 31.2 13.6Z" fill="url(#gla)" stroke="currentColor" stroke-opacity=".6" stroke-width="1.5"/><ellipse cx="24" cy="15" rx="14.5" ry="3" fill="url(#gla)" stroke="currentColor" stroke-opacity=".6" stroke-width="1.6"/><path d="M19 22c0 3 1 5.4 2.4 6.4" stroke="#fff" stroke-opacity=".85" stroke-width="1.5"/><path d="M9 45c.5-5 3-8 7-9.4" stroke="#fff" stroke-opacity=".8" stroke-width="1.5"/><path d="M12 14.6C16 13.3 21 13 26 13.2" stroke="#fff" stroke-opacity=".85" stroke-width="1.4"/></svg><span>Вход</span></a></header>
+<main id="app"></main>
+</div>
+<script src="trainer-data.js"></script>
+<script src="pron.js"></script>
+<script src="rabbit.js"></script>
+<script>
+const $=s=>document.querySelector(s);
+const CATL={ЖЕНСКИЕ:'Женские',МУЖСКИЕ:'Мужские',УНИСЕКС:'Унисекс',ПРЕМИУМ:'Премиум'};
+const A=window.TR.map(x=>Object.assign({},x,{key:x.c+'|'+x.n,all:[].concat(x.top,x.heart,x.base)}));
+const NC={};A.forEach(a=>NC[a.nm]=(NC[a.nm]||0)+1);
+const rnd=n=>Math.floor(Math.random()*n),pick=a=>a[rnd(a.length)];
+const shuf=a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=rnd(i+1);[a[i],a[j]]=[a[j],a[i]]}return a};
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const GEN=/^(мускус|белый мускус|амбра|серая амбра|древесные ноты|сладкие ноты|цветочные ноты|водные ноты|морские ноты|зеленые ноты|зелёные ноты|минеральные ноты|минеральные примечания|специи|цитрусы|смолы|фруктовые ноты|ароматные специи)$/i;
+const spec=n=>!GEN.test(n)&&!/[a-zA-Z]/.test(n);
+const stems=n=>n.toLowerCase().replace(/ё/g,'е').split(/[\s-]+/).filter(w=>w.length>3).map(w=>w.slice(0,5));
+const hasNote=(a,n)=>{const s=stems(n);return a.all.some(m=>stems(m).some(x=>s.includes(x)))};
+const pyr=a=>[['В начале',a.top],['В сердце',a.heart],['В основе',a.base]].filter(r=>r[1].length).map(r=>`<b>${r[0]}:</b> ${r[1].map(esc).join(', ')}`).join('<br>');
+const card=a=>`<b>${esc(a.n)} ${esc(a.nm)}</b><br>${pyr(a)}`;
+const NOTES={ваниль:/ванил/,пачули:/пачул/,жасмин:/жасмин/,роза:/(^|\s)роз(а|ы)(\s|$)/,бергамот:/бергамот/,кедр:/кедр/,сандал:/сандал/,пион:/пион/,лимон:/лимон/,мята:/мят/,кофе:/кофе/,пралине:/пралин/,груша:/груш/,яблоко:/яблок/,лаванда:/лаванд/,апельсин:/(^|\s)апельсин(\s|$)/,грейпфрут:/грейпфрут/,имбирь:/имбир/,кардамон:/кардамон/,ананас:/ананас/,малина:/малин/,персик:/персик/,ирис:/ирис/,гелиотроп:/гелиотроп/,какао:/какао/,'бобы тонка':/тонка/};
+const hasRx=(a,rx)=>a.all.some(m=>rx.test(m.toLowerCase()));
+let FILT='all';
+const poolOf=()=>A.filter(a=>FILT==='all'||a.c===FILT);
+/* ---- уровни сложности ---- */
+const DIFFS=[
+ {id:'e',t:'Обычный',d:'4 варианта ответа, случайные ароматы в вариантах, три ноты в подсказке.',w:3,time:0,clues:3,sim:false},
+ {id:'h',t:'Сложный',d:'5 вариантов, среди них похожие ароматы: тот же тип, общие ноты, тот же бренд.',w:4,time:0,clues:3,sim:true},
+ {id:'x',t:'Эксперт',d:'5 вариантов с похожими ароматами. В «Угадай по нотам» даны две ноты, ответ пишешь сам: подойдёт любой аромат с этими нотами. 20 секунд на выбор ответа, 45 на письменный.',w:4,time:20,clues:2,sim:true,write:true}];
+let DIFF='e';try{const v=localStorage.getItem('etib-diff');if(DIFFS.some(d=>d.id===v))DIFF=v}catch(e){}
+const DF=()=>DIFFS.find(d=>d.id===DIFF);
+const TM=q=>DF().time?(q.tm||DF().time):0;
+const SIMC={};
+const simSet=a=>SIMC[a.key]||(SIMC[a.key]=new Set(a.all.filter(spec).flatMap(stems)));
+const brand=a=>a.nm.toLowerCase().split(' ')[0];
+const simScore=(a,b)=>{let s=0;const x=simSet(a);simSet(b).forEach(k=>{if(x.has(k))s++});return s+(a.t===b.t?2:0)+(brand(a)===brand(b)?3:0)};
+function distract(a,n,ok){let p=shuf(A.filter(b=>b.c===a.c&&b.key!==a.key&&b.nm!==a.nm&&(!ok||ok(b))));
+ {const u=new Set();p=p.filter(b=>!u.has(b.nm)&&u.add(b.nm))}
+ if(DF().sim)p=shuf(p.sort((x,y)=>simScore(a,y)-simScore(a,x)).slice(0,Math.max(n*3,n)));
+ return p.slice(0,n)}
+function opts(correct,wrong){return shuf([{t:correct,ok:true}].concat(wrong.map(t=>({t,ok:false}))))}
+/* ---- вопросы по знаниям: раздача, масла, дома, скидки ---- */
+const KB=[["Раздача блоттеров","С 12:00 до 16:00: сколько раздаём и сколько отдыхаем?","30 мин раздаём, 30 мин отдыхаем",["30 мин раздаём, 15 мин отдыхаем","15 мин раздаём, 15 мин отдыхаем","60 мин раздаём, 30 мин отдыхаем"],"С 12:00 до 16:00: 30 мин раздаём, 30 мин отдыхаем."],["Раздача блоттеров","С 16:00 до 20:00: сколько раздаём и сколько отдыхаем?","30 мин раздаём, 15 мин отдыхаем",["30 мин раздаём, 30 мин отдыхаем","45 мин раздаём, 15 мин отдыхаем","20 мин раздаём, 10 мин отдыхаем"],"С 16:00 до 20:00: 30 мин раздаём, 15 мин отдыхаем."],["Раздача блоттеров","Кому предлагаем блоттеры?","Всем посетителям ТЦ, независимо от пола и возраста",["Только женщинам","Только тем, кто подошёл к витрине","Только взрослым"],"Блоттеры предлагаем всем посетителям ТЦ, независимо от пола и возраста."],["Раздача блоттеров","Сколько блоттеров даём в одни руки?","1 блоттер с 1 ароматом",["2 блоттера с разными ароматами","3 блоттера с разными ароматами","Сколько попросят"],"1 блоттер с 1 ароматом в одни руки."],["Раздача блоттеров","Из каких флаконов заготавливаем блоттеры?","Только из тестеров 100 мл",["Из любых флаконов","Из флаконов 50 мл","Из флаконов 15 мл"],"Блоттеры заготавливаем только из тестеров 100 мл."],["Раздача блоттеров","Как подаём блоттер?","На расстоянии вытянутой руки",["Подносим к носу человека","Кладём на витрину","Вкладываем в руку, придерживая за локоть"],"Подаём на расстоянии вытянутой руки, чтобы не нарушать личное пространство."],["Раздача блоттеров","Что запрещено во время раздачи?","Наушники, телефон, жвачка",["Здороваться с покупателем","Подавать на расстоянии вытянутой руки","Говорить «Добрый день!»"],"Во время раздачи не разговариваем по телефону, не жуём жвачку, в руках нет посторонних предметов. Наушники запрещены."],["Раздача блоттеров","Когда можно не соблюдать график раздачи блоттеров?","Когда у тебя покупатель",["Когда в ТЦ мало посетителей","Когда устал и хочется отдохнуть","Когда рядом стоит коллега"],"Если у тебя покупатель, график раздачи можно не соблюдать: работай с покупателем."],["Проценты масел","Сколько масел в духах (Parfum)?","30–40%",["15–30%","7–15%","около 1,5%"],"Духи (Parfum): 30–40% масел, на коже до 24 ч."],["Проценты масел","Сколько масел в парфюмерной воде (EdP)?","15–30%",["30–40%","7–15%","около 1,5%"],"Парфюмерная вода (EdP): 15–30%, около 12 ч."],["Проценты масел","Сколько масел в туалетной воде (EdT)?","7–15%",["15–30%","30–40%","около 1,5%"],"Туалетная вода (EdT): 7–15%, до 4 ч."],["Проценты масел","Сколько масел в одеколоне (EdC)?","около 1,5%",["7–15%","15–30%","30–40%"],"Одеколон (EdC): около 1,5%, 1–2 ч."],["Проценты масел","Сколько держится туалетная вода на коже?","до 4 часов",["около 12 часов","до 24 часов","1–2 часа"],"Туалетная вода (EdT): до 4 ч. Духи держатся до 24 ч, парфюмерная вода около 12 ч, одеколон 1–2 ч."],["Проценты масел","Какая парфюмерия у ETIB?","Только духи и парфюмерная вода",["Только туалетная вода","Туалетная вода и одеколон","Духи, парфюмерная и туалетная вода"],"У ETIB только духи и парфюмерная вода."],["Проценты масел","Что ответить на вопрос «У вас туалетная вода или парфюмерная?»","Вся наша продукция — духи на масляной основе",["Туалетная вода, она легче","Парфюмерная вода, как у всех","Одеколон на спиртовой основе"],"Вся наша продукция — духи на масляной основе."],["Клубные и селективные","Сколько масел в клубной парфюмерии?","20–30%",["свыше 40%","7–15%","около 1,5%"],"Клубные: масел 20–30%. Селективные: свыше 40%."],["Клубные и селективные","Сколько масел в селективной парфюмерии?","свыше 40%",["20–30%","15–30%","до 10%"],"Селективные: масел свыше 40%. Клубные: 20–30%."],["Клубные и селективные","Какие бренды относятся к клубным (люкс)?","Chanel, Dior, Versace, Armani",["Byredo, Tom Ford, Creed, Kilian","Mane, Luzi, Argeville"],"Клубные — это люкс: Chanel, Dior, Versace, Armani и др. Селективные — ниша: Byredo, Tom Ford, Creed, Kilian, MFK и др."],["Клубные и селективные","Какие бренды относятся к селективным (ниша)?","Byredo, Tom Ford, Creed, Kilian, MFK",["Chanel, Dior, Versace, Armani","Mane, Luzi, Argeville"],"Селективные — ниша: Byredo, Tom Ford, Creed, Kilian, MFK и др. Клубные — люкс: Chanel, Dior, Versace, Armani и др."],["Клубные и селективные","Сколько держится селективный аромат на коже?","~сутки",["~12 часов","~3–4 дня","~1,5 часа"],"На коже: клубные ~12 часов, селективные ~сутки."],["Клубные и селективные","Сколько держится селективный аромат на одежде?","3–4 дня",["~сутки","~12 часов","~неделю"],"На одежде: клубные ~сутки, селективные 3–4 дня."],["Клубные и селективные","Сколько держится клубный аромат на коже?","~12 часов",["~сутки","3–4 дня","~4 часа"],"На коже: клубные ~12 часов, селективные ~сутки."],["Клубные и селективные","Клиент спрашивает, почему селектив дороже. Что ответить?","Это более сложные, глубокие ароматы из дорогих и редких компонентов",["Потому что у него дороже флакон","Потому что на него тратят больше рекламы","Потому что его делают только в Париже"],"Селектив дороже, потому что это более сложные, глубокие ароматы из дорогих и редких компонентов."],["Дома и годы основания","Какой из парфюмерных домов, масла которых используются в составе ароматов, основан в 1871 году?","Mane (Манэ)",["Argeville (Аржевиль)","Luzi (Лузи)"],"Mane, Франция (Манэ): основан в 1871 году."],["Дома и годы основания","Какой из парфюмерных домов, масла которых используются в составе ароматов, основан в 1932 году?","Argeville (Аржевиль)",["Mane (Манэ)","Luzi (Лузи)"],"Argeville, Франция (Аржевиль): основан в 1932 году."],["Дома и годы основания","Какой из парфюмерных домов, масла которых используются в составе ароматов, основан в 1926 году?","Luzi (Лузи)",["Mane (Манэ)","Argeville (Аржевиль)"],"Luzi, Швейцария (Лузи): основан в 1926 году."],["Дома и годы основания","В каком году основан Mane (Манэ)?","1871",["1926","1932","1901"],"Mane, Франция (Манэ): основан в 1871 году."],["Дома и годы основания","В каком году основан Argeville (Аржевиль)?","1932",["1871","1926","1945"],"Argeville, Франция (Аржевиль): основан в 1932 году."],["Дома и годы основания","В каком году основан Luzi (Лузи)?","1926",["1871","1932","1950"],"Luzi, Швейцария (Лузи): основан в 1926 году."],["Дома и годы основания","Какой из домов Mane, Argeville и Luzi из Швейцарии?","Luzi (Лузи)",["Mane (Манэ)","Argeville (Аржевиль)"],"Luzi — Швейцария. Mane и Argeville — Франция."],["Дома и годы основания","Какие из домов Mane, Argeville и Luzi французские?","Mane и Argeville",["Mane и Luzi","Argeville и Luzi","Все три"],"Mane (Манэ) и Argeville (Аржевиль) — Франция, Luzi (Лузи) — Швейцария."],["Дома и годы основания","Какой из домов Mane, Argeville и Luzi самый старый?","Mane (Манэ), 1871",["Argeville (Аржевиль), 1932","Luzi (Лузи), 1926"],"Самый старый — Mane (1871). Дальше Luzi (1926) и Argeville (1932)."],["Скидки и бонусы","Какая скидка у сотрудников ТЦ, промоутеров и именинников?","10%",["5%","15%","20%"],"Скидка 10%: сотрудник ТЦ, промоутер, сотрудник (себе), именинник. Для каждого случая нужно фото, которое прикладывается к отчёту."],["Скидки и бонусы","Что нужно для скидки сотруднику ТЦ?","Фото сотрудника с бейджем, пропуском, в форме или на рабочем месте",["Устное подтверждение","Фото паспорта","Ничего, достаточно слов"],"Сотрудник ТЦ: фото сотрудника с бейджем, пропуском, в форме или на рабочем месте."],["Скидки и бонусы","Что нужно для скидки промоутеру?","Фото промо и проверка, что он участник чата",["Фото чека","Фото паспорта","Ничего"],"Промоутер: фото промо. Обязательно проверь, что он участник чата."],["Скидки и бонусы","Что нужно для скидки себе (сотруднику)?","Фото флакона и чека",["Фото бейджа","Фото паспорта","Ничего"],"Себе (сотруднику): фото флакона и чека."],["Скидки и бонусы","Что должно быть видно на фото документа именинника?","Только дата рождения",["Всё, включая ФИО и прописку","Только фото и ФИО","Только номер документа"],"Закрой рукой всю личную информацию: на фото должна быть видна только дата рождения."],["Скидки и бонусы","Сколько действует скидка для именинника?","В день рождения и 3 дня после",["Только в день рождения","В день рождения и 7 дней после","Неделю до и неделю после"],"Именинник: в день рождения и 3 дня после. Личное присутствие именинника обязательно."],["Скидки и бонусы","Может ли другой человек получить скидку за именинника?","Нет, личное присутствие именинника обязательно",["Да, если есть фото документа","Да, если он сотрудник ТЦ"],"Личное присутствие именинника обязательно."],["Скидки и бонусы","Можно ли совмещать скидки между собой?","Нет, скидки не совмещаются",["Да, всегда","Да, но только с бонусами","Да, если клиент попросит"],"Скидки не совмещаются. Клиенту применяем один вариант выгоды."],["Скидки и бонусы","Суммируются ли акции 1=2 и 2=4 со скидками и бонусами?","Нет, клиенту применяем один вариант выгоды",["Да, со всеми скидками","Да, только с бонусами","Да, только со скидкой 10%"],"Скидки и бонусы не суммируются с акциями 1=2 и 2=4: клиенту применяем один вариант выгоды."],["Скидки и бонусы","Какой кэшбэк на уровне «Эксперт» в бонусной системе?","3%",["5%","10%","1%"],"Эксперт (0–29 999 ₽): кэшбэк 3%, списание до 25%."],["Скидки и бонусы","Какой кэшбэк на уровне «Гуру»?","5%",["3%","10%","7%"],"Гуру (30 000–59 999 ₽): кэшбэк 5%, списание до 50%."],["Скидки и бонусы","Какой кэшбэк на уровне «Парфюмер»?","10%",["3%","5%","15%"],"Парфюмер (от 60 000 ₽): кэшбэк 10%, списание до 75%."],["Скидки и бонусы","Сколько можно списать баллами на уровне «Парфюмер»?","до 75%",["до 25%","до 50%","до 100%"],"Эксперт: до 25%, Гуру: до 50%, Парфюмер: до 75%."],["Скидки и бонусы","С какой суммы покупок начинается уровень «Гуру»?","30 000 ₽",["10 000 ₽","60 000 ₽","100 000 ₽"],"Гуру: 30 000–59 999 ₽. Парфюмер: от 60 000 ₽."],["Скидки и бонусы","Сколько дней действуют бонусные баллы?","180 дней",["30 дней","90 дней","365 дней"],"1 бонус = 1 ₽. Баллы действуют 180 дней."],["Скидки и бонусы","Сколько приветственных бонусов получает новый клиент БС?","300",["100","500","1000"],"300 приветственных бонусов: нужно зарегистрироваться в БС и установить приложение Bonus Money и/или добавить карту в электронный кошелёк."]];
+/* ---- возражения: [что говорит покупатель, лучший ответ, неудачные ответы, пояснение] ---- */
+const OBJ=[["Ваш аромат не похож на оригинал", "Да, вы правы, на начальных нотах он насыщеннее: в наших духах больше 20% масел. Давайте нанесём на запястье, дождёмся раскрытия, и вы услышите, что он такой же, как оригинал.", ["Он абсолютно такой же, вы просто не разобрались.", "Это же не оригинал, чтобы быть один в один.", "Тогда давайте посмотрим что-нибудь другое.", "Многие так говорят, но потом все возвращаются."], "Порядок: выслушай, согласись, назови причину (масел больше 20%, поэтому аромат насыщеннее до раскрытия), предложи проверить на запястье и дождаться раскрытия."], ["Ароматы точно такие же, как оригинал?", "Да, точно такие же. На начальных нотах могут быть насыщеннее за счёт большого процента масел, а после раскрытия аромат такой же.", ["Не совсем, но очень похожи.", "Нет, это просто вдохновлено оригиналом.", "Да, и на начальных нотах абсолютно никакой разницы нет.", "Это зависит от вашей кожи, я не знаю."], "Отвечай уверенно и честно: после раскрытия аромат такой же, на начальных нотах он может быть насыщеннее. Не преуменьшай и не обещай того, чего нет."], ["Почему я не чувствую аромат на себе?", "Значит, он вам подходит. Вы не должны чувствовать его постоянно, иначе заболит голова.", ["Нанесите побольше, и вы почувствуете.", "Значит, аромат слабый, возьмите другой.", "У вас просто нос привык, ничего не поделаешь.", "Скорее всего, вы нанесли слишком мало."], "Согласись с наблюдением и переверни его в плюс: если аромат не ощущается постоянно, он подходит."], ["Почему у вас такие доступные цены?", "Мы экономим на дизайне индивидуальных флаконов, не закладываем в цену бренд и не тратим огромные деньги на рекламу.", ["Сейчас просто акция, потом будет дороже.", "Качество чуть ниже, зато запах похож.", "Не знаю, так решили в компании.", "Мы продаём в убыток, чтобы привлечь покупателей."], "Назови настоящие причины: флаконы без индивидуального дизайна, нет наценки за бренд, нет больших затрат на рекламу."], ["У вас туалетная вода или парфюмерная?", "Вся наша продукция — духи на масляной основе.", ["Туалетная вода, но стойкая.", "Парфюмерная вода, это почти одно и то же.", "Зависит от аромата, у каждого по-разному.", "Не знаю, посмотрите на флаконе."], "Ответ один для всего ассортимента: духи на масляной основе."], ["Где производятся ваши ароматы?", "В Беларуси, город Минск.", ["Во Франции, как и оригиналы.", "В Польше.", "В ОАЭ.", "Это закрытая информация."], "Короткий и прямой ответ: в Беларуси, в Минске."], ["Мне пока нужен только маленький флакон, на пробу", "Конечно. Подскажу: в больших объёмах выгоднее, разница в цене небольшая. 30 мл хватит на 2–3 месяца, 50 мл на 3–5, а 15 мл на 1–1,5 месяца. Давайте поставлю рядом 30 и 50 мл и сравним.", ["Маленькие флаконы мы не продаём.", "Берите сразу 100 мл, не пожалеете.", "Маленький флакон брать невыгодно, это пустая трата денег.", "Хорошо, пробейте 15 мл на кассе."], "Не отказывай и не дави: согласись, объясни выгоду большого объёма (разница в цене небольшая, хватает надолго) и покажи полные флаконы 30 и 50 мл рядом."], ["Я подумаю", "Конечно. Подскажите, что именно хочется обдумать? Может, я помогу прямо сейчас: сравним два аромата на блоттере.", ["Сегодня последний день, потом будет дороже.", "Хорошо, до свидания.", "Думать тут нечего, всё равно вернётесь.", "В других магазинах дороже, не тратьте время."], "Не отпускай без вопроса и не дави ложными сроками: выясни настоящую причину и предложи помощь. Если клиент всё же отказался, не настаивай, поблагодари и пригласи вернуться."], ["Дайте мне и скидку, и акцию 1=2", "Скидки и бонусы не суммируются с акциями 1=2 и 2=4. Давайте посчитаем, какой вариант выгоднее именно вам, и выберем один.", ["Конечно, суммируем и даём всё бесплатно.", "Никаких скидок у нас нет.", "Скидки действуют только по пятницам.", "Это решает директор, я ничего не могу."], "Спокойно объясни правило: скидки не совмещаются с акциями, предложи один вариант выгоды."], ["Слишком сильный на первых нотах, мне такой не нужен", "Да, на начальных нотах он насыщеннее: в наших духах больше 20% масел. Давайте дадим ему раскрыться на запястье, и вы услышите, как он зазвучит.", ["Это стойкий аромат, привыкнете.", "Тогда нанесите поменьше.", "Тогда этот аромат не для вас, возьмите другой.", "Все так говорят сначала, а потом покупают."], "Согласись, назови причину (много масел) и предложи дождаться раскрытия, не отказываясь от аромата сразу."], ["Мне не понравилось", "Подскажите, что именно не подошло: слишком сладкий, резкий, тяжёлый? Подберу ближе к тому, что вы любите.", ["Странно, всем нравится.", "Тогда посмотрите сами на витрине.", "Попробуйте ещё раз, может, понравится.", "Ладно, до свидания."], "Если не понравилось, уточни, что именно и чего хочется. Никогда не оставляй клиента без вопроса."]];
+/* ---- генераторы вопросов ---- */
+const GEN_Q={
+know(){const ix=shuf(KB.map((_,i)=>i)).filter(i=>!R.seen.has('kb'+i));if(!ix.length)return null;const i=ix[0];R.seen.add('kb'+i);const k=KB[i];
+ return{sub:k[0],q:k[1],options:opts(k[2],k[3]),expl:esc(k[4])};},
+num(a){const d=distract(a,DF().w);if(d.length<3)return null;
+ return{sub:CATL[a.c]+' · номер',q:a.n,big:true,options:opts(a.nm,d.map(b=>b.nm)),expl:card(a),a};},
+name(a){if(NC[a.nm]>1)return null;const d=distract(a,DF().w);if(d.length<3)return null;
+ return{sub:CATL[a.c]+' · найди номер',q:a.nm,options:opts(a.n,d.map(b=>b.n)),expl:card(a),a};},
+notes(a){const sh=[];[['top','В начале'],['heart','В сердце'],['base','В основе']].forEach(([k,l])=>{const c=a[k].filter(spec);if(c.length)sh.push([l,pick(c)])});
+ if(sh.length<2)return null;while(sh.length>DF().clues)sh.splice(rnd(sh.length),1);
+  if(DF().write){const valid=A.filter(b=>b.c===a.c&&sh.every(s=>hasNote(b,s[1])));if(!valid.some(b=>b.key===a.key))valid.push(a);
+   return{sub:CATL[a.c]+' · угадай аромат по нотам',q:'Назови любой аромат с этими нотами',list:sh,write:true,valid,tm:45,a}}
+  const lim=sh.length-2;
+ const d=distract(a,DF().w,b=>sh.filter(s=>hasNote(b,s[1])).length<=lim);if(d.length<3)return null;
+ return{sub:CATL[a.c]+' · угадай аромат по нотам',q:'Какой это аромат?',list:sh,options:opts(a.nm,d.map(b=>b.nm)),expl:card(a),a};},
+obj(){const ix=shuf(OBJ.map((_,i)=>i)).filter(i=>!R.seen.has('ob'+i));if(!ix.length)return null;const i=ix[0];R.seen.add('ob'+i);const o=OBJ[i];
+  return{sub:'Работа с возражениями',q:'Покупатель: «'+o[0]+'». Что ответить?',tm:40,options:opts(o[1],shuf(o[2]).slice(0,DF().w)),expl:'<b>Лучший ответ:</b> '+esc(o[1])+'<br><br>'+esc(o[3])};},
+note(a){const c=a.all.filter(spec);if(!c.length)return null;const right=pick(c);const own=new Set(a.all.flatMap(stems));
+ const oth=A.filter(b=>b.c===a.c&&b.key!==a.key),near=DF().sim?shuf(oth).sort((x,y)=>simScore(a,y)-simScore(a,x)).slice(0,20):oth;
+ const pool=[...new Set(near.flatMap(b=>b.all).filter(spec).filter(n=>!stems(n).some(s=>own.has(s))))];
+ const used=new Set(stems(right)),w=[];shuf(pool).forEach(n=>{if(w.length<DF().w&&n!==right&&!w.includes(n)&&!stems(n).some(s=>used.has(s))){w.push(n);stems(n).forEach(s=>used.add(s))}});
+ if(w.length<3)return null;
+ return{sub:CATL[a.c]+' · '+a.n,q:'Какая нота есть в аромате «'+a.nm+'»?',options:opts(right,w),expl:card(a),a};},
+sit(){const cs=FILT==='all'?Object.keys(CATL):[FILT],keys=Object.keys(NOTES);
+ for(let i=0;i<80;i++){const c=pick(cs),pool=A.filter(a=>a.c===c);
+  const a=pick(pool),have=keys.filter(k=>hasRx(a,NOTES[k]));
+  const want=have.length>=2?shuf(have).slice(0,2):have.slice(0,1);if(!want.length)continue;
+  const ok=b=>want.every(k=>hasRx(b,NOTES[k]));
+  const un=new Set(),Wc=shuf(pool.filter(b=>b.key!==a.key&&b.nm!==a.nm&&!ok(b))).filter(b=>!un.has(b.nm)&&un.add(b.nm));
+   if(DF().sim)Wc.sort((x,y)=>want.filter(k=>hasRx(y,NOTES[k])).length-want.filter(k=>hasRx(x,NOTES[k])).length);
+   const W=Wc.slice(0,DF().w);if(W.length<3)continue;
+  const who={ЖЕНСКИЕ:'Покупательница ищет женский аромат',МУЖСКИЕ:'Покупатель ищет мужской аромат',УНИСЕКС:'Покупатель ищет унисекс-аромат',ПРЕМИУМ:'Покупатель хочет селективный аромат'}[c];
+  const q=`${who}. Хочет услышать ${want.length>1?'ноты':'ноту'}: ${want.join(' и ')}.`;
+  const why=W.map(b=>{const miss=want.filter(k=>!hasRx(b,NOTES[k]));return`<li><b>${esc(b.n)} ${esc(b.nm)}</b>: нет ${miss.length>1?'нот':'ноты'} «${miss.join('», «')}»</li>`}).join('');
+  return{sub:'Ситуация с покупателем',q:q+' Что предложить?',options:opts(a.nm,W.map(b=>b.nm)),expl:`Подходит: ${card(a)}<ul>${why}</ul>`,a};}
+ return null;}
+};
+const MODES=[
+ {id:'num',t:'Номер → название',d:'Какой аромат под этим номером',g:'num'},
+ {id:'name',t:'Название → номер',d:'Как найти флакон по названию',g:'name'},
+ {id:'notes',t:'Угадай по нотам',d:'По трём нотам найди аромат',g:'notes'},
+ {id:'note',t:'Найди ноту',d:'Какая нота есть в аромате',g:'note'},
+ {id:'sit',t:'Ситуация с покупателем',d:'Что предложить по запросу',g:'sit'},
+ {id:'obj',t:'Возражения',d:'Что ответить, если покупатель сомневается',g:'obj'},
+ {id:'know',t:'Знания: раздача, масла, скидки',d:'Блоттеры, проценты масел, дома, скидки и бонусы',g:'know'}];
+/* ---- прогресс ---- */
+const KEY='etib-trainer-v1';
+let S;try{S=JSON.parse(localStorage.getItem(KEY))}catch(e){}
+S=S&&S.m?S:{a:0,c:0,m:{},w:{}};S.s=S.s||0;S.bs=S.bs||0;S.k=S.k||{};S.r=S.r||0;S.t=S.t||0;
+const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}};
+const getBP=d=>d==='e'?S.bp:(S.bpd||{})[d];
+const setBP=(d,v)=>{if(d==='e')S.bp=v;else(S.bpd=S.bpd||{})[d]=v};
+const LV=[['Новичок',0,0],['Знает ассортимент',60,70],['Уверенный консультант',150,85]];
+function level(){const acc=S.a?S.c/S.a*100:0;let l=0;LV.forEach((v,i)=>{if(S.a>=v[1]&&acc>=v[2])l=i});return l}
+/* ---- экраны ---- */
+const app=$('#app');
+let R=null;
+const clearTm=()=>{if(R&&R.tm){clearTimeout(R.tm);R.tm=0}};
+function home(){
+ clearTm();R=null;const acc=S.a?Math.round(S.c/S.a*100):0,l=level(),nx=LV[l+1];
+ const wc=Object.keys(S.w).length;
+ const need=nx?`До уровня «${nx[0]}»: ${Math.max(0,nx[1]-S.a)>0?'ещё '+Math.max(0,nx[1]-S.a)+' ответов':''}${Math.max(0,nx[1]-S.a)>0&&acc<nx[2]?' и ':''}${acc<nx[2]?'точность от '+nx[2]+'%':''}`:'Высший уровень достигнут.';
+ app.innerHTML=`<div class="panel lvl"><p>Твой уровень</p><h2>${LV[l][0]}</h2>
+ <div class="steps">${LV.map((v,i)=>`<i class="${i<=l?'on':''}"></i>`).join('')}</div>
+ <p>${S.a?need:'Пройди первый раунд, и здесь появится прогресс.'}</p>
+ <div class="stat"><span><b>${S.a}</b>ответов</span><span><b>${acc}%</b>точность</span><span><b>${wc}</b>на повтор</span></div><p class="best">Лучшая серия: ${S.bs} подряд</p></div>
+ <div class="panel allst"><h3>Статистика за всё время</h3><div class="stat"><span><b>${S.a}</b>всего ответов</span><span><b>${S.c}</b>верных</span><span><b>${S.a-S.c}</b>ошибок</span></div><p class="best">Раундов пройдено: ${S.r}${S.t?', без ошибок: '+S.t:''}</p></div>
+ <details class="panel pfd" id="pfd"${pfOpen()}><summary><h3>Профиль по ошибкам в раунде</h3></summary><div id="pfb">${pfBody()}</div></details>
+ <h3 class="sec">Освоено по разделам</h3>${ringsHTML()}
+ <h3 class="sec">Раздел каталога</h3>
+ <div class="seg" id="fseg">${[['all','Все'],['ЖЕНСКИЕ','Жен'],['МУЖСКИЕ','Муж'],['УНИСЕКС','Уни'],['ПРЕМИУМ','Прем']].map(f=>`<button type="button" data-f="${f[0]}" data-v="${f[0]==='all'?'':f[0]}" aria-pressed="${FILT===f[0]}">${f[1]}</button>`).join('')}</div>
+ <h3 class="sec">Сложность</h3>
+  <div class="seg" id="dseg">${DIFFS.map(d=>`<button type="button" data-d="${d.id}" data-v="${d.id}" aria-pressed="${DIFF===d.id}">${d.t}</button>`).join('')}</div>
+  <p class="ddesc" id="ddesc">${DF().d}</p>
+  <h3 class="sec">Тренировка</h3><div class="modes">
+ <button class="modebtn main" data-m="quick"><div><h4>Быстрый тест</h4><p>10 случайных вопросов за пару минут</p></div>${arrow}</button>
+ <button class="modebtn" data-m="fix" ${wc?'':'disabled'}><div><h4>Работа над ошибками</h4><p>${wc?'Ароматы, где ты ошибся: '+wc:'Пока ошибок нет'}</p></div>${arrow}</button></div>
+ <h3 class="sec">По темам</h3><div class="modes">${MODES.map(m=>{const s=S.m[m.id];const p=s&&s.a?Math.round(s.c/s.a*100)+'%':'';return`<button class="modebtn" data-m="${m.id}"><div><h4>${m.t}</h4><p>${m.d}</p></div>${p?`<span class="pct">${p}</span>`:arrow}</button>`}).join('')}</div>
+ <button class="reset" id="rs">Сбросить прогресс</button>`;
+ const fs=$('#fseg');glassPill(fs);const ds=$('#dseg');glassPill(ds);ds.querySelectorAll('[data-d]').forEach(b=>b.onclick=()=>{DIFF=b.dataset.d;try{localStorage.setItem('etib-diff',DIFF)}catch(e){}ds.querySelectorAll('[data-d]').forEach(x=>x.setAttribute('aria-pressed',x===b));$('#ddesc').textContent=DF().d;$('#pfb').innerHTML=pfBody()});{const d=$('#pfd');if(d)d.ontoggle=()=>{try{localStorage.setItem('etib-pf',d.open?'1':'0')}catch(e){}}}app.querySelectorAll('.ring').forEach(r=>r.onclick=()=>fs.querySelector('[data-f="'+r.dataset.f+'"]').click());
+ fs.querySelectorAll('[data-f]').forEach(b=>b.onclick=()=>{FILT=b.dataset.f;fs.querySelectorAll('[data-f]').forEach(x=>x.setAttribute('aria-pressed',x===b));app.querySelectorAll('.ring').forEach(x=>x.setAttribute('aria-pressed',x.dataset.f===FILT))});
+ app.querySelectorAll('[data-m]').forEach(b=>b.onclick=()=>start(b.dataset.m));
+ $('#rs').onclick=()=>{if(confirm('Сбросить весь прогресс?')){S={a:0,c:0,m:{},w:{},s:0,bs:0,k:{},r:0,t:0};save();home()}};
+ scrollTo(0,0);
+}
+function glassPill(box){
+ const p=document.createElement('span');p.className='pill';p.setAttribute('aria-hidden','true');box.insertBefore(p,box.firstChild);
+ let last=null;const still=matchMedia('(prefers-reduced-motion:reduce)').matches;
+ const cur=()=>box.querySelector('[aria-pressed="true"]');
+ function go(){
+  const b=cur();if(!b){p.style.opacity=0;return}
+  const changed=last!==null&&last!==b;p.style.opacity=1;
+  if(last===null)p.style.transition='none';
+  p.style.left=b.offsetLeft+'px';p.style.width=b.offsetWidth+'px';box.dataset.sel=b.dataset.v||'';
+  if(last===null){void p.offsetWidth;p.style.transition=''}
+  if(changed&&!still&&p.animate)p.animate([{transform:'scale(1,1)'},{transform:'scale(1.12,.88)',offset:.35},{transform:'scale(1,1)'}],{duration:520,easing:'ease-out'});
+  last=b}
+ new MutationObserver(go).observe(box,{attributes:true,subtree:true,attributeFilter:['aria-pressed']});
+ if(window.ResizeObserver)new ResizeObserver(()=>{const l=last;last=null;go();last=l&&cur()}).observe(box);
+ if(document.fonts&&document.fonts.ready)document.fonts.ready.then(()=>{const l=last;last=null;go();last=cur()});
+ go()}
+const arrow='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg>';
+const PF=[[0,'Гуру ароматов','Без ошибок'],[1,'Эксперт','До 1 ошибки'],[3,'Уверенный консультант','До 3 ошибок'],[5,'Знает ассортимент','До 5 ошибок'],[10,'Новичок','Больше 5 ошибок']];
+const pfBody=()=>{const b=getBP(DIFF);return pfList(b==null?-1:b)+`<p class="best">${b==null?'Пройди раунд на этом уровне, и здесь появится твой профиль.':'Лучший результат на уровне «'+DF().t+'»: '+PF[b][1]}</p>`};
+const pfOpen=()=>{try{return localStorage.getItem('etib-pf')==='0'?'':' open'}catch(e){return' open'}};
+const profIdx=(e,n)=>{const x=Math.round(e*10/Math.max(n,1));return PF.findIndex(p=>x<=p[0])};
+const pfList=cur=>`<ul class="pf">${PF.map((p,i)=>`<li class="${i===cur?'on':''}"><b>${p[1]}</b><span>${p[2]}</span></li>`).join('')}</ul>`;
+const profCard=i=>`<div class="panel pfc"><p class="mute" style="margin:0">Твой профиль в этом раунде</p><h2>${PF[i][1]}</h2>${pfList(i)}</div>`;
+const resArt=(p,er,n)=>window.rabbitArt?window.rabbitArt(p,er,n):'';
+const FLAME='<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2c1 4 5 6 5 11a5 5 0 0 1-10 0c0-2 1-3 2-4 0 2 1 3 2 3 0-4-1-7 1-10z"/></svg>';
+function stkHTML(b){return `<span class="stk${S.s>1?' on':''}${b?' bump':''}" id="stk" role="status" aria-label="Серия правильных ответов: ${S.s}">${FLAME}${S.s}</span>`}
+function ringsHTML(){const t={},g={};A.forEach(a=>{t[a.c]=(t[a.c]||0)+1;if(S.k[a.key])g[a.c]=(g[a.c]||0)+1});
+ return `<div class="rings">${[['ЖЕНСКИЕ','Жен'],['МУЖСКИЕ','Муж'],['УНИСЕКС','Уни'],['ПРЕМИУМ','Прем']].map(([c,l])=>{const n=g[c]||0,p=t[c]?Math.round(n/t[c]*100):0;
+  return `<button type="button" class="ring" data-f="${c}" aria-pressed="${FILT===c}" aria-label="${CATL[c]}: освоено ${n} из ${t[c]||0}"><span class="rg"><svg viewBox="0 0 56 56" aria-hidden="true"><circle class="tr" cx="28" cy="28" r="23" pathLength="100"/><circle class="pg" cx="28" cy="28" r="23" pathLength="100" stroke-dasharray="${p} 100"/></svg><b>${p}%</b></span>${l}<small>${n}/${t[c]||0}</small></button>`}).join('')}</div>`}
+function makeQ(mode){
+ for(let i=0;i<40;i++){
+  let g,a=null;
+  if(mode==='quick')g=pick(MODES).g;else if(mode==='fix'){g=pick(['num','name','notes','note']);}else g=mode;
+  if(g==='sit'){const q=GEN_Q.sit();if(q){q.g='sit';return q}continue}
+  if(g==='know'){const q=GEN_Q.know();if(q){q.g='know';return q}continue}
+  if(g==='obj'){const q=GEN_Q.obj();if(q){q.g='obj';return q}continue}
+  let pool=poolOf();
+  if(mode==='fix'){const ks=Object.keys(S.w);pool=A.filter(x=>ks.includes(x.key))}
+  if(!pool.length)pool=A;
+  a=pick(pool);const q=GEN_Q[g](a);
+  if(q&&!R.seen.has(q.a.key+g)){R.seen.add(q.a.key+g);q.g=g;return q}
+ }
+ return null;
+}
+function start(mode){
+ R={mode,d:DIFF,i:0,ok:0,seen:new Set(),wrong:[],log:[],q:null,done:false,tm:0};next();
+}
+function next(){
+ if(R.i>=10){return end()}
+ const q=makeQ(R.mode);if(!q){return end()}
+ R.q=q;R.i++;R.answered=false;draw();
+}
+function draw(){
+ const q=R.q;
+ app.innerHTML=`<div class="top"><button class="nav" id="bk">← Выйти</button><div class="bar"><i style="width:${(R.i-1)/10*100}%"></i></div><span class="cnt">${R.i}/10</span>${stkHTML(false)}</div>
+  ${TM(q)?`<div class="tmr" aria-hidden="true"><i style="animation-duration:${TM(q)}s"></i></div>`:''}
+ <div class="panel q"><small>${esc(q.sub)}${R.d!=='e'?' · '+esc(DIFFS.find(d=>d.id===R.d).t):''}</small>${q.big?`<h2 style="font-size:40px">${esc(q.q)}</h2>`:`<h2>${esc(q.q)}</h2>`}${q.list?`<ul class="nt">${q.list.map(s=>`<li><b>${s[0]}:</b> ${esc(s[1])}</li>`).join('')}</ul>`:''}</div>
+ ${q.write?`<div class="wr"><input id="wi" type="text" inputmode="text" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" placeholder="Номер или название, например A5" aria-label="Твой ответ"><button class="go2" id="wgo" type="button">Проверить</button><button class="go2 sec" id="wsk" type="button">Не помню</button><p class="wmsg" id="wmsg" role="status"></p></div>`:`<div class="opts" role="group" aria-label="Варианты ответа">${q.options.map((o,i)=>`<button class="opt" data-i="${i}"><span>${esc(o.t)}</span><span class="mk"></span></button>`).join('')}</div>`}
+ <div id="fb" aria-live="polite"></div>`;
+ $('#bk').onclick=()=>{if(R.i>1&&!confirm('Выйти из раунда? Прогресс по ответам сохранён.'))return;home()};
+ app.querySelectorAll('.opt').forEach(b=>b.onclick=()=>answer(+b.dataset.i));
+ if(q.write){const wi=$('#wi');$('#wgo').onclick=()=>answerW(wi.value);$('#wsk').onclick=()=>answerW('',true);wi.onkeydown=e=>{if(e.key==='Enter'){e.preventDefault();answerW(wi.value)}};try{wi.focus({preventScroll:true})}catch(e){}}
+ clearTm();if(TM(q))R.tm=setTimeout(()=>{if(R&&R.q===q&&!R.answered){if(q.write)answerW('',true,true);else answer(-1)}},TM(q)*1000);
+ scrollTo(0,0);
+}
+function answer(i){
+ if(R.answered)return;R.answered=true;clearTm();const q=R.q,ok=i>=0&&q.options[i].ok;
+ S.a++;const m=S.m[q.g]||(S.m[q.g]={a:0,c:0});m.a++;
+ logQ(q,i>=0?q.options[i].t:'нет ответа (время вышло)',q.options.filter(o=>o.ok).map(o=>o.t).join(' / '),ok);
+ if(ok){S.c++;m.c++;R.ok++;S.s++;if(S.s>S.bs)S.bs=S.s;if(q.a)S.k[q.a.key]=1;if(R.mode==='fix'&&S.w[q.a.key]){S.w[q.a.key]--;if(S.w[q.a.key]<=0)delete S.w[q.a.key]}}
+ else{S.s=0;if(q.a)S.w[q.a.key]=(S.w[q.a.key]||0)+1;if(q.a)R.wrong.push(q.a)}
+ save();{const tb=$('.tmr i');if(tb)tb.style.animationPlayState='paused'}
+ app.querySelectorAll('.opt').forEach((b,k)=>{b.disabled=true;const o=q.options[k];
+  if(o.ok){b.classList.add('ok');b.querySelector('.mk').textContent='✓'}
+  else if(k===i){b.classList.add('bad');b.querySelector('.mk').textContent='✗'}else b.classList.add('dim')});
+ $('#fb').innerHTML=`<div class="panel expl"><p class="verdict ${ok?'ok':'bad'}">${ok?'Верно!'+(S.s>1?' Серия: '+S.s+' подряд.':''):(i<0?'Время вышло. Правильный ответ выделен.':'Не совсем. Правильный ответ выделен.')}</p>${q.expl}</div><button class="go2" id="nx">${R.i>=10?'Результат':'Дальше'}</button>`;
+ if(ok)app.querySelectorAll('.opt')[i].classList.add('win');{const sk=$('#stk');if(sk)sk.outerHTML=stkHTML(ok&&S.s>1)}$('#nx').onclick=next;$('#nx').focus({preventScroll:true});$('#nx').scrollIntoView({block:'nearest',behavior:'smooth'});
+}
+
+/* ---- письменный ответ (Эксперт, «Угадай по нотам») ---- */
+const HOM={'А':'A','В':'B','С':'C','Е':'E','Н':'H','К':'K','М':'M','О':'O','Р':'P','Т':'T','Х':'X'};
+const nrm=s=>String(s).toLowerCase().replace(/ё/g,'е').replace(/[^a-zа-я0-9]+/g,'');
+const codeOf=s=>String(s).toUpperCase().replace(/\s+/g,'').replace(/[АВСЕНКМОРТХ]/g,c=>HOM[c]);
+function findAroma(t){
+ t=String(t).trim();if(!t)return null;
+ const code=codeOf(t),valid=R.q.valid||[];
+ if(/^[A-Z]+\d+$/.test(code)){const hit=A.filter(a=>codeOf(a.n)===code);return hit.find(a=>a.c===R.q.a.c)||hit[0]||null}
+ const q=nrm(t);if(q.length<4)return null;
+ const P=window.PRON||{};const full=a=>nrm(a.nm)+'|'+nrm(P[a.nm]||'');
+ let hit=A.filter(a=>full(a).includes(q));
+ if(!hit.length){const ws=t.toLowerCase().replace(/ё/g,'е').split(/[^a-zа-я0-9]+/).filter(w=>w.length>2);
+  if(ws.length>=2)hit=A.filter(a=>{const n=full(a);return ws.every(w=>n.includes(w))})}
+ if(!hit.length)return null;
+ return hit.find(a=>valid.some(b=>b.key===a.key))||hit[0]}
+function answerW(txt,skip,timeout){
+ if(R.answered)return;const q=R.q;let m=null,ok=false;
+ if(!skip){m=findAroma(txt);
+  if(!m){const e=$('#wmsg');if(e)e.textContent=String(txt).trim()?'Такого аромата не нашлось. Введи номер (например, A5) или название, как в каталоге.':'Введи номер или название аромата.';return}
+  ok=q.valid.some(b=>b.key===m.key)}
+ R.answered=true;clearTm();
+ S.a++;const mm=S.m[q.g]||(S.m[q.g]={a:0,c:0});mm.a++;
+ logQ(q,skip?(timeout?'нет ответа (время вышло)':'не помню'):String(txt).trim()+(m?' ('+m.n+' '+m.nm+')':''),q.valid.slice(0,3).map(b=>b.n+' '+b.nm).join(', '),ok);
+ if(ok){S.c++;mm.c++;R.ok++;S.s++;if(S.s>S.bs)S.bs=S.s;S.k[m.key]=1;if(R.mode==='fix'&&S.w[q.a.key]){S.w[q.a.key]--;if(S.w[q.a.key]<=0)delete S.w[q.a.key]}}
+ else{S.s=0;S.w[q.a.key]=(S.w[q.a.key]||0)+1;R.wrong.push(q.a)}
+ save();{const tb=$('.tmr i');if(tb)tb.style.animationPlayState='paused'}
+ ['#wi','#wgo','#wsk'].forEach(x=>{const e=$(x);if(e)e.disabled=true});
+ const rest=q.valid.filter(b=>!m||b.key!==m.key),show=rest.slice(0,4);
+ const more=rest.length>show.length?`<li>и ещё ${rest.length-show.length}</li>`:'';
+ const head=ok?'Верно!'+(S.s>1?' Серия: '+S.s+' подряд.':''):timeout?'Время вышло.':skip?'Ничего страшного.':'Не совсем: в этом аромате нет обеих нот.';
+ const own=m?`<p>Ты назвал: ${card(m)}</p>`:'';
+ $('#fb').innerHTML=`<div class="panel expl"><p class="verdict ${ok?'ok':'bad'}">${head}</p>${own}<p>По этим нотам подходят, например:</p><ul>${(ok?show:q.valid.slice(0,5)).map(b=>`<li><b>${esc(b.n)} ${esc(b.nm)}</b></li>`).join('')}${ok?more:(q.valid.length>5?`<li>и ещё ${q.valid.length-5}</li>`:'')}</ul></div><button class="go2" id="nx">${R.i>=10?'Результат':'Дальше'}</button>`;
+ {const sk=$('#stk');if(sk)sk.outerHTML=stkHTML(ok&&S.s>1)}$('#nx').onclick=next;$('#nx').focus({preventScroll:true});$('#nx').scrollIntoView({block:'nearest',behavior:'smooth'});
+}
+const getNm=()=>{try{return localStorage.getItem('etib-name')||''}catch(e){return ''}},setNm=v=>{try{localStorage.setItem('etib-name',v)}catch(e){}};
+const cut=(s,n)=>{s=String(s).replace(/\s+/g,' ').trim();return s.length>n?s.slice(0,n-1)+'…':s};
+function logQ(q,given,right,ok){const nz=s=>String(s).replace(/\s+/g,' ').trim();R.log.push({s:q.sub||'',q:nz(q.q+(q.list?' ['+q.list.map(x=>x[1]).join(', ')+']':'')),g:nz(given),r:nz(right),ok:!!ok})}
+function end(){
+ const n=Math.max(R.i-(R.answered?0:1),0),p=n?Math.round(R.ok/n*100):0;const er=n-R.ok,pi=n?profIdx(er,n):-1;if(n){S.r++;if(er===0&&n>=10)S.t++;if(getBP(R.d)==null||pi<getBP(R.d))setBP(R.d,pi);save()}
+ const msg=!n?'Для этого раздела пока нет вопросов.':p>=90?'Отлично! Так держать.':p>=70?'Хороший результат, чуть-чуть до идеала.':p>=50?'Неплохо, но стоит повторить.':'Нужно ещё потренироваться, это нормально.';
+ const wr=[...new Map(R.wrong.map(a=>[a.key,a])).values()];
+ app.innerHTML=`<div class="panel" style="text-align:center"><p class="mute" style="margin:0">Результат</p><div class="score">${R.ok} из ${n}</div><p>${msg}</p></div>${n?resArt(p,er,n):''}${n?profCard(pi):''}
+ ${wr.length?`<div class="panel"><b>Повтори эти ароматы</b><ul class="wrongl">${wr.map(a=>`<li><b>${esc(a.n)}</b> ${esc(a.nm)} <span class="mute" style="color:var(--mute)">· ${CATL[a.c]}</span></li>`).join('')}</ul></div>`:''}
+ ${n?`<div class="panel snd"><b>Отправить результат</b><input id="sn" type="text" maxlength="40" placeholder="Твоё имя" autocomplete="name" value="${esc(getNm())}"><button type="button" class="go2 pri" id="tg">Отправить в Telegram</button></div>`:''}
+ <button class="go2 sec" id="again">Ещё раунд</button><button class="go2 lnk" id="bk2">К тренировкам</button>`;
+ $('#again').onclick=()=>start(R.mode);$('#bk2').onclick=home;scrollTo(0,0);
+ if(n){const mt=(MODES.find(x=>x.id===R.mode)||{}).t||'Быстрая тренировка',df=R.d!=='e'?(DIFFS.find(d=>d.id===R.d)||{}).t:'',d=new Date(),pad=x=>String(x).padStart(2,'0');
+  const body=full=>{const c=(s,n)=>full?s:cut(s,n);const nm=$('#sn').value.trim();setNm(nm);
+   return ['Тренажёр ETIB'+(nm?' — '+nm:''),mt+(df?' · '+df:''),'Результат: '+R.ok+' из '+n+' ('+p+'%)',pi>=0?'Профиль: '+PF[pi][1]:'','',...R.log.map((x,k)=>(k+1)+'. '+(x.ok?'✅ ':'❌ ')+c(x.q,90)+'\n   Ответ: '+c(x.g,70)+(x.ok?'':'\n   Верно: '+c(x.r,70))),'',pad(d.getDate())+'.'+pad(d.getMonth()+1)+'.'+d.getFullYear()+' '+pad(d.getHours())+':'+pad(d.getMinutes())].filter(Boolean).join('\n')};
+  $('#tg').onclick=async()=>{const nm=$('#sn').value.trim(),s=body(true),head=body().split('\n').slice(0,4).join('\n'),fn='ETIB-'+(nm?nm.replace(/[^\wа-яё-]+/gi,'_')+'-':'')+d.getFullYear()+pad(d.getMonth()+1)+pad(d.getDate())+'-'+pad(d.getHours())+pad(d.getMinutes())+'.txt';
+   let f=null;try{f=new File([s],fn,{type:'text/plain'})}catch(e){}
+   if(f&&navigator.canShare&&navigator.canShare({files:[f]})){try{await navigator.share({files:[f],text:head,title:'Результат тренажёра ETIB'});return}catch(e){if(e&&e.name==='AbortError')return}}
+   const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([s],{type:'text/plain'}));a.download=fn;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(a.href),4000);
+   const u=/^https?:/.test(location.protocol)?location.href.split('#')[0]:' ';
+   window.open('https://t.me/share/url?url='+encodeURIComponent(u)+'&text='+encodeURIComponent(head+'\n\n(файл с ответами скачан — прикрепи его к сообщению)'),'_blank','noopener')}}
+}
+home();
+/* ссылка с главной: trainer.html#num запускает нужную тренировку */
+(function(){let m='';try{m=decodeURIComponent(location.hash.slice(1))}catch(e){}
+ if(!m)return;history.replaceState(null,'',location.pathname+location.search);
+ if(MODES.some(x=>x.id===m)||(m==='fix'&&Object.keys(S.w).length))start(m)})();
+try{if(sessionStorage.getItem('etib-adm')==='1')document.getElementById('adm').hidden=true}catch(e){}
+</script>
+<script>if('serviceWorker' in navigator&&location.protocol!=='file:')addEventListener('load',function(){navigator.serviceWorker.register('sw.js').catch(function(){})})</script>
+</body>
+</html>
