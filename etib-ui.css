@@ -377,32 +377,31 @@ body:has(.srch) h1{font-size:clamp(24px,7.6vw,32px)}
 
 
 /* ===== ЕДИНАЯ ТИПОГРАФИКА (этот блок последний и главный) =====
-   Один шрифт на весь сайт: Manrope. Исключение только название ETIB PARFUM в шапке (логотип).
-   Иерархия задаётся весом и размером: текст 500, подзаголовки и кнопки 700, заголовки 800. */
+   Playfair Display (антиква) только у заголовков и подзаголовков; весь остальной текст, таблицы, статусы, кнопки, поля — Manrope.
+   Вес: текст 500, заголовки 800, подзаголовки 700. */
 :root{--sans:Manrope,system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;--serif:var(--sans);
---fw-text:500;--fw-sub:700;--fw-head:800}
+--head:'Playfair Display',Georgia,'Times New Roman',serif;--fw-text:500;--fw-sub:700;--fw-head:800}
 html{text-rendering:optimizeLegibility;-webkit-font-smoothing:antialiased}
 body{font-family:var(--sans);font-weight:var(--fw-text)}
 button,input,select,textarea{font-family:var(--sans)}
 
-/* название бренда в шапке остаётся прежним (Playfair Display 700) */
-body header.hd h1,h1{font-family:'Playfair Display',Georgia,'Times New Roman',serif}
+/* название бренда в шапке */
+body header.hd h1,h1{font-family:var(--head)}
 
 /* заголовки */
-h2,h3:not(.sec),.hero h2,.row h3,.modebtn h4,.card h3,.lvl h2,.q h2,.rp-top h2,.tp-head h2,dialog h2,.sh-head h2,.favs h2,.pfc h2,.winpic h2,.panel h3,.pfd summary h3,details.sec>summary h2{font-family:var(--sans);font-weight:var(--fw-head);letter-spacing:-.01em}
+h2,h3:not(.sec),.hero h2,.row h3,.modebtn h4,.card h3,.lvl h2,.q h2,.rp-top h2,.tp-head h2,dialog h2,.sh-head h2,.favs h2,.pfc h2,.winpic h2,.panel h3,.pfd summary h3,details.sec>summary h2{font-family:var(--head);font-weight:var(--fw-head);font-variant-numeric:lining-nums}
 
-/* подзаголовки, названия пунктов, строки-значения */
-details:not(.sec)>summary,.quick b,.res b,.favs a b,.pf li b,.verdict,.slot,.status,.status .stx b,.status .tm,th,td b,table b{font-family:var(--sans);font-weight:var(--fw-sub)}
-td{font-family:var(--sans);font-weight:var(--fw-text)}
+/* подзаголовки: названия пунктов-раскрывашек и плиток */
+details:not(.sec)>summary,.quick b,.res b,.favs a b{font-family:var(--head);font-weight:var(--fw-sub);font-variant-numeric:lining-nums}
+
+/* всё остальное, включая бывшие «акценты», — Manrope */
+.status,.status .stx b,.status .tm,.slot,th,td,table b,.pf li b,.verdict{font-family:var(--sans)}
+.status,.status .stx b,.slot,th,table b,.pf li b,.verdict{font-weight:700}
+td{font-weight:var(--fw-text)}
 .status .stx small{font-weight:600}
 th{font-size:13px;color:var(--ink)}
 .verdict{font-size:17px}
-
-/* цитаты: без курсива (у Manrope его нет), выделяются рамкой слева */
 .say,.quote,.tp-body .say,.alt,.pron,#hp .ps,i:not([class]){font-family:var(--sans);font-style:normal;font-weight:500}
-
-/* подписи */
 .hd small{font-weight:600;opacity:.9}
 b,strong{font-weight:700}
-.opt{font-weight:600}
-.banner{font-weight:600}
+.opt,.banner{font-weight:600}
