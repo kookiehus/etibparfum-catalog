@@ -28,7 +28,7 @@ function parse(q){var raw=norm(q).split(' ').filter(Boolean),f={cat:null,t:[]},w
   if(/^женск|унисе|премиу|мужск/.test(r)){f.cat=r.indexOf('жен')===0?'ЖЕНСКИЕ':r.indexOf('муж')===0?'МУЖСКИЕ':r.indexOf('уни')===0?'УНИСЕКС':'ПРЕМИУМ';return}
   if(FEM.indexOf(s)>=0){f.cat='ЖЕНСКИЕ';return}if(MAS.indexOf(s)>=0){f.cat='МУЖСКИЕ';return}
   if(s===S_FRESH||s===S_SWEET){f.t.push(s);return}
-  if(STOP.indexOf(s)<0&&s.length>1)w.push({s:s,raw:r})});return{f:f,w:w}}
+  if(STOP.indexOf(s)<0&&s.length>1&&!/^(из|на|по|за|со|об|во|ко|от|до|ли|бы|же|тако|так)$/.test(s))w.push({s:fz(s,r),raw:r})});return{f:f,w:w}}
 function exp(s){return[s].concat(SYN[s]||[])}
 function scoreA(a,p){var sc=0,hit={};p.w.forEach(function(x){var best=0;exp(x.s).forEach(function(t,i){var w=(a._n[t]||0)+(a._m[t]?3:0)+(a._t[t]?1:0);if(i>0)w=w*0.6;if(w>best)best=w;if(a._n[t])hit[t]=1});sc+=best});return{sc:sc,hit:hit}}
 function inF(a,f){if(f.cat&&a.c!==f.cat)return false;return f.t.every(function(s){return a.t.toLowerCase().indexOf(s)===0||a.t.toLowerCase().indexOf(s)>=0})}
@@ -137,7 +137,7 @@ var NEW=[
 [/ты умеешь (вязать|готовить|читать|рисовать|писать|шить|убирать)|умеешь (вязать|готовить|убирать)/,['Убирать Добби умеет отлично 🧹 А вот вязать пока только мечтает: вот бы связать себе носки!','Готовить Добби тоже умеет: эльфы на кухне мастера 🍳 Но самое вкусное для него — ароматы.','Добби умеет многое: убирать, помогать, находить ответы 😊 А рисовать не пробовал. Может, начнёт!'],{m:1,c:['Что ты умеешь?','Что ты любишь?','Шутка']}]
 ,
 [/^(а )?что (у (тебя|вас) )?нового$|^что новенького$|^как жизнь$/,['У Добби всё по-старому: ароматы, носки, добрые люди 🧦 А у вас что нового?','Новостей немного, но все хорошие ✨ Вот только что Добби придумал новую шутку про носки. Рассказать?','Добби сегодня уже протёр каталог и выучил пару новых нот 🌸 А у вас как день?'],{m:1,o:'расскажи шутку',c:['Расскажи шутку','Расскажи свою историю','Удиви меня']}],
-[/^(?!.*(аромат|духи|парфюм)).*(носк|носочк)/,['Носки — это святое! 🧦 Для Добби каждый носок как маленькая свобода. Чем больше расцветок, тем лучше.','О, носки! 🧦 Добби может говорить о них часами: полосатые, в горошек, шерстяные и даже те, что без пары.','Носок для эльфа — больше, чем одежда ✨ Это знак свободы. А ещё в нём тепло и уютно!'],{m:1,o:'расскажи свою историю',c:['Расскажи свою историю','Какие у тебя носки?','Шутка']}]];
+[/^(?!.*(аромат|духи|парфюм)).*(носок|носк|носочк)/,['Носки — это святое! 🧦 Для Добби каждый носок как маленькая свобода. Чем больше расцветок, тем лучше.','О, носки! 🧦 Добби может говорить о них часами: полосатые, в горошек, шерстяные и даже те, что без пары.','Носок для эльфа — больше, чем одежда ✨ Это знак свободы. А ещё в нём тепло и уютно!'],{m:1,o:'расскажи свою историю',c:['Расскажи свою историю','Какие у тебя носки?','Шутка']}]];
 NEW.forEach(function(e){TALK.push(e)});
 function tsay(i){var e=TALK[i];TM=e[2]||null;CTX.ti=TM&&TM.m?i:null;CTX.offer=TM&&TM.o||null;CTX.topic=null;KEEP=true;return nr('t'+i,e[1]).replace('{h}',hello()).replace('{na}',D&&D.aromas?plA(D.aromas.length):'много ароматов').replace('{now}',nowS())}
 function talk(n){for(var i=0;i<TALK.length;i++)if(TALK[i][0].test(n))return tsay(i);return null}
@@ -240,19 +240,107 @@ var RT=[[/дорог|возражен|сомнева|подумаю/,'obj'],[/д
 function route(n){for(var i=0;i<RT.length;i++)if(RT[i][0].test(n)){var t=RT[i][1];if(typeof t==='string'){var x=D.sections.filter(function(z){return z.s===t})[0];if(x)return x}else return{n:t.n,u:t.u,x:'',k:''}}return null}
 function factR(){var L=D.qa.filter(function(i){return FS.indexOf(i.sec)>=0}),it=rnd(L);return{html:nr('fa',['Знаете ли вы? 🤓','Интересный факт! ✨','Держите факт для разговора с клиентом 💬'])+'<div class="hc"><b>'+esc(it.q)+'</b><small>'+esc(it.sec)+'</small><p>'+esc(cut(it.a,520))+'</p><a href="'+esc(it.u)+'">Открыть в шпаргалке</a></div>',chips:['Ещё факт','Викторина','Подбодри меня']}}
 var FB=['Добби задумался, но ответа пока нет 🧦 Спросите про аромат, ноту, номер или просто скажите «привет»!','Ой, Добби запутался в носках 🧦 Скажите проще: «что-то свежее», «бонусы» или «расскажи шутку».','Добби виноват, Добби не понял! 🙈 Скажите иначе: ноту, номер аромата (A2) или тему из шпаргалки. Добби очень старается!','Ох, Добби в замешательстве 🧦 Напишите чуть иначе, например «свежее для мужчины», «скидка 10%» или просто «шутку».','Добби честно искал, но пока не нашёл 🤔 Попробуйте одно слово («ваниль», «блоттеры», «бонусы») или выберите кнопку ниже.','Простите Добби, это не по его части 🙈 Зато про ароматы, продажи и отчёты Добби знает всё. Спросите что-нибудь из этого!'];
+/* ===== Умный слой: понимание реплик, обучение, защита от ложных карточек ===== */
+var MEMLS={},SHARED=[],CUR='',LSL='etib_dobby_lessons',LSU='etib_dobby_unknown',NV=null;
+function lsGet(k){try{var v=localStorage.getItem(k);return v?JSON.parse(v):[]}catch(e){return MEMLS[k]||[]}}
+function lsSet(k,v){MEMLS[k]=v;try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}
+function lk(s){var o=[],S={};norm(s).split(' ').forEach(function(w){if(w.length>1){var x=st(w);if(!S[x]){S[x]=1;o.push(x)}}});return o}
+function dice(a,b){if(!a.length||!b.length)return 0;var S={},i=0;a.forEach(function(x){S[x]=1});b.forEach(function(x){if(S[x])i++});return 2*i/(a.length+b.length)}
+function fmt(a){return esc(a).replace(/\n/g,'<br>')}
+function lessons(){return lsGet(LSL).concat(SHARED)}
+/* урок: фраза → ответ; одно слово — только точное совпадение, фразы — по сходству слов */
+function learned(n){var k=lk(n);if(!k.length)return null;var best=null,bs=0;
+ lessons().forEach(function(l){if(!l||!l.p||!l.a)return;var lkk=l.k||(l.k=lk(l.p));if(lkk.length===1||k.length===1){if(norm(l.p)===n&&1>bs){bs=1;best=l}return}var s=dice(k,lkk);if(s>bs){bs=s;best=l}});
+ if(best&&bs>=.8){KEEP=false;return{html:fmt(best.a),chips:defc()}}return null}
+function saveLesson(ph,ans){ph=String(ph||'').replace(/\s+/g,' ').trim().slice(0,80);ans=String(ans||'').trim().slice(0,500);
+ if(norm(ph).length<2||ans.length<2){KEEP=false;return{html:'Не получилось запомнить: фраза или ответ слишком короткие 🙈 Попробуйте ещё раз: «научить».',chips:['Научить Добби']}}
+ var L=lsGet(LSL),np=norm(ph);L=L.filter(function(l){return norm(l.p)!==np});L.push({p:ph,a:ans,t:Date.now()});if(L.length>150)L=L.slice(L.length-150);lsSet(LSL,L);
+ lsSet(LSU,lsGet(LSU).filter(function(u){return norm(u.q)!==np}));KEEP=false;
+ return{html:'Запомнил! 🧠 Теперь на «'+esc(ph)+'» Добби ответит так:<div class="hc"><p>'+fmt(ans)+'</p></div>Проверьте: напишите эту фразу ещё раз.',chips:[ph.length>26?ph.slice(0,24)+'…':ph,'Научить Добби','Что ты выучил?'].slice(0,3).map(function(x,i){return i===0?ph:x}).slice(0,3)}}
+function logUnk(q){var t=String(q).trim().slice(0,80);if(norm(t).length<2)return;var L=lsGet(LSU),k=norm(t),f=null;L.forEach(function(u){if(norm(u.q)===k)f=u});
+ if(f){f.c++;f.t=Date.now()}else L.push({q:t,c:1,t:Date.now()});L.sort(function(a,b){return b.t-a.t});lsSet(LSU,L.slice(0,60))}
+var TD=/^\s*(?:запомни|научись|выучи|научи(?:ть)?(?: добби)?)\s*[:,—-]?\s*(?:когда (?:я |мне |тебе |вам )?(?:напишу|напишут|скажу|скажут|спрошу|спросят)\s*[:,]?\s*)?[«"“]?(.{2,80}?)[»"”]?\s*(?:=>|->|→|=| — | - |,? ?отвечай:?|,? ?ответь:?|,? ?ответ:)\s*[«"“]?([\s\S]{2,500}?)[»"”]?\s*$/i;
+var TD2=/^\s*(?:запомни|научись|выучи|научи(?:ть)?(?: добби)?)\s*[:—-]\s*[«"“]?(.{2,80}?)[»"”]?\s*$/i;
+var TS=/^(научи|научить|научи добби|научить добби|обучи|обучить|обучи добби|давай научу|хочу научить|хочу тебя научить|запомни|научись)$/;
+var FBK=/^(не то|не так|неправильно|неверно|не верно|ты не понял[а]?|ты меня не понял|мимо|ерунда|чушь|бред|я не об этом|я не про это|не об этом|не про это|ты ошибся|ты ошибаешься|ты тупишь|тупишь|глупый ответ|глупость)( |$)/;
+function teachFlow(q,n,more){if(more)return null;var T=CTX.teach;
+ if(T&&Date.now()-T.t>240000){CTX.teach=T=null}
+ if(T){if(/^(отмена|не надо|стоп|хватит|не хочу|передумал|передумала)( |$)/.test(n)){CTX.teach=null;KEEP=false;return{html:'Хорошо, не учим 😊 Добби рядом.',chips:defc()}}
+  if(T.step===1){T.ph=String(q).trim().slice(0,80);T.step=2;T.t=Date.now();KEEP=true;return{html:'Хорошо! Что Добби отвечать на «'+esc(T.ph)+'»? Напишите ответ одним сообщением 💬',chips:['Отмена']}}
+  CTX.teach=null;return saveLesson(T.ph,q)}
+ var m=TD.exec(String(q));if(m)return saveLesson(m[1],m[2]);
+ m=TD2.exec(String(q));if(m){CTX.teach={step:2,ph:m[1].trim(),t:Date.now()};KEEP=true;return{html:'Давайте научим 🧠 Что Добби отвечать на «'+esc(m[1].trim())+'»? Напишите ответ одним сообщением.',chips:['Отмена']}}
+ if(TS.test(n)){KEEP=true;if(CUR){CTX.teach={step:2,ph:CUR,t:Date.now()};return{html:'Давайте научим 🧠 Что Добби отвечать на «'+esc(CUR)+'»? Напишите ответ одним сообщением. Другая фраза? Напишите «научи: ваша фраза».',chips:['Отмена']}}
+  CTX.teach={step:1,t:Date.now()};return{html:'Давайте 🧠 Напишите фразу, на которую Добби должен отвечать (так, как её напишет коллега или клиент).',chips:['Отмена']}}
+ if(!CTX.rid&&!QZ&&FBK.test(n)){KEEP=true;CTX.offer='научить';return{html:nr('fk',['Простите, Добби промахнулся 🙈','Ой, Добби опять запутался в носках 🧦','Понял, не то. Добби не обижается 🙏'])+(CUR?' Хотите научить его, как правильно отвечать на «'+esc(CUR.slice(0,60))+'»?':' Хотите научить его, как отвечать правильно?'),chips:['Научить Добби','Что-то с ванилью','Расскажи шутку']}}
+ if(/(что|чему) (ты )?(выучил|научился|запомнил)|твои уроки|покажи уроки|чему я тебя научил/.test(n)){var L=lessons();KEEP=false;
+  if(!L.length)return{html:'Пока Добби ничему не научили 🌱 Напишите «научить» и расскажите, как отвечать на ту или иную фразу.',chips:['Научить Добби']};
+  return{html:'Добби выучил уроков: '+L.length+' 🧠 Последние:'+L.slice(-5).reverse().map(function(l){return'<p><b>'+esc(l.p)+'</b> → '+esc(String(l.a).slice(0,90))+(l.a.length>90?'…':'')+'</p>'}).join('')+'<p class="ot">«Забудь последний урок» удалит урок на этом телефоне.</p>',chips:['Научить Добби','Что ты не понял?']}}
+ if(/что ты не понял|непонят|вопросы без ответа|что (у тебя )?не получилось/.test(n)){var U=lsGet(LSU).slice().sort(function(a,b){return b.c-a.c||b.t-a.t}).slice(0,8);KEEP=false;
+  if(!U.length)return{html:'Непонятых фраз пока нет ✨ Когда Добби не поймёт, он запишет это здесь.',chips:defc()};
+  return{html:'Вот что Добби не понял 🤔'+U.map(function(u,i){return'<p>'+(i+1)+'. «'+esc(u.q)+'»'+(u.c>1?' × '+u.c:'')+'</p>'}).join('')+'<p class="ot">Чтобы научить, напишите: «научи: фраза», потом ответ.</p>',chips:['Научить Добби','Что ты выучил?']}}
+ if(/выгрузи уроки|выгрузить уроки|экспорт уроков|скопируй уроки/.test(n)){var A2=lsGet(LSL).map(function(l){return{p:l.p,a:l.a}});KEEP=false;
+  if(!A2.length)return{html:'Выгружать пока нечего: Добби ещё не учили на этом телефоне 🌱',chips:['Научить Добби']};
+  return{html:'Уроки готовы 📦 Скопируйте текст и вставьте в файл <b>dobby-learn.json</b> на GitHub: тогда их выучат все.<textarea class="hjs" readonly rows="6" onclick="this.select()">'+esc(JSON.stringify({lessons:A2},null,1))+'</textarea>',chips:defc()}}
+ if(/^забудь (последний урок|последнее|последний)$/.test(n)){var L2=lsGet(LSL);KEEP=false;if(!L2.length)return{html:'Забывать нечего: на этом телефоне уроков нет 🙂',chips:defc()};var d=L2.pop();lsSet(LSL,L2);return{html:'Забыл урок про «'+esc(d.p)+'» 🧽',chips:defc()}}
+ if(/^забудь (все|всё|все уроки|все выученное)$/.test(n)){lsSet(LSL,[]);KEEP=false;return{html:'Готово, все уроки на этом телефоне стёрты 🧽 Общие уроки из файла остались.',chips:defc()}}
+ return null}
+/* реплики, обращённые к самому Добби: подарки, комплименты, вопросы про подарок */
+var GVR=/(^| )(подарю|дарю|подарим|дарим|подарила|подарил|подарить|принести|купить|привезти|угостить|отдать|принесу|принесла|принес|принесем|куплю|купила|купил|привезу|привезла|привез|отдам|испеку|испекла|свяжу|связала|сделаю|сделала|налью|угощу|угостила|угостил|вручу|вышью|нарисую|сошью)( |$)/;
+var ADR=/(^| )(тебе|добби|тебя)( |$)/;
+var GDR=/^(я|мы|тебе|тебя|добби|для|тоже|обязательно|непременно|завтра|сегодня|потом|когда|если|вот|же|еще|уже|скоро|хочу|хотела|хотел|хотим|буду|будем|обещаю|все|ты|вам|вас|с|от|души|сердца|как|то)$/;
+function objOf(n){var o=[];n.split(' ').forEach(function(w){if(!w||GDR.test(w)||GVR.test(' '+w+' '))return;o.push(w)});while(o.length&&/^(и|а)$/.test(o[0]))o.shift();return o.slice(0,4).join(' ')}
+var GF=[[/нос(ок|к|оч)/,['Носок?! 🧦 Добби замер и даже ушами не шевелит. Для эльфа носок — это свобода, поэтому Добби будет беречь его вечно. Спасибо вам!','Носок для Добби? 🥹 Это самый главный подарок на свете! Добби уже свободен, так что носок просто станет самым любимым. Спасибо!','Ой, носок! 🧦 Добби знает, что с ним делать: ничего, просто радоваться. Вы чудесный человек!'],'расскажи свою историю','Хотите, Добби расскажет, как один носок изменил его жизнь?'],
+[/шапк|шляп|колпак|берет|кепк/,['Шапка! 🎩 Добби обожает шапки, чем пушистее, тем лучше. Спасибо, теперь есть чем гордиться!','Шапка для Добби? 🥹 Он наденет её сразу, и уши останутся торчать из-под неё. Спасибо!'],'',''],
+[/пирог|торт|пирож|конфет|шокол|печень|булоч|кекс|пончик|сладост|мороженое|пицц|бутерброд|вкусняшк/,['Угощение для Добби? 🍰 Он обожает пироги! Одно «но»: Добби припрячет кусочек и для вас, смена длинная.','Ох, как вкусно звучит 😋 Добби растроган. Давайте разделим: вам кусочек, ему кусочек, остальное блоттерам (шутка!).'],'',''],
+[/(^| )(чай|кофе|пиво|какао|лимонад|сок)( |$)/,['Угостите Добби? ☕ Он больше всего любит сливочное пиво, но от чашечки тёплого не откажется. Спасибо!','Как мило ☕ Добби выпьет за ваше здоровье и за хорошие продажи!'],'',''],
+[/цвет|роз|букет|тюльпан|пион|ромашк|лилию|лилии/,['Цветы 💐 Добби растрогался до кончиков ушей! Теперь на рабочем месте пахнет почти как в каталоге. Спасибо!','Цветы для Добби?! 🌷 Он поставит их в самое красивое место, поближе к ароматам.'],'',''],
+[/дух|аромат|парфюм|флакон|одеколон/,['Духи?! 🌸 Для Добби это как ключи от сокровищницы. Он аккуратно понюхает и сразу разложит всё по пирамиде. Спасибо!','Аромат в подарок 🌹 Добби понимает: вы знаете, чем порадовать эльфа из ETIB. Спасибо огромное!'],'что-то с ванилью','Хотите, вместе подберём аромат для вас?'],
+[/книг|сказк|историю|истории/,['Книга 📖 Добби обожает истории, особенно про волшебников и носки! Спасибо вам.','Ох, история! 📚 Добби любит, когда ему читают. Спасибо за такой тёплый подарок.'],'',''],
+[/деньг|зарплат|премию|премия|рубл/,['Ой, деньги 😄 Добби уже получает честную плату и даже выходной. Но доброе слово ценнее любых монет!','Добби тронут 💛 Но он работает за уважение и носки. Лучше купите себе что-нибудь приятное!'],'','']];
+var GG=['Для Добби?! 🥹 Он даже не знает, что сказать.','Ох, Добби растроган до кончиков ушей 💛','Это так мило! 🧦 Добби очень тронут.'];
+var GG2=['Добби запомнит ваш подарок и не потеряет, в отличие от носков, которые иногда пропадают 😄','Добби будет беречь «{o}» и вспоминать вас каждый раз. Спасибо!','Лучший подарок — внимание, а «{o}» ещё и приятно. Спасибо, вы чудесный человек!'];
+function gift(n){var o=objOf(n);for(var i=0;i<GF.length;i++)if(!/ и /.test(' '+o+' ')&&GF[i][0].test(o||n)){var g=GF[i];KEEP=true;CTX.ti=null;CTX.offer=g[2]||null;return{html:nr('gf'+i,g[1])+(g[3]?' '+g[3]:''),chips:g[2]?['Да, давай',defc()[0],'Расскажи шутку']:defc()}}
+ KEEP=true;CTX.ti=null;CTX.offer=null;return{html:nr('gg',GG)+' '+(o?nr('gg2',GG2).replace('{o}',esc(o)):'Спасибо!'),chips:defc()}}
+var PRA=/^(ты|вы) (очень |такой |такая |так |просто |действительно |самый |самая )?(красив|умн|добр|мил|смешн|классн|хорош|замечательн|прекрасн|симпатичн|забавн|весел|талантлив|полезн|шустр|быстр|супер|крут|золот|чудесн|потрясающ|офигенн|милаш|солнышк|лапочк|зайк)/;
+var PRR=['Ой, Добби краснеет до кончиков ушей 🥰 Спасибо! А вы сами просто чудо.','Добби счастлив! 🧦 Такие слова — лучше любого носка. Вы тоже замечательный человек!','Спасибо-спасибо! 🌷 Добби старается ради вас. Давайте найдём что-нибудь приятное: аромат или шутку?','Это самая добрая реплика за день ✨ Добби запомнит. Чем теперь помочь?'];
+function smartA(q,n){var Q=String(q);
+ if(/что (тебе|добби) (подарить|принести|купить|привезти|подарим)|что (подарить|принести|купить) (тебе|добби)|что (ты )?хочешь (в подарок|получить в подарок)/.test(n)){KEEP=true;return{html:nr('wl',['Добби мечтает о носках 🧦 Но лучший подарок для эльфа — доброе слово и довольный клиент!','Шапка, носки или пирог — Добби будет рад всему 🎩 А главное — чтобы смена прошла хорошо!']),chips:defc()}}
+ if(GVR.test(n)&&ADR.test(n)&&!/\?/.test(Q)&&!/^(что|какой|какую|какое|зачем|почему|когда|кому|куда|как|где|можно|а что)( |$)/.test(n))return gift(n);
+ if(/болит|заболел|заболела|температур|простуд|тошнит|кружится голова|плохо себя чувств/.test(n)&&!/клиент|покупател/.test(n)){KEEP=true;CTX.ti=null;CTX.offer=null;return{html:nr('hl',['Ох, Добби переживает 🫂 Берегите себя: если совсем плохо, скажите руководителю и отдохните. Работа подождёт.','Добби очень сочувствует 💛 Выпейте тёплого, посидите минутку, а при плохом самочувствии не терпите, сообщите руководителю.']),chips:['Подбодри меня','Расскажи шутку']}}
+ if(/^(я|мы) [а-я]+(ла|л|ли|лась|лись|ся)( |$)/.test(n)&&!BIZ.test(n)&&!ADR.test(n)&&n.split(' ').length>=3&&!/\?/.test(Q)){KEEP=true;CTX.ti=null;CTX.offer=null;return{html:nr('sm',SMR),chips:['Научить Добби','Что-то с ванилью','Расскажи шутку']}}
+ if(PRA.test(n)&&!/\?/.test(Q)){KEEP=true;CTX.ti=null;CTX.offer=null;return{html:nr('pr2',PRR),chips:defc()}}
+ return null}
+var BIZ=/аромат|дух|парфюм|флакон|клиент|покупател|продал|продаж|продам|скидк|бонус|смен|отчет|блоттер|касс|план|выручк|акци|цен[аыу]|заказ|размер|мужск|женск|унисекс|нот[аыу]|запах|пахн|ванил|свеж|слад|подар|ищу|хочу|нужен|нужна|нужно|посоветуй|подбери|ищем|порекомендуй|устал|тяжел|груст|скучн|плох|бесит|выжат|нет сил|хам|шпаргалк|каталог|викторин|загадк|шутк/;
+var SMR=['Понятно 🧦 Спасибо, что рассказали! Если нужна помощь с ароматом или шпаргалкой, Добби на месте.','Добби слушает с удовольствием ✨ Расскажете ещё? Или вернёмся к делам: аромат, блоттеры, отчёт?','Интересно! 🙂 А Добби пока умеет искать ароматы, отвечать по шпаргалке и шутить. С чего начнём?','Добби всё услышал 🧦 Если хотите, научите его отвечать на такое лучше: напишите «научить».'];
+function smartB(q,n){if(/^(я|мы|у меня|у нас|сегодня|вчера|утром|вечером|днем|только что)( |$)/.test(n)&&!BIZ.test(n)&&!ADR.test(n)&&n.split(' ').length>=3&&!/\?/.test(String(q))){logUnk(q);KEEP=true;return{html:nr('sm',SMR),chips:['Научить Добби','Что-то с ванилью','Расскажи шутку']}}return null}
+/* когда Добби честно не знает: не показывает карточки наугад, а уточняет и предлагает научить */
+var UKM=['Добби не уверен, что понял «{q}» 🤔 Это про аромат, про работу или просто поболтать? А ещё Добби можно научить: напишите «научить».','Хм, «{q}» — Добби такого ещё не слышал 🧦 Подскажете, как на это отвечать? Нажмите «Научить Добби», и он запомнит.','Добби пока не знает, что ответить на «{q}» 🙈 Зато он умеет учиться! Скажите, как правильно, и в следующий раз ответит сам.'];
+function unknown(q,pre){logUnk(q);KEEP=true;CTX.offer='научить';var e=esc(String(q).trim().slice(0,60));
+ return{html:(pre||'')+nr('uk',UKM).replace('{q}',e),chips:['Научить Добби','Что-то с ванилью','Расскажи шутку']}}
+/* опечатки в нотах: «ванилин»→«ваниль», «лаванду»→«лаванда» (правим только слова, которых нет нигде) */
+function nvBuild(){NV={};D.aromas.forEach(function(a){Object.keys(a._n).forEach(function(k){NV[k]=1})});Object.keys(SYN).forEach(function(k){NV[k]=1});Object.keys(EM).forEach(function(k){NV[k]=1})}
+function ed1(a,b){if(a===b)return 1;var la=a.length,lb=b.length;if(Math.abs(la-lb)>1)return 0;var i=0;while(i<la&&i<lb&&a[i]===b[i])i++;
+ if(la===lb){if(a.slice(i+1)===b.slice(i+1))return 1;if(a[i]===b[i+1]&&a[i+1]===b[i]&&a.slice(i+2)===b.slice(i+2))return 1;return 0}
+ return(la>lb?a.slice(i+1)===b.slice(i):b.slice(i+1)===a.slice(i))?1:0}
+function fz(s,raw){if(!D||raw.length<5||s.length<4)return s;if(!NV)nvBuild();dfs();
+ if(NV[s]||D._df[s]||SYN[s]||EM[s]||STOP.indexOf(s)>=0)return s;var c=[];Object.keys(NV).forEach(function(k){if(k.length>=4&&k[0]===s[0]&&ed1(s,k))c.push(k)});return c.length===1?c[0]:s}
+/* охват: сколько слов запроса реально есть в найденном тексте (одно случайное совпадение не считается) */
+function cov(text,p){var T={};toks(text).forEach(function(x){T[x]=1});var c=0;p.w.forEach(function(x){if(exp(x.s).some(function(t){return T[t]}))c++});return c}
 function reply(q,more){KEEP=false;var r=reply0(q,more);if(!KEEP){CTX.ti=null;CTX.topic=null;CTX.offer=null}return r}
 function reply0(q,more){if(!D)return{html:'Секундочку, Добби достаёт знания… 📚'};prep(D);var n=norm(q),pre='';
  if(!n)return{html:'Напишите, что ищете: ноту, повод, номер аромата или тему 😊'};
  if(CR.test(n))return{html:'Добби очень сочувствует, что вам так тяжело 💛 Вы не одни. Пожалуйста, поговорите сейчас с близким человеком или обратитесь на горячую линию помощи или в экстренную службу вашей страны. Если вы в опасности, звоните немедленно.'};
+ var tf=teachFlow(q,n,more);if(tf)return tf;if(!more&&n.length>=4&&!YES.test(n)&&!NO.test(n)&&!CONT.test(n)&&!FBK.test(n))CUR=String(q).trim();
  if(QZ&&/^(дальше|еще|следующий|продолжить|давай еще)/.test(n))return qzNext();if(/^(хватит|стоп|закончить|выход|не хочу больше)/.test(n)&&QZ)return qzEnd();
  var g=/^(привет|здравствуйте|здравствуй|добрый день|доброе утро|добрый вечер|хай|салют|приветик)\s+/,n2=n.replace(g,'');if(n2!==n&&n2.split(' ').length>=2){pre=hello()+'! 😊 ';n=n2;q=n2}
  if(/(любим|лучш|нравится).{0,15}(аромат|духи|парфюм)|какой (аромат|парфюм|запах) (тебе|ты|у тебя)|что бы ты (выбрал|носил|посоветовал себе)/.test(n)&&/(тебе|ты|твой|у тебя)/.test(n)){var rf=reply('удиви меня');rf.html='Добби выбирает сердцем: мой любимчик на сегодня 💖'+rf.html.replace(/^[^<]*/,'');return rf}
- var ch=chat(n);if(ch)return ch;var t=talk(n);if(t)return{html:t,chips:TM&&TM.c?TM.c:defc()};
+ var ch=chat(n);if(ch)return ch;var ls=learned(n);if(ls)return ls;var sa=smartA(q,n);if(sa)return sa;var t=talk(n);if(t)return{html:t,chips:TM&&TM.c?TM.c:defc()};
  if(/викторин|потренируй|спроси меня|проверь меня|давай тест|квиз|тренировк/.test(n)){QZ=null;var r0=qzNext();r0.html='Добби обожает викторины! 🧠 Выбирайте ответ кнопкой.<br>'+r0.html;return r0}
  if(/удиви|случайн|аромат дня|посоветуй что-нибудь|что-нибудь интересн/.test(n)){var a=rnd(D.aromas);CTX.a=a;return{html:nr('rd',['Добби выбрал фаворита дня 🌟','Сюрприз от Добби 🎁','Держите находку! ✨'])+card({a:a,hit:{}},false)+(a.pitch?'<p class="ps">💬 '+esc(a.pitch)+'</p>':''),chips:['Ещё один','Как продать','Похожие']}}
  if(/^ещ[её] (один|раз)/.test(n))return reply('удиви меня');if(/^как продать$/.test(n)&&CTX.a)return sub('как продать',n,{w:[]},[]);if(/^похожие$/.test(n)&&CTX.a)return sub('похожие',n,{w:[]},[]);
  if(/^(ещ[её] )?(расскажи )?(что.нибудь )?(факт|интересн)[а-я]*$/.test(n)||/^ещ[её] факт/.test(n))return factR();
- var rs=route(n);if(rs&&!/сейчас|когда отчет/.test(n))return{html:pre+secCard([{s:rs,sc:9}],{w:[]}),chips:defc()};
+ var rs=route(n);if(rs&&!/сейчас|когда отчет/.test(n)&&!/подар/.test(n))return{html:pre+secCard([{s:rs,sc:9}],{w:[]}),chips:defc()};
  if(/блоттер|раздач/.test(n)&&/сейчас|когда|можно|перерыв|идти|время|ещё|еще/.test(n)&&!/как|правил/.test(n))return{html:blot(),chips:defc()};
  if(/отчет|отчёт/.test(n)&&/когда|сейчас|следующ|во сколько|время/.test(n))return{html:rep(),chips:defc()};
  var bc=bonus(q,n);if(bc)return{html:bc,chips:defc()};
@@ -260,19 +348,19 @@ function reply0(q,more){if(!D)return{html:'Секундочку, Добби до
    if(AA.length&&Object.keys(AA[0].hit).length){CTX.offer=ob;return{html:nr('lk',['Ещё как! 🧦 Добби к этому неравнодушен.','Конечно, любит! ✨ Это так вкусно пахнет.','О, Добби в восторге от такого! 😊'])+' В ароматах это есть. Показать?',chips:['Да','Нет','Удиви меня']}}
    CTX.offer='расскажи свою историю';return{html:nr('lg2',['Добби любит многое: носки, ароматы, добрые слова 🧦 А что любите вы?','Про это Добби подумает ✨ Зато точно знает: он любит носки, ваниль и людей с улыбкой.','Добби не уверен, что хорошо знает это 🙈 Зато про носки может говорить часами!']),chips:['Расскажи свою историю','Что ты любишь?','Шутка','Удиви меня']}}
  if((/(^| )(ты|тебя|тебе|тобой|твой|твоя|твое|твои|вас|вам)( |$)|про себя|о себе/.test(n))&&!/аромат|нот[аыуе]|духи|парфюм|скидк|бонус|отчет|блоттер|клиент|смен|продаж|возраж|цен[аыуео]|доступн|стоит|подар/.test(n)){KEEP=true;CTX.ti=null;CTX.topic=null;CTX.offer='расскажи свою историю';return{html:nr('pp',PERSONA),chips:['Расскажи свою историю','Какой ты?','Что ты любишь?','Загадай загадку']}}
- var c=code(q),p=parse(q),A=null;if(c){var a2=D.aromas.filter(function(x){return x.n===c})[0];if(a2){CTX.a=a2;return{html:pre+'Нашёлся! ✨ Вот что стоит знать:'+card({a:a2,hit:{}},true),chips:['Как продать','Похожие','Ноты']}}}
+ var c=code(q),p=parse(q),A=null;if(/подар|(^| )дар(ю|им)( |$)/.test(n)&&p.f.cat)p.w=p.w.filter(function(x){return!/^(дух|парф|флак|арома|запах)/.test(x.s)});if(c){var a2=D.aromas.filter(function(x){return x.n===c})[0];if(a2){CTX.a=a2;return{html:pre+'Нашёлся! ✨ Вот что стоит знать:'+card({a:a2,hit:{}},true),chips:['Как продать','Похожие','Ноты']}}}
  A=findA(p);A.forEach(function(x){x.m=0;p.w.forEach(function(y){if(x.a._m[y.s])x.m++})});var sb=sub(q,n,p,A);if(sb){sb.html=pre+sb.html;sb.chips=sb.chips||['Как продать','Похожие','Ноты'];return sb}
- var Q=p.w.length?findQ(p):[],S=p.w.length?findS(p):[],bs=A.length?A[0].sc:0,qs=Q.length?Q[0].sc:0,ss=S.length?S[0].sc:0,nh=A.length&&Object.keys(A[0].hit).length>0,asked=/аромат|пахн|нот|для (муж|жен|нее|него)|подар|свеж|сладк|унисекс|духи/.test(n)||p.f.cat||p.f.t.length;
- var fact=/факт|что такое|расскажи|правда ли|откуда|почему|зачем|истори|как делают|из чего/.test(n);
- if(Q.length&&(fact||!A.length||(nh?qs>=bs*4:(!asked&&qs>=4)||qs>=bs)))return{html:pre+qaCard(Q,p),chips:defc()};
- if(S.length&&(!A.length||(nh?ss>=bs*4:(!asked&&ss>bs*1.5)||(ss>=6&&bs<3))))return{html:pre+secCard(S,p),chips:defc()};
- if(A.length){CTX.a=A[0].a;var k=more?8:4,list=A.slice(0,k),e='✨',nm=p.w[0]?p.w[0].raw:'';p.w.forEach(function(x){if(EM[x.s]&&e==='✨')e=EM[x.s]});
+ var need=Math.ceil(p.w.length*.5),Q=(p.w.length?findQ(p):[]).filter(function(r){return cov(r.it.q+' '+r.it.a,p)>=need}),S=(p.w.length?findS(p):[]).filter(function(r){return cov(r.s.n+' '+r.s.k+' '+r.s.x,p)>=need}),bs=A.length?A[0].sc:0,qs=Q.length?Q[0].sc:0,ss=S.length?S[0].sc:0,nh=A.length&&Object.keys(A[0].hit).length>0,asked=/аромат|пахн|нот|для (муж|жен|нее|него)|подар|свеж|сладк|унисекс|духи/.test(n)||p.f.cat||p.f.t.length,giftQ=/подар|(^| )дар(ю|им)( |$)/.test(n)&&!!p.f.cat,sig=!!(nh||asked||p.f.cat||p.f.t.length||(A.length&&A[0].m>0));
+ var fact=/факт|что такое|расскажи|правда ли|откуда|почему|зачем|истори|как делают|из чего/.test(n);var skipQS=giftQ||(!!(p.f.cat||p.f.t.length)&&!/факт|что такое|правда ли|откуда|почему|зачем|истори|как делают|из чего|скидк|бонус|отчет|смен|блоттер|цен/.test(n));
+ if(!skipQS&&Q.length&&(fact||!A.length||(nh?qs>=bs*4:(!asked&&qs>=4)||qs>=bs)))return{html:pre+qaCard(Q,p),chips:defc()};
+ if(!skipQS&&S.length&&(!A.length||(nh?ss>=bs*4:(!asked&&ss>bs*1.5)||(ss>=6&&bs<3))))return{html:pre+secCard(S,p),chips:defc()};
+ if(A.length&&sig){CTX.a=A[0].a;var k=more?8:4,list=A.slice(0,k),e='✨',nm=p.w[0]?p.w[0].raw:'';p.w.forEach(function(x){if(EM[x.s]&&e==='✨')e=EM[x.s]});
   if(p.w[0]){var t0=exp(p.w[0].s);['base','heart','top'].forEach(function(z){A[0].a[z].forEach(function(x){if(t0.indexOf(toks(x)[0])===0||toks(x).indexOf(p.w[0].s)>=0)nm=x})})}
   var intro=p.w.length&&!nh?'Такой ноты в пирамидах нет 🤔 Но вот близкое по настроению:':p.w.length&&EM[p.w[0].s]&&nh?e+' '+nm.charAt(0).toUpperCase()+nm.slice(1)+' — '+nr('pr',PR)+'! Вот что стоит показать:':nr('in',['Отличный запрос! ','Есть из чего выбрать! ','С огромным удовольствием, Добби подберёт! ','Класс, смотрим! '])+e+' Вот что подойдёт:';
   return{html:pre+intro+list.map(function(r){return card(r)}).join('')+(A.length>k?'<p class="ot">Всего подходит '+A.length+'.</p>':'')+'<p class="ot">'+nr('ou',OUT)+'</p>',more:A.length>k,chips:A.length>k?['Показать ещё']:['Как продать','Похожие','Ноты']}}
  if(Q.length)return{html:pre+qaCard(Q,p),chips:defc()};if(S.length)return{html:pre+secCard(S,p),chips:defc()};
- if(CTX.ti!=null||CTX.offer||CTX.topic)return{html:nr('ak',ACK),chips:CTX.ti!=null?['Расскажи ещё'].concat(defc().slice(0,3)):defc()};return{html:nr('fb',FB),chips:defc()}}
-root.ETIBHelper={reply:reply,answer:qzAnswer,load:function(d){D=d}};
+ if(CTX.ti!=null||CTX.offer||CTX.topic)return{html:nr('ak',ACK),chips:CTX.ti!=null?['Расскажи ещё'].concat(defc().slice(0,3)):defc()};var sb2=smartB(q,n);if(sb2)return sb2;return unknown(q,pre)}
+root.ETIBHelper={reply:reply,answer:qzAnswer,load:function(d){D=d},shared:function(l){SHARED=(l||[]).filter(function(x){return x&&x.p&&x.a}).slice(0,300)},lessons:lessons};
 if(typeof document==='undefined')return;
 var css=[
 '#hb{position:fixed;right:14px;bottom:calc(16px + env(safe-area-inset-bottom));width:66px;height:54px;padding:0;border-radius:18px 18px 6px 18px;border:1px solid var(--g-bd,rgba(255,255,255,.9));background:linear-gradient(var(--g-bg,rgba(255,255,255,.55)),var(--g-bg,rgba(255,255,255,.55))),color-mix(in srgb,var(--paper,#fff) 30%,transparent);-webkit-backdrop-filter:blur(24px) saturate(160%);backdrop-filter:blur(24px) saturate(160%);color:var(--ink,#15120f);font-size:26px;line-height:1;box-shadow:var(--g-sh,0 8px 28px rgba(60,30,40,.14),inset 0 1px 0 rgba(255,255,255,.95));z-index:50;cursor:pointer;transform-origin:100% 100%;transition:transform .25s cubic-bezier(.2,.8,.2,1),opacity .2s}',
@@ -316,6 +404,7 @@ var css=[
 '#hp #hs{display:grid;place-items:center;flex:none;width:0;min-width:0;height:44px;margin:0;padding:0;border-radius:50%;background:var(--ha);color:var(--paper,#fff);opacity:0;transform:scale(.3);pointer-events:none;overflow:hidden;transition:width .25s cubic-bezier(.34,1.45,.5,1),margin .25s,opacity .2s,transform .25s cubic-bezier(.34,1.45,.5,1)}',
 '#hp #hf.has #hs{width:44px;min-width:44px;margin-left:8px;opacity:1;transform:none;pointer-events:auto}#hp #hf.has #hs:active{transform:scale(.9)}',
 '#hp :focus-visible{outline:3px solid var(--ha);outline-offset:2px}',
+'.hjs{display:block;width:100%;box-sizing:border-box;margin:8px 0 0;padding:8px;border-radius:10px;border:1px solid #8886;background:transparent;color:inherit;font:12px/1.35 ui-monospace,Menlo,monospace;resize:none}',
 '@media(prefers-reduced-motion:reduce){#hp,#hp.on,#hv,#hv.on,#hb,#hb.off,.hm,.hg,.hg button,#hq button{transition:none!important;animation:none!important}.hcr{animation:none}}'
 ].join('');
 var s=document.createElement('style');s.textContent=css;document.head.appendChild(s);
@@ -356,7 +445,7 @@ L.addEventListener('click',function(e){var b=e.target.closest('.hqo');if(!b||b.d
 p.addEventListener('click',function(e){var a=e.target.closest&&e.target.closest('a[href]');if(a)setTimeout(close,0)});
 Q.addEventListener('click',function(e){if(e.target.textContent==='Показать ещё'){e.stopImmediatePropagation();Q.innerHTML='';var r=reply(last,true);bot(r.html,defc())}},true);
 var fine=false;try{fine=matchMedia('(pointer:fine)').matches}catch(e){}
-function open(){p.removeAttribute('inert');p.classList.add('on');V.classList.add('on');b.classList.add('off');
+var sh0=false;function open(){if(!sh0){sh0=true;try{fetch('dobby-learn.json',{cache:'no-cache'}).then(function(r){return r.ok?r.json():null}).then(function(d){if(d&&d.lessons)ETIBHelper.shared(d.lessons)}).catch(function(){})}catch(e){}}p.removeAttribute('inert');p.classList.add('on');V.classList.add('on');b.classList.add('off');
  if(!loaded){loaded=true;setTimeout(function(){bot(hello()+'! 🧦 Добби приветствует вас! Добби — свободный эльф, а теперь ещё и помощник ETIB. Добби подберёт аромат, найдёт ответ в шпаргалке или сыграет с вами в викторину. С чего начнём?',null,380,tiles)},280)}
  if(fine)setTimeout(function(){I.focus({preventScroll:true})},300)}
 function close(){if(fin)fin();p.classList.remove('on');V.classList.remove('on');b.classList.remove('off');p.setAttribute('inert','');if(document.activeElement===I)I.blur()}
