@@ -578,3 +578,19 @@ section[id^="p-"]:not([hidden]){animation:fadein .18s ease backwards}
 html{-webkit-text-size-adjust:100%;text-size-adjust:100%;color-scheme:light;font-synthesis:none}
 body{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
 details:not(.sec),.say,.status,.res,.slot,table,.btn.sec{background-color:color-mix(in srgb,var(--paper,#fff) 78%,transparent)}
+
+/* ===== каталог: шапка и розовый — как на главном экране ===== */
+body[data-sec=cat]{--c-f:var(--accent);--c-f-bg:color-mix(in srgb,var(--accent) 16%,transparent);--c-on:#fff}
+body[data-sec=cat] header.hd{gap:12px;padding:20px 16px 14px}
+body[data-sec=cat] header.hd::after{display:none}
+body[data-sec=cat] header.hd small::before{display:none}
+body[data-sec=cat] header.hd h1{letter-spacing:.1em}
+body[data-sec=cat] header.hd small{font-size:14.5px;line-height:16.8px;letter-spacing:.14em;margin-top:5px;font-weight:600;opacity:.9}
+body[data-sec=cat] header.hd h1{font-size:19px}
+
+/* ===== тренажёр: шапка как на главном экране ===== */
+body[data-sec=train] header.hd{gap:12px}
+body[data-sec=train] header.hd::after{display:none}
+body[data-sec=train] header.hd small::before{display:none}
+body[data-sec=train] header.hd h1{letter-spacing:.1em;font-size:19px}
+body[data-sec=train] header.hd small{font-size:14.5px;line-height:16.8px;letter-spacing:.14em;margin-top:5px;font-weight:600;opacity:.9}
