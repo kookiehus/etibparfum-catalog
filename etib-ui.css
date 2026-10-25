@@ -562,3 +562,6 @@ body.home .favs h2,body.home .row h3,body.home .hero h2,body.home .quick b,body.
 body.home .quick b,body.home .quick small{display:block}
 body.home .row .head p,body.home .hero p,body.home .hd small{transform:scaleY(1.1);transform-origin:left top}
 body.home .row h3,body.home .row .head p{will-change:auto}
+
+/* ===== v13 · «Каталог ароматов»: заголовок меньше ===== */
+body.home .hero h2{font-size:28px;letter-spacing:.05em}
