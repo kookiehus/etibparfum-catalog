@@ -271,22 +271,22 @@ body[data-sec=train] .panel{border-color:color-mix(in srgb,var(--k-train) 38%,va
 
 /* --- шпаргалка (sales.html) --- */
 details:not(.sec),.say,.quote,.res,.slot,table,.btn.sec,.seg,.status:not(.on):not(.soon):not(.rest):not(.off){background:var(--g-fill);-webkit-backdrop-filter:var(--g-bl);backdrop-filter:var(--g-bl)}
-section.ks details:not(.sec){background:linear-gradient(135deg,color-mix(in srgb,var(--k) 10%,transparent),color-mix(in srgb,var(--k) 3%,transparent)),var(--g-fill);border-color:color-mix(in srgb,var(--k) 28%,var(--g-bd));box-shadow:var(--g-sh)}
+section.ks details:not(.sec){background:linear-gradient(135deg,color-mix(in srgb,var(--k) 20%,transparent),color-mix(in srgb,var(--k) 7%,transparent)),var(--g-fill);border-color:color-mix(in srgb,var(--k) 45%,var(--g-bd));box-shadow:var(--g-sh),0 6px 18px color-mix(in srgb,var(--k) 10%,transparent)}
 body:not(:has(.srch)) :is(input:not([type=checkbox]):not([type=radio]):not([type=range]):not([type=file]),select,textarea){background:var(--g-fill)}
-.favs a{background:linear-gradient(135deg,color-mix(in srgb,var(--k,var(--accent)) 10%,transparent),color-mix(in srgb,var(--k,var(--accent)) 3%,transparent)),var(--g-fill);-webkit-backdrop-filter:var(--g-bl);backdrop-filter:var(--g-bl)}
+.favs a{background:linear-gradient(135deg,color-mix(in srgb,var(--k,var(--accent)) 20%,transparent),color-mix(in srgb,var(--k,var(--accent)) 7%,transparent)),var(--g-fill);-webkit-backdrop-filter:var(--g-bl);backdrop-filter:var(--g-bl)}
 .favtog,.rp-btns button,.rp-x,.rbtn,.rp-f input{background:var(--g-fill)}
 .rbtn.fin{background:var(--hl)}.rbtn.fin.soon{background:var(--warnbg)}.rp-btns .main{background:var(--ink)}
 .rp-bar{background:var(--g-fill-d)}
 
 /* --- тренажёр (trainer.html): плашки цвета раздела --- */
-.panel,.modebtn:not(.main),.opt:not(.ok):not(.bad),body .rings .ring{background:linear-gradient(135deg,color-mix(in srgb,var(--k) 12%,transparent),color-mix(in srgb,var(--k) 3%,transparent)),var(--g-fill);border-color:color-mix(in srgb,var(--k) 30%,var(--g-bd));box-shadow:var(--g-sh);-webkit-backdrop-filter:var(--g-bl);backdrop-filter:var(--g-bl)}
+.panel,.modebtn:not(.main),.opt:not(.ok):not(.bad),body .rings .ring{background:linear-gradient(135deg,color-mix(in srgb,var(--k) 22%,transparent),color-mix(in srgb,var(--k) 8%,transparent)),var(--g-fill);border-color:color-mix(in srgb,var(--k) 50%,var(--g-bd));box-shadow:var(--g-sh),0 8px 22px color-mix(in srgb,var(--k) 12%,transparent);-webkit-backdrop-filter:var(--g-bl);backdrop-filter:var(--g-bl)}
 .opt.ok{background:linear-gradient(color-mix(in srgb,#2f7d54 26%,transparent),color-mix(in srgb,#2f7d54 26%,transparent)),var(--g-fill)}
 .opt.bad{background:linear-gradient(color-mix(in srgb,#b3382c 22%,transparent),color-mix(in srgb,#b3382c 22%,transparent)),var(--g-fill)}
 .go2.sec,.wr input,.snd input{background:var(--g-fill)}
 
 /* --- каталог (catalog.html): карточки цвета категории --- */
-.card{background:var(--g-fill);border:1px solid color-mix(in srgb,var(--cc,var(--line)) 35%,var(--g-bd));box-shadow:var(--g-sh)}
-.card .body{background:linear-gradient(135deg,color-mix(in srgb,var(--cc,transparent) 10%,transparent),color-mix(in srgb,var(--cc,transparent) 3%,transparent))}
+.card{background:var(--g-fill);border:1px solid color-mix(in srgb,var(--cc,var(--line)) 50%,var(--g-bd));box-shadow:var(--g-sh),0 8px 22px color-mix(in srgb,var(--cc,transparent) 12%,transparent)}
+.card .body{background:linear-gradient(135deg,color-mix(in srgb,var(--cc,transparent) 20%,transparent),color-mix(in srgb,var(--cc,transparent) 7%,transparent))}
 #q,.fbtn{background:var(--g-fill);border:1px solid var(--g-bd);box-shadow:var(--g-sh);-webkit-backdrop-filter:var(--g-bl);backdrop-filter:var(--g-bl)}
 #q:focus-visible{border-color:var(--accent)}
 .gtog,.gbox,.chip,.x{background:var(--g-fill);border-color:var(--g-bd)}
@@ -296,7 +296,7 @@ dialog{background:var(--g-fill-d);border:1px solid var(--g-bd);box-shadow:0 16px
 dialog::backdrop{background:rgba(20,10,14,.24);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
 dialog input,dialog select,dialog textarea{background:var(--g-fill)}
 .sh-foot{background:transparent;border-top-color:var(--g-bd)}
-.tp-head{background:linear-gradient(135deg,color-mix(in srgb,var(--cc,var(--accent)) 18%,transparent),color-mix(in srgb,var(--cc,var(--accent)) 6%,transparent));color:var(--ink);border-bottom:1px solid color-mix(in srgb,var(--cc,var(--accent)) 28%,var(--g-bd))}
+.tp-head{background:linear-gradient(135deg,color-mix(in srgb,var(--cc,var(--accent)) 30%,transparent),color-mix(in srgb,var(--cc,var(--accent)) 12%,transparent));color:var(--ink);border-bottom:1px solid color-mix(in srgb,var(--cc,var(--accent)) 40%,var(--g-bd))}
 .tp-head .x{background:var(--g-fill);color:var(--ink)}
 .tp-body{background:transparent}
 .tp-body .say{background:var(--g-fill)}
@@ -305,7 +305,9 @@ dialog input,dialog select,dialog textarea{background:var(--g-fill)}
 @supports not ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))){dialog{background:var(--paper)}}
 
 /* --- итоговый отчёт: тот же стеклянный стиль --- */
-.rp{background:var(--page-bg);background-color:var(--paper)}
+.rp{background:radial-gradient(120% 60% at 50% -8%,rgba(176,86,108,.14) 0%,rgba(176,86,108,0) 62%) fixed no-repeat,linear-gradient(180deg,#fbf7f6 0%,#efe5e4 100%) fixed no-repeat;background-color:var(--paper)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .rp{background:radial-gradient(120% 60% at 50% -8%,#2b1620 0%,rgba(43,22,32,0) 62%) fixed no-repeat,linear-gradient(180deg,#130c10 0%,#0b070a 100%) fixed no-repeat;background-color:var(--paper)}}
+:root[data-theme="dark"] .rp{background:radial-gradient(120% 60% at 50% -8%,#2b1620 0%,rgba(43,22,32,0) 62%) fixed no-repeat,linear-gradient(180deg,#130c10 0%,#0b070a 100%) fixed no-repeat;background-color:var(--paper)}
 .rp{--k:var(--k-rep,var(--accent))}
 .rp-top{border-bottom:1px solid var(--g-bd);background:color-mix(in srgb,var(--paper) 62%,transparent);-webkit-backdrop-filter:var(--g-bl);backdrop-filter:var(--g-bl)}
 /* каждая группа полей (утро, продажи, расходы…) — стеклянная плашка цвета раздела «Смена и отчёт» */
@@ -322,37 +324,3 @@ dialog input,dialog select,dialog textarea{background:var(--g-fill)}
 .rp-f input::placeholder{color:var(--mute);opacity:1}
 .rp-f label{color:var(--ink)}
 .rp-h{color:var(--mute);opacity:1}
-
-/* ===== оформление «ниша»: молочный светлый + бордо и золотая линия; тёмная тема приглушённая ===== */
-:root{--paper:#faf6f1;--card:#fffdfa;--tint:#f2ebe3;--line:#e8ddd0;--hl:#f1dfe0;--gold:#b0894f;
---k-sell:#94435c;--k-price:#876428;--k-rep:#3f6e5a;--k-memo:#46658f;--k-train:#6b4f87;--k-fact:#5f7035;
---c-f:#9b4a63;--c-m:#46658f;--c-u:#3f6e5a;--c-p:#876428;
---g-bg:rgba(255,255,255,.58);--g-bd:rgba(176,137,79,.30);--g-sh:0 6px 22px rgba(60,30,40,.07),inset 0 1px 0 rgba(255,255,255,.9);--g-bl:blur(24px) saturate(125%);
---page-bg:radial-gradient(120% 55% at 50% -10%,rgba(160,80,100,.07) 0%,rgba(160,80,100,0) 60%) fixed no-repeat,linear-gradient(180deg,#fdfaf6 0%,#f3ece5 100%) fixed no-repeat;
---spring:cubic-bezier(.22,1,.36,1)}
-@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--paper:#110d0f;--ink:#e8e1d7;--mute:#b8abac;--line:#2c2226;--card:#1a1417;--tint:#1c1519;--accent:#c98e9d;--hl:#3b2530;--gold:#a88c5e;
---k-sell:#c99aa9;--k-price:#c4ad7d;--k-rep:#8fb5a3;--k-memo:#9bb2cf;--k-train:#b2a2c9;--k-fact:#b5c488;
---c-f:#c99aa9;--c-m:#9bb2cf;--c-u:#8fb5a3;--c-p:#c4ad7d;
---g-bg:rgba(255,255,255,.045);--g-bd:rgba(214,184,140,.14);--g-sh:0 6px 22px rgba(0,0,0,.35),inset 0 1px 0 rgba(255,255,255,.06);
---page-bg:radial-gradient(120% 55% at 50% -10%,#231419 0%,rgba(35,20,25,0) 60%) fixed no-repeat,linear-gradient(180deg,#130e10 0%,#0a0809 100%) fixed no-repeat}}
-:root[data-theme="dark"]{--paper:#110d0f;--ink:#e8e1d7;--mute:#b8abac;--line:#2c2226;--card:#1a1417;--tint:#1c1519;--accent:#c98e9d;--hl:#3b2530;--gold:#a88c5e;
---k-sell:#c99aa9;--k-price:#c4ad7d;--k-rep:#8fb5a3;--k-memo:#9bb2cf;--k-train:#b2a2c9;--k-fact:#b5c488;
---c-f:#c99aa9;--c-m:#9bb2cf;--c-u:#8fb5a3;--c-p:#c4ad7d;
---g-bg:rgba(255,255,255,.045);--g-bd:rgba(214,184,140,.14);--g-sh:0 6px 22px rgba(0,0,0,.35),inset 0 1px 0 rgba(255,255,255,.06);
---page-bg:radial-gradient(120% 55% at 50% -10%,#231419 0%,rgba(35,20,25,0) 60%) fixed no-repeat,linear-gradient(180deg,#130e10 0%,#0a0809 100%) fixed no-repeat}
-body,:root:not([data-theme="light"]) body,:root[data-theme="dark"] body{background:var(--page-bg);background-color:var(--paper)}
-
-/* типографика: тоньше и воздушнее, подписи — как на этикетке */
-h2,.hero h2,.row h3,.modebtn h4,.card h3,.lvl h2,.q h2,.rp-top h2,.tp-head h2,dialog h2,details.sec>summary h2{font-weight:500}
-.hero h2{font-size:34px;letter-spacing:.005em}
-.hd small{text-transform:uppercase;letter-spacing:.18em;font-size:11px}
-
-/* тоньше тонировка разделов: цвет только намёком, основной вид — стекло */
-.row[class*="k-"],.row[class*="k-"]:hover{background:linear-gradient(135deg,color-mix(in srgb,var(--k) 12%,transparent),color-mix(in srgb,var(--k) 3%,transparent)),var(--g-fill);border:1px solid color-mix(in srgb,var(--k) 30%,var(--g-bd));box-shadow:var(--g-sh)}
-@media (hover:hover){.row[class*="k-"]:hover{background:linear-gradient(135deg,color-mix(in srgb,var(--k) 18%,transparent),color-mix(in srgb,var(--k) 6%,transparent)),var(--g-fill)}}
-details.sec,section.ks details.sec{background:linear-gradient(135deg,color-mix(in srgb,var(--k,var(--accent)) 12%,transparent),color-mix(in srgb,var(--k,var(--accent)) 3%,transparent)),var(--g-fill);border-color:color-mix(in srgb,var(--k,var(--accent)) 30%,var(--g-bd));box-shadow:var(--g-sh)}
-
-/* спокойнее движение: без отскоков, мягче нажатие и подъём */
-@media (prefers-reduced-motion:no-preference){
-a.tile:active,.btn:active,.chip:active,.tipbtn:active,.adm-ico:active,.seg button:active,.gtog:active,.gclr:active,.x:active,.zx:active{transform:scale(.97)}
-@media (hover:hover){.card:hover{transform:translateY(-2px);box-shadow:var(--g-sh),0 12px 28px rgba(60,30,40,.1)}}}
