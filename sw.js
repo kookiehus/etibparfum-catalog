@@ -1,7 +1,7 @@
 /* ETIB: работа без сети. При наличии интернета страницы берутся свежие, без сети — из копии на телефоне. */
 const V='etib-v60';
 const FILES=['./','index.html','catalog.html','sales.html','trainer.html','memo.html',
-  'etib-ui.css','etib-ui.js','trainer-data.js','rabbit.js','pron.js','tips.js','helper.js','helper-data.json','dobby-learn.json','img/shop.jpg','img/staff.jpg','img/qr.jpg',
+  'etib-ui.css','etib-ui.js','trainer-data.js','rabbit.js','pron.js','tips.js','helper.js','helper-data.json','dobby-learn.json','shop.jpg','staff.jpg','qr.jpg',
   'manifest.webmanifest','icons/favicon.svg','icons/icon-192.png','icons/icon-512.png','icons/icon-maskable-512.png','icons/apple-touch-icon.png'];
 self.addEventListener('install',e=>{
   e.waitUntil(caches.open(V).then(c=>Promise.all(FILES.map(f=>c.add(f).catch(()=>{})))).then(()=>self.skipWaiting()))});
