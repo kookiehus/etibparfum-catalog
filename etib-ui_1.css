@@ -530,3 +530,14 @@ body[data-sec=train] .panel{border-color:var(--bd-n)}
 .favs a{border-color:var(--bd-n);border-left:5px solid var(--k,var(--accent))}
 .favall,.rp-sum b.big{color:var(--ink);border-color:var(--accent)}
 .rp-sum b.big{border:0}
+
+/* ===== v8 · «Каталог ароматов»: цвета местами — розовое полупрозрачное стекло, светлая кнопка; текст позади размыт ===== */
+a.hero,a.hero:hover{background:linear-gradient(135deg,rgba(255,255,255,.30),rgba(255,255,255,0) 55%),color-mix(in srgb,var(--cta) 66%,transparent);color:var(--ink);border:1px solid rgba(255,255,255,.55);box-shadow:0 -6px 24px rgba(74,48,39,.12),0 12px 32px rgba(74,48,39,.20),inset 0 1px 0 rgba(255,255,255,.6);-webkit-backdrop-filter:blur(26px) saturate(150%);backdrop-filter:blur(26px) saturate(150%)}
+.hero p{color:var(--ink);opacity:.82}
+a.hero .go,.hero:hover .go{background:var(--card);color:var(--ink);box-shadow:0 2px 8px rgba(74,48,39,.18)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) a.hero,:root:not([data-theme="light"]) a.hero:hover{background:linear-gradient(135deg,rgba(255,255,255,.14),rgba(255,255,255,0) 55%),color-mix(in srgb,var(--cta) 68%,transparent);color:#f6f2f1;border-color:rgba(255,255,255,.24);box-shadow:0 -6px 24px rgba(0,0,0,.30),0 12px 32px rgba(0,0,0,.40),inset 0 1px 0 rgba(255,255,255,.22)}
+:root:not([data-theme="light"]) .hero p{color:#f6f2f1}
+:root:not([data-theme="light"]) a.hero .go,:root:not([data-theme="light"]) .hero:hover .go{background:#f1e8e2;color:#3a2620}}
+:root[data-theme="dark"] a.hero,:root[data-theme="dark"] a.hero:hover{background:linear-gradient(135deg,rgba(255,255,255,.14),rgba(255,255,255,0) 55%),color-mix(in srgb,var(--cta) 68%,transparent);color:#f6f2f1;border-color:rgba(255,255,255,.24);box-shadow:0 -6px 24px rgba(0,0,0,.30),0 12px 32px rgba(0,0,0,.40),inset 0 1px 0 rgba(255,255,255,.22)}
+:root[data-theme="dark"] .hero p{color:#f6f2f1}
+:root[data-theme="dark"] a.hero .go,:root[data-theme="dark"] .hero:hover .go{background:#f1e8e2;color:#3a2620}
