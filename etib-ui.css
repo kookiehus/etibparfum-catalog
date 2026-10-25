@@ -565,3 +565,11 @@ body.home .row h3,body.home .row .head p{will-change:auto}
 
 /* ===== v13 · «Каталог ароматов»: заголовок меньше ===== */
 body.home .hero h2{font-size:28px;letter-spacing:.05em}
+
+/* ---- производительность: стекло только на шапке и табах, внутри вкладок плотный фон ---- */
+details:not(.sec),.say,.status,.res,.slot,table,.btn.sec{-webkit-backdrop-filter:none!important;backdrop-filter:none!important}
+details:not(.sec){box-shadow:none}
+.pill{-webkit-backdrop-filter:none!important;backdrop-filter:none!important}
+details::details-content{transition:none!important}
+details>div{animation:none!important}
+section[id^="p-"]:not([hidden]){animation:fadein .18s ease backwards}
