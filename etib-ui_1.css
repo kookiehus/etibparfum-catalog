@@ -541,3 +541,9 @@ a.hero .go,.hero:hover .go{background:var(--card);color:var(--ink);box-shadow:0 
 :root[data-theme="dark"] a.hero,:root[data-theme="dark"] a.hero:hover{background:linear-gradient(135deg,rgba(255,255,255,.14),rgba(255,255,255,0) 55%),color-mix(in srgb,var(--cta) 68%,transparent);color:#f6f2f1;border-color:rgba(255,255,255,.24);box-shadow:0 -6px 24px rgba(0,0,0,.30),0 12px 32px rgba(0,0,0,.40),inset 0 1px 0 rgba(255,255,255,.22)}
 :root[data-theme="dark"] .hero p{color:#f6f2f1}
 :root[data-theme="dark"] a.hero .go,:root[data-theme="dark"] .hero:hover .go{background:#f1e8e2;color:#3a2620}
+
+/* ===== v9 · кнопка «Открыть каталог» — шалфейно-зелёная, в паре с пыльно-розовым ===== */
+a.hero .go,.hero:hover .go{background:#5a7656;color:#fbf8f4;box-shadow:0 3px 10px rgba(50,70,48,.28),inset 0 1px 0 rgba(255,255,255,.22)}
+.hero:hover .go{background:#4f6b4d}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) a.hero .go,:root:not([data-theme="light"]) .hero:hover .go{background:#547352;color:#f6f2f1}}
+:root[data-theme="dark"] a.hero .go,:root[data-theme="dark"] .hero:hover .go{background:#547352;color:#f6f2f1}
