@@ -258,3 +258,8 @@ details.sec[open]>summary{padding-bottom:4px}
 
 /* тренажёр: кайма карточек в цвете раздела */
 body[data-sec=train] .panel{border-color:color-mix(in srgb,var(--k-train) 38%,var(--g-bd))}
+
+/* значки «Главная» и «Вход»: эмодзи в стеклянном кружке, как кнопка Добби */
+.hd .adm-ico .ei,.adm-ico .ei{display:block;letter-spacing:0;text-transform:none;font-style:normal;font-family:"Apple Color Emoji","Segoe UI Emoji","Noto Color Emoji",sans-serif;filter:drop-shadow(0 1px 1.5px rgba(70,35,45,.25))}
+.hd .adm-ico .ei{font-size:26px}
+@media (max-width:380px){.hd .adm-ico .ei{font-size:23px}}
