@@ -376,3 +376,10 @@ body:has(.srch) h1{font-size:clamp(24px,7.6vw,32px)}
 /* подпись под названием — тихая, не спорит с логотипом */
 .hd small{display:block;margin-top:7px;font:500 9.5px/1.2 var(--sans);letter-spacing:.22em;text-transform:uppercase;color:var(--mute);opacity:.75}
 @media (max-width:340px){h1{font-size:18px;letter-spacing:.1em}.hd small{letter-spacing:.14em}.hd .mark{width:34px;height:34px}}
+
+/* ===== заголовки плашек и пунктов — антиква Playfair, как у разделов ===== */
+.quick b{font-family:var(--serif);font-weight:500;font-size:clamp(14px,4.2vw,17px);line-height:1.15;letter-spacing:.005em}
+details:not(.sec)>summary{font-family:var(--serif);font-weight:500;font-size:16.5px;line-height:1.25}
+details:not(.sec)>summary .n{font-family:var(--sans)}
+h3:not(.sec){font-family:var(--serif);font-weight:500}
+.status .stx b{font-family:var(--serif);font-weight:500}
