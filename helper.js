@@ -405,6 +405,11 @@ var css=[
 '#hp #hs{display:grid;place-items:center;flex:none;width:0;min-width:0;height:44px;margin:0;padding:0;border-radius:50%;background:var(--ha);color:var(--paper,#fff);opacity:0;transform:scale(.3);pointer-events:none;overflow:hidden;transition:width .25s cubic-bezier(.34,1.45,.5,1),margin .25s,opacity .2s,transform .25s cubic-bezier(.34,1.45,.5,1)}',
 '#hp #hf.has #hs{width:44px;min-width:44px;margin-left:8px;opacity:1;transform:none;pointer-events:auto}#hp #hf.has #hs:active{transform:scale(.9)}',
 '#hp :focus-visible{outline:3px solid var(--ha);outline-offset:2px}',
+'/* ---- окно Добби = стекло плашки «Каталог ароматов»: та же заливка, рамка и размытие; подложка плотнее, а страница под окном размыта, чтобы текст сзади не мешал чтению ---- */',
+'#hv{background:rgba(20,10,14,.24);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}',
+'#hp{--cd:color-mix(in srgb,var(--card,#fff) 90%,transparent);background:linear-gradient(var(--g-bg,rgba(255,255,255,.55)),var(--g-bg,rgba(255,255,255,.55))),color-mix(in srgb,var(--paper,#f7f2f1) 68%,transparent);border:1px solid var(--g-bd,rgba(255,255,255,.9));border-bottom:0;-webkit-backdrop-filter:blur(28px) saturate(160%);backdrop-filter:blur(28px) saturate(160%);box-shadow:0 -10px 32px rgba(40,20,28,.16),var(--g-sh,inset 0 1px 0 rgba(255,255,255,.95))}',
+'#hp #hf{border-top:1px solid var(--g-bd,rgba(255,255,255,.9))}',
+'@supports not ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))){#hp{background:var(--paper,#f7f2f1)}#hv{background:rgba(20,10,14,.5)}}',
 '.hjs{display:block;width:100%;box-sizing:border-box;margin:8px 0 0;padding:8px;border-radius:10px;border:1px solid #8886;background:transparent;color:inherit;font:12px/1.35 ui-monospace,Menlo,monospace;resize:none}',
 '@media(prefers-reduced-motion:reduce){#hp,#hp.on,#hv,#hv.on,#hb,#hb.off,.hm,.hg,.hg button,#hq button{transition:none!important;animation:none!important}.hcr{animation:none}}'
 ].join('');
