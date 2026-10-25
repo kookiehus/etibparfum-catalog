@@ -1,4 +1,3 @@
-@import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=Playfair+Display:wght@400;500;600;700&display=swap");
 /* ETIB: общие стили — читаемость, шапка, цвет раздела, закладки, тренажёр */
 :root{--mute:#54494c;--k-train:#6b3fa0;--k-cat:var(--accent);--star:#a8701a}
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--mute:#c9bcbe;--k-train:#c4a3ee;--star:#e8bf6f}}
@@ -344,7 +343,6 @@ dialog input,dialog select,dialog textarea{background:var(--g-fill)}
 body,:root:not([data-theme="light"]) body,:root[data-theme="dark"] body{background:var(--page-bg);background-color:var(--paper)}
 
 /* типографика: тоньше и воздушнее, подписи — как на этикетке */
-h2,.hero h2,.row h3,.modebtn h4,.card h3,.lvl h2,.q h2,.rp-top h2,.tp-head h2,dialog h2,details.sec>summary h2{font-weight:500}
 .hero h2{font-size:34px;letter-spacing:.005em}
 .hd small{text-transform:uppercase;letter-spacing:.18em;font-size:11px}
 
@@ -377,9 +375,37 @@ body:has(.srch) h1{font-size:clamp(24px,7.6vw,32px)}
 .hd small{display:block;margin-top:7px;font:500 9.5px/1.2 var(--sans);letter-spacing:.22em;text-transform:uppercase;color:var(--mute);opacity:.75}
 @media (max-width:340px){h1{font-size:18px;letter-spacing:.1em}.hd small{letter-spacing:.14em}.hd .mark{width:34px;height:34px}}
 
-/* ===== заголовки плашек и пунктов — антиква Playfair, как у разделов ===== */
-.quick b{font-family:var(--serif);font-weight:500;font-size:clamp(14px,4.2vw,17px);line-height:1.15;letter-spacing:.005em}
-details:not(.sec)>summary{font-family:var(--serif);font-weight:500;font-size:16.5px;line-height:1.25}
-details:not(.sec)>summary .n{font-family:var(--sans)}
-h3:not(.sec){font-family:var(--serif);font-weight:500}
-.status .stx b{font-family:var(--serif);font-weight:500}
+
+/* ===== ЕДИНАЯ ТИПОГРАФИКА (этот блок последний и главный) =====
+   Два шрифта, роли одинаковые на всех страницах:
+   · Playfair Display (антиква): заголовки, подзаголовки, названия пунктов, таблицы, статусы, цитаты, ключевые цифры;
+   · Manrope (гротеск): обычный текст, подписи, кнопки, поля ввода.
+   Вес: текст 500, кнопки и подписи 600–700, подзаголовки 650, заголовки 700. */
+:root{--serif:'Playfair Display',Georgia,'Times New Roman',serif;--sans:Manrope,system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;
+--fw-text:500;--fw-ui:700;--fw-sub:650;--fw-head:700}
+html{font-variant-numeric:lining-nums;text-rendering:optimizeLegibility;-webkit-font-smoothing:antialiased}
+body{font-weight:var(--fw-text)}
+button,input,select,textarea{font-family:var(--sans)}
+
+/* заголовки */
+h2,h3:not(.sec),.hero h2,.row h3,.modebtn h4,.card h3,.lvl h2,.q h2,.rp-top h2,.tp-head h2,dialog h2,.sh-head h2,.favs h2,.pfc h2,.winpic h2,.panel h3,.pfd summary h3,details.sec>summary h2{font-family:var(--serif);font-weight:var(--fw-head)}
+
+/* подзаголовки, названия пунктов, строки-значения: тоже антиква, чуть легче заголовков */
+details:not(.sec)>summary,.quick b,.res b,.favs a b,.pf li b,.verdict,.slot,.status,.status .stx b,.status .tm,th,td,table b{font-family:var(--serif);font-weight:var(--fw-sub)}
+td b,th,.slot.now,.status .stx b{font-weight:var(--fw-head)}
+th{font-size:13px;color:var(--ink)}
+.status .stx small{font-family:var(--sans);font-weight:600}
+.verdict{font-size:17px}
+
+/* цитаты и «что сказать клиенту»: курсив антиквы (у Manrope курсива нет, браузер рисовал его наклоном) */
+.say,.quote,.tp-body .say,.alt,.pron,#hp .ps{font-family:var(--serif);font-style:italic;font-weight:500}
+.pron span{font-family:var(--sans)}
+i:not([class]){font-family:var(--serif);font-style:italic;font-weight:500}
+/* жирное внутри жирного не уходит в 900: у Manrope такого начертания нет */
+b,strong{font-weight:700}
+
+/* подписи и подсказки: гротеск, плотнее прежнего */
+.hd small{font-weight:600;opacity:.9}
+.mute,.row p,.res small,.res .sn,.shint,.hint,.comp,.grp,.foot,footer,.lvl p,.modebtn p,.ddesc,.wmsg,.favnote,.favhint{font-weight:500}
+.opt{font-weight:600}
+.banner{font-weight:600}
