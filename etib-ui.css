@@ -578,3 +578,11 @@ section[id^="p-"]:not([hidden]){animation:fadein .18s ease backwards}
 html{-webkit-text-size-adjust:100%;text-size-adjust:100%;color-scheme:light;font-synthesis:none}
 body{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
 details:not(.sec),.say,.status,.res,.slot,table,.btn.sec{background-color:color-mix(in srgb,var(--paper,#fff) 78%,transparent)}
+
+/* ===== ЛЁГКИЙ РЕЖИМ (Android): без размытия, без анимации фона, без fixed-фонов ===== */
+*,*::before,*::after{-webkit-backdrop-filter:none!important;backdrop-filter:none!important;background-attachment:scroll!important}
+:root{--g-bg:rgba(255,255,255,.70)}
+body{background:var(--paper)!important}
+body::before{inset:0!important;animation:none!important;transform:none!important;will-change:auto!important;background:linear-gradient(160deg,#ede6df 0%,#e2d9cf 50%,#d8cec3 100%)!important}
+body::after{display:none!important;animation:none!important}
+header.hd,.rp-top,.rp-bar{background-color:color-mix(in srgb,var(--paper) 94%,transparent)!important}
