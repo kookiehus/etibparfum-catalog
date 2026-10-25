@@ -448,3 +448,7 @@ body::after{animation:pearlsweep 22s ease-in-out infinite alternate;will-change:
 .rp-btns .main,.btn:not(.sec),.go2:not(.sec){background:var(--ink)}
 .rbtn.fin{background:var(--hl)}.rbtn.fin.soon{background:var(--warnbg)}
 .fav[aria-pressed=true]{color:var(--star)}
+
+/* главная кнопка тренажёра («Быстрый тест»): насыщенный цвет акцента + блик, без выцветания */
+button.modebtn.main{background:linear-gradient(112deg,rgba(255,255,255,.30) 0%,rgba(255,255,255,.08) 26%,rgba(255,255,255,0) 44%),linear-gradient(135deg,var(--accent),color-mix(in srgb,var(--accent) 74%,#000));color:var(--paper);border:1px solid color-mix(in srgb,var(--accent) 60%,#fff);box-shadow:0 10px 26px color-mix(in srgb,var(--accent) 35%,transparent),inset 0 1.5px 0 rgba(255,255,255,.45),inset 0 -1px 0 rgba(0,0,0,.25);-webkit-backdrop-filter:none;backdrop-filter:none}
+button.modebtn.main p,button.modebtn.main h4{color:inherit}
