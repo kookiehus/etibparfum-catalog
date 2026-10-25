@@ -1,5 +1,5 @@
 /* ETIB: работа без сети. При наличии интернета страницы берутся свежие, без сети — из копии на телефоне. */
-const V='etib-v35';
+const V='etib-v36';
 const FILES=['./','index.html','catalog.html','sales.html','trainer.html','memo.html',
   'etib-ui.css','etib-ui.js','trainer-data.js','rabbit.js','pron.js','tips.js','helper.js','helper-data.json','dobby-learn.json',
   'manifest.webmanifest','icons/favicon.svg','icons/icon-192.png','icons/icon-512.png','icons/icon-maskable-512.png','icons/apple-touch-icon.png'];

@@ -315,3 +315,12 @@ dialog input,dialog select,dialog textarea{background:var(--g-fill)}
 .rp-f input{border:1px solid color-mix(in srgb,var(--k) 30%,var(--g-bd))}
 .rp-f input:focus{border-color:var(--k);box-shadow:0 0 0 3px color-mix(in srgb,var(--k) 22%,transparent)}
 .rp-h{color:var(--ink);opacity:.75}
+
+/* --- итоговый отчёт: цвета как у окна Добби (нейтральное стекло, акцент страницы вместо цвета раздела) --- */
+.rp{--k:var(--accent)}
+.rp-g{background:var(--g-fill-d);border:1px solid var(--g-bd);box-shadow:var(--g-sh)}
+.rp-f input{border:1px solid var(--g-bd);background:var(--g-bg);box-shadow:var(--g-sh)}
+.rp-f input:focus{border-color:var(--accent);box-shadow:0 0 0 3px color-mix(in srgb,var(--accent) 22%,transparent)}
+.rp-f input::placeholder{color:var(--mute);opacity:1}
+.rp-f label{color:var(--ink)}
+.rp-h{color:var(--mute);opacity:1}
