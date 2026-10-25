@@ -454,60 +454,58 @@ button.modebtn.main{background:linear-gradient(112deg,rgba(255,255,255,.30) 0%,r
 button.modebtn.main p,button.modebtn.main h4{color:inherit}
 
 
-/* ===== v4 · МАТОВАЯ БУМАГА: зерно, мягкие тени, палитра «пыльная роза + хвойный зелёный + мокрый песок» =====
-   Эффект как на референсе: ни одного глянцевого блика, поверхность матовая с тонким зерном, тени рассеянные.
-   Светлая: тёплая белая бумага (#F6F2F1 → #EAE2D3) с розовой, шалфейной и песочной дымкой.
-   Тёмная: графит #1D1A19 с глубокой хвойной зеленью и приглушённой розой.
-   Розовый (акцент) и зелёный (цвет раздела «Отчёт») — взаимные дополнения. */
-:root{--paper:#f6f2f1;--card:#fbf9f6;--tint:#ece5da;--line:#cfc2b0;--ink:#2a2725;--mute:#594e4c;--accent:#85595b;--hl:#eadcdc;--gold:#ae8f60;--star:#80632f;
---k-sell:#8a5658;--k-price:#80632f;--k-rep:#3f6a50;--k-memo:#4f6479;--k-train:#6e5670;--k-fact:#5f7243;--k-facts:#5f7243;
---c-f:#8a5658;--c-m:#4f6479;--c-u:#3f6a50;--c-p:#80632f;
---g-bg:rgba(251,248,244,.55);--g-bg-hi:rgba(250,247,243,.88);--g-bd:rgba(255,255,255,.55);--g-bl:blur(14px) saturate(110%);
---g-sh:0 14px 30px rgba(70,52,44,.10),0 2px 5px rgba(70,52,44,.06);
---g-sheen:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n' x='0' y='0' width='100%' height='100%'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.16 0 0 0 -0.055'/%3E%3C/filter%3E%3Crect width='100%' height='100%' filter='url(%23n)'/%3E%3C/svg%3E");
---page-bg:linear-gradient(160deg,#f6f2f1 0%,#efe8df 55%,#eae2d3 100%) fixed no-repeat;
---pe-1:rgba(222,196,201,.60);--pe-2:rgba(145,166,115,.28);--pe-3:rgba(174,143,96,.26);--pe-sweep:transparent;--noise-page:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n' x='0' y='0' width='100%' height='100%'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.24 0 0 0 -0.085'/%3E%3C/filter%3E%3Crect width='100%' height='100%' filter='url(%23n)'/%3E%3C/svg%3E");
---gl-bg1:rgba(251,248,244,.70);--gl-bg2:rgba(251,248,244,.36);--gl-bd:rgba(255,255,255,.65);--gl-sh:0 8px 18px rgba(70,52,44,.13),0 1px 3px rgba(70,52,44,.08);--gl-in:0 0 0 0 transparent;--gi-ao:0;--gi-bo:0;
---cta:#8c545b;
+/* ===== v5 · ПАЛИТРА РЕФЕРЕНСА «зелёный + песок»; плавные переливы вместо бликов; без зерна =====
+   Цвета: Bright White #F6F2F1, Whisper White #EAE2D3, Lucious Lime #91A673, Dark Hunter Green #3A4A3F, Bokara Grey #2A2725, Wet Sand #AE8F60.
+   Переливы: фон и плашки окрашены мягкими разводами «шалфей → песок» (как на нижнем квадрате референса), медленно плывут.
+   Блики убраны: нет белых диагональных полос, светящихся кромок и бегущего света. */
+:root{--paper:#f6f2f1;--card:#fbf8f4;--tint:#eae2d3;--line:#d3c9b6;--ink:#2a2725;--mute:#5a524c;--accent:#3a4a3f;--hl:#e4e6d6;--gold:#ae8f60;--star:#86683a;
+--k-sell:#8a5a47;--k-price:#86683a;--k-rep:#587441;--k-memo:#55646a;--k-train:#3a4a3f;--k-fact:#6b6838;--k-facts:#6b6838;
+--c-f:#8a5a47;--c-m:#55646a;--c-u:#587441;--c-p:#86683a;
+--g-bg:rgba(251,248,243,.52);--g-bg-hi:rgba(250,247,242,.88);--g-bd:rgba(255,255,255,.60);--g-bl:blur(18px) saturate(115%);
+--g-sh:0 12px 28px rgba(58,52,40,.10),0 2px 5px rgba(58,52,40,.05);
+--g-sheen:linear-gradient(135deg,rgba(145,166,115,.12),rgba(174,143,96,.10));
+--page-bg:linear-gradient(160deg,#f6f2f1 0%,#efe9de 50%,#eae2d3 100%) fixed no-repeat;
+--pe-1:rgba(145,166,115,.42);--pe-2:rgba(174,143,96,.34);--pe-3:rgba(120,140,128,.30);--pe-sweep:transparent;
+--gl-bg1:rgba(251,248,243,.72);--gl-bg2:rgba(251,248,243,.38);--gl-bd:rgba(255,255,255,.70);--gl-sh:0 6px 16px rgba(58,52,40,.13),0 1px 3px rgba(58,52,40,.08);--gl-in:0 0 0 0 transparent;--gi-ao:0;--gi-bo:0;
+--cta:#3a4a3f;
 --g-fill:var(--g-sheen),linear-gradient(var(--g-bg),var(--g-bg)),var(--g-scrim);
 --g-fill-d:var(--g-sheen),linear-gradient(var(--g-bg),var(--g-bg)),color-mix(in srgb,var(--paper) 62%,transparent)}
-@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--paper:#1d1a19;--card:#242120;--tint:#292524;--line:#48423e;--ink:#ece6dc;--mute:#b5aba3;--accent:#dcb0b6;--hl:#3b2d2f;--gold:#ae8f60;--star:#cdb07c;
---k-sell:#dcb0b6;--k-price:#cdb07c;--k-rep:#a9c18f;--k-memo:#a3b8cc;--k-train:#c3adc6;--k-fact:#b9c78f;--k-facts:#b9c78f;
---c-f:#dcb0b6;--c-m:#a3b8cc;--c-u:#a9c18f;--c-p:#cdb07c;
---g-bg:rgba(255,255,255,.055);--g-bg-hi:rgba(36,33,32,.88);--g-bd:rgba(255,255,255,.10);--g-bl:blur(14px) saturate(110%);
---g-sh:0 14px 30px rgba(0,0,0,.38),0 2px 5px rgba(0,0,0,.25);
---g-sheen:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n' x='0' y='0' width='100%' height='100%'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0.13 0 0 0 -0.045'/%3E%3C/filter%3E%3Crect width='100%' height='100%' filter='url(%23n)'/%3E%3C/svg%3E");
---page-bg:linear-gradient(160deg,#211e1d 0%,#181615 60%,#121110 100%) fixed no-repeat;
---pe-1:rgba(58,74,63,.60);--pe-2:rgba(151,114,114,.20);--pe-3:rgba(174,143,96,.12);--pe-sweep:transparent;--noise-page:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n' x='0' y='0' width='100%' height='100%'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0.19 0 0 0 -0.065'/%3E%3C/filter%3E%3Crect width='100%' height='100%' filter='url(%23n)'/%3E%3C/svg%3E");
---gl-bg1:rgba(255,255,255,.12);--gl-bg2:rgba(255,255,255,.04);--gl-bd:rgba(255,255,255,.14);--gl-sh:0 8px 18px rgba(0,0,0,.42);--gl-in:0 0 0 0 transparent;--gi-ao:0;--gi-bo:0;
---cta:#96595f}}
-:root[data-theme="dark"]{--paper:#1d1a19;--card:#242120;--tint:#292524;--line:#48423e;--ink:#ece6dc;--mute:#b5aba3;--accent:#dcb0b6;--hl:#3b2d2f;--gold:#ae8f60;--star:#cdb07c;
---k-sell:#dcb0b6;--k-price:#cdb07c;--k-rep:#a9c18f;--k-memo:#a3b8cc;--k-train:#c3adc6;--k-fact:#b9c78f;--k-facts:#b9c78f;
---c-f:#dcb0b6;--c-m:#a3b8cc;--c-u:#a9c18f;--c-p:#cdb07c;
---g-bg:rgba(255,255,255,.055);--g-bg-hi:rgba(36,33,32,.88);--g-bd:rgba(255,255,255,.10);--g-bl:blur(14px) saturate(110%);
---g-sh:0 14px 30px rgba(0,0,0,.38),0 2px 5px rgba(0,0,0,.25);
---g-sheen:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n' x='0' y='0' width='100%' height='100%'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0.13 0 0 0 -0.045'/%3E%3C/filter%3E%3Crect width='100%' height='100%' filter='url(%23n)'/%3E%3C/svg%3E");
---page-bg:linear-gradient(160deg,#211e1d 0%,#181615 60%,#121110 100%) fixed no-repeat;
---pe-1:rgba(58,74,63,.60);--pe-2:rgba(151,114,114,.20);--pe-3:rgba(174,143,96,.12);--pe-sweep:transparent;--noise-page:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n' x='0' y='0' width='100%' height='100%'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0.19 0 0 0 -0.065'/%3E%3C/filter%3E%3Crect width='100%' height='100%' filter='url(%23n)'/%3E%3C/svg%3E");
---gl-bg1:rgba(255,255,255,.12);--gl-bg2:rgba(255,255,255,.04);--gl-bd:rgba(255,255,255,.14);--gl-sh:0 8px 18px rgba(0,0,0,.42);--gl-in:0 0 0 0 transparent;--gi-ao:0;--gi-bo:0;
---cta:#96595f}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--paper:#211e1c;--card:#292624;--tint:#2f2b28;--line:#443e39;--ink:#eae2d3;--mute:#b3aa9f;--accent:#a9c18a;--hl:#34402f;--gold:#ae8f60;--star:#d2b684;
+--k-sell:#d4a58f;--k-price:#d2b684;--k-rep:#a9c18a;--k-memo:#9db3b8;--k-train:#8fb09a;--k-fact:#c0bd7e;--k-facts:#c0bd7e;
+--c-f:#d4a58f;--c-m:#9db3b8;--c-u:#a9c18a;--c-p:#d2b684;
+--g-bg:rgba(255,255,255,.055);--g-bg-hi:rgba(38,35,32,.88);--g-bd:rgba(255,255,255,.10);--g-bl:blur(18px) saturate(115%);
+--g-sh:0 12px 28px rgba(0,0,0,.38),0 2px 5px rgba(0,0,0,.24);
+--g-sheen:linear-gradient(135deg,rgba(145,166,115,.09),rgba(174,143,96,.07));
+--page-bg:linear-gradient(160deg,#25211f 0%,#1c1917 55%,#151311 100%) fixed no-repeat;
+--pe-1:rgba(58,74,63,.75);--pe-2:rgba(174,143,96,.20);--pe-3:rgba(70,95,85,.45);--pe-sweep:transparent;
+--gl-bg1:rgba(255,255,255,.12);--gl-bg2:rgba(255,255,255,.04);--gl-bd:rgba(255,255,255,.14);--gl-sh:0 6px 16px rgba(0,0,0,.42);--gl-in:0 0 0 0 transparent;--gi-ao:0;--gi-bo:0;
+--cta:#476049}}
+:root[data-theme="dark"]{--paper:#211e1c;--card:#292624;--tint:#2f2b28;--line:#443e39;--ink:#eae2d3;--mute:#b3aa9f;--accent:#a9c18a;--hl:#34402f;--gold:#ae8f60;--star:#d2b684;
+--k-sell:#d4a58f;--k-price:#d2b684;--k-rep:#a9c18a;--k-memo:#9db3b8;--k-train:#8fb09a;--k-fact:#c0bd7e;--k-facts:#c0bd7e;
+--c-f:#d4a58f;--c-m:#9db3b8;--c-u:#a9c18a;--c-p:#d2b684;
+--g-bg:rgba(255,255,255,.055);--g-bg-hi:rgba(38,35,32,.88);--g-bd:rgba(255,255,255,.10);--g-bl:blur(18px) saturate(115%);
+--g-sh:0 12px 28px rgba(0,0,0,.38),0 2px 5px rgba(0,0,0,.24);
+--g-sheen:linear-gradient(135deg,rgba(145,166,115,.09),rgba(174,143,96,.07));
+--page-bg:linear-gradient(160deg,#25211f 0%,#1c1917 55%,#151311 100%) fixed no-repeat;
+--pe-1:rgba(58,74,63,.75);--pe-2:rgba(174,143,96,.20);--pe-3:rgba(70,95,85,.45);--pe-sweep:transparent;
+--gl-bg1:rgba(255,255,255,.12);--gl-bg2:rgba(255,255,255,.04);--gl-bd:rgba(255,255,255,.14);--gl-sh:0 6px 16px rgba(0,0,0,.42);--gl-in:0 0 0 0 transparent;--gi-ao:0;--gi-bo:0;
+--cta:#476049}
 
-/* фон: медленные матовые переливы цвета + зерно бумаги поверх; бегущей световой полосы нет */
-body::after{display:block!important;left:0!important;width:100%!important;top:0;bottom:0;background:var(--noise-page)!important;background-size:160px 160px!important;animation:none!important;transform:none!important;will-change:auto}
+/* фон: цветные разводы остаются и медленно перетекают; световой полосы нет */
+body::after{display:none!important;animation:none!important}
 
-/* плотная стеклянная плашка поверх контента («Каталог ароматов»): текст под ней не просвечивает */
+/* плотное стекло поверх контента («Каталог ароматов») */
 a.hero,a.hero:hover{background:var(--g-sheen),linear-gradient(var(--g-bg-hi),var(--g-bg-hi));color:var(--ink);border:1px solid var(--g-bd);box-shadow:var(--g-sh);-webkit-backdrop-filter:var(--g-bl);backdrop-filter:var(--g-bl)}
-a.hero .go,.hero:hover .go{background:var(--cta);color:#fff}
+a.hero .go,.hero:hover .go{background:var(--cta);color:#f6f2f1}
 .hero .subs a{color:var(--ink);background:rgba(255,255,255,.22);border-color:var(--g-bd)}
 
-/* бегунок вкладок: «вдавленный» матовый, без белой кромки */
-.pill{background:var(--g-sheen),linear-gradient(var(--card),var(--card));border:1px solid var(--g-bd);box-shadow:0 2px 6px rgba(70,52,44,.16)}
-@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .pill{background:var(--g-sheen),linear-gradient(rgba(255,255,255,.12),rgba(255,255,255,.12));border-color:rgba(255,255,255,.16);box-shadow:0 2px 6px rgba(0,0,0,.5)}}
-:root[data-theme="dark"] .pill{background:var(--g-sheen),linear-gradient(rgba(255,255,255,.12),rgba(255,255,255,.12));border-color:rgba(255,255,255,.16);box-shadow:0 2px 6px rgba(0,0,0,.5)}
-.hd .adm-ico,.adm-ico{background:var(--g-sheen),linear-gradient(150deg,var(--gl-bg1),var(--gl-bg2))}
+/* бегунок вкладок и круглые кнопки шапки: без белой кромки */
+.pill{background:var(--card);border:1px solid var(--g-bd);box-shadow:0 2px 6px rgba(58,52,40,.16)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .pill{background:rgba(255,255,255,.12);border-color:rgba(255,255,255,.16);box-shadow:0 2px 6px rgba(0,0,0,.5)}}
+:root[data-theme="dark"] .pill{background:rgba(255,255,255,.12);border-color:rgba(255,255,255,.16);box-shadow:0 2px 6px rgba(0,0,0,.5)}
 
-/* «Быстрый тест»: матовое цветное стекло, насыщенное, белый текст */
-button.modebtn.main{background:var(--g-sheen),linear-gradient(color-mix(in srgb,var(--cta) 92%,transparent),color-mix(in srgb,var(--cta) 92%,transparent));color:#fff;border:1px solid color-mix(in srgb,var(--cta) 60%,#fff);box-shadow:0 12px 26px color-mix(in srgb,var(--cta) 34%,transparent),0 2px 4px rgba(40,25,25,.18);-webkit-backdrop-filter:var(--g-bl);backdrop-filter:var(--g-bl)}
-button.modebtn.main h4,button.modebtn.main p,button.modebtn.main svg{color:#fff}
+/* «Быстрый тест»: насыщенное зелёное стекло, текст Whisper White */
+button.modebtn.main{background:linear-gradient(135deg,color-mix(in srgb,var(--cta) 94%,transparent),color-mix(in srgb,var(--cta) 82%,#91a673 18%));color:#f6f2f1;border:1px solid color-mix(in srgb,var(--cta) 55%,#d9d2bd);box-shadow:0 12px 26px color-mix(in srgb,var(--cta) 32%,transparent),0 2px 4px rgba(30,30,25,.18);-webkit-backdrop-filter:var(--g-bl);backdrop-filter:var(--g-bl)}
+button.modebtn.main h4,button.modebtn.main p,button.modebtn.main svg{color:#f6f2f1}
 button.modebtn.main p{opacity:.92}
 button.modebtn.main:active{filter:brightness(.95)}
