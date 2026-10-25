@@ -377,35 +377,32 @@ body:has(.srch) h1{font-size:clamp(24px,7.6vw,32px)}
 
 
 /* ===== ЕДИНАЯ ТИПОГРАФИКА (этот блок последний и главный) =====
-   Два шрифта, роли одинаковые на всех страницах:
-   · Playfair Display (антиква): заголовки, подзаголовки, названия пунктов, таблицы, статусы, цитаты, ключевые цифры;
-   · Manrope (гротеск): обычный текст, подписи, кнопки, поля ввода.
-   Вес: текст 500, кнопки и подписи 600–700, подзаголовки 650, заголовки 700. */
-:root{--serif:'Playfair Display',Georgia,'Times New Roman',serif;--sans:Manrope,system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;
---fw-text:500;--fw-ui:700;--fw-sub:650;--fw-head:700}
-html{font-variant-numeric:lining-nums;text-rendering:optimizeLegibility;-webkit-font-smoothing:antialiased}
-body{font-weight:var(--fw-text)}
+   Один шрифт на весь сайт: Manrope. Исключение только название ETIB PARFUM в шапке (логотип).
+   Иерархия задаётся весом и размером: текст 500, подзаголовки и кнопки 700, заголовки 800. */
+:root{--sans:Manrope,system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;--serif:var(--sans);
+--fw-text:500;--fw-sub:700;--fw-head:800}
+html{text-rendering:optimizeLegibility;-webkit-font-smoothing:antialiased}
+body{font-family:var(--sans);font-weight:var(--fw-text)}
 button,input,select,textarea{font-family:var(--sans)}
 
-/* заголовки */
-h2,h3:not(.sec),.hero h2,.row h3,.modebtn h4,.card h3,.lvl h2,.q h2,.rp-top h2,.tp-head h2,dialog h2,.sh-head h2,.favs h2,.pfc h2,.winpic h2,.panel h3,.pfd summary h3,details.sec>summary h2{font-family:var(--serif);font-weight:var(--fw-head)}
+/* название бренда в шапке остаётся прежним (Playfair Display 700) */
+body header.hd h1,h1{font-family:'Playfair Display',Georgia,'Times New Roman',serif}
 
-/* подзаголовки, названия пунктов, строки-значения: тоже антиква, чуть легче заголовков */
-details:not(.sec)>summary,.quick b,.res b,.favs a b,.pf li b,.verdict,.slot,.status,.status .stx b,.status .tm,th,td,table b{font-family:var(--serif);font-weight:var(--fw-sub)}
-td b,th,.slot.now,.status .stx b{font-weight:var(--fw-head)}
+/* заголовки */
+h2,h3:not(.sec),.hero h2,.row h3,.modebtn h4,.card h3,.lvl h2,.q h2,.rp-top h2,.tp-head h2,dialog h2,.sh-head h2,.favs h2,.pfc h2,.winpic h2,.panel h3,.pfd summary h3,details.sec>summary h2{font-family:var(--sans);font-weight:var(--fw-head);letter-spacing:-.01em}
+
+/* подзаголовки, названия пунктов, строки-значения */
+details:not(.sec)>summary,.quick b,.res b,.favs a b,.pf li b,.verdict,.slot,.status,.status .stx b,.status .tm,th,td b,table b{font-family:var(--sans);font-weight:var(--fw-sub)}
+td{font-family:var(--sans);font-weight:var(--fw-text)}
+.status .stx small{font-weight:600}
 th{font-size:13px;color:var(--ink)}
-.status .stx small{font-family:var(--sans);font-weight:600}
 .verdict{font-size:17px}
 
-/* цитаты и «что сказать клиенту»: курсив антиквы (у Manrope курсива нет, браузер рисовал его наклоном) */
-.say,.quote,.tp-body .say,.alt,.pron,#hp .ps{font-family:var(--serif);font-style:italic;font-weight:500}
-.pron span{font-family:var(--sans)}
-i:not([class]){font-family:var(--serif);font-style:italic;font-weight:500}
-/* жирное внутри жирного не уходит в 900: у Manrope такого начертания нет */
-b,strong{font-weight:700}
+/* цитаты: без курсива (у Manrope его нет), выделяются рамкой слева */
+.say,.quote,.tp-body .say,.alt,.pron,#hp .ps,i:not([class]){font-family:var(--sans);font-style:normal;font-weight:500}
 
-/* подписи и подсказки: гротеск, плотнее прежнего */
+/* подписи */
 .hd small{font-weight:600;opacity:.9}
-.mute,.row p,.res small,.res .sn,.shint,.hint,.comp,.grp,.foot,footer,.lvl p,.modebtn p,.ddesc,.wmsg,.favnote,.favhint{font-weight:500}
+b,strong{font-weight:700}
 .opt{font-weight:600}
 .banner{font-weight:600}
