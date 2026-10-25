@@ -86,7 +86,7 @@ function rub(n){n=Math.round((n+Number.EPSILON)*100)/100;return n.toLocaleString
 function load(){try{return JSON.parse(localStorage.getItem(DK))||null}catch(e){return null}}
 function cur(){var o=load();if(!o)return{};if(o.d===today())return o;var k={};KEEP.forEach(function(id){if(o[id])k[id]=o[id]});return k}
 function hasDraft(){var o=load();return!!o&&o.d===today()&&IDS.some(function(id){return KEEP.indexOf(id)<0&&String(o[id]||'').trim()!==''})}
-var root=null,inp={},bar=null;
+var root=null,inp={};
 function val(id){return inp[id]?inp[id].value:(cur()[id]||'')}
 function num(id){return parseFloat(val(id))||0}
 function save(){if(!root)return;var o={d:today(),t:hm()};IDS.forEach(function(id){o[id]=inp[id].value});
@@ -130,15 +130,11 @@ function fill(){var c=cur();IDS.forEach(function(id){inp[id].value=c[id]!=null?c
  var o=load();note(hasDraft()?'Черновик за сегодня'+(o&&o.t?' · '+o.t:''):'Черновик сохраняется сам')}
 function open(){if(!root)build();fill();root.hidden=false;document.documentElement.style.overflow='hidden';root.querySelector('.rp-body').scrollTop=0}
 function close(){if(!root||root.hidden)return;save();root.hidden=true;document.documentElement.style.overflow='';paintBar()}
-var BI='<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="4" width="14" height="17" rx="2"/><path d="M9 4V3h6v1M9 11h6M9 15h4"/></svg>';
-function paintBar(){if(!bar)return;var d=hasDraft(),o=load();bar.classList.toggle('draft',d);
- bar.querySelector('small').textContent=d?'Продолжить заполнение'+(o&&o.t?' · сохранено в '+o.t:''):'Открыть форму и скопировать';
- bar.setAttribute('aria-label','Итоговый отчёт'+(d?', черновик, продолжить':', открыть'))}
+function paintBar(){var b=document.getElementById('rrep');if(!b)return;var d=hasDraft();
+ b.textContent=d?'Продолжить итоговый отчёт · черновик':'Открыть итоговый отчёт';
+ b.classList.toggle('draft',d)}
 function init(){
- if(document.getElementById('rpbar-w')||!document.body)return;
- var w=document.createElement('div');w.className='rpbar-w';w.id='rpbar-w';
- w.innerHTML='<button type="button" class="rpbar">'+BI+'<span class="t"><b>Итоговый отчёт</b><small></small></span><span class="tag">Черновик</span><svg class="go" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></button>';
- document.body.insertBefore(w,document.body.firstChild);bar=w.firstChild;bar.onclick=open;paintBar();
+ paintBar();
  addEventListener('pageshow',paintBar);addEventListener('storage',paintBar);
  document.addEventListener('visibilitychange',function(){if(document.hidden)save();else paintBar()});
  addEventListener('pagehide',save);

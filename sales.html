@@ -347,6 +347,7 @@ html.nofx details::details-content{transition:none!important}
 <details class="sec" open><summary><h2>Отчёты в течение дня</h2></summary><div class="secb">
 <div class="status" id="rstat">…</div>
 <div class="slots" id="rslots"></div>
+<button type="button" class="rbtn" id="rrep" onclick="window.etibReport&&etibReport.open()">Открыть итоговый отчёт</button>
 <p class="mute">Отчёт отправляем каждые 2 часа. Итоговый отчёт в 22:00, когда закроется ТЦ.</p>
 </div></details>
 <details class="sec"><summary><h2>Раздача блоттеров</h2></summary><div class="secb">
@@ -362,8 +363,7 @@ html.nofx details::details-content{transition:none!important}
 <details><summary>Если работает промоутер</summary><div>Выдай ему заготовленные блоттеры, контролируй, подсказывай. Напоминай про улыбку, вовремя подвози новые блоттеры, особенно в час-пик. Перед сменой озвучь: маркировку, название аромата, категорию и скрипт.</div></details>
 
 </div></details><details class="sec"><summary><h2>Калькулятор отчёта</h2></summary><div class="secb">
-<p>Заполняй отчёт на удобном экране. Черновик сохраняется сам: можно выйти с сайта и вернуться, плашка «Итоговый отчёт» сверху откроет его снова.</p>
-<button class="btn" type="button" onclick="window.etibReport&&etibReport.open()">Открыть итоговый отчёт</button>
+<p>Форма отчёта открывается кнопкой «Открыть итоговый отчёт» в блоке «Отчёты в течение дня». Черновик сохраняется сам: можно выйти с сайта и вернуться, кнопка в этом блоке будет подписана «черновик» и откроет его снова.</p>
 <p class="mute">Остаток = утро + наличные − расходы − промо − инкассация. Б/н = факт − наличные.</p>
 
 </div></details><details class="sec"><summary><h2>Что значит в отчёте</h2></summary><div class="secb">
@@ -568,9 +568,10 @@ function remind(){
   let nx=RT.findIndex(r=>r[0]>m);
   $('rslots').innerHTML=RT.map((r,i)=>`<div class="slot${i===nx?' now':''}${nx<0||i<nx?' done':''}">${r[1].length>5?r[1]:r[1]+' отчёт'}</div>`).join('');
   const st=$('rstat');
-  if(nx<0){st.className='status';st.textContent='Все отчёты на сегодня отправлены';return}
+  const rb=$('rrep');
+  if(nx<0){st.className='status';rb.className='rbtn done';st.textContent='Все отчёты на сегодня отправлены';return}
   const diff=RT[nx][0]-m,fin=nx===RT.length-1;
-  st.className='status'+(diff<=15?' soon':'');
+  st.className='status'+(diff<=15?' soon':'');rb.className='rbtn'+(diff<=15?' soon':'');
   st.textContent=(fin?'Итоговый отчёт в 22:00':(nx===0?'Первый отчёт в ':'Следующий отчёт в ')+RT[nx][1])+' · через '+left(diff);
 }
 remind();setInterval(remind,30000);
