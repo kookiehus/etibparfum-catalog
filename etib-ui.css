@@ -573,3 +573,8 @@ details:not(.sec){box-shadow:none}
 details::details-content{transition:none!important}
 details>div{animation:none!important}
 section[id^="p-"]:not([hidden]){animation:fadein .18s ease backwards}
+
+/* ---- одинаково на Android и iPhone ---- */
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%;color-scheme:light;font-synthesis:none}
+body{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
+details:not(.sec),.say,.status,.res,.slot,table,.btn.sec{background-color:color-mix(in srgb,var(--paper,#fff) 78%,transparent)}
