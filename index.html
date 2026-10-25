@@ -212,6 +212,11 @@ a.hero{background:color-mix(in srgb,var(--accent) 97%,transparent);box-shadow:0 
 /* две независимые колонки: раскрытая плитка тянет вниз только свою колонку, плитки соседней колонки поднимаются вплотную друг к другу */
 .lc{display:flex;flex-direction:column;gap:12px;min-width:0}
 .lc>.tile{flex:none}
+/* ---- кнопка каталога: стекло того же цвета, что «Открыть итоговый отчёт»; размытие и лёгкая подложка не дают тексту под ней мешать чтению ---- */
+a.hero,a.hero:hover{background:linear-gradient(var(--g-bg),var(--g-bg)),color-mix(in srgb,var(--paper) 30%,transparent);color:var(--ink);border:1px solid var(--g-bd);box-shadow:var(--g-sh);-webkit-backdrop-filter:blur(24px) saturate(160%);backdrop-filter:blur(24px) saturate(160%)}
+.hero p{color:var(--mute);opacity:1}
+a.hero .go,.hero:hover .go{background:var(--accent);color:var(--paper)}
+.hero .subs a{color:var(--ink);background:rgba(255,255,255,.4);border-color:var(--g-bd)}
 /* шапка: заголовок занимает свободное место, значок админа всегда у правого края */
 body header.hd{width:100%;align-self:stretch;padding-right:4px}
 header.hd>div:not(.mark){flex:1}
