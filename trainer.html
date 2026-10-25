@@ -211,6 +211,15 @@ button.modebtn:focus-visible,.opt:focus-visible,.nav:focus-visible{outline:3px s
 .wrongl b{color:var(--accent)}
 .snd{display:flex;flex-direction:column;gap:10px;text-align:center}.snd input{font:inherit;font-size:16px;padding:12px 14px;border-radius:var(--r-m,18px);border:1px solid var(--line,rgba(0,0,0,.15));background:transparent;color:inherit;text-align:center}.snd .go2{margin:0}
 .reset{all:unset;cursor:pointer;display:block;margin:22px auto 0;font-size:12.5px;color:var(--mute);text-decoration:underline;padding:6px}
+/* ---- карточки как в шпаргалке: оттенок и рамка цвета раздела ---- */
+.panel,.modebtn:not(.main),.opt:not(.ok):not(.bad),body .rings .ring{background:linear-gradient(120deg,color-mix(in srgb,var(--k) 14%,var(--g-bg)),color-mix(in srgb,var(--k) 3%,var(--g-bg)));border:1px solid color-mix(in srgb,var(--k) 40%,transparent);border-radius:var(--r-m,18px);box-shadow:var(--g-sh);-webkit-backdrop-filter:var(--g-bl);backdrop-filter:var(--g-bl)}
+.rings .ring{border-radius:var(--r-m,18px)}
+body .rings .ring[aria-pressed=true]{border-color:var(--k);border-width:1.5px}
+.modebtn.main{border-color:color-mix(in srgb,var(--k) 55%,transparent)}
+body[data-sec=train] .panel{border-color:color-mix(in srgb,var(--k) 40%,transparent)}
+.opt:not(.ok):not(.bad){border-width:1px}
+.seg{border:1px solid color-mix(in srgb,var(--k) 40%,transparent)}
+.pf li{border-radius:var(--r-s,12px)}
 </style>
 <link rel="stylesheet" href="etib-ui.css"><script src="etib-ui.js" defer></script>
 </head>
