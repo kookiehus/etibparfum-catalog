@@ -241,3 +241,20 @@ details.sec>summary h2{padding-right:96px}
 .rbtn.done{color:var(--mute)}
 .rbtn:active{transform:scale(.97)}
 .rbtn:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+
+/* ===== единый стеклянный стиль на всех страницах ===== */
+/* размытие чуть сильнее: текст под плашками не мешает чтению */
+:root{--g-bl:blur(24px) saturate(160%);--g-scrim:color-mix(in srgb,var(--paper) 30%,transparent)}
+
+/* шпаргалка: разделы — стеклянные плашки цвета раздела (как плитки на главной) */
+details.sec,section.ks details.sec{margin:12px 0 0;border:1px solid color-mix(in srgb,var(--k,var(--accent)) 50%,var(--g-bd));border-radius:var(--r-m,18px);background:linear-gradient(135deg,color-mix(in srgb,var(--k,var(--accent)) 22%,transparent),color-mix(in srgb,var(--k,var(--accent)) 8%,transparent)),linear-gradient(var(--g-bg),var(--g-bg)),var(--g-scrim);box-shadow:var(--g-sh),0 8px 22px color-mix(in srgb,var(--k,var(--accent)) 12%,transparent);-webkit-backdrop-filter:var(--g-bl);backdrop-filter:var(--g-bl)}
+details.sec>summary{padding:10px 8px 10px 16px;border-bottom:0;gap:4px;min-height:56px}
+details.sec>summary h2{flex:1;min-width:0;padding-right:0;font-size:19px;line-height:1.2}
+/* звезда и «+» стоят в одном ряду после заголовка и не заходят на текст */
+details.sec>summary .fav{position:static;top:auto;right:auto;transform:none;flex:none;margin:0}
+details.sec>summary::after{flex:none;margin-left:0;width:28px;text-align:center}
+details.sec>.secb{padding:0 16px 14px}
+details.sec[open]>summary{padding-bottom:4px}
+
+/* тренажёр: кайма карточек в цвете раздела */
+body[data-sec=train] .panel{border-color:color-mix(in srgb,var(--k-train) 38%,var(--g-bd))}
