@@ -263,3 +263,43 @@ body[data-sec=train] .panel{border-color:color-mix(in srgb,var(--k-train) 38%,va
 .hd .adm-ico .ei,.adm-ico .ei{display:block;letter-spacing:0;text-transform:none;font-style:normal;font-family:"Apple Color Emoji","Segoe UI Emoji","Noto Color Emoji",sans-serif;filter:drop-shadow(0 1px 1.5px rgba(70,35,45,.25))}
 .hd .adm-ico .ei{font-size:26px}
 @media (max-width:380px){.hd .adm-ico .ei{font-size:23px}}
+
+/* ===== стекло v2: рецепт плашки «Каталог ароматов» на всех страницах, кроме главной =====
+   заливка = белое стекло + лёгкая подложка цвета страницы, размытие 24px;
+   у плашек раздела/категории сверху тонировка их цветом (как плитки на главной) */
+:root{--g-fill:linear-gradient(var(--g-bg),var(--g-bg)),var(--g-scrim);--g-fill-d:linear-gradient(var(--g-bg),var(--g-bg)),color-mix(in srgb,var(--paper) 68%,transparent)}
+
+/* --- шпаргалка (sales.html) --- */
+details:not(.sec),.say,.quote,.res,.slot,table,.btn.sec,.seg,.status:not(.on):not(.soon):not(.rest):not(.off){background:var(--g-fill);-webkit-backdrop-filter:var(--g-bl);backdrop-filter:var(--g-bl)}
+section.ks details:not(.sec){background:linear-gradient(135deg,color-mix(in srgb,var(--k) 20%,transparent),color-mix(in srgb,var(--k) 7%,transparent)),var(--g-fill);border-color:color-mix(in srgb,var(--k) 45%,var(--g-bd));box-shadow:var(--g-sh),0 6px 18px color-mix(in srgb,var(--k) 10%,transparent)}
+body:not(:has(.srch)) :is(input:not([type=checkbox]):not([type=radio]):not([type=range]):not([type=file]),select,textarea){background:var(--g-fill)}
+.favs a{background:linear-gradient(135deg,color-mix(in srgb,var(--k,var(--accent)) 20%,transparent),color-mix(in srgb,var(--k,var(--accent)) 7%,transparent)),var(--g-fill);-webkit-backdrop-filter:var(--g-bl);backdrop-filter:var(--g-bl)}
+.favtog,.rp-btns button,.rp-x,.rbtn,.rp-f input{background:var(--g-fill)}
+.rbtn.fin{background:var(--hl)}.rbtn.fin.soon{background:var(--warnbg)}.rp-btns .main{background:var(--ink)}
+.rp-bar{background:var(--g-fill-d)}
+
+/* --- тренажёр (trainer.html): плашки цвета раздела --- */
+.panel,.modebtn:not(.main),.opt:not(.ok):not(.bad),body .rings .ring{background:linear-gradient(135deg,color-mix(in srgb,var(--k) 22%,transparent),color-mix(in srgb,var(--k) 8%,transparent)),var(--g-fill);border-color:color-mix(in srgb,var(--k) 50%,var(--g-bd));box-shadow:var(--g-sh),0 8px 22px color-mix(in srgb,var(--k) 12%,transparent);-webkit-backdrop-filter:var(--g-bl);backdrop-filter:var(--g-bl)}
+.opt.ok{background:linear-gradient(color-mix(in srgb,#2f7d54 26%,transparent),color-mix(in srgb,#2f7d54 26%,transparent)),var(--g-fill)}
+.opt.bad{background:linear-gradient(color-mix(in srgb,#b3382c 22%,transparent),color-mix(in srgb,#b3382c 22%,transparent)),var(--g-fill)}
+.go2.sec,.wr input,.snd input{background:var(--g-fill)}
+
+/* --- каталог (catalog.html): карточки цвета категории --- */
+.card{background:var(--g-fill);border:1px solid color-mix(in srgb,var(--cc,var(--line)) 50%,var(--g-bd));box-shadow:var(--g-sh),0 8px 22px color-mix(in srgb,var(--cc,transparent) 12%,transparent)}
+.card .body{background:linear-gradient(135deg,color-mix(in srgb,var(--cc,transparent) 20%,transparent),color-mix(in srgb,var(--cc,transparent) 7%,transparent))}
+#q,.fbtn{background:var(--g-fill);border:1px solid var(--g-bd);box-shadow:var(--g-sh);-webkit-backdrop-filter:var(--g-bl);backdrop-filter:var(--g-bl)}
+#q:focus-visible{border-color:var(--accent)}
+.gtog,.gbox,.chip,.x{background:var(--g-fill);border-color:var(--g-bd)}
+
+/* --- всплывающие окна и шторки (каталог, «Как продать», фильтры): как окно Добби --- */
+dialog{background:var(--g-fill-d);border:1px solid var(--g-bd);box-shadow:0 16px 48px rgba(40,20,28,.28),var(--g-sh);-webkit-backdrop-filter:blur(28px) saturate(160%);backdrop-filter:blur(28px) saturate(160%)}
+dialog::backdrop{background:rgba(20,10,14,.24);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
+dialog input,dialog select,dialog textarea{background:var(--g-fill)}
+.sh-foot{background:transparent;border-top-color:var(--g-bd)}
+.tp-head{background:linear-gradient(135deg,color-mix(in srgb,var(--cc,var(--accent)) 30%,transparent),color-mix(in srgb,var(--cc,var(--accent)) 12%,transparent));color:var(--ink);border-bottom:1px solid color-mix(in srgb,var(--cc,var(--accent)) 40%,var(--g-bd))}
+.tp-head .x{background:var(--g-fill);color:var(--ink)}
+.tp-body{background:transparent}
+.tp-body .say{background:var(--g-fill)}
+/* просмотр картинки на весь экран остаётся тёмным */
+#zoom{box-shadow:none;-webkit-backdrop-filter:none;backdrop-filter:none}#zoom::backdrop{-webkit-backdrop-filter:none;backdrop-filter:none}
+@supports not ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))){dialog{background:var(--paper)}}
