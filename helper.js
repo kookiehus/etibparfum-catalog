@@ -134,7 +134,7 @@ function reply(q,more){if(!D)return{html:'Секундочку, Добби до�
  return{html:nr('fb',FB),chips:defc()}}
 root.ETIBHelper={reply:reply,answer:qzAnswer,load:function(d){D=d}};
 if(typeof document==='undefined')return;
-var css='#hb{position:fixed;right:14px;bottom:calc(92px + env(safe-area-inset-bottom));width:56px;height:56px;border-radius:50%;border:0;background:var(--accent,#7a2e3f);color:#fff;font-size:26px;box-shadow:0 4px 14px #0005;z-index:50}'+
+var css='#hb{position:fixed;right:14px;bottom:calc(210px + env(safe-area-inset-bottom));width:60px;height:60px;border-radius:50%;border:3px solid var(--accent,#7a2e3f);background:#fff;color:#000;font-size:28px;box-shadow:0 4px 14px #0006;z-index:50}'+
 '#hp{position:fixed;left:0;right:0;bottom:0;height:78dvh;max-width:560px;margin:auto;background:var(--bg,#f7f2f1);color:var(--fg,#1d1517);border-radius:18px 18px 0 0;box-shadow:0 -4px 24px #0006;z-index:60;display:flex;flex-direction:column;font:16px/1.4 system-ui,sans-serif}'+
 '@media(prefers-color-scheme:dark){#hp{--bg:#1a1216;--fg:#f3eaec;--cd:#2a1e24}}#hp{--cd:#fff}@media(prefers-color-scheme:dark){#hp{--cd:#2a1e24}}'+
 '#hp[hidden]{display:none}#hh{display:flex;justify-content:space-between;align-items:center;padding:12px 16px}#hx{min-width:48px;min-height:48px;border:0;background:none;font-size:22px;color:inherit}'+
