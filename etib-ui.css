@@ -454,13 +454,13 @@ button.modebtn.main{background:linear-gradient(112deg,rgba(255,255,255,.30) 0%,r
 button.modebtn.main p,button.modebtn.main h4{color:inherit}
 
 
-/* ===== v6 · фон «шалфей + песок», акценты — розово-бордовый, разделы различаются ТОНОМ одного цвета =====
-   Акцент: бордово-розовый (hue ≈ 8°), дополнение к шалфейно-зелёному фону.
-   Разделы и уровни сложности: тот же оттенок, от светлого (#a85869-ряд) к тёмному бордо; чередуются, чтобы соседние плитки не сливались.
+/* ===== v6 · фон «шалфей + песок», акценты — розово-бордовый, разделы различаются ТОНОМ одного цвета (пыльная роза) =====
+   Акцент: пыльно-розовый (hue ≈ 350°, низкая насыщенность), дополнение к шалфейно-зелёному фону.
+   Разделы и уровни сложности: тот же оттенок, от светлого к тёмному пыльно-розовому; чередуются, чтобы соседние плитки не сливались.
    Каталог: женский розовый, мужской синий, унисекс зелёный, премиум золотой — цвета как были. Блики и зерно не используются. */
-:root{--paper:#f6f2f1;--card:#fbf8f4;--tint:#eae2d3;--line:#d3c9b6;--ink:#2a2725;--mute:#5a524c;--accent:#853246;--hl:#f8dde1;--gold:#ae8f60;--star:#86683a;
---k-sell:#62192d;--k-price:#a45566;--k-rep:#7b3042;--k-memo:#974a5a;--k-train:#6e2538;--k-fact:#873c4d;--k-facts:#873c4d;
---d-e:#a45566;--d-h:#84394a;--d-x:#62192d;
+:root{--paper:#f6f2f1;--card:#fbf8f4;--tint:#eae2d3;--line:#d3c9b6;--ink:#2a2725;--mute:#5a524c;--accent:#9a5666;--hl:#f4e3e6;--gold:#ae8f60;--star:#86683a;
+--k-sell:#8a4c5a;--k-price:#b07682;--k-rep:#9c5b69;--k-memo:#a96a78;--k-train:#945363;--k-fact:#a06070;--k-facts:#a06070;
+--d-e:#b07682;--d-h:#9c5b69;--d-x:#8a4c5a;
 --c-f:#9b4a63;--c-m:#46658f;--c-u:#3f6e5a;--c-p:#876428;
 --g-bg:rgba(251,248,243,.52);--g-bg-hi:rgba(250,247,242,.88);--g-bd:rgba(255,255,255,.60);--g-bl:blur(18px) saturate(115%);
 --g-sh:0 12px 28px rgba(58,52,40,.10),0 2px 5px rgba(58,52,40,.05);
@@ -468,12 +468,12 @@ button.modebtn.main p,button.modebtn.main h4{color:inherit}
 --page-bg:linear-gradient(160deg,#f6f2f1 0%,#efe9de 50%,#eae2d3 100%) fixed no-repeat;
 --pe-1:rgba(145,166,115,.42);--pe-2:rgba(174,143,96,.34);--pe-3:rgba(120,140,128,.30);--pe-sweep:transparent;
 --gl-bg1:rgba(251,248,243,.72);--gl-bg2:rgba(251,248,243,.38);--gl-bd:rgba(255,255,255,.70);--gl-sh:0 6px 16px rgba(58,52,40,.13),0 1px 3px rgba(58,52,40,.08);--gl-in:0 0 0 0 transparent;--gi-ao:0;--gi-bo:0;
---cta:#853246;
+--cta:#a05d6b;
 --g-fill:var(--g-sheen),linear-gradient(var(--g-bg),var(--g-bg)),var(--g-scrim);
 --g-fill-d:var(--g-sheen),linear-gradient(var(--g-bg),var(--g-bg)),color-mix(in srgb,var(--paper) 62%,transparent)}
-@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--paper:#211e1c;--card:#292624;--tint:#2f2b28;--line:#443e39;--ink:#eae2d3;--mute:#b3aa9f;--accent:#eca9b4;--hl:#3f252a;--gold:#ae8f60;--star:#d2b684;
---k-sell:#c1858f;--k-price:#fdbdc8;--k-rep:#d597a2;--k-memo:#f0b0bb;--k-train:#c88b95;--k-fact:#e2a4ae;--k-facts:#e2a4ae;
---d-e:#f7b7c1;--d-h:#dc9ea8;--d-x:#c1858f;
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--paper:#211e1c;--card:#292624;--tint:#2f2b28;--line:#443e39;--ink:#eae2d3;--mute:#b3aa9f;--accent:#d9a0ab;--hl:#3a2b2e;--gold:#ae8f60;--star:#d2b684;
+--k-sell:#c08c96;--k-price:#e3b5be;--k-rep:#cf9ca6;--k-memo:#e0aab4;--k-train:#c6929c;--k-fact:#d6a2ac;--k-facts:#d6a2ac;
+--d-e:#e8bcc4;--d-h:#d3a0aa;--d-x:#c08c96;
 --c-f:#c99aa9;--c-m:#9bb2cf;--c-u:#8fb5a3;--c-p:#c4ad7d;
 --g-bg:rgba(255,255,255,.055);--g-bg-hi:rgba(38,35,32,.88);--g-bd:rgba(255,255,255,.10);--g-bl:blur(18px) saturate(115%);
 --g-sh:0 12px 28px rgba(0,0,0,.38),0 2px 5px rgba(0,0,0,.24);
@@ -481,10 +481,10 @@ button.modebtn.main p,button.modebtn.main h4{color:inherit}
 --page-bg:linear-gradient(160deg,#25211f 0%,#1c1917 55%,#151311 100%) fixed no-repeat;
 --pe-1:rgba(58,74,63,.75);--pe-2:rgba(174,143,96,.20);--pe-3:rgba(70,95,85,.45);--pe-sweep:transparent;
 --gl-bg1:rgba(255,255,255,.12);--gl-bg2:rgba(255,255,255,.04);--gl-bd:rgba(255,255,255,.14);--gl-sh:0 6px 16px rgba(0,0,0,.42);--gl-in:0 0 0 0 transparent;--gi-ao:0;--gi-bo:0;
---cta:#984357}}
-:root[data-theme="dark"]{--paper:#211e1c;--card:#292624;--tint:#2f2b28;--line:#443e39;--ink:#eae2d3;--mute:#b3aa9f;--accent:#eca9b4;--hl:#3f252a;--gold:#ae8f60;--star:#d2b684;
---k-sell:#c1858f;--k-price:#fdbdc8;--k-rep:#d597a2;--k-memo:#f0b0bb;--k-train:#c88b95;--k-fact:#e2a4ae;--k-facts:#e2a4ae;
---d-e:#f7b7c1;--d-h:#dc9ea8;--d-x:#c1858f;
+--cta:#a45d6a}}
+:root[data-theme="dark"]{--paper:#211e1c;--card:#292624;--tint:#2f2b28;--line:#443e39;--ink:#eae2d3;--mute:#b3aa9f;--accent:#d9a0ab;--hl:#3a2b2e;--gold:#ae8f60;--star:#d2b684;
+--k-sell:#c08c96;--k-price:#e3b5be;--k-rep:#cf9ca6;--k-memo:#e0aab4;--k-train:#c6929c;--k-fact:#d6a2ac;--k-facts:#d6a2ac;
+--d-e:#e8bcc4;--d-h:#d3a0aa;--d-x:#c08c96;
 --c-f:#c99aa9;--c-m:#9bb2cf;--c-u:#8fb5a3;--c-p:#c4ad7d;
 --g-bg:rgba(255,255,255,.055);--g-bg-hi:rgba(38,35,32,.88);--g-bd:rgba(255,255,255,.10);--g-bl:blur(18px) saturate(115%);
 --g-sh:0 12px 28px rgba(0,0,0,.38),0 2px 5px rgba(0,0,0,.24);
@@ -492,7 +492,7 @@ button.modebtn.main p,button.modebtn.main h4{color:inherit}
 --page-bg:linear-gradient(160deg,#25211f 0%,#1c1917 55%,#151311 100%) fixed no-repeat;
 --pe-1:rgba(58,74,63,.75);--pe-2:rgba(174,143,96,.20);--pe-3:rgba(70,95,85,.45);--pe-sweep:transparent;
 --gl-bg1:rgba(255,255,255,.12);--gl-bg2:rgba(255,255,255,.04);--gl-bd:rgba(255,255,255,.14);--gl-sh:0 6px 16px rgba(0,0,0,.42);--gl-in:0 0 0 0 transparent;--gi-ao:0;--gi-bo:0;
---cta:#984357}
+--cta:#a45d6a}
 
 body::after{display:none!important;animation:none!important}
 
@@ -504,8 +504,25 @@ a.hero .go,.hero:hover .go{background:var(--cta);color:#f6f2f1}
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .pill{background:rgba(255,255,255,.12);border-color:rgba(255,255,255,.16);box-shadow:0 2px 6px rgba(0,0,0,.5)}}
 :root[data-theme="dark"] .pill{background:rgba(255,255,255,.12);border-color:rgba(255,255,255,.16);box-shadow:0 2px 6px rgba(0,0,0,.5)}
 
-/* «Быстрый тест»: насыщенное бордово-розовое стекло */
-button.modebtn.main{background:linear-gradient(135deg,color-mix(in srgb,var(--cta) 94%,transparent),color-mix(in srgb,var(--cta) 84%,#d98a9a 16%));color:#f6f2f1;border:1px solid color-mix(in srgb,var(--cta) 55%,#ecd0d5);box-shadow:0 12px 26px color-mix(in srgb,var(--cta) 32%,transparent),0 2px 4px rgba(40,20,25,.18);-webkit-backdrop-filter:var(--g-bl);backdrop-filter:var(--g-bl)}
+/* «Быстрый тест»: пыльно-розовое стекло */
+button.modebtn.main{background:linear-gradient(135deg,color-mix(in srgb,var(--cta) 94%,transparent),color-mix(in srgb,var(--cta) 90%,#d9a3ae 10%));color:#f6f2f1;border:1px solid color-mix(in srgb,var(--cta) 55%,#ecd8db);box-shadow:0 12px 26px color-mix(in srgb,var(--cta) 32%,transparent),0 2px 4px rgba(40,20,25,.18);-webkit-backdrop-filter:var(--g-bl);backdrop-filter:var(--g-bl)}
 button.modebtn.main h4,button.modebtn.main p,button.modebtn.main svg{color:#f6f2f1}
 button.modebtn.main p{opacity:.92}
 button.modebtn.main:active{filter:brightness(.95)}
+
+/* ===== v7 · плашки нейтральные: без цветной каёмки и без розового налива, цвет раздела — только в иконке/полоске ===== */
+:root{--bd-n:rgba(90,80,74,.18)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bd-n:rgba(255,255,255,.12)}}
+:root[data-theme="dark"]{--bd-n:rgba(255,255,255,.12)}
+
+details.sec,section.ks details.sec,
+section.ks details:not(.sec),
+.panel,.modebtn:not(.main),.opt:not(.ok):not(.bad),body .rings .ring,
+.rp-g,
+.row[class*="k-"],.row[class*="k-"]:hover{
+  background:var(--g-fill);border-color:var(--bd-n);box-shadow:var(--g-sh)}
+.card{border-color:var(--bd-n)}
+body[data-sec=train] .panel{border-color:var(--bd-n)}
+.rp-f input{border-color:var(--bd-n)}
+.tp-head{background:none;border-bottom-color:var(--bd-n)}
+.favs a{border-color:var(--bd-n);border-left:5px solid var(--k,var(--accent))}
