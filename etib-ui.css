@@ -454,60 +454,59 @@ button.modebtn.main{background:linear-gradient(112deg,rgba(255,255,255,.30) 0%,r
 button.modebtn.main p,button.modebtn.main h4{color:inherit}
 
 
-/* ===== v2 · МАТОВЫЕ ПОВЕРХНОСТИ И НОВАЯ ПАЛИТРА (последний блок, перекрывает всё выше) =====
-   Светлая: льняная бумага, бордо + латунь, пары-дополнения: бордо↔сосна, латунь↔индиго, слива↔олива.
-   Тёмная: чернильная слива, приглушённые пигменты тех же оттенков, золото вместо белого блеска.
-   Блики убраны: нет диагональных полос, белых кромок inset, бегущей световой полосы на фоне. */
-:root{--paper:#f4eee5;--card:#fbf7f0;--tint:#ece3d6;--line:#ddd0bf;--ink:#231a1c;--mute:#5b4e4f;--accent:#7a2b40;--hl:#ecd6d6;--gold:#94702f;--star:#9a6a1c;
---k-sell:#8a2f47;--k-price:#8a6420;--k-rep:#2f6150;--k-memo:#34527c;--k-train:#5d3f7e;--k-fact:#5a6a2a;--k-facts:#5a6a2a;
---c-f:#8a2f47;--c-m:#34527c;--c-u:#2f6150;--c-p:#8a6420;
---g-bg:rgba(251,247,240,.88);--g-bd:rgba(148,112,47,.24);--g-bl:blur(10px);
---g-sh:0 1px 2px rgba(60,40,30,.07),0 8px 20px rgba(60,40,30,.07);
+/* ===== v3 · СТЕКЛО БЕЗ БЛИКОВ, ДЫМЧАТАЯ ПАЛИТРА (последний блок, перекрывает всё выше) =====
+   Стекло осталось: прозрачность и размытие. Убраны диагональные блики, белые inset-кромки и бегущая полоса света.
+   Цвета разделов выровнены по яркости и насыщенности (одинаковая «плотность»), оттенки: роза, янтарь, шалфей, сланец, лаванда, олива.
+   Светлая: фарфор с розовой, шалфейной и шампанской дымкой. Тёмная: чернильный фон с теми же тремя дымками. */
+:root{--paper:#f1eeea;--card:#faf8f5;--tint:#e9e4de;--line:#dcd4cb;--ink:#1f181e;--mute:#5b5258;--accent:#893d5e;--hl:#efdde3;--gold:#8a6d3b;--star:#a06f14;
+--k-sell:#854857;--k-price:#79561e;--k-rep:#236d51;--k-memo:#35618c;--k-train:#695184;--k-fact:#576429;--k-facts:#576429;
+--c-f:#854857;--c-m:#35618c;--c-u:#236d51;--c-p:#79561e;
+--g-bg:rgba(255,255,255,.50);--g-bg-hi:rgba(255,255,255,.88);--g-bd:rgba(255,255,255,.62);--g-bl:blur(20px) saturate(125%);
+--g-sh:0 8px 24px rgba(70,50,70,.09),0 0 0 1px rgba(90,70,90,.06);
 --g-sheen:linear-gradient(transparent,transparent);
---page-bg:radial-gradient(120% 50% at 8% -8%,rgba(255,250,242,.9) 0%,rgba(255,250,242,0) 60%) fixed no-repeat,linear-gradient(180deg,#f6f0e7 0%,#ebe2d4 100%) fixed no-repeat;
---pe-1:rgba(122,43,64,.05);--pe-2:rgba(148,112,47,.05);--pe-3:rgba(47,97,80,.04);--pe-sweep:transparent;
---gl-bg1:#fbf7f0;--gl-bg2:#f1e9dc;--gl-bd:rgba(148,112,47,.28);--gl-sh:0 1px 2px rgba(60,40,30,.10),0 5px 12px rgba(60,40,30,.09);--gl-in:0 0 0 0 transparent;--gi-ao:0;--gi-bo:0;
---cta-a:#8a2f47;--cta-b:#6a2336;--cta-ink:#fff6ee;--cta-bd:#b08a4a;--cta-sh:0 8px 18px rgba(106,35,54,.28),0 1px 2px rgba(60,20,30,.25);
+--page-bg:linear-gradient(180deg,#f6f3ef 0%,#ebe6e0 100%) fixed no-repeat;
+--pe-1:rgba(236,190,202,.55);--pe-2:rgba(188,214,200,.50);--pe-3:rgba(238,222,186,.50);--pe-sweep:transparent;
+--gl-bg1:rgba(255,255,255,.62);--gl-bg2:rgba(255,255,255,.28);--gl-bd:rgba(255,255,255,.70);--gl-sh:0 6px 16px rgba(70,50,70,.12),0 0 0 1px rgba(90,70,90,.06);--gl-in:0 0 0 0 transparent;--gi-ao:0;--gi-bo:0;
+--cta:#964267;
 --g-fill:var(--g-sheen),linear-gradient(var(--g-bg),var(--g-bg)),var(--g-scrim);
 --g-fill-d:var(--g-sheen),linear-gradient(var(--g-bg),var(--g-bg)),color-mix(in srgb,var(--paper) 62%,transparent)}
-@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--paper:#141016;--card:#1d171e;--tint:#221b24;--line:#342a36;--ink:#ece4d8;--mute:#b7aaa9;--accent:#d899aa;--hl:#3a2230;--gold:#c2a36a;--star:#e0bb72;
---k-sell:#d88ea2;--k-price:#cfae6c;--k-rep:#86bda6;--k-memo:#94acd0;--k-train:#b9a0d6;--k-fact:#b8c47e;--k-facts:#b8c47e;
---c-f:#d88ea2;--c-m:#94acd0;--c-u:#86bda6;--c-p:#cfae6c;
---g-bg:rgba(34,26,37,.80);--g-bd:rgba(214,184,140,.16);--g-bl:blur(10px);
---g-sh:0 1px 2px rgba(0,0,0,.45),0 10px 24px rgba(0,0,0,.30);
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--paper:#15141a;--card:#1d1b23;--tint:#221f2a;--line:#332f3b;--ink:#ebe7e1;--mute:#b3abb4;--accent:#e496b4;--hl:#3a2a38;--gold:#c4a672;--star:#dab787;
+--k-sell:#e8aab7;--k-price:#dab787;--k-rep:#90ceb2;--k-memo:#99c2ed;--k-train:#c9b2e5;--k-fact:#b7c58f;--k-facts:#b7c58f;
+--c-f:#e8aab7;--c-m:#99c2ed;--c-u:#90ceb2;--c-p:#dab787;
+--g-bg:rgba(255,255,255,.06);--g-bg-hi:rgba(30,27,38,.86);--g-bd:rgba(255,255,255,.12);--g-bl:blur(20px) saturate(125%);
+--g-sh:0 8px 24px rgba(0,0,0,.36),0 0 0 1px rgba(255,255,255,.03);
 --g-sheen:linear-gradient(transparent,transparent);
---page-bg:radial-gradient(120% 50% at 50% -10%,rgba(122,43,64,.20) 0%,rgba(122,43,64,0) 62%) fixed no-repeat,linear-gradient(180deg,#151118 0%,#0d0a0f 100%) fixed no-repeat;
---pe-1:rgba(122,43,64,.10);--pe-2:rgba(194,163,106,.04);--pe-3:rgba(70,60,110,.07);--pe-sweep:transparent;
---gl-bg1:#2a2029;--gl-bg2:#211922;--gl-bd:rgba(214,184,140,.22);--gl-sh:0 1px 2px rgba(0,0,0,.5),0 6px 14px rgba(0,0,0,.35);--gl-in:0 0 0 0 transparent;--gi-ao:0;--gi-bo:0;
---cta-a:#9b3452;--cta-b:#76263d;--cta-ink:#fff4ee;--cta-bd:rgba(214,184,140,.55);--cta-sh:0 8px 20px rgba(0,0,0,.45),0 1px 2px rgba(0,0,0,.5)}}
-:root[data-theme="dark"]{--paper:#141016;--card:#1d171e;--tint:#221b24;--line:#342a36;--ink:#ece4d8;--mute:#b7aaa9;--accent:#d899aa;--hl:#3a2230;--gold:#c2a36a;--star:#e0bb72;
---k-sell:#d88ea2;--k-price:#cfae6c;--k-rep:#86bda6;--k-memo:#94acd0;--k-train:#b9a0d6;--k-fact:#b8c47e;--k-facts:#b8c47e;
---c-f:#d88ea2;--c-m:#94acd0;--c-u:#86bda6;--c-p:#cfae6c;
---g-bg:rgba(34,26,37,.80);--g-bd:rgba(214,184,140,.16);--g-bl:blur(10px);
---g-sh:0 1px 2px rgba(0,0,0,.45),0 10px 24px rgba(0,0,0,.30);
+--page-bg:linear-gradient(180deg,#17151d 0%,#0e0d12 100%) fixed no-repeat;
+--pe-1:rgba(150,70,110,.24);--pe-2:rgba(60,120,120,.17);--pe-3:rgba(170,130,70,.10);--pe-sweep:transparent;
+--gl-bg1:rgba(255,255,255,.14);--gl-bg2:rgba(255,255,255,.05);--gl-bd:rgba(255,255,255,.18);--gl-sh:0 6px 16px rgba(0,0,0,.40);--gl-in:0 0 0 0 transparent;--gi-ao:0;--gi-bo:0;
+--cta:#a04a6e}}
+:root[data-theme="dark"]{--paper:#15141a;--card:#1d1b23;--tint:#221f2a;--line:#332f3b;--ink:#ebe7e1;--mute:#b3abb4;--accent:#e496b4;--hl:#3a2a38;--gold:#c4a672;--star:#dab787;
+--k-sell:#e8aab7;--k-price:#dab787;--k-rep:#90ceb2;--k-memo:#99c2ed;--k-train:#c9b2e5;--k-fact:#b7c58f;--k-facts:#b7c58f;
+--c-f:#e8aab7;--c-m:#99c2ed;--c-u:#90ceb2;--c-p:#dab787;
+--g-bg:rgba(255,255,255,.06);--g-bg-hi:rgba(30,27,38,.86);--g-bd:rgba(255,255,255,.12);--g-bl:blur(20px) saturate(125%);
+--g-sh:0 8px 24px rgba(0,0,0,.36),0 0 0 1px rgba(255,255,255,.03);
 --g-sheen:linear-gradient(transparent,transparent);
---page-bg:radial-gradient(120% 50% at 50% -10%,rgba(122,43,64,.20) 0%,rgba(122,43,64,0) 62%) fixed no-repeat,linear-gradient(180deg,#151118 0%,#0d0a0f 100%) fixed no-repeat;
---pe-1:rgba(122,43,64,.10);--pe-2:rgba(194,163,106,.04);--pe-3:rgba(70,60,110,.07);--pe-sweep:transparent;
---gl-bg1:#2a2029;--gl-bg2:#211922;--gl-bd:rgba(214,184,140,.22);--gl-sh:0 1px 2px rgba(0,0,0,.5),0 6px 14px rgba(0,0,0,.35);--gl-in:0 0 0 0 transparent;--gi-ao:0;--gi-bo:0;
---cta-a:#9b3452;--cta-b:#76263d;--cta-ink:#fff4ee;--cta-bd:rgba(214,184,140,.55);--cta-sh:0 8px 20px rgba(0,0,0,.45),0 1px 2px rgba(0,0,0,.5)}
+--page-bg:linear-gradient(180deg,#17151d 0%,#0e0d12 100%) fixed no-repeat;
+--pe-1:rgba(150,70,110,.24);--pe-2:rgba(60,120,120,.17);--pe-3:rgba(170,130,70,.10);--pe-sweep:transparent;
+--gl-bg1:rgba(255,255,255,.14);--gl-bg2:rgba(255,255,255,.05);--gl-bd:rgba(255,255,255,.18);--gl-sh:0 6px 16px rgba(0,0,0,.40);--gl-in:0 0 0 0 transparent;--gi-ao:0;--gi-bo:0;
+--cta:#a04a6e}
 
-/* фон: без бегущей световой полосы и без движения */
+/* фон: три мягкие дымки, неподвижные; бегущей световой полосы нет */
 body::after{display:none!important;animation:none!important}
 body::before{animation:none!important;will-change:auto}
 
-/* плашки-вкладки и круглые кнопки в шапке: без белой кромки */
-.pill{background:var(--card);border:1px solid var(--g-bd);box-shadow:0 1px 3px rgba(60,40,30,.14)}
-@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .pill{background:rgba(255,255,255,.09);border-color:rgba(214,184,140,.22);box-shadow:0 1px 3px rgba(0,0,0,.5)}}
-:root[data-theme="dark"] .pill{background:rgba(255,255,255,.09);border-color:rgba(214,184,140,.22);box-shadow:0 1px 3px rgba(0,0,0,.5)}
-.hd .adm-ico,.adm-ico{background:linear-gradient(var(--gl-bg1),var(--gl-bg2));-webkit-backdrop-filter:none;backdrop-filter:none}
+/* большие плашки поверх контента («Каталог ароматов»): стекло плотнее, чтобы текст под ней не просвечивал */
+a.hero,a.hero:hover{background:linear-gradient(var(--g-bg-hi),var(--g-bg-hi));color:var(--ink);border:1px solid var(--g-bd);box-shadow:var(--g-sh);-webkit-backdrop-filter:var(--g-bl);backdrop-filter:var(--g-bl)}
+a.hero .go,.hero:hover .go{background:var(--cta);color:#fff}
+.hero .subs a{color:var(--ink);background:rgba(255,255,255,.28);border-color:var(--g-bd)}
 
-/* главные кнопки («Быстрый тест» и «Тренажёр» на главной): плотный насыщенный цвет, золотой кант, без бликов и прозрачности */
-button.modebtn.main,a.hero{background:linear-gradient(180deg,var(--cta-a),var(--cta-b));color:var(--cta-ink);border:1px solid var(--cta-bd);box-shadow:var(--cta-sh);-webkit-backdrop-filter:none;backdrop-filter:none}
-button.modebtn.main h4,button.modebtn.main p,button.modebtn.main svg,a.hero,a.hero h2,a.hero p{color:var(--cta-ink)}
-button.modebtn.main h4{font-weight:800}
+/* вкладки-«пилюли» и круглые кнопки шапки: стекло без белой кромки */
+.pill{background:rgba(255,255,255,.72);border:1px solid rgba(255,255,255,.8);box-shadow:0 2px 8px rgba(70,50,70,.14)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .pill{background:rgba(255,255,255,.12);border-color:rgba(255,255,255,.2);box-shadow:0 2px 8px rgba(0,0,0,.45)}}
+:root[data-theme="dark"] .pill{background:rgba(255,255,255,.12);border-color:rgba(255,255,255,.2);box-shadow:0 2px 8px rgba(0,0,0,.45)}
+
+/* «Быстрый тест»: цветное стекло, насыщенное, но не глухое; белый текст */
+button.modebtn.main{background:color-mix(in srgb,var(--cta) 90%,transparent);color:#fff;border:1px solid color-mix(in srgb,var(--cta) 55%,#fff);box-shadow:0 8px 22px color-mix(in srgb,var(--cta) 32%,transparent);-webkit-backdrop-filter:var(--g-bl);backdrop-filter:var(--g-bl)}
+button.modebtn.main h4,button.modebtn.main p,button.modebtn.main svg{color:#fff}
 button.modebtn.main p{opacity:.92}
-@media (hover:hover){button.modebtn.main:hover{filter:brightness(1.07)}}
-button.modebtn.main:active{filter:brightness(.94)}
-/* вложенное в главную кнопку: светлые чипы и пилюля на плотном фоне */
-.hero .subs a{color:var(--cta-ink);background:rgba(255,255,255,.12);border-color:rgba(255,255,255,.30)}
-a.hero .go,.hero:hover .go{background:var(--cta-ink);color:var(--cta-b)}
+button.modebtn.main:active{filter:brightness(.95)}
