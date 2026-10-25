@@ -38,7 +38,7 @@ function findS(p){dfs();var r=[];D.sections.forEach(function(x){var sc=3*hit(x.n
 function notes(a,hit){return['top','heart','base'].map(function(k){return a[k].map(function(n){var h=toks(n).some(function(t){return hit[t]});return h?'<b>'+esc(n)+'</b>':esc(n)}).join(', ')}).filter(Boolean).join(' · ')}
 function cut(s,n){s=String(s);if(s.length<=n)return s;var c=s.slice(0,n),i=Math.max(c.lastIndexOf('. '),c.lastIndexOf(', '));return(i>40?c.slice(0,i):c.replace(/\s\S*$/,''))+'…'}
 function card(r,full){var a=r.a;return'<div class="hc"><b>'+esc(a.n)+' · '+esc(a.nm)+'</b><small>'+esc(a.c.toLowerCase())+' · '+esc(a.t.toLowerCase())+'</small>'+(a.how?'<p>'+esc(full?a.how:cut(a.how,130))+'</p>':'')+'<p class="nt">Ноты: '+notes(a,r.hit||{})+'</p>'+
- (full&&a.whom?'<p>'+esc(a.whom)+'</p>':'')+(full&&a.pitch?'<p class="ps">💬 '+esc(a.pitch)+'</p>':'')+'<a href="catalog.html?q='+encodeURIComponent(a.n)+'">Открыть в каталоге</a></div>'}
+ (full&&a.whom?'<p>'+esc(a.whom)+'</p>':'')+(full&&a.pitch?'<p class="ps">💬 '+esc(a.pitch)+'</p>':'')+'<a href="catalog.html#n='+encodeURIComponent(a.n)+'">Открыть в каталоге</a></div>'}
 function secs(r){return r.slice(0,3).map(function(x){var s=x.s,t=s.x?cut(s.x.replace(s.n,'').trim(),150):'';return'<a class="hs" href="'+esc(s.u||'sales.html')+'"><b>'+esc(s.n)+'</b>'+(t?'<small>'+esc(t)+'</small>':'')+'</a>'}).join('')}
 var LAST={},CTX={a:null},QZ=null;
 function nr(k,a){var i,l=LAST[k];do{i=Math.floor(Math.random()*a.length)}while(a.length>1&&i===l);LAST[k]=i;return a[i]}
@@ -94,9 +94,9 @@ function qzEnd(){var q=QZ;QZ=null;if(!q||!q.total)return{html:'Хорошо, о�
  return{html:'Итог: '+q.ok+' из '+q.total+' '+(pc>=.8?'🏆 Вы эксперт!':pc>=.5?'👍 Хороший результат!':'🌱 Неплохое начало!')+' Для полной тренировки откройте <a href="trainer.html">Тренажёр</a>.',chips:defc()}}
 function sub(q,n,p,A){var w={pitch:/продат|сказат|фраз|питч|крючок|предложит|презентов/,sim:/похож|аналог|замен|вместо/,notes:/ноты|состав|пирамид|из чего/,whom:/кому|для кого|кто носит|подойд[её]т/,read:/как (читается|произносится|говорить|произнести)|произнош/},k=null;for(var z in w)if(w[z].test(n)){k=z;break}if(!k)return null;
  var a=null,m=String(q).toUpperCase().match(/(?:^|\s)([A-ZА-Я])\s?-?(\d{1,2})(?=\s|$|[?!.,])/);if(m){var c=(LK[m[1]]||m[1])+m[2];a=D.aromas.filter(function(x){return x.n===c})[0]}
- if(!a&&A.length&&A[0].m>0&&A[0].sc>=3)a=A[0].a;if(!a&&(CTX.a&&(!A.length||n.split(' ').length<=4)))a=CTX.a;if(!a)return null;CTX.a=a;var h='<b>'+esc(a.n)+' · '+esc(a.nm)+'</b>',L='<p class="ot"><a href="catalog.html?q='+encodeURIComponent(a.n)+'">Открыть в каталоге</a></p>';
+ if(!a&&A.length&&A[0].m>0&&A[0].sc>=3)a=A[0].a;if(!a&&(CTX.a&&(!A.length||n.split(' ').length<=4)))a=CTX.a;if(!a)return null;CTX.a=a;var h='<b>'+esc(a.n)+' · '+esc(a.nm)+'</b>',L='<p class="ot"><a href="catalog.html#n='+encodeURIComponent(a.n)+'">Открыть в каталоге</a></p>';
  if(k==='pitch')return{html:nr('pi',['Держите! 💬','Вот что сказать клиенту 😊','Готовая подача 👇'])+'<div class="hc">'+h+(a.pitch?'<p class="ps">💬 '+esc(a.pitch)+'</p>':'')+(a.hooks.length?'<p>Крючки: '+a.hooks.slice(0,3).map(esc).join(' · ')+'</p>':'')+'</div>'+L};
- if(k==='sim')return{html:a.sim.length?'Похожие на <b>'+esc(a.n)+'</b> 👇<div class="hc">'+a.sim.map(function(x){var c=x.split(' ')[0];return'<p><a href="catalog.html?q='+encodeURIComponent(c)+'">'+esc(x)+'</a></p>'}).join('')+'</div>':'Для '+h+' список похожих пока не заполнен 🙈'};
+ if(k==='sim')return{html:a.sim.length?'Похожие на <b>'+esc(a.n)+'</b> 👇<div class="hc">'+a.sim.map(function(x){var c=x.split(' ')[0];return'<p><a href="catalog.html#n='+encodeURIComponent(c)+'">'+esc(x)+'</a></p>'}).join('')+'</div>':'Для '+h+' список похожих пока не заполнен 🙈'};
  if(k==='notes')return{html:'Пирамида '+h+' 👃<div class="hc"><p>Верх: '+esc(a.top.join(', '))+'</p><p>Сердце: '+esc(a.heart.join(', '))+'</p><p>База: '+esc(a.base.join(', '))+'</p></div>'+L};
  if(k==='whom')return{html:a.whom?h+': '+esc(a.whom)+L:'Про '+h+' описание «для кого» пока не заполнено 🙈'};
  return{html:a.ru?'Читается так: <b>«'+esc(a.ru)+'»</b> 🗣️':'Подсказка по произношению для '+h+' пока не добавлена 🙈'}}
@@ -135,8 +135,9 @@ function reply(q,more){if(!D)return{html:'Секундочку, Добби до�
 root.ETIBHelper={reply:reply,answer:qzAnswer,load:function(d){D=d}};
 if(typeof document==='undefined')return;
 var css=[
-'#hb{position:fixed;right:14px;bottom:calc(214px + env(safe-area-inset-bottom));width:66px;height:54px;padding:0;border-radius:18px 18px 6px 18px;border:3px solid var(--accent,#7a2e3f);background:#fff;color:#000;font-size:26px;line-height:1;box-shadow:0 4px 14px #0006;z-index:50;cursor:pointer;transform-origin:100% 100%;transition:transform .25s cubic-bezier(.2,.8,.2,1),opacity .2s}#hb::before{content:"";position:absolute;right:-3px;bottom:-14px;width:16px;height:14px;background:var(--accent,#7a2e3f);clip-path:polygon(0 0,100% 0,100% 100%)}#hb::after{content:"";position:absolute;right:0;bottom:-9px;width:10px;height:10px;background:#fff;clip-path:polygon(0 0,100% 0,100% 100%)}',
-'#hb:active{transform:scale(.92)}#hb.off{transform:scale(.4);opacity:0;visibility:hidden;pointer-events:none;transition:transform .25s,opacity .2s,visibility 0s .25s}',
+'#hb{position:fixed;right:14px;bottom:calc(16px + env(safe-area-inset-bottom));width:66px;height:54px;padding:0;border-radius:18px 18px 6px 18px;border:3px solid var(--accent,#7a2e3f);background:#fff;color:#000;font-size:26px;line-height:1;box-shadow:0 4px 14px #0006;z-index:50;cursor:pointer;transform-origin:100% 100%;transition:transform .25s cubic-bezier(.2,.8,.2,1),opacity .2s}#hb::before{content:"";position:absolute;right:-3px;bottom:-14px;width:16px;height:14px;background:var(--accent,#7a2e3f);clip-path:polygon(0 0,100% 0,100% 100%)}#hb::after{content:"";position:absolute;right:0;bottom:-9px;width:10px;height:10px;background:#fff;clip-path:polygon(0 0,100% 0,100% 100%)}',
+'@keyframes hbin{0%{opacity:0;transform:translateY(34px) scale(.3)}55%{opacity:1;transform:translateY(-7px) scale(1.1)}78%{transform:translateY(2px) scale(.96)}100%{opacity:1;transform:none}}#hb{animation:hbin .8s cubic-bezier(.2,.8,.2,1) 1.2s backwards}',
+'#hb.hi{bottom:calc(214px + env(safe-area-inset-bottom))}\n#hb:active{transform:scale(.92)}#hb.off{transform:scale(.4);opacity:0;visibility:hidden;pointer-events:none;transition:transform .25s,opacity .2s,visibility 0s .25s}',
 '#hv{position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(20,10,14,.4);opacity:0;visibility:hidden;transition:opacity .3s,visibility 0s .3s;z-index:55}#hv.on{opacity:1;visibility:visible;transition:opacity .3s}',
 '#hp{position:fixed;left:0;right:0;bottom:0;height:80dvh;max-width:560px;margin:auto;background:var(--bg,#f7f2f1);color:var(--fg,#1d1517);border-radius:20px 20px 0 0;box-shadow:0 -6px 30px #0006;z-index:60;display:flex;flex-direction:column;font:16px/1.4 system-ui,sans-serif;',
 ' transform:translateY(48px) scale(.97);transform-origin:50% 100%;opacity:0;visibility:hidden;pointer-events:none;transition:transform .38s cubic-bezier(.2,.9,.25,1),opacity .25s,visibility 0s .38s}',
@@ -148,10 +149,10 @@ var css=[
 '#hl{flex:1;overflow:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch;padding:4px 12px 8px;display:flex;flex-direction:column;gap:8px}',
 '.hm{max-width:92%;padding:10px 12px;border-radius:14px 14px 14px 4px;background:var(--cd);animation:hin .3s cubic-bezier(.2,.8,.2,1) both}.hu{align-self:flex-end;background:var(--accent,#7a2e3f);color:#fff;border-radius:14px 14px 4px 14px}',
 '@keyframes hin{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}',
-'.hd{display:flex;gap:5px;padding:13px 14px;width:max-content}.hd i{width:7px;height:7px;border-radius:50%;background:currentColor;opacity:.3;animation:hdt 1s infinite}.hd i:nth-child(2){animation-delay:.15s}.hd i:nth-child(3){animation-delay:.3s}@keyframes hdt{0%,60%,100%{opacity:.3;transform:none}30%{opacity:.9;transform:translateY(-3px)}}',
+'.hdt{display:flex;gap:5px;padding:13px 14px;width:max-content}.hdt i{width:7px;height:7px;border-radius:50%;background:currentColor;opacity:.3;animation:hdt 1s infinite}.hdt i:nth-child(2){animation-delay:.15s}.hdt i:nth-child(3){animation-delay:.3s}@keyframes hdt{0%,60%,100%{opacity:.3;transform:none}30%{opacity:.9;transform:translateY(-3px)}}',
 '.hcr{display:inline-block;width:2px;height:1em;margin-left:1px;vertical-align:-.12em;background:var(--accent,#7a2e3f);animation:hbl .7s steps(1) infinite}@keyframes hbl{50%{opacity:0}}',
-'.hc{margin:8px 0;padding:8px 10px;border-radius:10px;border:1px solid #8884;border-left:3px solid var(--accent,#7a2e3f)}.hc small{display:block;opacity:.7}.hc p{margin:4px 0}.nt{font-size:14px}.ps{font-style:italic}.hc a,.hs{color:var(--accent,#7a2e3f);font-weight:600}',
-'.hs{display:block;margin:6px 0;padding:8px 10px;border:1px solid #8884;border-radius:10px;text-decoration:none}.hs small{display:block;color:var(--fg,#1d1517);opacity:.7;font-weight:400}.ot{margin:6px 0 0;opacity:.8}',
+'.hc{margin:8px 0;padding:8px 10px;border-radius:10px;border:1px solid #8884;border-left:3px solid var(--accent,#7a2e3f)}.hc small{display:block;opacity:.7}.hc p{margin:4px 0}#hp .nt{font-size:14px}#hp .ps{font-style:italic}.hc a,.hs{color:var(--accent,#7a2e3f);font-weight:600}',
+'.hs{display:block;margin:6px 0;padding:8px 10px;border:1px solid #8884;border-radius:10px;text-decoration:none}.hs small{display:block;color:var(--fg,#1d1517);opacity:.7;font-weight:400}#hp .ot{margin:6px 0 0;opacity:.8}',
 '.hg{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));grid-auto-rows:72px;gap:8px;margin:2px 0 6px;transition:opacity .2s,transform .2s}.hg.go{opacity:0;transform:scale(.96)}',
 '.hg button{display:flex;flex-direction:column;align-items:flex-start;justify-content:space-between;padding:10px 12px;border-radius:14px;border:1px solid #8886;background:var(--cd);color:inherit;font:600 14px/1.2 system-ui,sans-serif;text-align:left;cursor:pointer;animation:hin .35s cubic-bezier(.2,.8,.2,1) both;animation-delay:calc(var(--i) * 60ms);transition:transform .15s}',
 '.hg button span{font-size:22px;line-height:1}.hg button:active,#hq button:active,.hqo:active{transform:scale(.97)}',
@@ -164,7 +165,7 @@ var css=[
 '@media(prefers-reduced-motion:reduce){#hp,#hp.on,#hv,#hv.on,#hb,#hb.off,.hm,.hg,.hg button,#hq button{transition:none!important;animation:none!important}.hcr{animation:none}}'
 ].join('');
 var s=document.createElement('style');s.textContent=css;document.head.appendChild(s);
-var b=document.createElement('button');b.id='hb';b.setAttribute('aria-label','Добби');b.textContent='🧦';
+var b=document.createElement('button');b.id='hb';if(document.querySelector('a.hero'))b.classList.add('hi');b.setAttribute('aria-label','Добби');b.textContent='🧦';
 var V=document.createElement('div');V.id='hv';
 var p=document.createElement('div');p.id='hp';p.setAttribute('role','dialog');p.setAttribute('aria-label','Добби · помощник ETIB');p.setAttribute('inert','');
 p.innerHTML='<div id="hh"><div class="hav">🧦</div><div class="ht"><b>Добби</b><small>помощник ETIB</small></div><button id="hx" aria-label="Закрыть">✕</button></div><div id="hl"></div><div id="hq" class="off"></div><form id="hf"><input id="hi" placeholder="Например: что-то с ванилью" autocomplete="off" enterkeyhint="send"><button id="hs" aria-label="Отправить">▶</button></form>';
@@ -175,7 +176,7 @@ function still(){try{return matchMedia('(prefers-reduced-motion:reduce)').matche
 function near(){return L.scrollHeight-L.scrollTop-L.clientHeight<70}
 function stick(){L.scrollTop=L.scrollHeight}
 function add(h,u){var d=document.createElement('div');d.className='hm'+(u?' hu':'');if(u)d.textContent=h;else d.innerHTML=h;L.appendChild(d);stick();return d}
-function dots(){var d=document.createElement('div');d.className='hm hd';d.innerHTML='<i></i><i></i><i></i>';L.appendChild(d);stick();return d}
+function dots(){var d=document.createElement('div');d.className='hm hdt';d.innerHTML='<i></i><i></i><i></i>';L.appendChild(d);stick();return d}
 function group(m){var o=m.querySelectorAll('.hqo');if(!o.length)return;var g=document.createElement('div');g.className='hqg';o[0].parentNode.insertBefore(g,o[0]);[].forEach.call(o,function(x){g.appendChild(x)})}
 /* печать текста: структура (карточки, ссылки) сохраняется, буквы появляются по очереди; тап по сообщению дописывает его сразу */
 function type(d,done){
@@ -212,6 +213,7 @@ function say(t,more){if(fin)fin();dropTiles();add(t,1);I.value='';last=t;chips([
  if(D)go();else{var ind=dots();fetch('helper-data.json').then(function(r){return r.json()}).then(function(d){D=d;if(ind.parentNode)ind.parentNode.removeChild(ind);go()}).catch(function(){if(ind.parentNode)ind.parentNode.removeChild(ind);bot('Не удалось загрузить данные. Проверьте интернет и обновите страницу 🙏',defc(),0)})}}
 p.querySelector('#hf').onsubmit=function(e){e.preventDefault();var v=I.value.trim();if(v)say(v)};
 L.addEventListener('click',function(e){var b=e.target.closest('.hqo');if(!b||b.disabled)return;var r=ETIBHelper.answer(+b.dataset.i);[].forEach.call(b.parentNode.querySelectorAll('.hqo'),function(x,i){x.disabled=true;if(i===r.right)x.classList.add('ok');else if(x===b)x.classList.add('no')});bot(r.html,r.chips||defc(),300)});
+p.addEventListener('click',function(e){var a=e.target.closest&&e.target.closest('a[href]');if(a)setTimeout(close,0)});
 Q.addEventListener('click',function(e){if(e.target.textContent==='Показать ещё'){e.stopImmediatePropagation();Q.innerHTML='';var r=reply(last,true);bot(r.html,defc())}},true);
 var fine=false;try{fine=matchMedia('(pointer:fine)').matches}catch(e){}
 function open(){p.removeAttribute('inert');p.classList.add('on');V.classList.add('on');b.classList.add('off');

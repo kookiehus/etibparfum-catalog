@@ -35,9 +35,10 @@ if(grid&&document.body.dataset.sec==='cat'){
   var f={id:'a:'+no,n:no+' '+nm};c.dataset.fid=f.id;
   (c.querySelector('.art')||c).appendChild(mk(f,function(added){sync();toast(added?'Добавлено в закладки: '+no+'. Весь список: кнопка «Закладки» вверху':'Убрано из закладок: '+no)}))});sync()};
  new MutationObserver(inject).observe(grid,{childList:true});inject();
- var m=/^#n=(.+)$/.exec(location.hash);
- if(m){if(q){q.value=decodeURIComponent(m[1]);q.dispatchEvent(new Event('input',{bubbles:true}))}history.replaceState(null,'',location.pathname+location.search)}
- else if(location.hash==='#fav'){history.replaceState(null,'',location.pathname+location.search);setOn(true)}
+ var byHash=function(){var m=/^#n=(.+)$/.exec(location.hash);
+  if(m){var v='';try{v=decodeURIComponent(m[1])}catch(e){v=m[1]}if(on){on=false;sync()}if(q){q.value=v;q.dispatchEvent(new Event('input',{bubbles:true}))}history.replaceState(null,'',location.pathname+location.search);window.scrollTo(0,0)}
+  else if(location.hash==='#fav'){history.replaceState(null,'',location.pathname+location.search);setOn(true)}};
+ byHash();addEventListener('hashchange',byHash);
 }
 
 /* шпаргалка: звёздочка у блоков, закладки видны на главной */
