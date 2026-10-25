@@ -568,7 +568,7 @@ function remind(){
   const rb=$('rrep');
   if(nx<0){st.className='status';rb.className='rbtn done';st.textContent='Все отчёты на сегодня отправлены';return}
   const diff=RT[nx][0]-m,fin=nx===RT.length-1;
-  st.className='status'+(diff<=15?' soon':'');rb.className='rbtn'+(diff<=15?' soon':'');
+  st.className='status'+(diff<=15?' soon':'');rb.className='rbtn'+(fin?' fin'+(diff<=15?' soon':''):'');
   st.textContent=(fin?'Итоговый отчёт в 22:00':(nx===0?'Первый отчёт в ':'Следующий отчёт в ')+RT[nx][1])+' · через '+left(diff);
 }
 remind();setInterval(remind,30000);
