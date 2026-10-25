@@ -362,27 +362,8 @@ html.nofx details::details-content{transition:none!important}
 <details><summary>Если работает промоутер</summary><div>Выдай ему заготовленные блоттеры, контролируй, подсказывай. Напоминай про улыбку, вовремя подвози новые блоттеры, особенно в час-пик. Перед сменой озвучь: маркировку, название аромата, категорию и скрипт.</div></details>
 
 </div></details><details class="sec"><summary><h2>Калькулятор отчёта</h2></summary><div class="secb">
-<div class="grid">
-<div><label for="r-t">Торговая точка</label><input id="r-t" type="text" autocomplete="off"></div>
-<div><label for="r-name">ФИО</label><input id="r-name" type="text" autocomplete="name"></div>
-<div><label for="r-m">Остаток на утро</label><input id="r-m" type="number" step="any" inputmode="decimal"></div>
-<div><label for="r-pl">План</label><input id="r-pl" type="number" step="any" inputmode="decimal"></div>
-<div><label for="r-f">Факт (в Эвоторе «Продажи»)</label><input id="r-f" type="number" step="any" inputmode="decimal"></div>
-<div><label for="r-n">Нал (в Эвоторе «В кассе»)</label><input id="r-n" type="number" step="any" inputmode="decimal"></div>
-<div><label for="r-e">Расход (чек приложить)</label><input id="r-e" type="number" step="any" inputmode="decimal"></div>
-<div style="grid-column:1/-1"><label for="r-ed">Описание расхода (на что потрачено)</label><input id="r-ed" type="text" autocomplete="off" placeholder="150 салфетка, 150 бумага"></div>
-<div><label for="r-bs">БС</label><input id="r-bs" type="number" step="any" inputmode="decimal"></div>
-<div><label for="r-rk">Р/К</label><input id="r-rk" type="number" step="any" inputmode="decimal"></div>
-<div><label for="r-p">Промо</label><input id="r-p" type="number" step="any" inputmode="decimal"></div>
-<div><label for="r-d">Доп (например: 3 авто 1 диф)</label><input id="r-d" type="text" autocomplete="off" placeholder="3 авто 1 диф"></div>
-<div><label for="r-i">Инкассация</label><input id="r-i" type="number" step="any" inputmode="decimal"></div>
-<div style="grid-column:1/-1"><label for="r-id">Описание инкассации</label><input id="r-id" type="text" autocomplete="off" placeholder="Например: забрал руководитель"></div>
-<div><label for="r-a">Акция</label><input id="r-a" type="number" step="any" inputmode="decimal"></div>
-<div><label for="r-o">Одиночные</label><input id="r-o" type="number" step="any" inputmode="decimal"></div>
-<div><label for="r-c">Консультации</label><input id="r-c" type="number" step="any" inputmode="decimal"></div>
-</div>
-<div class="res" id="rres"></div>
-<button class="btn" id="rcopy" type="button">Скопировать отчёт</button>
+<p>Заполняй отчёт на удобном экране. Черновик сохраняется сам: можно выйти с сайта и вернуться, плашка «Итоговый отчёт» сверху откроет его снова.</p>
+<button class="btn" type="button" onclick="window.etibReport&&etibReport.open()">Открыть итоговый отчёт</button>
 <p class="mute">Остаток = утро + наличные − расходы − промо − инкассация. Б/н = факт − наличные.</p>
 
 </div></details><details class="sec"><summary><h2>Что значит в отчёте</h2></summary><div class="secb">
@@ -616,33 +597,6 @@ function blotStatus(){
   st.innerHTML=`<span class="dot"></span><div class="stx"><b>${give?'Раздаём блоттеры':'Перерыв'}</b><small>${tx}</small></div><span class="tm">${String(Math.floor(left/60)).padStart(2,'0')}:${String(left%60).padStart(2,'0')}</span><i class="prog" style="--p:${p.toFixed(1)}%"></i>`}
 blot();setInterval(blot,30000);setInterval(blotStatus,1000);
 
-/* ---- отчёт ---- */
-const num=id=>parseFloat($(id).value)||0;
-const IDS=['r-t','r-name','r-m','r-pl','r-f','r-n','r-e','r-ed','r-bs','r-rk','r-p','r-d','r-i','r-id','r-a','r-o','r-c'];
-function reportText(){
-  const m=num('r-m'),f=num('r-f'),n=num('r-n'),e=num('r-e'),p=num('r-p'),i=num('r-i');
-  const ost=m+n-e-p-i,bn=f-n;
-  const q=id=>String(num(id)),s=id=>$(id).value.trim();
-  const D=id=>{const x=s(id);return x?' ('+x+')':''};
-  const L=[new Date().toLocaleDateString('ru-RU'),'',
-   'Торговая точка: '+s('r-t'),'ФИО: '+s('r-name'),
-   'Остаток на утро: '+rub(m),'План: '+rub(num('r-pl')),'Факт: '+rub(f),'Нал: '+rub(n),'Б/н: '+rub(bn),
-   'Расход: '+rub(e)+D('r-ed'),'БС: '+q('r-bs'),'Р/К: '+q('r-rk'),'Промо: '+rub(p),
-   'Доп: '+s('r-d'),'Инкассация: '+rub(i)+D('r-id'),'Акция: '+q('r-a'),
-   'Одиночные: '+q('r-o'),'Консультации: '+q('r-c'),'Остаток на вечер: '+rub(ost)];
-  return{text:L.join('\n'),ost,bn};
-}
-function wn(){const w=[];if(num('r-e')>0&&!$('r-ed').value.trim())w.push('Укажи, на что расход.');if(num('r-i')>0&&!$('r-id').value.trim())w.push('Добавь описание инкассации.');return w.length?`<p class="mute">${w.join(' ')}</p>`:''}
-function rep(){
-  const r=reportText();
-  $('rres').innerHTML=`<div class="row"><span>Остаток на вечер</span><b class="big">${rub(r.ost)}</b></div>
-  <div class="row"><span>Б/н</span><b>${rub(r.bn)}</b></div>${wn()}`}
-IDS.forEach(id=>$(id).addEventListener('input',rep));rep();
-$('rcopy').onclick=async()=>{
-  const t=reportText().text;
-  try{await navigator.clipboard.writeText(t);$('rcopy').textContent='Скопировано'}
-  catch(e){const a=document.createElement('textarea');a.value=t;document.body.appendChild(a);a.select();try{document.execCommand('copy');$('rcopy').textContent='Скопировано'}catch(_){$('rcopy').textContent='Не удалось скопировать'}a.remove()}
-  setTimeout(()=>$('rcopy').textContent='Скопировать отчёт',1800)};
 </script>
 <script>try{if(sessionStorage.getItem('etib-adm')==='1')document.getElementById('adm').hidden=true}catch(e){}</script>
 <script>

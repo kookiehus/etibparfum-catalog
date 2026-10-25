@@ -62,3 +62,87 @@ if(list&&sf){
  box.addEventListener('click',function(e){var b=e.target.closest('.rm');if(!b)return;put(all().filter(function(f){return f.id!==b.dataset.id}));draw()});
  draw();addEventListener('pageshow',draw);addEventListener('storage',draw)}
 })();
+
+/* итоговый отчёт: плашка сверху, экран заполнения, черновик */
+(function(){
+var DK='etib-report-draft',KEEP=['r-t','r-name'];
+var F=[
+ ['h','Кто заполняет'],
+ ['r-t','Торговая точка','t'],['r-name','ФИО','t','name'],
+ ['h','Касса'],
+ ['r-m','Остаток на утро'],['r-pl','План'],
+ ['r-f','Факт','n','','Эвотор: «Продажи»'],['r-n','Нал','n','','Эвотор: «В кассе»'],
+ ['r-e','Расход','n','','Чек приложить'],['r-p','Промо'],
+ ['r-ed','На что расход','t','','','w2','150 салфетка, 150 бумага'],
+ ['r-i','Инкассация','n','','','w2'],
+ ['r-id','Описание инкассации','t','','','w2','Например: забрал руководитель'],
+ ['h','Продажи'],
+ ['r-bs','БС'],['r-rk','Р/К'],['r-a','Акция'],['r-o','Одиночные'],['r-c','Консультации'],['r-d','Доп','t','','','','3 авто 1 диф']
+];
+var IDS=F.filter(function(f){return f[0]!=='h'}).map(function(f){return f[0]});
+function today(){return new Date().toLocaleDateString('ru-RU')}
+function hm(){return new Date().toLocaleTimeString('ru-RU',{hour:'2-digit',minute:'2-digit'})}
+function rub(n){n=Math.round((n+Number.EPSILON)*100)/100;return n.toLocaleString('ru-RU',{minimumFractionDigits:Number.isInteger(n)?0:2,maximumFractionDigits:2})+' ₽'}
+function load(){try{return JSON.parse(localStorage.getItem(DK))||null}catch(e){return null}}
+function cur(){var o=load();if(!o)return{};if(o.d===today())return o;var k={};KEEP.forEach(function(id){if(o[id])k[id]=o[id]});return k}
+function hasDraft(){var o=load();return!!o&&o.d===today()&&IDS.some(function(id){return KEEP.indexOf(id)<0&&String(o[id]||'').trim()!==''})}
+var root=null,inp={},bar=null;
+function val(id){return inp[id]?inp[id].value:(cur()[id]||'')}
+function num(id){return parseFloat(val(id))||0}
+function save(){if(!root)return;var o={d:today(),t:hm()};IDS.forEach(function(id){o[id]=inp[id].value});
+ try{localStorage.setItem(DK,JSON.stringify(o));note('Черновик сохранён · '+o.t)}catch(e){note('Черновик не сохраняется: память браузера недоступна')}paintBar()}
+function note(t){if(root)root.querySelector('.rp-top small').textContent=t}
+function text(){var m=num('r-m'),f=num('r-f'),n=num('r-n'),e=num('r-e'),p=num('r-p'),i=num('r-i');
+ var ost=m+n-e-p-i,bn=f-n,s=function(id){return val(id).trim()},q=function(id){return String(num(id))},D=function(id){var x=s(id);return x?' ('+x+')':''};
+ var L=[new Date().toLocaleDateString('ru-RU'),'','Торговая точка: '+s('r-t'),'ФИО: '+s('r-name'),
+  'Остаток на утро: '+rub(m),'План: '+rub(num('r-pl')),'Факт: '+rub(f),'Нал: '+rub(n),'Б/н: '+rub(bn),
+  'Расход: '+rub(e)+D('r-ed'),'БС: '+q('r-bs'),'Р/К: '+q('r-rk'),'Промо: '+rub(p),
+  'Доп: '+s('r-d'),'Инкассация: '+rub(i)+D('r-id'),'Акция: '+q('r-a'),
+  'Одиночные: '+q('r-o'),'Консультации: '+q('r-c'),'Остаток на вечер: '+rub(ost)];
+ return{text:L.join('\n'),ost:ost,bn:bn}}
+function calc(){var r=text(),w=[];
+ var e=inp['r-e'].value!==''&&num('r-e')>0||inp['r-ed'].value.trim()!=='',i=num('r-i')>0||inp['r-id'].value.trim()!=='';
+ inp['r-ed'].parentNode.hidden=!e;inp['r-id'].parentNode.hidden=!i;
+ if(num('r-e')>0&&!inp['r-ed'].value.trim())w.push('Укажи, на что расход.');
+ if(num('r-i')>0&&!inp['r-id'].value.trim())w.push('Добавь описание инкассации.');
+ root.querySelector('.rp-sum').innerHTML='<span>Остаток на вечер <b class="big">'+rub(r.ost)+'</b></span><span>Б/н <b>'+rub(r.bn)+'</b></span>';
+ root.querySelector('.rp-warn').textContent=w.join(' ')}
+var SVG_X='<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>';
+function build(){
+ root=document.createElement('div');root.className='rp';root.hidden=true;root.setAttribute('role','dialog');root.setAttribute('aria-modal','true');root.setAttribute('aria-label','Итоговый отчёт');
+ var h='<div class="rp-top"><div><h2>Итоговый отчёт</h2><small></small></div><button type="button" class="rp-x" aria-label="Свернуть отчёт (черновик сохранится)">'+SVG_X+'</button></div><div class="rp-body"><div class="rp-in">',open=false;
+ F.forEach(function(f){
+  if(f[0]==='h'){if(open)h+='</div>';h+='<div class="rp-h">'+f[1]+'</div><div class="rp-g">';open=true;return}
+  var id=f[0],t=f[2]==='t';
+  h+='<div class="rp-f'+(f[5]?' '+f[5]:'')+'"><label for="rp-'+id+'">'+f[1]+'</label><input id="rp-'+id+'" data-k="'+id+'" '+(t?'type="text" autocomplete="'+(f[3]||'off')+'"':'type="number" step="any" inputmode="decimal"')+' enterkeyhint="next"'+(f[6]?' placeholder="'+f[6]+'"':'')+'>'+(f[4]?'<small>'+f[4]+'</small>':'')+'</div>'});
+ h+='</div></div></div><div class="rp-bar"><div class="rp-sum"></div><div class="rp-warn"></div><div class="rp-btns"><button type="button" class="main" data-a="copy">Скопировать отчёт</button><button type="button" data-a="clr">Очистить</button></div></div>';
+ root.innerHTML=h;document.body.appendChild(root);
+ IDS.forEach(function(id){var el=root.querySelector('[data-k="'+id+'"]');inp[id]=el;el.addEventListener('input',function(){calc();save()})});
+ root.querySelector('.rp-x').onclick=close;
+ root.querySelector('[data-a="copy"]').onclick=function(ev){var b=ev.currentTarget,t=text().text;
+  function ok(m){b.textContent=m;setTimeout(function(){b.textContent='Скопировать отчёт'},1800)}
+  if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(t).then(function(){ok('Скопировано')},fb)}else fb();
+  function fb(){var a=document.createElement('textarea');a.value=t;a.style.cssText='position:fixed;opacity:0';document.body.appendChild(a);a.select();var r=false;try{r=document.execCommand('copy')}catch(e){}a.remove();ok(r?'Скопировано':'Не удалось скопировать')}};
+ root.querySelector('[data-a="clr"]').onclick=function(){if(!confirm('Очистить черновик отчёта? Точка и ФИО останутся.'))return;
+  IDS.forEach(function(id){if(KEEP.indexOf(id)<0)inp[id].value=''});calc();save();note('Черновик очищен')};
+}
+function fill(){var c=cur();IDS.forEach(function(id){inp[id].value=c[id]!=null?c[id]:''});calc();
+ var o=load();note(hasDraft()?'Черновик за сегодня'+(o&&o.t?' · '+o.t:''):'Черновик сохраняется сам')}
+function open(){if(!root)build();fill();root.hidden=false;document.documentElement.style.overflow='hidden';root.querySelector('.rp-body').scrollTop=0}
+function close(){if(!root||root.hidden)return;save();root.hidden=true;document.documentElement.style.overflow='';paintBar()}
+var BI='<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="5" y="4" width="14" height="17" rx="2"/><path d="M9 4V3h6v1M9 11h6M9 15h4"/></svg>';
+function paintBar(){if(!bar)return;var d=hasDraft(),o=load();bar.classList.toggle('draft',d);
+ bar.querySelector('small').textContent=d?'Продолжить заполнение'+(o&&o.t?' · сохранено в '+o.t:''):'Открыть форму и скопировать';
+ bar.setAttribute('aria-label','Итоговый отчёт'+(d?', черновик, продолжить':', открыть'))}
+function init(){
+ if(document.getElementById('rpbar-w')||!document.body)return;
+ var w=document.createElement('div');w.className='rpbar-w';w.id='rpbar-w';
+ w.innerHTML='<button type="button" class="rpbar">'+BI+'<span class="t"><b>Итоговый отчёт</b><small></small></span><span class="tag">Черновик</span><svg class="go" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5l7 7-7 7"/></svg></button>';
+ document.body.insertBefore(w,document.body.firstChild);bar=w.firstChild;bar.onclick=open;paintBar();
+ addEventListener('pageshow',paintBar);addEventListener('storage',paintBar);
+ document.addEventListener('visibilitychange',function(){if(document.hidden)save();else paintBar()});
+ addEventListener('pagehide',save);
+ document.addEventListener('keydown',function(e){if(e.key==='Escape')close()})}
+window.etibReport={open:open,close:close};
+if(document.body)init();else document.addEventListener('DOMContentLoaded',init);
+})();
