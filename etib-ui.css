@@ -303,3 +303,15 @@ dialog input,dialog select,dialog textarea{background:var(--g-fill)}
 /* просмотр картинки на весь экран остаётся тёмным */
 #zoom{box-shadow:none;-webkit-backdrop-filter:none;backdrop-filter:none}#zoom::backdrop{-webkit-backdrop-filter:none;backdrop-filter:none}
 @supports not ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))){dialog{background:var(--paper)}}
+
+/* --- итоговый отчёт: тот же стеклянный стиль --- */
+.rp{background:radial-gradient(120% 60% at 50% -8%,rgba(176,86,108,.14) 0%,rgba(176,86,108,0) 62%) fixed no-repeat,linear-gradient(180deg,#fbf7f6 0%,#efe5e4 100%) fixed no-repeat;background-color:var(--paper)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .rp{background:radial-gradient(120% 60% at 50% -8%,#2b1620 0%,rgba(43,22,32,0) 62%) fixed no-repeat,linear-gradient(180deg,#130c10 0%,#0b070a 100%) fixed no-repeat;background-color:var(--paper)}}
+:root[data-theme="dark"] .rp{background:radial-gradient(120% 60% at 50% -8%,#2b1620 0%,rgba(43,22,32,0) 62%) fixed no-repeat,linear-gradient(180deg,#130c10 0%,#0b070a 100%) fixed no-repeat;background-color:var(--paper)}
+.rp{--k:var(--k-rep,var(--accent))}
+.rp-top{border-bottom:1px solid var(--g-bd);background:color-mix(in srgb,var(--paper) 62%,transparent);-webkit-backdrop-filter:var(--g-bl);backdrop-filter:var(--g-bl)}
+/* каждая группа полей (утро, продажи, расходы…) — стеклянная плашка цвета раздела «Смена и отчёт» */
+.rp-g{padding:14px;border:1px solid color-mix(in srgb,var(--k) 45%,var(--g-bd));border-radius:var(--r-m,18px);background:linear-gradient(135deg,color-mix(in srgb,var(--k) 18%,transparent),color-mix(in srgb,var(--k) 6%,transparent)),var(--g-fill);box-shadow:var(--g-sh),0 8px 22px color-mix(in srgb,var(--k) 10%,transparent);-webkit-backdrop-filter:var(--g-bl);backdrop-filter:var(--g-bl)}
+.rp-f input{border:1px solid color-mix(in srgb,var(--k) 30%,var(--g-bd))}
+.rp-f input:focus{border-color:var(--k);box-shadow:0 0 0 3px color-mix(in srgb,var(--k) 22%,transparent)}
+.rp-h{color:var(--ink);opacity:.75}
