@@ -217,6 +217,22 @@ a.hero,a.hero:hover{background:linear-gradient(var(--g-bg),var(--g-bg)),color-mi
 .hero p{color:var(--mute);opacity:1}
 a.hero .go,.hero:hover .go{background:var(--accent);color:var(--paper)}
 .hero .subs a{color:var(--ink);background:rgba(255,255,255,.4);border-color:var(--g-bd)}
+/* ---- плитки разделов: тот же стеклянный стиль; цвет раздела остаётся (тонкая тонировка, кайма и значок), текст всегда цвета страницы ---- */
+.row[class*="k-"],.row[class*="k-"]:hover{background:linear-gradient(135deg,color-mix(in srgb,var(--k) 24%,transparent),color-mix(in srgb,var(--k) 9%,transparent)),linear-gradient(var(--g-bg),var(--g-bg)),color-mix(in srgb,var(--paper) 30%,transparent);border:1px solid color-mix(in srgb,var(--k) 50%,var(--g-bd));box-shadow:var(--g-sh),0 8px 22px color-mix(in srgb,var(--k) 14%,transparent);-webkit-backdrop-filter:blur(24px) saturate(160%);backdrop-filter:blur(24px) saturate(160%)}
+@media (hover:hover){.row[class*="k-"]:hover{background:linear-gradient(135deg,color-mix(in srgb,var(--k) 32%,transparent),color-mix(in srgb,var(--k) 14%,transparent)),linear-gradient(var(--g-bg),var(--g-bg)),color-mix(in srgb,var(--paper) 30%,transparent)}}
+.row[class*="k-"] h3{color:var(--ink)}
+.row[class*="k-"] .head p{color:var(--mute)}
+.row[class*="k-"] .subs a{color:var(--ink);background:rgba(255,255,255,.42);border:1px solid color-mix(in srgb,var(--k) 38%,var(--g-bd))}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .row[class*="k-"] .subs a{background:rgba(255,255,255,.1)}}
+:root[data-theme="dark"] .row[class*="k-"] .subs a{background:rgba(255,255,255,.1)}
+.row[class*="k-"] .tg{background:rgba(255,255,255,.42);border:1px solid color-mix(in srgb,var(--k) 45%,var(--g-bd))}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .row[class*="k-"] .tg{background:rgba(255,255,255,.1)}}
+:root[data-theme="dark"] .row[class*="k-"] .tg{background:rgba(255,255,255,.1)}
+/* значок: отдельная строка над заголовком, текст его не задевает ни на какой ширине */
+body .row[class*="k-"] .top::before{position:static;order:-1;flex:none;align-self:flex-start;width:26px;height:26px;margin:0 0 6px}
+.row h3{padding-right:0}
+/* высота плитки подстраивается под содержимое (минимум 368px), поэтому ничего не вылезает за край даже при крупном шрифте */
+.row:not(.open),.row.open{height:auto;min-height:368px}
 /* шапка: заголовок занимает свободное место, значок админа всегда у правого края */
 body header.hd{width:100%;align-self:stretch;padding-right:4px}
 header.hd>div:not(.mark){flex:1}
