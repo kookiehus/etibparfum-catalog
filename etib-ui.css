@@ -364,12 +364,15 @@ h1{font-family:var(--brand);font-weight:400;font-size:clamp(19px,5.6vw,24px);let
 .hd small{font-family:var(--sans);font-weight:500;font-size:11.5px;letter-spacing:.3em;text-transform:uppercase;margin-top:8px}
 @media (max-width:340px){h1{font-size:17px;letter-spacing:.08em}.hd small{letter-spacing:.2em}}
 
-/* ===== шапка: название бренда — главное; шрифт Playfair Display SC (из присланных), подпись компактная ===== */
+/* ===== шапка: логотип (Е в полумесяце) + название бренда с вытянутыми по вертикали буквами; подпись тихая ===== */
 @font-face{font-family:"Playfair SC";src:url("fonts/playfair-sc.woff") format("woff");font-weight:400;font-style:normal;font-display:swap}
 :root{--brand:"Playfair SC","Playfair Display",Georgia,"Times New Roman",serif}
-h1{font-family:var(--brand);font-weight:400;font-size:clamp(22px,7vw,30px);letter-spacing:.1em;line-height:1}
-.hd{padding-top:20px;padding-bottom:12px}
-.hd .mark{display:none}
-.hd small{font-size:10px;letter-spacing:.24em;margin-top:6px}
-body:has(.srch) .hd small{display:none}
-@media (max-width:340px){h1{font-size:19px;letter-spacing:.06em}}
+.hd{padding-top:20px;padding-bottom:12px;gap:10px}
+.hd .mark{display:block;flex:none;width:42px;height:42px}
+.hd>div:not(.mark){min-width:0}
+/* название: буквы вытянуты по вертикали (выше и уже), разрядка небольшая */
+h1{font-family:var(--brand);font-weight:400;font-size:clamp(20px,6.3vw,26px);letter-spacing:.16em;line-height:1;white-space:nowrap;text-transform:uppercase;transform:scaleX(.78);transform-origin:0 50%}
+body:has(.srch) h1{font-size:clamp(24px,7.6vw,32px)}
+/* подпись под названием — тихая, не спорит с логотипом */
+.hd small{display:block;margin-top:7px;font:500 9.5px/1.2 var(--sans);letter-spacing:.22em;text-transform:uppercase;color:var(--mute);opacity:.75}
+@media (max-width:340px){h1{font-size:18px;letter-spacing:.1em}.hd small{letter-spacing:.14em}.hd .mark{width:34px;height:34px}}
