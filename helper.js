@@ -162,13 +162,27 @@ var css=[
 '.hqg{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));grid-auto-rows:56px;gap:6px;margin:6px 0}',
 '.hqo{display:flex;align-items:center;width:auto;margin:0;min-height:0;overflow:hidden;border-radius:12px;border:1px solid #8886;background:var(--cd);color:inherit;font:inherit;font-size:14px;line-height:1.2;text-align:left;padding:6px 10px;cursor:pointer;transition:transform .15s,background .2s}.hqo.ok{background:#2e7d3240}.hqo.no{background:#b0003a40}',
 '#hf{display:flex;gap:8px;padding:6px 12px calc(10px + env(safe-area-inset-bottom))}#hi{flex:1;min-height:48px;border-radius:12px;border:1px solid #8886;padding:0 12px;font:inherit;background:var(--cd);color:inherit}#hs{min-height:48px;min-width:52px;border:0;border-radius:12px;background:var(--accent,#7a2e3f);color:#fff;font-size:20px;cursor:pointer}',
+'#hp{--bg:var(--paper,#f7f2f1);--fg:var(--ink,#1a1215);--cd:color-mix(in srgb,var(--card,#fff) 86%,transparent);--ha:var(--k,var(--accent,#7a2e3f));--hb:var(--g-bd,rgba(255,255,255,.9));font-family:var(--sans,system-ui,sans-serif);background:color-mix(in srgb,var(--paper,#f7f2f1) 94%,transparent);border-radius:var(--r-l,22px) var(--r-l,22px) 0 0}',
+'#hp .hav{background:var(--g-bg);border:1px solid var(--hb);box-shadow:var(--g-sh);width:42px;height:42px;font-size:21px}#hp .ht b{font:700 19px/1.1 var(--serif,Georgia,serif);letter-spacing:.02em}#hp .ht small{opacity:1;color:var(--mute,#6b5f62);font-size:13px}',
+'#hp #hx{min-width:44px;width:44px;min-height:44px;margin-right:6px;border-radius:50%;background:var(--g-bg);border:1px solid var(--hb);box-shadow:var(--g-sh);font-size:16px;display:grid;place-items:center}',
+'#hp .hm{max-width:88%;padding:10px 14px;font-size:15px;line-height:1.45;border:1px solid var(--hb);border-radius:18px 18px 18px 6px;background:var(--cd);box-shadow:0 1px 3px rgba(60,30,40,.1);transform-origin:0 100%;animation:hpop .3s cubic-bezier(.34,1.45,.5,1) both}',
+'#hp .hu{background:var(--ha);color:var(--paper,#fff);border-color:transparent;border-radius:18px 18px 6px 18px;transform-origin:100% 100%}',
+'@keyframes hpop{from{opacity:0;transform:translateY(10px) scale(.9)}to{opacity:1;transform:none}}',
+'#hp .hc{margin:8px 0 0;padding:10px 12px;border-radius:14px;border:1px solid color-mix(in srgb,var(--ha) 35%,transparent);border-left:4px solid var(--ha);background:color-mix(in srgb,var(--ha) 7%,transparent)}#hp .hc a,#hp .hs{color:var(--ha)}#hp .hs{border-radius:14px;border-color:color-mix(in srgb,var(--ha) 35%,transparent);background:color-mix(in srgb,var(--ha) 7%,transparent)}',
+'#hp .hg button,#hp #hq button,#hp .hqo{background:var(--g-bg);border:1px solid var(--hb);box-shadow:var(--g-sh);font-family:inherit}#hp .hg button{border-radius:var(--r-m,18px)}#hp #hq button{border-radius:999px;font-size:13.5px;font-weight:600;color:var(--ha)}',
+'#hp .hqo.ok{background:color-mix(in srgb,#2f7d54 22%,transparent);border-color:#2f7d54}#hp .hqo.no{background:color-mix(in srgb,#b3382c 20%,transparent);border-color:#b3382c}',
+'#hp #hf{align-items:center;gap:0;padding:8px 12px calc(10px + env(safe-area-inset-bottom))}',
+'#hp #hi{flex:1;min-width:0;min-height:48px;padding:0 18px;border-radius:999px;border:1px solid var(--hb);background:var(--g-bg);color:var(--fg);box-shadow:var(--g-sh);font:16px var(--sans,system-ui,sans-serif);outline:0;transition:border-color .2s,box-shadow .2s}#hp #hi::placeholder{color:var(--mute,#6b5f62);opacity:1}#hp #hi:focus{border-color:var(--ha);box-shadow:0 0 0 3px color-mix(in srgb,var(--ha) 22%,transparent)}',
+'#hp #hs{display:grid;place-items:center;flex:none;width:0;min-width:0;height:44px;margin:0;padding:0;border-radius:50%;background:var(--ha);color:var(--paper,#fff);opacity:0;transform:scale(.3);pointer-events:none;overflow:hidden;transition:width .25s cubic-bezier(.34,1.45,.5,1),margin .25s,opacity .2s,transform .25s cubic-bezier(.34,1.45,.5,1)}',
+'#hp #hf.has #hs{width:44px;min-width:44px;margin-left:8px;opacity:1;transform:none;pointer-events:auto}#hp #hf.has #hs:active{transform:scale(.9)}',
+'#hp :focus-visible{outline:3px solid var(--ha);outline-offset:2px}',
 '@media(prefers-reduced-motion:reduce){#hp,#hp.on,#hv,#hv.on,#hb,#hb.off,.hm,.hg,.hg button,#hq button{transition:none!important;animation:none!important}.hcr{animation:none}}'
 ].join('');
 var s=document.createElement('style');s.textContent=css;document.head.appendChild(s);
 var b=document.createElement('button');b.id='hb';if(document.querySelector('a.hero'))b.classList.add('hi');b.setAttribute('aria-label','Добби');b.textContent='🧦';
 var V=document.createElement('div');V.id='hv';
 var p=document.createElement('div');p.id='hp';p.setAttribute('role','dialog');p.setAttribute('aria-label','Добби · помощник ETIB');p.setAttribute('inert','');
-p.innerHTML='<div id="hh"><div class="hav">🧦</div><div class="ht"><b>Добби</b><small>помощник ETIB</small></div><button id="hx" aria-label="Закрыть">✕</button></div><div id="hl"></div><div id="hq" class="off"></div><form id="hf"><input id="hi" placeholder="Например: что-то с ванилью" autocomplete="off" enterkeyhint="send"><button id="hs" aria-label="Отправить">▶</button></form>';
+p.innerHTML='<div id="hh"><div class="hav">🧦</div><div class="ht"><b>Добби</b><small>помощник ETIB</small></div><button id="hx" aria-label="Закрыть">✕</button></div><div id="hl"></div><div id="hq" class="off"></div><form id="hf"><input id="hi" placeholder="Например: что-то с ванилью" autocomplete="off" enterkeyhint="send"><button id="hs" aria-label="Отправить"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><path d="M12 19V6M6.5 11.5 12 6l5.5 5.5" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></button></form>';
 document.body.appendChild(V);document.body.appendChild(b);document.body.appendChild(p);
 var L=p.querySelector('#hl'),I=p.querySelector('#hi'),Q=p.querySelector('#hq'),last='',loaded=false,fin=null,G=null;
 var TILES=[['🍦','Подобрать аромат','что-то с ванилью'],['🎁','Подарок','подарок маме'],['💬','Возражение «дорого»','возражение «дорого»'],['🎯','Викторина','викторина'],['🧴','Блоттеры сейчас','блоттеры сейчас'],['⏰','Когда отчёт','когда отчёт']];
@@ -179,39 +193,25 @@ function add(h,u){var d=document.createElement('div');d.className='hm'+(u?' hu':
 function dots(){var d=document.createElement('div');d.className='hm hdt';d.innerHTML='<i></i><i></i><i></i>';L.appendChild(d);stick();return d}
 function group(m){var o=m.querySelectorAll('.hqo');if(!o.length)return;var g=document.createElement('div');g.className='hqg';o[0].parentNode.insertBefore(g,o[0]);[].forEach.call(o,function(x){g.appendChild(x)})}
 /* печать текста: структура (карточки, ссылки) сохраняется, буквы появляются по очереди; тап по сообщению дописывает его сразу */
-function type(d,done){
- var steps=[],tot=0;
- [].slice.call(d.childNodes).forEach(function(c){var tn=[];
-  if(c.nodeType===3){if(c.nodeValue.trim())tn.push(c)}
-  else if(c.nodeType===1){if(!/(^| )hqg( |$)/.test(c.className)){var w=document.createTreeWalker(c,4,null,false),x;while((x=w.nextNode()))if(x.nodeValue.trim())tn.push(x)}}
-  else return;
-  var len=0,arr=tn.map(function(n){var cp=Array.from?Array.from(n.nodeValue):n.nodeValue.split('');len+=cp.length;return{n:n,c:cp}});
-  tot+=len;steps.push({el:c.nodeType===1?c:null,tn:arr,len:len})});
- if(still()||!tot){if(done)done();return}
- steps.forEach(function(s){s.tn.forEach(function(o){o.n.nodeValue=''});if(s.el)s.el.style.display='none'});
- var cr=document.createElement('span');cr.className='hcr';
- var chs=[];steps.forEach(function(s){s.tn.forEach(function(o){o.c.forEach(function(c){chs.push(c)})})});
- var T=[],acc=0,k0;for(k0=0;k0<chs.length;k0++){var pc=k0?chs[k0-1]:'';acc+=34+(/[.!?…]/.test(pc)?260:/[,:;—]/.test(pc)?110:0);T.push(acc)}
- var sc=acc>12000?12000/acc:1,ptr=0,t0=null,raf=0,ended=false;
- function render(w){var left=w,blocked=false,lastN=null;
-  steps.forEach(function(s){if(blocked)return;if(s.len>0&&left<=0){blocked=true;return}
-   if(s.el)s.el.style.display='';
-   var l=left;s.tn.forEach(function(o){var k=Math.max(0,Math.min(o.c.length,l));o.n.nodeValue=o.c.slice(0,k).join('');if(k>0)lastN=o.n;l-=k});
-   if(left<s.len)blocked=true;left-=s.len});
-  if(lastN&&lastN.parentNode)lastN.parentNode.insertBefore(cr,lastN.nextSibling)}
- function end(){if(ended)return;ended=true;cancelAnimationFrame(raf);render(tot);if(cr.parentNode)cr.parentNode.removeChild(cr);d.onclick=null;if(fin===end)fin=null;stick();if(done)done()}
- function frame(ts){if(t0===null)t0=ts;var el=ts-t0;while(ptr<tot&&T[ptr]*sc<=el)ptr++;if(ptr>=tot){end();return}var nb=near();render(ptr);if(nb)stick();raf=requestAnimationFrame(frame)}
- fin=end;d.onclick=end;render(0);raf=requestAnimationFrame(frame)}
+function type(d,done){if(done)done()}
 function chips(t){Q.innerHTML='';if(!t||!t.length){Q.className='off';return}
  t.slice(0,4).forEach(function(x,i){var c=document.createElement('button');c.type='button';c.textContent=x;c.style.setProperty('--i',i);c.onclick=function(){say(x)};Q.appendChild(c)});Q.className='';stick()}
-function bot(html,ch,delay,cb){if(fin)fin();var ind=dots();
- setTimeout(function(){if(ind.parentNode)ind.parentNode.removeChild(ind);var m=add(html);group(m);type(m,function(){if(ch)chips(ch);if(cb)cb()})},delay==null?420+Math.random()*260:delay)}
+function bot(html,ch,delay,cb){
+ var rich=/class="(hc|hs|hqg|hqo)/.test(html),ind=null;
+ var show=function(){if(ind&&ind.parentNode)ind.parentNode.removeChild(ind);var m=add(html);group(m);if(ch)chips(ch);
+  if(m.offsetHeight>L.clientHeight*.6)L.scrollTop=Math.max(0,m.offsetTop-L.offsetTop-8);
+  if(cb)cb()};
+ /* карточки и быстрые ответы — сразу; обычный текст — короткое «набирает…» и целое сообщение */
+ if(rich){show();return}
+ ind=dots();var n=String(html).replace(/<[^>]*>/g,'').length;
+ setTimeout(show,delay==null?Math.min(900,Math.max(380,260+n*4)):delay)}
 function tiles(){G=document.createElement('div');G.className='hg';TILES.forEach(function(t,i){var c=document.createElement('button');c.type='button';c.style.setProperty('--i',i);c.innerHTML='<span>'+t[0]+'</span>'+esc(t[1]);c.onclick=function(){say(t[2])};G.appendChild(c)});L.appendChild(G);stick()}
 function dropTiles(){if(!G)return;var g=G;G=null;g.classList.add('go');setTimeout(function(){if(g.parentNode)g.parentNode.removeChild(g)},200)}
-function say(t,more){if(fin)fin();dropTiles();add(t,1);I.value='';last=t;chips([]);
+function say(t,more){if(fin)fin();dropTiles();add(t,1);I.value='';HF.classList.remove('has');last=t;chips([]);
  var go=function(){var r=reply(t,more);bot(r.html,r.chips||defc())};
  if(D)go();else{var ind=dots();fetch('helper-data.json').then(function(r){return r.json()}).then(function(d){D=d;if(ind.parentNode)ind.parentNode.removeChild(ind);go()}).catch(function(){if(ind.parentNode)ind.parentNode.removeChild(ind);bot('Не удалось загрузить данные. Проверьте интернет и обновите страницу 🙏',defc(),0)})}}
-p.querySelector('#hf').onsubmit=function(e){e.preventDefault();var v=I.value.trim();if(v)say(v)};
+var HF=p.querySelector('#hf');I.addEventListener('input',function(){HF.classList.toggle('has',!!I.value.trim())});
+HF.onsubmit=function(e){e.preventDefault();var v=I.value.trim();if(v)say(v)};
 L.addEventListener('click',function(e){var b=e.target.closest('.hqo');if(!b||b.disabled)return;var r=ETIBHelper.answer(+b.dataset.i);[].forEach.call(b.parentNode.querySelectorAll('.hqo'),function(x,i){x.disabled=true;if(i===r.right)x.classList.add('ok');else if(x===b)x.classList.add('no')});bot(r.html,r.chips||defc(),300)});
 p.addEventListener('click',function(e){var a=e.target.closest&&e.target.closest('a[href]');if(a)setTimeout(close,0)});
 Q.addEventListener('click',function(e){if(e.target.textContent==='Показать ещё'){e.stopImmediatePropagation();Q.innerHTML='';var r=reply(last,true);bot(r.html,defc())}},true);
