@@ -38,10 +38,7 @@ h1{margin:0;font:700 21px/1.1 var(--serif);letter-spacing:.14em}
 .row{display:flex;gap:7px;flex-wrap:wrap}
 #notes{margin-top:10px}
 #notes .chip{font-size:12.5px;padding:5px 12px}
-:root{--note-on:#1e4a3a}
-@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--note-on:#2e6b53}}
-:root[data-theme="dark"]{--note-on:#2e6b53}
-#notes .chip[aria-pressed="true"]{background:var(--note-on);border-color:var(--note-on);color:#f4eee4;box-shadow:0 4px 12px color-mix(in srgb,var(--note-on) 38%,transparent),inset 0 1px 0 rgba(255,255,255,.14)}
+#notes .chip[aria-pressed="true"]{background:var(--cta,#d6a5b0);border-color:var(--cta,#d6a5b0);color:var(--ink);box-shadow:0 4px 12px color-mix(in srgb,var(--cta,#d6a5b0) 45%,transparent),inset 0 1px 0 rgba(255,255,255,.35)}
 .chip{font:600 13px var(--sans);padding:7px 13px;border:1px solid var(--line);border-radius:var(--r-pill,999px);background:transparent;color:var(--ink);cursor:pointer}
 .chip:hover{border-color:var(--ink)}
 .chip[aria-pressed="true"]{background:var(--ink);color:var(--paper);border-color:var(--ink)}
