@@ -224,6 +224,10 @@ nav.tabs .seg button[data-v="memo"]{--ic:url("data:image/svg+xml,%3Csvg xmlns='h
 nav.tabs .seg button[data-v="facts"]{--ic:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M12 3l2.2 5.8L20 11l-5.8 2.2L12 19l-2.2-5.8L4 11l5.8-2.2z'/%3E%3C/svg%3E");--kc:var(--k-fact)}
 @media (max-width:360px){nav.tabs .seg button{font-size:10px}nav.tabs .seg button i{width:23px;height:23px}}
 @media (max-width:340px){nav.tabs .seg button{font-size:9px}}
+/* плашка выбранного раздела — тот же розовый и та же прозрачность, что у кнопки «Каталог» на главной */
+nav.tabs .seg[data-sel] .pill,nav.tabs .seg .pill{background:linear-gradient(135deg,rgba(255,255,255,.30),rgba(255,255,255,0) 55%),color-mix(in srgb,var(--cta,#d6a5b0) 66%,transparent);border:1px solid rgba(255,255,255,.55);box-shadow:0 2px 8px rgba(74,48,39,.14),inset 0 1px 0 rgba(255,255,255,.6)}
+nav.tabs .seg button[aria-selected=true] i{color:var(--ink)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) nav.tabs .seg[data-sel] .pill{background:linear-gradient(135deg,rgba(255,255,255,.14),rgba(255,255,255,0) 55%),color-mix(in srgb,var(--cta,#a45d6a) 68%,transparent);border-color:rgba(255,255,255,.24)}}
 /* плавающие элементы поднимаем над панелью */
 body:has(nav.tabs) #hb{bottom:calc(92px + env(safe-area-inset-bottom,0px))}
 body:has(nav.tabs) #hb.hi{bottom:calc(300px + env(safe-area-inset-bottom,0px))}
