@@ -4,11 +4,10 @@
 <meta charset="utf-8"><meta name="color-scheme" content="light"><script>document.documentElement.setAttribute("data-theme","light")</script>
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#e9e1da" media="(prefers-color-scheme:light)"><meta name="theme-color" content="#211e1c" media="(prefers-color-scheme:dark)">
-<link rel="manifest" href="manifest.webmanifest"><link rel="apple-touch-icon" href="apple-touch-icon.png"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="ETIB">
+<link rel="manifest" href="manifest.webmanifest"><link rel="icon" href="favicon.svg" type="image/svg+xml"><link rel="apple-touch-icon" href="apple-touch-icon.png"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="ETIB">
 <title>ETIB PARFUM — шпаргалка сотрудника</title>
-<link rel="preload" href="fonts/manrope-cyrillic.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="preload" href="fonts/manrope-latin.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="fonts/fonts.css">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400..800&family=Playfair+Display:wght@500..800&display=swap" rel="stylesheet">
 <style>
 :root{--paper:#f7f2f1;--ink:#1a1215;--mute:#6b5f62;--line:#e0d3d2;--card:#fffdfc;--tint:#f0e6e5;--accent:#7a2e3f;--hl:#f2d6dc;--gold:#b8935a;--ok:#2f6b4a;--warn:#8a5a00;--warnbg:#fbf0d8;
 --serif:'Playfair Display',Georgia,'Times New Roman',serif;--sans:Manrope,system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;
@@ -205,7 +204,7 @@ body{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
 details:not(.sec),.say,.status,.res,.slot,table,.btn.sec{background-color:color-mix(in srgb,var(--paper,#fff) 78%,transparent)}
 </style>
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20152.4%20145.8%22%3E%3Cpath%20fill%3D%22%2315120f%22%20fill-rule%3D%22evenodd%22%20d%3D%22M47.6%2032.6%2047.2%2033.0%2047.2%2033.6%2047.8%2034.1%2051.0%2034.8%2053.5%2036.0%2054.9%2037.4%2055.2%2038.1%2055.8%2040.0%2055.8%2041.9%2055.9%2042.0%2055.8%20100.6%2055.4%20102.1%2054.9%20103.1%2053.8%20104.2%2051.9%20105.1%2050.4%20105.5%2047.4%20105.9%2046.6%20106.6%2046.8%20107.4%2047.2%20107.8%2056.2%20107.6%2056.4%20107.5%2073.0%20107.5%2073.1%20107.6%2089.6%20107.6%2089.8%20107.8%2092.4%20107.8%2092.5%20107.6%2098.0%20107.8%2098.8%20107.6%2098.9%20107.8%20100.6%20107.8%20100.8%20107.6%20107.8%20107.6%20108.4%20107.1%20108.4%2096.4%20108.2%2096.2%20108.4%2095.9%20108.4%2090.4%20108.1%2089.8%20107.8%2089.5%20106.8%2089.5%20106.4%2089.9%20106.0%2090.9%20105.6%2093.2%20104.9%2095.5%20103.9%2097.5%20102.6%2099.2%20100.6%20101.2%2098.5%20102.8%2096.8%20103.6%2094.0%20104.5%2092.1%20104.9%2089.6%20105.0%2089.5%20105.1%2086.8%20105.1%2086.6%20105.2%2071.6%20105.4%2070.0%20104.9%2068.2%20103.5%2067.2%20101.9%2066.9%20100.0%2066.9%2093.4%2067.0%2093.2%2066.9%2092.6%2067.0%2092.1%2066.9%2071.0%2067.0%2070.4%2067.4%2069.9%2068.4%2069.5%2069.0%2069.5%2069.1%2069.6%2073.4%2069.6%2073.5%2069.8%2085.2%2069.8%2086.9%2070.1%2088.1%2070.6%2089.2%2071.4%2090.9%2073.1%2091.8%2074.5%2092.5%2076.4%2093.1%2079.0%2093.5%2079.4%2094.4%2079.4%2094.6%2079.0%2094.5%2063.5%2094.6%2063.4%2094.8%2059.2%2094.5%2058.5%2093.6%2058.5%2093.4%2058.8%2092.5%2062.0%2091.2%2064.0%2089.5%2065.8%2088.4%2066.5%2086.1%2067.4%2080.6%2067.5%2080.5%2067.6%2068.2%2067.8%2067.6%2067.5%2067.1%2067.0%2066.9%2066.0%2067.0%2065.1%2067.0%2037.4%2067.4%2036.1%2068.0%2035.5%2068.9%2035.2%2085.4%2035.4%2085.5%2035.5%2092.2%2035.6%2096.6%2036.8%2098.2%2037.6%2099.6%2038.6%20101.8%2041.0%20102.6%2042.4%20103.6%2044.8%20104.6%2048.9%20104.9%2049.4%20105.9%2049.5%20106.4%2049.0%20106.4%2033.5%20106.2%2033.2%20105.6%2032.9%2069.6%2032.9%2069.5%2033.0%2067.4%2033.0%2067.2%2032.9%2056.0%2032.9%2055.9%2032.8ZM66.6%202.8%2060.2%204.0%2053.0%206.1%2052.4%206.5%2050.2%207.1%2049.0%207.8%2048.2%207.9%2047.0%208.5%2045.8%208.9%2037.5%2013.0%2031.6%2016.9%2026.1%2021.2%2021.0%2026.2%2015.4%2032.9%2012.2%2037.4%2010.2%2040.8%208.0%2045.1%205.4%2051.6%203.2%2059.4%202.1%2066.8%202.1%2068.6%202.0%2068.8%202.0%2077.0%202.4%2080.9%203.0%2084.1%203.0%2084.9%204.9%2092.4%207.0%2098.1%2010.4%20105.0%2014.1%20111.0%2018.1%20116.2%2023.9%20122.5%2026.8%20125.1%2030.9%20128.5%2036.4%20132.4%2041.2%20135.2%2047.5%20138.1%2051.5%20139.5%2052.4%20139.6%2057.9%20141.4%2063.6%20142.6%2065.1%20142.8%2068.1%20143.4%2070.6%20143.5%2070.8%20143.6%2078.9%20143.8%2079.0%20143.6%2085.4%20143.5%2094.0%20142.4%2096.1%20141.8%2098.0%20141.5%2099.0%20141.1%20102.5%20140.4%20103.8%20139.9%20105.9%20139.4%20112.9%20136.6%20115.6%20135.2%20119.9%20132.8%20123.4%20130.4%20127.2%20127.4%20132.0%20123.1%20134.9%20120.1%20138.6%20115.8%20141.8%20111.6%20144.6%20107.4%20147.6%20102.2%20149.4%2098.6%20149.9%2097.1%20150.4%2096.2%20150.2%2095.4%20149.1%2094.9%20148.0%2094.9%20147.2%2095.5%20144.5%20101.2%20141.8%20105.9%20137.5%20112.0%20133.2%20117.0%20129.9%20120.4%20126.4%20123.4%20122.0%20126.6%20116.1%20130.4%20109.8%20133.8%20108.9%20134.0%20108.1%20134.5%20106.4%20135.1%20105.5%20135.6%20104.1%20136.0%20102.4%20136.8%2098.5%20137.9%2094.4%20138.8%2087.8%20139.8%2083.8%20139.9%2083.6%20140.0%2073.9%20139.9%2069.4%20139.2%2063.0%20137.8%2059.9%20136.8%2054.9%20134.8%2050.6%20132.6%2044.4%20128.8%2040.6%20126.0%2035.9%20122.0%2032.8%20118.9%2029.0%20114.6%2025.6%20110.1%2022.9%20105.9%2021.0%20102.6%2017.8%2095.9%2015.6%2089.9%2015.4%2088.4%2014.6%2086.1%2014.2%2083.2%2013.8%2081.0%2013.5%2076.9%2013.4%2076.8%2013.5%2066.2%2013.9%2062.6%2014.9%2057.2%2015.5%2055.1%2015.9%2053.0%2016.4%2051.9%2016.8%2050.1%2017.4%2048.8%2017.6%2047.6%2021.0%2040.2%2023.1%2036.5%2025.8%2032.5%2027.8%2029.9%2032.0%2025.0%2036.5%2020.6%2039.8%2017.9%2045.6%2013.9%2048.6%2012.1%2053.8%209.6%2058.1%208.0%2061.8%207.0%2066.0%206.2%2067.1%205.9%2073.0%205.1%2077.4%205.0%2077.5%204.9%2082.0%205.0%2088.5%205.6%2093.2%206.5%2097.1%207.6%2099.9%208.9%20102.1%2010.4%20104.1%2012.5%20106.1%2016.2%20106.5%2016.5%20107.5%2016.5%20107.8%2016.1%20107.9%208.1%20107.5%207.0%20106.8%206.6%2095.6%203.9%2093.5%203.6%2090.1%202.9%2084.6%202.2%2080.0%202.1%2079.9%202.0%2075.2%202.0%2075.1%202.1%2072.4%202.1Z%22%2F%3E%3C%2Fsvg%3E">
-<link rel="stylesheet" href="etib-ui.css"><link rel="stylesheet" href="etib-fx.css"><style id="botnav">
+<link rel="stylesheet" href="etib-ui.css"><style id="botnav">
 /* ===== нижняя панель разделов (как в Telegram) ===== */
 html{scroll-padding-top:12px;scroll-padding-bottom:120px}
 .wrap{padding-bottom:calc(120px + env(safe-area-inset-bottom,0px))}
@@ -235,255 +234,9 @@ body:has(nav.tabs) #hb.hi{bottom:calc(300px + env(safe-area-inset-bottom,0px))}
 body:has(nav.tabs) .toast{bottom:calc(98px + env(safe-area-inset-bottom,0px))}
 </style>
 <script src="etib-ui.js" defer></script>
-<script src="etib-fx.js" defer></script>
-<style id="sx">
-/* ===== Шпаргалка: инфографика, воронка, карточки (префикс sx-) ===== */
-:root{--sx-onk:#fff;--sx-c1:var(--fx-s1,#a8405a);--sx-c2:var(--fx-s2,#b07818)}
-@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--sx-onk:#1a1215}}
-:root[data-theme="dark"]{--sx-onk:#1a1215}
-.ks{--kd:color-mix(in srgb,var(--k) 70%,#2a1218)}
-@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .ks{--kd:var(--k)}}
-:root[data-theme="dark"] .ks{--kd:var(--k)}
-.sx-r{position:relative;overflow:hidden}
-.fx-sr,.sx-sr{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
-/* быстрые переходы по разделам вкладки */
-.sx-jump{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;margin:6px -16px 2px;padding:6px 16px 8px;-webkit-overflow-scrolling:touch}
-.sx-jump::-webkit-scrollbar{display:none}
-.sx-jump button{flex:none;position:relative;overflow:hidden;display:inline-flex;align-items:center;gap:7px;border:1px solid color-mix(in srgb,var(--k) 32%,transparent);background:color-mix(in srgb,var(--k) 8%,var(--card));color:var(--ink);font:700 13px/1 var(--sans);padding:10px 14px;border-radius:999px;cursor:pointer}
-.sx-jump button::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--kd)}
-/* ---- воронка 8 этапов ---- */
-.sx-fwrap{margin:12px 0 4px;padding:14px 12px 12px;border-radius:var(--r-m,18px);background:radial-gradient(120% 90% at 50% 0%,color-mix(in srgb,var(--k) 12%,var(--card)) 0%,var(--card) 70%);border:1px solid color-mix(in srgb,var(--k) 22%,transparent);box-shadow:0 10px 30px color-mix(in srgb,var(--k) 12%,transparent)}
-.sx-fhd{display:flex;align-items:baseline;justify-content:space-between;gap:10px;margin:0 2px 10px}
-.sx-fhd b{font:700 15px/1.2 var(--serif)}
-.sx-fhd small{color:var(--mute);font-size:12.5px;font-weight:600;white-space:nowrap}
-.sx-fun{display:grid;gap:3px;margin:0}
-.sx-fun button{width:calc(100% - var(--i)*5%);justify-self:center;min-height:36px;border:0;margin:0;padding:5px 22px;display:flex;align-items:center;justify-content:center;gap:8px;font:700 13px/1.15 var(--sans);color:var(--ink);background:linear-gradient(90deg,rgba(255,255,255,.16),rgba(255,255,255,0) 40%,rgba(255,255,255,.12)),color-mix(in srgb,var(--k) var(--mx),var(--card));clip-path:polygon(0 0,100% 0,calc(100% - 11px) 100%,11px 100%);cursor:pointer;text-align:center;position:relative}
-.sx-fun button b{flex:none;font:800 12px/1 var(--sans);opacity:.75;font-variant-numeric:tabular-nums}
-.sx-fun button.on{background:var(--kd);color:var(--sx-onk)}
-.sx-fun button.on b{opacity:1}
-.sx-fun button.done::after{content:"✓";position:absolute;right:18px;font-size:12px;opacity:.8}
-.sx-sp{display:flex;align-items:center;gap:10px;margin:12px 2px 0}
-.sx-sp b{flex:none;font-size:12.5px;font-weight:700;color:var(--mute);font-variant-numeric:tabular-nums}
-.sx-tr{flex:1;height:6px;border-radius:6px;background:color-mix(in srgb,var(--k) 14%,transparent);overflow:hidden}
-.sx-tr i{display:block;height:100%;width:var(--p,0%);border-radius:6px;background:var(--kd)}
-/* этапы-лента */
-details.sx-st{position:relative;margin:10px 0;scroll-margin-top:12px}
-details.sx-st+details.sx-st::before{content:"";position:absolute;left:28px;top:-11px;height:10px;width:2px;background:color-mix(in srgb,var(--k) 45%,transparent)}
-section.ks details.sx-st[open]{border-color:var(--kd);box-shadow:0 12px 30px color-mix(in srgb,var(--k) 18%,transparent)}
-details.sx-st.done>summary .n{background:color-mix(in srgb,var(--k) 55%,var(--card))}
-.sx-nav{display:flex;gap:8px;margin:14px 0 2px}
-.sx-nav button{flex:1 1 0;min-width:0;position:relative;overflow:hidden;min-height:46px;padding:10px 16px;border-radius:999px;border:1px solid var(--kd);background:var(--kd);color:var(--sx-onk);font:700 14px/1.2 var(--sans);cursor:pointer}
-.sx-nav button.sec2{flex:0 0 52px;order:-1;background:transparent;color:var(--ink);border-color:color-mix(in srgb,var(--k) 40%,transparent)}
-/* ---- полосы-диапазоны ---- */
-.sx-rg{list-style:none;margin:12px 0 6px;padding:0;display:grid;gap:12px}
-.sx-rg li{margin:0}
-.sx-l{display:flex;align-items:center;gap:8px;font-size:14px;font-weight:700;line-height:1.3;margin-bottom:5px}
-.sx-l em{font:800 10px/1 var(--sans);font-style:normal;letter-spacing:.08em;padding:4px 6px;border-radius:6px;background:var(--kd);color:var(--sx-onk)}
-.sx-row{display:flex;align-items:center;gap:8px;min-height:14px}
-.sx-bar{flex:none;height:12px;width:calc((100% - 7.5em)*var(--b)/var(--max));min-width:4px;border-radius:0 4px 4px 0;background:linear-gradient(90deg,var(--c,var(--kd)) calc(var(--a)/var(--b)*100%),color-mix(in srgb,var(--c,var(--kd)) 38%,transparent) 0);transform-origin:0 50%}
-.sx-bar.open{background:linear-gradient(90deg,var(--c,var(--kd)) calc(var(--a)/var(--b)*100%),color-mix(in srgb,var(--c,var(--kd)) 45%,transparent) 0,transparent);border-radius:0}
-.sx-v{font-size:13px;font-weight:700;color:var(--mute);white-space:nowrap}
-.sx-in li{display:grid;grid-template-columns:4.6em 1fr;align-items:center;gap:6px}
-.sx-in .sx-l{margin:0}
-.sx-btl{flex:none;display:inline-block;width:calc(var(--h)*.55);height:var(--h);border-radius:3px 3px 4px 4px;background:linear-gradient(90deg,color-mix(in srgb,var(--k) 55%,var(--card)),color-mix(in srgb,var(--k) 25%,var(--card)));position:relative;margin-top:5px}
-.sx-btl::before{content:"";position:absolute;left:30%;right:30%;top:-5px;height:5px;border-radius:2px 2px 0 0;background:var(--gold)}
-.sx-grp{margin:14px 0 4px;font:700 12px/1 var(--sans);letter-spacing:.08em;text-transform:uppercase;color:var(--mute)}
-.sx-lg{list-style:none;display:flex;flex-wrap:wrap;gap:6px 16px;margin:10px 0 0;padding:0;font-size:13px;font-weight:600}
-.sx-lg li{display:inline-flex;align-items:center;gap:6px;margin:0}
-.sx-lg i{width:12px;height:12px;border-radius:3px;background:var(--c,var(--kd))}
-.sx-note{color:var(--mute);font-size:12.5px;margin:8px 0 0}
-.sx-two{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:12px 0}
-.sx-two>div{padding:12px;border-radius:14px;background:color-mix(in srgb,var(--c) 9%,var(--card));border:1px solid color-mix(in srgb,var(--c) 30%,transparent);font-size:13.5px;line-height:1.4}
-.sx-two b{display:flex;align-items:center;gap:6px;font-size:14px;margin-bottom:4px}
-.sx-two b::before{content:"";width:10px;height:10px;border-radius:3px;background:var(--c)}
-/* ---- карточки-перевёртыши: частые вопросы ---- */
-.sx-fbar{display:flex;justify-content:space-between;align-items:center;gap:10px;margin:6px 0 0}
-.sx-fbar .mute{margin:0}
-.sx-all{flex:none;border:1px solid color-mix(in srgb,var(--k) 40%,transparent);background:transparent;color:var(--ink);font:700 12.5px/1 var(--sans);padding:9px 12px;border-radius:999px;cursor:pointer}
-.sx-flips{display:grid;gap:10px;grid-template-columns:1fr;margin:10px 0}
-@media (min-width:620px){.sx-flips{grid-template-columns:1fr 1fr}}
-.sx-flip{display:grid;perspective:1100px;scroll-margin-top:12px}
-.sx-fi{display:grid;width:100%;margin:0;padding:0;border:0;background:none;font:inherit;color:inherit;text-align:left;cursor:pointer;transform-style:preserve-3d;-webkit-tap-highlight-color:transparent}
-.sx-fi>span{grid-area:1/1;display:flex;flex-direction:column;justify-content:space-between;gap:10px;min-height:112px;padding:14px 16px;border-radius:18px;-webkit-backface-visibility:hidden;backface-visibility:hidden;border:1px solid color-mix(in srgb,var(--k) 30%,transparent)}
-.sx-ff{background:linear-gradient(135deg,color-mix(in srgb,var(--k) 15%,var(--card)),var(--card));box-shadow:0 6px 18px color-mix(in srgb,var(--k) 10%,transparent)}
-.sx-ff b{font:700 16px/1.3 var(--serif);padding-right:30px;position:relative}
-.sx-ff b::after{content:"?";position:absolute;right:0;top:-2px;width:24px;height:24px;border-radius:50%;display:grid;place-items:center;font:800 14px/1 var(--sans);background:var(--kd);color:var(--sx-onk)}
-.sx-fi small{font-size:12px;font-weight:700;color:var(--mute);letter-spacing:.02em}
-.sx-fb{transform:rotateY(180deg);background:linear-gradient(135deg,var(--kd),color-mix(in srgb,var(--k) 78%,#000));color:var(--sx-onk);box-shadow:0 10px 26px color-mix(in srgb,var(--k) 25%,transparent)}
-.sx-fb span{font-size:15px;line-height:1.45;font-weight:600}
-.sx-fb small{color:inherit;opacity:.8}
-.sx-fi[aria-expanded="true"]{transform:rotateY(180deg)}
-/* ---- бонусы ---- */
-.sx-eq{display:flex;flex-wrap:wrap;gap:10px;margin:12px 0 4px}
-.sx-eq>div{flex:1 1 140px;display:flex;align-items:flex-end;justify-content:center;gap:5px;padding:30px 10px 12px;border-radius:14px;background:color-mix(in srgb,var(--k) 8%,var(--card));border:1px solid color-mix(in srgb,var(--k) 25%,transparent);position:relative}
-.sx-eq em{font:800 20px/1 var(--sans);font-style:normal;color:var(--mute);margin:0 4px 6px}
-.sx-eq small{position:absolute;top:6px;left:10px;font:800 12px/1 var(--sans);color:var(--mute)}
-.sx-b{display:inline-block;width:14px;height:24px;border-radius:3px 3px 4px 4px;background:color-mix(in srgb,var(--k) 55%,var(--card));position:relative}
-.sx-b::before{content:"";position:absolute;left:4px;right:4px;top:-5px;height:5px;border-radius:2px 2px 0 0;background:var(--gold)}
-.sx-b.g{background:repeating-linear-gradient(45deg,var(--k) 0 3px,color-mix(in srgb,var(--k) 55%,var(--card)) 3px 6px)}
-.sx-lvl{margin:14px 0 2px}
-.sx-lvl .sx-tr{height:8px;display:flex;gap:2px;background:none;overflow:visible}
-.sx-lvl .sx-tr i{flex:1;width:auto;border-radius:2px}
-.sx-lvl .sx-tr i:nth-child(1){background:color-mix(in srgb,var(--k) 30%,var(--card));border-radius:4px 2px 2px 4px}
-.sx-lvl .sx-tr i:nth-child(2){background:color-mix(in srgb,var(--k) 60%,var(--card))}
-.sx-lvl .sx-tr i:nth-child(3){background:linear-gradient(90deg,var(--k),color-mix(in srgb,var(--k) 20%,transparent))}
-.sx-ticks{display:flex;justify-content:space-between;font-size:11.5px;font-weight:700;color:var(--mute);margin-top:5px;font-variant-numeric:tabular-nums}
-.sx-ticks{position:relative;height:14px}.sx-ticks span{position:absolute;top:0}.sx-ticks span:nth-child(1){left:0}.sx-ticks span:nth-child(2){left:33.33%;transform:translateX(-50%)}.sx-ticks span:nth-child(3){left:66.66%;transform:translateX(-50%)}.sx-ticks span:nth-child(4){right:0}
-.sx-tiers{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:10px 0 14px}
-.sx-tier{position:relative;display:flex;flex-direction:column;align-items:center;text-align:center;gap:6px;padding:12px 6px 10px;border-radius:18px;border:1px solid color-mix(in srgb,var(--k) 30%,transparent);background:linear-gradient(165deg,color-mix(in srgb,var(--k) var(--m),var(--card)),color-mix(in srgb,var(--k) calc(var(--m) / 3),var(--card)));color:var(--ink)}
-.sx-tier.t2{background:linear-gradient(165deg,var(--kd),color-mix(in srgb,var(--k) 70%,#000));color:var(--sx-onk);border-color:var(--kd);box-shadow:0 12px 28px color-mix(in srgb,var(--k) 30%,transparent)}
-.sx-tier h4{margin:0;font:700 15px/1.1 var(--serif)}
-.sx-tier .pc{font:800 30px/1 var(--sans);letter-spacing:-.02em;font-variant-numeric:tabular-nums}
-.sx-tier small{font-size:11px;font-weight:700;opacity:.8;line-height:1.25}
-.sx-tier .cap{font-size:10.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;opacity:.75}
-.sx-ring{--s:58px;width:var(--s);height:var(--s);border-radius:50%;display:grid;place-items:center;background:conic-gradient(currentColor calc(var(--p)*1%),color-mix(in srgb,currentColor 18%,transparent) 0);-webkit-mask:radial-gradient(farthest-side,transparent calc(100% - 7px),#000 calc(100% - 6px));mask:radial-gradient(farthest-side,transparent calc(100% - 7px),#000 calc(100% - 6px))}
-.sx-rw{position:relative;display:grid;place-items:center}
-.sx-rw b{position:absolute;font:800 11.5px/1 var(--sans)}
-.sx-tier:not(.t2) .sx-ring{color:var(--kd)}
-.sx-tier small{white-space:nowrap}
-.sx-flow{list-style:none;margin:12px 0;padding:0;display:grid;gap:0;counter-reset:f}
-.sx-flow li{position:relative;display:grid;grid-template-columns:34px 1fr;gap:2px 12px;margin:0;padding:0 0 14px}
-.sx-flow li:not(:last-child)::before{content:"";position:absolute;left:16px;top:34px;bottom:0;width:2px;background:linear-gradient(var(--k),color-mix(in srgb,var(--k) 25%,transparent))}
-.sx-flow i{grid-row:span 2;width:34px;height:34px;border-radius:50%;display:grid;place-items:center;font:800 14px/1 var(--sans);font-style:normal;background:var(--kd);color:var(--sx-onk);box-shadow:0 0 0 4px color-mix(in srgb,var(--k) 15%,transparent)}
-.sx-flow b{font-size:15px;line-height:1.3;padding-top:6px}
-.sx-flow span{font-size:14px;color:var(--mute);line-height:1.45}
-@media (min-width:700px){.sx-flow{grid-template-columns:repeat(4,1fr);gap:10px}.sx-flow li{grid-template-columns:1fr;padding:0}.sx-flow li:not(:last-child)::before{left:44px;right:-6px;top:16px;bottom:auto;width:auto;height:2px;background:linear-gradient(90deg,var(--k),color-mix(in srgb,var(--k) 25%,transparent))}.sx-flow i{grid-row:auto}}
-/* калькулятор */
-.sx-calc{margin:10px 0 14px;padding:14px;border-radius:22px;background:linear-gradient(160deg,color-mix(in srgb,var(--k) 12%,var(--card)),var(--card) 60%);border:1px solid color-mix(in srgb,var(--k) 30%,transparent);box-shadow:0 14px 36px color-mix(in srgb,var(--k) 14%,transparent)}
-.sx-calc input{font:700 22px var(--sans);padding:12px 44px 12px 14px;font-variant-numeric:tabular-nums}
-.sx-inw{position:relative}
-.sx-inw::after{content:"₽";position:absolute;right:16px;top:50%;transform:translateY(-50%);font:700 18px var(--sans);color:var(--mute);pointer-events:none}
-.sx-lv{display:grid;grid-template-columns:repeat(3,1fr);gap:4px;padding:4px;margin:10px 0 0;border-radius:16px;background:color-mix(in srgb,var(--k) 10%,transparent)}
-.sx-lv button{position:relative;overflow:hidden;min-height:48px;border:0;border-radius:12px;background:transparent;color:var(--ink);font:700 14px/1.1 var(--sans);cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px}
-.sx-lv button small{font-size:11px;font-weight:700;color:var(--mute)}
-.sx-lv button[aria-checked="true"]{background:var(--kd);color:var(--sx-onk);box-shadow:0 4px 12px color-mix(in srgb,var(--k) 30%,transparent)}
-.sx-lv button[aria-checked="true"] small{color:inherit;opacity:.85}
-.sx-out{margin-top:12px;display:grid;grid-template-columns:118px 1fr;gap:14px;align-items:center}
-.sx-out.empty .sx-kpi b,.sx-out.empty svg,.sx-out.empty .sx-dc b{opacity:.35}
-#bres.empty .sx-lg,#bres.empty .sx-cmpl{display:none}
-.sx-dn{width:118px;height:118px;display:block;transform:rotate(-90deg)}
-.sx-dn circle{fill:none;stroke-width:12}
-.sx-dn .tr{stroke:color-mix(in srgb,var(--ink) 12%,transparent)}
-.sx-dn .bo{stroke:var(--kd);stroke-linecap:butt}
-.sx-dw{position:relative}
-.sx-dc{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;line-height:1.1}
-.sx-dc b{font:800 21px/1 var(--sans);font-variant-numeric:tabular-nums}
-.sx-dc small{font-size:10.5px;font-weight:700;color:var(--mute);margin-top:3px}
-.sx-kpi{display:flex;flex-direction:column;gap:1px;padding:4px 0}
-.sx-kpi+.sx-kpi{border-top:1px solid color-mix(in srgb,var(--ink) 10%,transparent);margin-top:6px;padding-top:8px}
-.sx-kpi small{font-size:12.5px;font-weight:700;color:var(--mute)}
-.sx-kpi b{font:800 18px/1.2 var(--sans);font-variant-numeric:tabular-nums}
-.sx-kpi b.big{font-size:17px;color:var(--ink)}
-.sx-kpi b.big span{font-size:34px;letter-spacing:-.02em;color:var(--kd)}
-.sx-msg{font-weight:700;margin:12px 0 0;color:var(--mute)}
-.sx-cmpl{margin:14px 0 0;padding-top:12px;border-top:1px solid color-mix(in srgb,var(--ink) 10%,transparent)}
-.sx-cmpl .sx-rg{margin:8px 0 0;gap:8px}
-.sx-cmpl li.off .sx-bar{--c:color-mix(in srgb,var(--k) 38%,var(--card))}
-.sx-cmpl li.off .sx-l{color:var(--mute)}
-.sx-cmpl .sx-in li{grid-template-columns:6.4em 1fr}
-/* скидка 10% */
-.sx-dg{display:grid;grid-template-columns:1fr 1fr;gap:8px;align-items:start;margin:10px 0}
-.sx-dg details{margin:0}
-.sx-dg summary{flex-direction:column;align-items:flex-start;gap:8px;min-height:92px}
-.sx-dg summary::after{position:absolute;right:14px;top:14px}
-.sx-dg details{position:relative}
-.sx-ic{width:34px;height:34px;border-radius:12px;display:grid;place-items:center;background:color-mix(in srgb,var(--k) 16%,var(--card));color:var(--k)}
-.sx-ic svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
-.sx-dg details>div{font-size:14px}
-.sx-pct{display:flex;align-items:center;gap:14px;margin:6px 0 4px}
-.sx-pct b{font:800 44px/1 var(--sans);color:var(--k);letter-spacing:-.03em}
-.sx-pct span{font-size:13.5px;color:var(--mute);font-weight:600;line-height:1.35}
-/* ---- смена: шкала дня ---- */
-.sx-day{margin:12px 0 4px;padding:12px 12px 8px;border-radius:16px;background:color-mix(in srgb,var(--k) 6%,var(--card));border:1px solid color-mix(in srgb,var(--k) 20%,transparent)}
-.sx-day h4{margin:0 0 10px;font:700 13px/1 var(--sans);color:var(--mute);letter-spacing:.04em}
-.sx-dt{position:relative;height:46px}
-.sx-dt .seg2{position:absolute;top:16px;height:14px;border-radius:2px}
-.sx-dt .give{background:var(--kd)}
-.sx-dt .rest{background:color-mix(in srgb,var(--k) 22%,transparent)}
-.sx-dt .base{position:absolute;left:0;right:0;top:22px;height:2px;background:color-mix(in srgb,var(--ink) 12%,transparent)}
-.sx-dt .rp{position:absolute;top:8px;width:10px;height:10px;margin-left:-5px;border-radius:50%;background:var(--card);border:2.5px solid var(--ink)}
-.sx-dt .rp.done{background:var(--ink)}
-.sx-dt .rp.fin{width:14px;height:14px;margin-left:-7px;top:6px;border-color:var(--kd);background:var(--kd)}
-.sx-dt .now{position:absolute;top:2px;bottom:10px;width:2px;margin-left:-1px;background:var(--warn,#8a5a00);border-radius:2px}
-.sx-dt .now::before{content:"";position:absolute;top:-3px;left:-3px;width:8px;height:8px;border-radius:50%;background:inherit}
-.sx-dt .tk{position:absolute;bottom:0;transform:translateX(-50%);font-size:10.5px;font-weight:700;color:var(--mute);font-variant-numeric:tabular-nums}
-.sx-dt .tk:last-child{transform:translateX(-100%)}
-.sx-day .sx-lg{margin-top:6px;font-size:12px}
-.sx-lg i.o{background:var(--card);border:2.5px solid var(--ink);border-radius:50%;width:10px;height:10px}
-.sx-lg i.r{background:color-mix(in srgb,var(--k) 22%,transparent)}
-.sx-lg i.n{width:2px;height:12px;border-radius:2px;background:var(--warn,#8a5a00)}
-/* формулы отчёта */
-.sx-fx{display:flex;flex-wrap:wrap;align-items:center;gap:6px;margin:10px 0;padding:12px;border-radius:14px;background:color-mix(in srgb,var(--k) 7%,var(--card));border:1px solid color-mix(in srgb,var(--k) 22%,transparent)}
-.sx-fx span{padding:7px 10px;border-radius:10px;background:var(--card);border:1px solid color-mix(in srgb,var(--k) 25%,transparent);font-size:13px;font-weight:700;line-height:1.2}
-.sx-fx span.res2{background:var(--kd);color:var(--sx-onk);border-color:var(--kd)}
-.sx-fx em{font:800 16px/1 var(--sans);font-style:normal;color:var(--k)}
-/* ---- памятки: чек-листы ---- */
-.sx-cp{display:flex;align-items:center;gap:10px;margin:8px 0 2px}
-.sx-cp b{flex:none;font-size:12.5px;color:var(--mute);font-variant-numeric:tabular-nums}
-.sx-cp button{flex:none;border:0;background:none;color:var(--mute);font:700 12px var(--sans);text-decoration:underline;cursor:pointer;padding:6px 2px}
-ol.sx-chk{list-style:none;padding:0;counter-reset:c}
-ol.sx-chk>li{counter-increment:c;position:relative;padding:10px 12px 10px 46px;margin:6px 0;border-radius:14px;background:color-mix(in srgb,var(--k) 5%,var(--card));border:1px solid color-mix(in srgb,var(--k) 18%,transparent);cursor:pointer;-webkit-user-select:none;user-select:none}
-ol.sx-chk>li::before{content:counter(c);position:absolute;left:12px;top:9px;width:24px;height:24px;border-radius:8px;display:grid;place-items:center;font:800 12px/1 var(--sans);border:2px solid color-mix(in srgb,var(--k) 55%,transparent);color:var(--k)}
-ol.sx-chk>li.ok{background:color-mix(in srgb,var(--k) 12%,var(--card));color:var(--mute)}
-ol.sx-chk>li.ok::before{content:"✓";background:var(--kd);border-color:var(--kd);color:var(--sx-onk)}
-ol.sx-chk>li:focus-visible{outline:3px solid var(--k);outline-offset:2px}
-.sx-split{display:flex;gap:2px;margin:10px 0 4px;border-radius:12px;overflow:hidden;font-size:13px;font-weight:700}
-.sx-split span{flex:1;padding:10px 12px;background:var(--kd);color:var(--sx-onk);line-height:1.3}
-.sx-split span+span{background:color-mix(in srgb,var(--k) 25%,var(--card));color:var(--ink)}
-.sx-split small{display:block;font-weight:600;opacity:.85;font-size:12px}
-/* ---- факты ---- */
-.sx-fact{position:relative;display:grid;grid-template-columns:1fr 92px;gap:10px;align-items:center;margin:10px 0 12px;padding:16px;border-radius:22px;background:radial-gradient(120% 120% at 100% 0%,color-mix(in srgb,var(--k) 22%,var(--card)) 0%,var(--card) 65%);border:1px solid color-mix(in srgb,var(--k) 28%,transparent);box-shadow:0 14px 34px color-mix(in srgb,var(--k) 14%,transparent);min-height:170px}
-.sx-fact small{font:800 11px/1 var(--sans);letter-spacing:.12em;text-transform:uppercase;color:var(--k)}
-.sx-fact h3{margin:8px 0 6px;font:700 18px/1.25 var(--serif)}
-.sx-fact p{margin:0;font-size:14px;line-height:1.5;color:var(--ink)}
-.sx-fbtn{display:flex;gap:8px;margin-top:12px}
-.sx-fbtn button{position:relative;overflow:hidden;border:1px solid var(--kd);background:var(--kd);color:var(--sx-onk);font:700 13px/1 var(--sans);padding:11px 14px;border-radius:999px;cursor:pointer}
-.sx-fbtn button+button{background:transparent;color:var(--ink);border-color:color-mix(in srgb,var(--k) 40%,transparent)}
-.sx-fvis{align-self:stretch;display:grid;place-items:center}
-.sx-fvis canvas{width:92px;height:auto;aspect-ratio:3/4}
-.sx-fvis .sx-b{width:44px;height:74px;border-radius:10px 10px 14px 14px;background:linear-gradient(100deg,color-mix(in srgb,var(--k) 35%,var(--card)),color-mix(in srgb,var(--k) 75%,var(--card)) 45%,color-mix(in srgb,var(--k) 40%,var(--card)));box-shadow:0 12px 22px color-mix(in srgb,var(--k) 30%,transparent)}
-.sx-fvis .sx-b::before{left:13px;right:13px;top:-14px;height:14px;border-radius:4px 4px 0 0}
-.sx-cats{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin:0 0 6px}
-.sx-cats button{position:relative;overflow:hidden;display:flex;flex-direction:column;align-items:center;gap:4px;padding:10px 4px;border-radius:14px;border:1px solid color-mix(in srgb,var(--k) 25%,transparent);background:color-mix(in srgb,var(--k) 7%,var(--card));color:var(--ink);font:700 11.5px/1.15 var(--sans);cursor:pointer;text-align:center}
-.sx-cats b{font:800 22px/1 var(--sans);color:var(--k);font-variant-numeric:tabular-nums}
-/* ---- нижние вкладки: метка под активной ---- */
-nav.tabs .seg button::after{content:"";position:absolute;left:50%;bottom:3px;width:18px;height:3px;margin-left:-9px;border-radius:3px;background:var(--kc,var(--ink));opacity:0;transform:scaleX(.2)}
-nav.tabs .seg button[aria-selected=true]::after{opacity:1;transform:none}
-/* ---- движение ---- */
-@media (prefers-reduced-motion:no-preference){
- section[id^="p-"]:not([hidden]){animation:tabin .34s var(--ease) backwards}
- nav.tabs .seg button::after{transition:opacity .3s,transform .45s var(--spring)}
- .sx-fun button{transition:transform .35s var(--spring),background-color .3s,color .3s}
- .sx-fun button:active{transform:scale(.97)}
- .sx-fun button.on{animation:sx-pop .45s var(--spring)}
- .sx-tr i{transition:width .6s var(--ease)}
- .sx-fi{transition:transform .62s cubic-bezier(.3,1.25,.5,1)}
- .sx-fi:active>span{filter:brightness(.97)}
- .sx-bar{animation:sx-grow .9s var(--ease) backwards;animation-delay:calc(var(--n,0)*80ms)}
- .sx-dn .bo{transition:stroke-dasharray .8s var(--ease)}
- .sx-cmpl .sx-bar{animation:none;transition:width .6s var(--ease)}
- .sx-lv button{transition:background-color .25s,color .25s,box-shadow .25s}
- ol.sx-chk>li{transition:background-color .25s,color .25s}
- ol.sx-chk>li.ok::before{animation:sx-pop .4s var(--spring)}
- .sx-fact h3,.sx-fact p{transition:opacity .25s}
- .sx-fact.sw h3,.sx-fact.sw p{opacity:0}
- .sx-dt .now::before{animation:pulse 1.8s ease-in-out infinite}
-}
-@keyframes sx-pop{0%{transform:scale(.94)}60%{transform:scale(1.03)}100%{transform:none}}
-@keyframes sx-grow{from{transform:scaleX(0)}to{transform:none}}
-@media (prefers-reduced-motion:reduce){
- .sx-fi{transform:none!important}
- .sx-fb{transform:none;visibility:hidden}
- .sx-fi[aria-expanded="true"] .sx-fb{visibility:visible}
- .sx-fi[aria-expanded="true"] .sx-ff{visibility:hidden}
-}
-@media (max-width:380px){.sx-fun button{font-size:12px;padding:6px 18px}.sx-tier .pc{font-size:26px}.sx-ring{--s:50px}.sx-out{grid-template-columns:100px 1fr}.sx-dn{width:100px;height:100px}.sx-cats button{font-size:10.5px}}
-@media (min-width:700px){.sx-fun button{min-height:44px;font-size:14px}.sx-dg{grid-template-columns:repeat(4,1fr)}}
-@media (forced-colors:active){.sx-bar,.sx-tr i,.sx-fun button{background:CanvasText;color:Canvas}}
-</style>
 </head>
 <body>
-<div id="etibSplash" aria-hidden="true"><img src="welcome-9x16.webp" alt=""></div>
+<div id="etibSplash" aria-hidden="true"><img src="welcome-9x16.png" alt=""></div>
 <style>#etibSplash{position:fixed;inset:0;z-index:99999;display:flex;align-items:center;justify-content:center;background:var(--page-bg,linear-gradient(160deg,#ede6df 0%,#e2d9cf 50%,#d8cec3 100%));background-color:var(--paper,#e9e1da);transition:opacity .45s ease}#etibSplash.out{opacity:0;pointer-events:none}#etibSplash img{width:100%;height:100%;object-fit:cover;display:block}</style>
 <script>(function(){var d=document.getElementById("etibSplash");if(!d)return;try{if(sessionStorage.getItem("etibSplash")){d.remove();return}sessionStorage.setItem("etibSplash","1")}catch(e){}var t=Date.now(),done=0;function hide(){if(done)return;done=1;setTimeout(function(){d.classList.add("out");setTimeout(function(){d.remove()},500)},Math.max(0,800-(Date.now()-t)))}if(document.readyState==="complete")hide();else addEventListener("load",hide);setTimeout(hide,4000)})();</script>
 
@@ -498,22 +251,20 @@ nav.tabs .seg button[aria-selected=true]::after{opacity:1;transform:none}
 
 <!-- ================= ПРОДАЖИ ================= -->
 <section id="p-sell" class="ks k-sell">
-<details class="sec" open><summary><h2>8 этапов продаж</h2></summary><div class="secb">
+<details class="sec"><summary><h2>8 этапов продаж</h2></summary><div class="secb">
 <p class="mute">Нажми на этап, чтобы открыть. Правильно отработанные этапы — гарантия покупки.</p>
-<div class="sx-fwrap" id="sxF" hidden><div class="sx-fhd"><b>Воронка продаж</b><small id="sxFc"></small></div><div class="sx-fun" id="sxFun"></div><div class="sx-sp"><div class="sx-tr"><i id="sxFp"></i></div><b id="sxFn"></b></div></div>
-<div class="sx-steps" id="sxSteps">
 
-<details class="sx-st" name="stage" id="st1"><summary><span class="n">1</span>Знакомство</summary><div>
+<details><summary><span class="n">1</span>Знакомство</summary><div>
 <p>Поприветствуй покупателя сразу, как только он подошёл: «Добрый день», «Здравствуйте».</p>
 <ul><li>Улыбка, взгляд в глаза, хорошее настроение.</li><li>Это первое впечатление, оно настраивает человека на покупку.</li></ul>
 </div></details>
 
-<details class="sx-st" name="stage" id="st2"><summary><span class="n">2</span>Выявление потребностей</summary><div>
+<details><summary><span class="n">2</span>Выявление потребностей</summary><div>
 <p>Задай вопросы, чтобы понять, что нужно покупателю. Если не знает, чего хочет, уточни, чем пользовался раньше.</p>
 <ul><li>Интересует ли вас что-то определённое?</li><li>Для кого рассматриваете аромат: для себя или в подарок?</li><li>Какими ароматами вы раньше пользовались?</li><li>Какие ноты предпочитаете?</li><li>Ищете аромат на каждый день или на выход?</li></ul>
 </div></details>
 
-<details class="sx-st" name="stage" id="st3"><summary><span class="n">3</span>Презентация</summary><div>
+<details><summary><span class="n">3</span>Презентация</summary><div>
 <p>Предложи несколько ароматов, <b>максимум 4–5</b>, чтобы клиент не запутался. Если запутался, предложи послушать кофе.</p>
 <h3>В момент презентации озвучь</h3>
 <ol><li>маркировку,</li><li>название и бренд,</li><li>опиши аромат.</li></ol>
@@ -523,7 +274,7 @@ nav.tabs .seg button[aria-selected=true]::after{opacity:1;transform:none}
 <p><b>Обязательно после показа спроси, что именно понравилось.</b> Никогда не оставляй клиента без вопроса. Если не понравилось, уточни, что именно и чего хочется.</p>
 </div></details>
 
-<details class="sx-st" name="stage" id="st4"><summary><span class="n">4</span>Работа с возражениями</summary><div>
+<details><summary><span class="n">4</span>Работа с возражениями</summary><div>
 <p>Соблюдай порядок из пяти шагов:</p>
 <ol><li>Выслушай до конца, не перебивая.</li><li>Присоединись или согласись.</li><li>Задай уточняющие вопросы, выясни настоящую причину, сделай переход к своим аргументам.</li><li>Приведи более сильные аргументы, предложи альтернативу.</li><li>Резюмируй и призови к действию.</li></ol>
 <h3>Пример</h3>
@@ -532,7 +283,7 @@ nav.tabs .seg button[aria-selected=true]::after{opacity:1;transform:none}
 <p class="mute">Ответы на частые вопросы смотри ниже, в разделе «Частые вопросы».</p>
 </div></details>
 
-<details class="sx-st" name="stage" id="st5"><summary><span class="n">5</span>Дожим по объёму</summary><div>
+<details><summary><span class="n">5</span>Дожим по объёму</summary><div>
 <p>Когда клиент определился, предложи больший объём.</p>
 <div class="say">Ароматы в больших объёмах выгоднее: разница в цене небольшая, а большой объём дольше радует. Чем больше объём, тем выгоднее аромат.</div>
 <ul><li>Поставь перед клиентом полные флаконы 30, 50 и 100 мл (не обязательно одного аромата), чтобы они выглядели презентабельно.</li>
@@ -540,7 +291,7 @@ nav.tabs .seg button[aria-selected=true]::after{opacity:1;transform:none}
 <li>Сколько хватает флакона каждого объёма, смотри ниже, в разделе «На сколько хватает».</li></ul>
 </div></details>
 
-<details class="sx-st" name="stage" id="st6"><summary><span class="n">6</span>Допродажа</summary><div>
+<details><summary><span class="n">6</span>Допродажа</summary><div>
 <ul><li>Предложи аромат подруге, маме, супругу или тому, кто пришёл с клиентом.</li>
 <li>Авто-парфюм 7 мл. Это 12 ароматов, повторяющих бренды основной коллекции. Если клиент выбрал аромат себе, предложи такой же для авто.</li>
 <li>Диффузор 100 мл. Работает около двух месяцев, в комплекте 5 фибровых палочек (для комнаты иногда хватает 3).</li>
@@ -549,7 +300,7 @@ nav.tabs .seg button[aria-selected=true]::after{opacity:1;transform:none}
 <div class="banner">Скидки не совмещаются. Акции 1=2 и 2=4 (флаконы в подарок для участников БС) не суммируются со скидками и бонусами. Предлагай клиенту один вариант выгоды.</div>
 </div></details>
 
-<details class="sx-st" name="stage" id="st7"><summary><span class="n">7</span>Завершение покупки</summary><div>
+<details><summary><span class="n">7</span>Завершение покупки</summary><div>
 <ol><li><b>Перед оплатой проверь каждый флакон:</b> распыли на запястье или блоттер (распыляет, не течёт), и убедись, что маркировка совпадает с содержимым. Клиент слушает аромат и подтверждает свой выбор.</li>
 <li>Назови стоимость и спроси, пользуется ли клиент бонусной системой. Если нет, предложи участие.</li>
 <li>Назови сумму к оплате. Приоритетные способы: <b>QR-код и наличные</b>.</li>
@@ -558,7 +309,7 @@ nav.tabs .seg button[aria-selected=true]::after{opacity:1;transform:none}
 <li>Поблагодари, предложи подписаться на соцсети (тг-канал, Instagram) и оставить отзыв.</li></ol>
 </div></details>
 
-<details class="sx-st" name="stage" id="st8"><summary><span class="n">8</span>Создание новой потребности</summary><div>
+<details><summary><span class="n">8</span>Создание новой потребности</summary><div>
 <p>Покупка сделана, но разговор не заканчивается. Помоги клиенту увидеть, что ему может понадобиться ещё, чтобы он захотел вернуться.</p>
 <ul><li>Узнай, в каких ситуациях клиент пользуется ароматом: днём, на работе, вечером, на свидании.</li>
 <li>Покажи, что один аромат не закрывает все случаи: лёгкие и свежие хороши в жару и на каждый день, сладкие и тёплые лучше для вечера и прохладного времени.</li>
@@ -568,51 +319,27 @@ nav.tabs .seg button[aria-selected=true]::after{opacity:1;transform:none}
 <div class="say">Этот аромат отлично подойдёт на каждый день. А для вечера у нас есть более тёплые, глубокие ароматы. Хотите, покажу, как они звучат?</div>
 <p>Если клиент отказался, не настаивай: поблагодари и пригласи вернуться за новым ароматом.</p>
 </div></details>
-</div>
 
 </div></details><details class="sec"><summary><h2>На сколько хватает</h2></summary><div class="secb">
-<p class="sx-grp">Хватит флакона, месяцев</p>
-<ul class="sx-rg sx-in" style="--max:12" aria-label="На сколько хватает флакона">
-<li><span class="sx-l"><i class="sx-btl" style="--h:13px" aria-hidden="true"></i>15 мл</span><div class="sx-row"><span class="sx-bar" style="--a:1;--b:1.5;--n:0"></span><span class="sx-v">1–1,5 мес.</span></div></li>
-<li><span class="sx-l"><i class="sx-btl" style="--h:17px" aria-hidden="true"></i>30 мл</span><div class="sx-row"><span class="sx-bar" style="--a:2;--b:3;--n:1"></span><span class="sx-v">2–3 мес.</span></div></li>
-<li><span class="sx-l"><i class="sx-btl" style="--h:21px" aria-hidden="true"></i>50 мл</span><div class="sx-row"><span class="sx-bar" style="--a:3;--b:5;--n:2"></span><span class="sx-v">3–5 мес.</span></div></li>
-<li><span class="sx-l"><i class="sx-btl" style="--h:27px" aria-hidden="true"></i>100 мл</span><div class="sx-row"><span class="sx-bar" style="--a:8;--b:12;--n:3"></span><span class="sx-v">8–12 мес.</span></div></li>
-</ul>
-<p class="sx-note">Тёмная часть полосы — минимум, светлая — до максимума.</p>
+<table><thead><tr><th>Объём</th><th>Хватит на</th></tr></thead><tbody><tr><td><b>15 мл</b></td><td>1–1,5 мес.</td></tr><tr><td><b>30 мл</b></td><td>2–3 мес.</td></tr><tr><td><b>50 мл</b></td><td>3–5 мес.</td></tr><tr><td><b>100 мл</b></td><td>8–12 мес.</td></tr></tbody></table>
 <p class="mute">Совет: покажи полные флаконы 30, 50, 100 мл рядом. 15 мл не показываем.</p>
 </div></details><details class="sec"><summary><h2>Частые вопросы</h2></summary><div class="secb">
-<div class="sx-fbar"><p class="mute">Вопрос спереди, ответ на обороте.</p><button type="button" class="sx-all" id="sxAll" aria-pressed="false">Все ответы</button></div>
-<div class="sx-flips" id="sxFlips">
-<div class="sx-flip"><button type="button" class="sx-fi" aria-expanded="false"><span class="sx-ff"><b data-dl>Ароматы точно такие же, как оригинал?</b><small>Нажми, чтобы увидеть ответ</small></span><span class="sx-fb"><span>Да, точно такие же. Но на начальных нотах могут быть насыщеннее за счёт большого процента масел. После раскрытия аромат такой же.</span><small>Нажми ещё раз, чтобы вернуться</small></span></button></div>
-<div class="sx-flip"><button type="button" class="sx-fi" aria-expanded="false"><span class="sx-ff"><b data-dl>Почему я не чувствую аромат на себе?</b><small>Нажми, чтобы увидеть ответ</small></span><span class="sx-fb"><span>Значит, он вам подходит. Вы не должны чувствовать его постоянно, иначе заболит голова.</span><small>Нажми ещё раз, чтобы вернуться</small></span></button></div>
-<div class="sx-flip"><button type="button" class="sx-fi" aria-expanded="false"><span class="sx-ff"><b data-dl>Почему у вас такие доступные цены?</b><small>Нажми, чтобы увидеть ответ</small></span><span class="sx-fb"><span>Мы экономим на дизайне индивидуальных флаконов, не закладываем в цену бренд и не тратим огромные деньги на рекламу.</span><small>Нажми ещё раз, чтобы вернуться</small></span></button></div>
-<div class="sx-flip"><button type="button" class="sx-fi" aria-expanded="false"><span class="sx-ff"><b data-dl>У вас туалетная вода или парфюмерная?</b><small>Нажми, чтобы увидеть ответ</small></span><span class="sx-fb"><span>Вся наша продукция — духи на масляной основе.</span><small>Нажми ещё раз, чтобы вернуться</small></span></button></div>
-<div class="sx-flip"><button type="button" class="sx-fi" aria-expanded="false"><span class="sx-ff"><b data-dl>Где производятся ваши ароматы?</b><small>Нажми, чтобы увидеть ответ</small></span><span class="sx-fb"><span>В Беларуси, город Минск.</span><small>Нажми ещё раз, чтобы вернуться</small></span></button></div>
-</div>
+<details><summary>Ароматы точно такие же, как оригинал?</summary><div>Да, точно такие же. Но на начальных нотах могут быть насыщеннее за счёт большого процента масел. После раскрытия аромат такой же.</div></details>
+<details><summary>Почему я не чувствую аромат на себе?</summary><div>Значит, он вам подходит. Вы не должны чувствовать его постоянно, иначе заболит голова.</div></details>
+<details><summary>Почему у вас такие доступные цены?</summary><div>Мы экономим на дизайне индивидуальных флаконов, не закладываем в цену бренд и не тратим огромные деньги на рекламу.</div></details>
+<details><summary>У вас туалетная вода или парфюмерная?</summary><div>Вся наша продукция — духи на масляной основе.</div></details>
+<details><summary>Где производятся ваши ароматы?</summary><div>В Беларуси, город Минск.</div></details>
+
 </div></details><details class="sec"><summary><h2>Клубные и селективные</h2></summary><div class="secb">
-<ul class="sx-lg"><li><i style="--c:var(--sx-c1)"></i>Клубные</li><li><i style="--c:var(--sx-c2)"></i>Селективные</li></ul>
-<p class="sx-grp">Масел</p>
-<ul class="sx-rg" style="--max:50">
-<li><span class="sx-l">Клубные</span><div class="sx-row"><span class="sx-bar" style="--c:var(--sx-c1);--a:20;--b:30;--n:0"></span><span class="sx-v">20–30%</span></div></li>
-<li><span class="sx-l">Селективные</span><div class="sx-row"><span class="sx-bar open" style="--c:var(--sx-c2);--a:40;--b:50;--n:1"></span><span class="sx-v">свыше 40%</span></div></li></ul>
-<p class="sx-grp">На коже</p>
-<ul class="sx-rg" style="--max:24">
-<li><span class="sx-l">Клубные</span><div class="sx-row"><span class="sx-bar" style="--c:var(--sx-c1);--a:12;--b:12;--n:2"></span><span class="sx-v">~12 часов</span></div></li>
-<li><span class="sx-l">Селективные</span><div class="sx-row"><span class="sx-bar" style="--c:var(--sx-c2);--a:24;--b:24;--n:3"></span><span class="sx-v">~сутки</span></div></li></ul>
-<p class="sx-grp">На одежде</p>
-<ul class="sx-rg" style="--max:4">
-<li><span class="sx-l">Клубные</span><div class="sx-row"><span class="sx-bar" style="--c:var(--sx-c1);--a:1;--b:1;--n:4"></span><span class="sx-v">~сутки</span></div></li>
-<li><span class="sx-l">Селективные</span><div class="sx-row"><span class="sx-bar" style="--c:var(--sx-c2);--a:3;--b:4;--n:5"></span><span class="sx-v">3–4 дня</span></div></li></ul>
-<div class="sx-two"><div style="--c:var(--sx-c1)"><b>Клубные</b>Люкс: Chanel, Dior, Versace, Armani и др.</div><div style="--c:var(--sx-c2)"><b>Селективные</b>Ниша: Byredo, Tom Ford, Creed, Kilian, MFK и др.</div></div>
+<table><tr><th></th><th>Клубные</th><th>Селективные</th></tr>
+<tr><td>Масел</td><td>20–30%</td><td>свыше 40%</td></tr>
+<tr><td>На коже</td><td>~12 часов</td><td>~сутки</td></tr>
+<tr><td>На одежде</td><td>~сутки</td><td>3–4 дня</td></tr>
+<tr><td>Что это</td><td>Люкс: Chanel, Dior, Versace, Armani и др.</td><td>Ниша: Byredo, Tom Ford, Creed, Kilian, MFK и др.</td></tr></table>
 <p class="mute">Если спрашивают, почему селектив дороже: это более сложные, глубокие ароматы из дорогих и редких компонентов.</p>
 
 <details><summary>Виды парфюмерии (масла и стойкость)</summary><div>
-<p class="sx-grp">Масел, % · стойкость на коже</p>
-<ul class="sx-rg" style="--max:40">
-<li><span class="sx-l">Духи (Parfum) <em>ETIB</em></span><div class="sx-row"><span class="sx-bar" style="--a:30;--b:40;--n:0"></span><span class="sx-v">30–40% · до 24 ч</span></div></li>
-<li><span class="sx-l">Парфюмерная вода (EdP) <em>ETIB</em></span><div class="sx-row"><span class="sx-bar" style="--a:15;--b:30;--n:1"></span><span class="sx-v">15–30% · около 12 ч</span></div></li>
-<li><span class="sx-l">Туалетная вода (EdT)</span><div class="sx-row"><span class="sx-bar" style="--c:color-mix(in srgb,var(--k) 45%,var(--card));--a:7;--b:15;--n:2"></span><span class="sx-v">7–15% · до 4 ч</span></div></li>
-<li><span class="sx-l">Одеколон (EdC)</span><div class="sx-row"><span class="sx-bar" style="--c:color-mix(in srgb,var(--k) 45%,var(--card));--a:1.5;--b:1.5;--n:3"></span><span class="sx-v">около 1,5% · 1–2 ч</span></div></li></ul>
+<ul><li><b>Духи (Parfum)</b>: 30–40% масел, на коже до 24 ч.</li><li><b>Парфюмерная вода (EdP)</b>: 15–30%, около 12 ч.</li><li><b>Туалетная вода (EdT)</b>: 7–15%, до 4 ч.</li><li><b>Одеколон (EdC)</b>: около 1,5%, 1–2 ч.</li></ul>
 <p>У ETIB только духи и парфюмерная вода.</p></div></details>
 
 <details><summary>Английский алфавит (для маркировки)</summary><div>
@@ -625,37 +352,20 @@ nav.tabs .seg button[aria-selected=true]::after{opacity:1;transform:none}
 <div class="banner">Скидки не совмещаются. Скидки и бонусы не суммируются с акциями 1=2 и 2=4: клиенту применяем один вариант выгоды.</div>
 <details class="sec"><summary><h2>Акция для участников БС</h2></summary><div class="secb">
 <p>Участникам бонусной системы при покупке определённого количества флаконов часть флаконов дарим (например, 1=2 или 2=4). Условия действующей акции уточняй в рабочем чате.</p>
-<div class="sx-eq" aria-hidden="true"><div><small>1=2</small><i class="sx-b"></i><em>=</em><i class="sx-b"></i><i class="sx-b g"></i></div><div><small>2=4</small><i class="sx-b"></i><i class="sx-b"></i><em>=</em><i class="sx-b"></i><i class="sx-b"></i><i class="sx-b g"></i><i class="sx-b g"></i></div></div>
-<ul class="sx-lg" aria-hidden="true"><li><i style="background:color-mix(in srgb,var(--k) 55%,var(--card))"></i>флакон</li><li><i style="background:repeating-linear-gradient(45deg,var(--k) 0 3px,color-mix(in srgb,var(--k) 55%,var(--card)) 3px 6px)"></i>в подарок</li></ul>
 
-</div></details><details class="sec" open><summary><h2>Бонусная система</h2></summary><div class="secb">
-<div class="sx-lvl" aria-hidden="true"><p class="sx-grp">Уровень растёт с суммой покупок</p><div class="sx-tr"><i></i><i></i><i></i></div><div class="sx-ticks"><span>0 ₽</span><span>30 000 ₽</span><span>60 000 ₽</span><span>→</span></div></div>
-<div class="sx-tiers" role="list" aria-label="Уровни бонусной системы"><div role="listitem" class="sx-tier t0" data-tilt style="--m:14%"><h4 data-depth="2">Эксперт</h4><span class="cap">Кэшбэк</span><span class="pc" data-depth="3"><span data-count="3" data-suffix="%">3%</span></span><span class="sx-rw" data-depth="2"><span class="sx-ring" style="--p:25" aria-hidden="true"></span><b>до 25%</b></span><span class="cap">Списание</span><small>0–29&nbsp;999&nbsp;₽</small></div><div role="listitem" class="sx-tier t1" data-tilt style="--m:34%"><h4 data-depth="2">Гуру</h4><span class="cap">Кэшбэк</span><span class="pc" data-depth="3"><span data-count="5" data-suffix="%">5%</span></span><span class="sx-rw" data-depth="2"><span class="sx-ring" style="--p:50" aria-hidden="true"></span><b>до 50%</b></span><span class="cap">Списание</span><small>30&nbsp;000–<br>59&nbsp;999&nbsp;₽</small></div><div role="listitem" class="sx-tier t2" data-tilt style="--m:0%"><h4 data-depth="2">Парфюмер</h4><span class="cap">Кэшбэк</span><span class="pc" data-depth="3"><span data-count="10" data-suffix="%">10%</span></span><span class="sx-rw" data-depth="2"><span class="sx-ring" style="--p:75" aria-hidden="true"></span><b>до 75%</b></span><span class="cap">Списание</span><small>от 60&nbsp;000&nbsp;₽</small></div></div>
+</div></details><details class="sec"><summary><h2>Бонусная система</h2></summary><div class="secb">
+<table><thead><tr><th>Уровень</th><th>Покупок на сумму</th><th>Кэшбэк</th><th>Списание</th></tr></thead>
+<tbody><tr><td>Эксперт</td><td>0–29 999 ₽</td><td>3%</td><td>до 25%</td></tr>
+<tr><td>Гуру</td><td>30 000–59 999 ₽</td><td>5%</td><td>до 50%</td></tr>
+<tr><td>Парфюмер</td><td>от 60 000 ₽</td><td>10%</td><td>до 75%</td></tr></tbody></table>
+<ul><li>1 бонус = 1 ₽. Баллы действуют 180 дней.</li>
+<li><b>300 приветственных бонусов</b>: нужно зарегистрироваться в БС и установить приложение Bonus Money и/или добавить карту в электронный кошелёк (обязательное условие).</li>
+<li>Пользоваться картой можно по номеру телефона.</li></ul>
 
 <h3>Калькулятор бонусов</h3>
-<div class="sx-calc">
-<label for="bsum">Сумма чека, ₽</label><div class="sx-inw"><input id="bsum" type="number" inputmode="decimal" placeholder="4990" min="0" enterkeyhint="done"></div>
-<div class="sx-lv" id="blvl" role="radiogroup" aria-label="Уровень клиента"><button type="button" role="radio" aria-checked="true" data-l="0">Эксперт<small>3% · до 25%</small></button><button type="button" role="radio" aria-checked="false" data-l="1">Гуру<small>5% · до 50%</small></button><button type="button" role="radio" aria-checked="false" data-l="2">Парфюмер<small>10% · до 75%</small></button></div>
-<div id="bres" aria-live="polite">
-<p class="sx-msg" id="bmsg">Введи сумму чека</p>
-<div class="sx-out empty" id="bout">
-<div class="sx-dw"><svg class="sx-dn" viewBox="0 0 120 120" aria-hidden="true"><circle class="tr" cx="60" cy="60" r="48" pathLength="100"/><circle class="bo" id="bArc" cx="60" cy="60" r="48" pathLength="100" stroke-dasharray="0 100"/></svg><div class="sx-dc"><b id="bPct">0%</b><small>чека<br>бонусами</small></div></div>
-<div><div class="sx-kpi"><small id="bCbL">Кэшбэк (3%)</small><b class="big"><span id="bCb">0</span> <i id="bCbW" style="font-style:normal">бонусов</i></b></div>
-<div class="sx-kpi"><small id="bWoL">Можно списать (до 25%)</small><b>до <span id="bWo">0</span> <i id="bWoW" style="font-style:normal">бонусов</i></b></div></div>
-</div>
-<ul class="sx-lg"><li><i></i>бонусами до <b id="bLb">0 ₽</b></li><li><i style="background:color-mix(in srgb,var(--ink) 12%,transparent)"></i>деньгами от <b id="bLm">0 ₽</b></li></ul>
-<div class="sx-cmpl"><p class="sx-grp">Кэшбэк с этого чека на каждом уровне</p><ul class="sx-rg sx-in" id="bCmp" style="--max:1"></ul></div>
-<p class="mute">Ориентировочно. 1 бонус = 1 ₽. Не суммируется с акциями 1=2 и 2=4.</p>
-</div></div>
-
-<h3>Как работает бонусная система</h3>
-<ol class="sx-flow">
-<li><i>1</i><b>Регистрация</b><span>Зарегистрироваться в БС и установить приложение Bonus Money и/или добавить карту в электронный кошелёк (обязательное условие).</span></li>
-<li><i>2</i><b>300 приветственных бонусов</b><span>Начисляем, когда выполнено условие из шага 1.</span></li>
-<li><i>3</i><b>Кэшбэк с покупок</b><span>3%, 5% или 10% по уровню клиента.</span></li>
-<li><i>4</i><b>Оплата бонусами</b><span>Списание до 25%, 50% или 75% по уровню. 1 бонус = 1 ₽. Баллы действуют 180 дней.</span></li>
-</ol>
-<p class="mute">Пользоваться картой можно по номеру телефона.</p>
+<div class="grid"><div><label for="bsum">Сумма чека, ₽</label><input id="bsum" type="number" inputmode="decimal" placeholder="4990"></div>
+<div><label for="blvl">Уровень клиента</label><select id="blvl"><option value="0">Эксперт</option><option value="1">Гуру</option><option value="2">Парфюмер</option></select></div></div>
+<div class="res" id="bres">Введи сумму чека</div>
 
 <details><summary>Чем полезно приложение / кошелёк</summary><div>
 <p><b>Bonus Money:</b> баллы, % кэшбэка и уровень; история начислений и списаний с очередью сгорания; <b>история покупок</b> (клиент может найти аромат, который брал раньше); уведомления об акциях.</p>
@@ -671,20 +381,17 @@ nav.tabs .seg button[aria-selected=true]::after{opacity:1;transform:none}
 <p>Если делать иначе, клиенту могут не начислиться баллы или скидка встанет неправильно.</p></div></details>
 
 </div></details><details class="sec"><summary><h2>Скидка 10%</h2></summary><div class="secb">
-<div class="sx-pct"><b>−10%</b><span>Четыре случая. Для каждого нужно фото, которое прикладывается к отчёту.</span></div>
-<div class="sx-dg">
-<details><summary><span class="sx-ic" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="5" y="3" width="14" height="18" rx="2"/><circle cx="12" cy="10" r="2.5"/><path d="M8.5 16.5c.8-1.6 2-2.2 3.5-2.2s2.7.6 3.5 2.2"/></svg></span>Сотрудник ТЦ</summary><div>Фото сотрудника с бейджем, пропуском, в форме или на рабочем месте.</div></details>
-<details><summary><span class="sx-ic" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3 11v2a1 1 0 0 0 1 1h2l5 4V6L6 10H4a1 1 0 0 0-1 1z"/><path d="M15 9a4 4 0 0 1 0 6M18 6a8 8 0 0 1 0 12"/></svg></span>Промоутер</summary><div>Фото промо. Обязательно проверь, что он участник чата.</div></details>
-<details><summary><span class="sx-ic" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M9 3h6v3H9z"/><rect x="6" y="6" width="12" height="15" rx="3"/><path d="M10 12h4"/></svg></span>Себе (сотруднику)</summary><div>Фото флакона и чека.</div></details>
-<details><summary><span class="sx-ic" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 21h16v-8H4z"/><path d="M4 16c2 0 2-1.5 4-1.5s2 1.5 4 1.5 2-1.5 4-1.5 2 1.5 4 1.5"/><path d="M12 13V9M12 6.5c-.8-.8-.8-2 0-3 .8 1 .8 2.2 0 3z"/></svg></span>Именинник</summary><div>Фото документа, удостоверяющего личность (паспорт, Госуслуги, права). Закрой рукой всю личную информацию, чтобы не нервировать клиента: на фото должна быть видна только дата рождения. В день рождения и 3 дня после. Личное присутствие именинника обязательно.</div></details>
-</div>
+<p class="mute">Для каждого случая нужно фото, которое прикладывается к отчёту.</p>
+<details><summary>Сотрудник ТЦ</summary><div>Фото сотрудника с бейджем, пропуском, в форме или на рабочем месте.</div></details>
+<details><summary>Промоутер</summary><div>Фото промо. Обязательно проверь, что он участник чата.</div></details>
+<details><summary>Себе (сотруднику)</summary><div>Фото флакона и чека.</div></details>
+<details><summary>Именинник</summary><div>Фото документа, удостоверяющего личность (паспорт, Госуслуги, права). Закрой рукой всю личную информацию, чтобы не нервировать клиента: на фото должна быть видна только дата рождения. В день рождения и 3 дня после. Личное присутствие именинника обязательно.</div></details>
 </div></details></section>
 
 <!-- ================= СМЕНА ================= -->
 <section id="p-rep" class="ks k-rep" hidden>
 <details class="sec" open><summary><h2>Отчёты в течение дня</h2></summary><div class="secb">
 <div class="status" id="rstat">…</div>
-<div class="sx-day" id="sxDay"><h4>День на шкале</h4><div class="sx-dt" id="sxDt" aria-hidden="true"></div><ul class="sx-lg"><li><i></i>раздаём</li><li><i class="r"></i>перерыв</li><li><i class="o"></i>отчёт</li><li><i class="n"></i>сейчас</li></ul></div>
 <div class="slots" id="rslots"></div>
 <button type="button" class="rbtn" id="rrep" onclick="window.etibReport&&etibReport.open()">Открыть итоговый отчёт</button>
 <p class="mute">Отчёт отправляем каждые 2 часа. Итоговый отчёт в 22:00, когда закроется ТЦ.</p>
@@ -703,9 +410,6 @@ nav.tabs .seg button[aria-selected=true]::after{opacity:1;transform:none}
 <details><summary>Если работает промоутер</summary><div>Выдай ему заготовленные блоттеры, контролируй, подсказывай. Напоминай про улыбку, вовремя подвози новые блоттеры, особенно в час-пик. Перед сменой озвучь: маркировку, название аромата, категорию и скрипт.</div></details>
 
 </div></details><details class="sec"><summary><h2>Что значит в отчёте</h2></summary><div class="secb">
-<p class="sx-grp">Две формулы отчёта</p>
-<div class="sx-fx" role="img" aria-label="Остаток на вечер равен: остаток на утро плюс наличные минус расходы минус промо минус инкассация"><span class="res2">Остаток на вечер</span><em>=</em><span>Остаток на утро</span><em>+</em><span>Наличные</span><em>−</em><span>Расходы</span><em>−</em><span>Промо</span><em>−</em><span>Инкассация</span></div>
-<div class="sx-fx" role="img" aria-label="Безналичные равны: продажи минус в кассе"><span class="res2">Б/н</span><em>=</em><span>Продажи</span><em>−</em><span>«В кассе»</span></div>
 <details><summary>Остаток на утро, план, факт, остаток на вечер</summary><div><p><b>Остаток на утро</b>: наличка в кошельке утром.</p><p><b>План</b>: сумма, которую нужно сделать за смену.</p><p><b>Факт</b>: фактическая сумма, наличные и б/н; в Эвоторе «Продажи».</p><p><b>Остаток на вечер</b>: наличные в кассе в конце смены. Считается так: остаток на утро + наличные − расходы − промо − инкассация.</p></div></details>
 <details><summary>Наличные и б/н</summary><div><p><b>Наличные</b>: то, что сегодня оплатили наличными; в Эвоторе «В кассе».</p><p><b>Б/н</b>: оплата картой или QR-кодом = продажи − «в кассе».</p></div></details>
 <details><summary>Расходы и промо</summary><div><p><b>Расходы</b>: траты с кассы (ручки, печать макета в тент). Покупаем, сохраняем чек, в поле «Описание расхода» пишем на что, обязательно прикладываем фото чека.</p><p><b>Промо</b>: сумма, которую отдали промоутеру.</p></div></details>
@@ -719,9 +423,9 @@ nav.tabs .seg button[aria-selected=true]::after{opacity:1;transform:none}
 <!-- ================= ПАМЯТКИ ================= -->
 <section id="p-memo" class="ks k-memo" hidden>
 <details class="sec"><summary><h2>Открытие и закрытие магазина</h2></summary><div class="secb">
-<button type="button" class="pic" data-z aria-label="Открыть крупнее"><img loading="lazy" decoding="async" src="shop.webp" alt="Памятка: открытие и закрытие магазина"></button><p class="hint">Нажми на картинку, чтобы открыть её крупнее.</p>
+<button type="button" class="pic" data-z aria-label="Открыть крупнее"><img loading="lazy" decoding="async" src="shop.jpg" alt="Памятка: открытие и закрытие магазина"></button><p class="hint">Нажми на картинку, чтобы открыть её крупнее.</p>
 <h3>Открытие смены</h3>
-<ol class="sx-chk" data-ck="open">
+<ol>
 <li>Включить свет.</li>
 <li>Открыть смену в Эвоторе (Отчёты → Кассовый отчёт → Открыть смену).</li>
 <li>Прислать фото чека об открытии смены в беседу.</li>
@@ -731,7 +435,7 @@ nav.tabs .seg button[aria-selected=true]::after{opacity:1;transform:none}
 <li>Заготовка блоттеров.</li>
 </ol>
 <h3>Закрытие смены</h3>
-<ol class="sx-chk" data-ck="close">
+<ol>
 <li>Пересчёт флаконов (по тетради пересчёта).</li>
 <li>Привести ТТ в чистый вид:
 <ul><li>помыть одну витрину с шкафчиком целиком;</li><li>разложить аккуратно блоттеры;</li><li>флаконы стоят ровно, по порядку;</li><li>помыть пол;</li><li>выбросить мусор;</li><li>закрыть все шкафчики и витрины.</li></ul></li>
@@ -744,7 +448,7 @@ nav.tabs .seg button[aria-selected=true]::after{opacity:1;transform:none}
 </div></details>
 
 <details class="sec"><summary><h2>Рабочий день сотрудника</h2></summary><div class="secb">
-<button type="button" class="pic" data-z aria-label="Открыть крупнее"><img loading="lazy" decoding="async" src="staff.webp" alt="Памятка: рабочий день сотрудника"></button><p class="hint">Нажми на картинку, чтобы открыть её крупнее.</p>
+<button type="button" class="pic" data-z aria-label="Открыть крупнее"><img loading="lazy" decoding="async" src="staff.jpg" alt="Памятка: рабочий день сотрудника"></button><p class="hint">Нажми на картинку, чтобы открыть её крупнее.</p>
 <div class="quote">Порядок сегодня — это высокий результат завтра.</div>
 <h3>В начале рабочего дня</h3>
 <ol>
@@ -773,7 +477,6 @@ nav.tabs .seg button[aria-selected=true]::after{opacity:1;transform:none}
 <li>30 минут: обед. Обед можно взять в любое время с 12:00 до 15:00.</li>
 <li>Оставшиеся 30 минут: перерывы в течение дня.</li>
 </ul>
-<div class="sx-split" aria-hidden="true"><span>30 мин · обед<small>с 12:00 до 15:00</small></span><span>30 мин · перерывы<small>в течение дня</small></span></div>
 <h3>Важно помнить</h3>
 <ul>
 <li>Ты создаёшь атмосферу, в которую хочется возвращаться.</li>
@@ -793,7 +496,7 @@ nav.tabs .seg button[aria-selected=true]::after{opacity:1;transform:none}
 </div></details>
 
 <details class="sec"><summary><h2>Дресс-код</h2></summary><div class="secb">
-<button type="button" class="pic" data-z aria-label="Открыть крупнее"><img loading="lazy" decoding="async" src="qr.webp" alt="Памятка: дресс-код"></button><p class="hint">Нажми на картинку, чтобы открыть её крупнее.</p>
+<button type="button" class="pic" data-z aria-label="Открыть крупнее"><img loading="lazy" decoding="async" src="qr.jpg" alt="Памятка: дресс-код"></button><p class="hint">Нажми на картинку, чтобы открыть её крупнее.</p>
 <div class="quote">Парфюм как роскошь, так презентуй её роскошно одетой(ым).</div>
 <h3>Летний вариант</h3>
 <p class="mute">Лёгкий, стильный, аккуратный.</p>
@@ -822,8 +525,6 @@ nav.tabs .seg button[aria-selected=true]::after{opacity:1;transform:none}
 
 <!-- ================= ФАКТЫ ================= -->
 <section id="p-facts" class="ks k-fact" hidden>
-<div class="sx-fact" id="sxFact" data-tilt hidden><div data-depth="2"><small>Факт дня</small><h3 id="sxFt"></h3><p id="sxFb"></p><div class="sx-fbtn"><button type="button" id="sxFn2" data-ripple>Ещё факт</button><button type="button" id="sxFo">К списку</button></div></div><div class="sx-fvis" data-depth="4"><i class="sx-b" aria-hidden="true"></i></div></div>
-<div class="sx-cats" id="sxCats"></div>
 <details class="sec"><summary><h2>История парфюмерии</h2></summary><div class="secb">
 <details><summary>Откуда слово «парфюм»</summary><div><p>Оно происходит от латинского <i>per fumum</i> — «сквозь дым». Первые ароматы были благовониями: их курили в храмах.</p></div></details>
 <details><summary>Одеколон родом из Кёльна</summary><div><p>В 1709 году итальянец Джованни Мария Фарина создал в Кёльне свежий цитрусовый аромат и назвал его <i>Eau de Cologne</i> — «кёльнская вода». Так появилось слово «одеколон».</p></div></details>
@@ -887,29 +588,24 @@ const $=id=>document.getElementById(id);
 const rub=n=>{n=Math.round((n+Number.EPSILON)*100)/100;return n.toLocaleString('ru-RU',{minimumFractionDigits:Number.isInteger(n)?0:2,maximumFractionDigits:2})+' ₽'};
 /* ---- вкладки ---- */
 const T=['sell','price','rep','memo','facts'];
-const SK='etib-sales-tab';
-function tab(t){if(!T.includes(t))t='sell';T.forEach(k=>{$('p-'+k).hidden=k!==t;$('t-'+k).setAttribute('aria-selected',k===t);$('t-'+k).tabIndex=k===t?0:-1});
- try{localStorage.setItem(SK,t)}catch(e){}
- history.replaceState(null,'','#'+t);window.scrollTo(0,0);document.dispatchEvent(new CustomEvent('sx:tab',{detail:t}))}
+function tab(t){if(!T.includes(t))t='sell';T.forEach(k=>{$('p-'+k).hidden=k!==t;$('t-'+k).setAttribute('aria-selected',k===t)});history.replaceState(null,'','#'+t);window.scrollTo(0,0)}
 /* ---- глубокие ссылки: #вкладка/раздел (с главной) ---- */
 const DL={"stages":["sell","8 этапов продаж"],"obj":["sell","Работа с возражениями"],"faq":["sell","Частые вопросы"],"last":["sell","На сколько хватает"],"club":["sell","Клубные и селективные"],"types":["sell","Виды парфюмерии"],"alpha":["sell","Английский алфавит"],"bs":["price","Бонусная система"],"bcalc":["price","Калькулятор бонусов"],"akciya":["price","Акция для участников БС"],"app":["price","Чем полезно приложение"],"reg":["price","Как зарегистрировать клиента"],"disc10":["price","Скидка 10%"],"staff":["price","Сотрудник ТЦ"],"rep2h":["rep","Отчёты в течение дня"],"blot":["rep","Раздача блоттеров"],"promo":["rep","Если работает промоутер"],"rmean":["rep","Что значит в отчёте"],"inkass":["rep","Инкассация"],"open":["memo","Открытие смены"],"close":["memo","Закрытие смены"],"day":["memo","Рабочий день сотрудника"],"lunch":["memo","Обед и перерывы"],"motiv":["memo","Мотивационные фразы"],"dress":["memo","Дресс-код"],"a1":["sell","1Знакомство"],"a2":["sell","2Выявление потребностей"],"a3":["sell","3Презентация"],"a4":["sell","5Дожим по объёму"],"a5":["sell","6Допродажа"],"a6":["sell","7Завершение покупки"],"a7":["sell","8Создание новой потребности"],"a8":["sell","Ароматы точно такие же, как оригинал?"],"a9":["sell","Почему я не чувствую аромат на себе?"],"a10":["sell","Почему у вас такие доступные цены?"],"a11":["sell","У вас туалетная вода или парфюмерная?"],"a12":["sell","Где производятся ваши ароматы?"],"a13":["price","Регистрация клиента по QR-коду (с тейбл-тента)"],"a14":["price","Продажа со скидкой действующему или новому клиенту БС"],"a15":["price","Промоутер"],"a16":["price","Себе (сотруднику)"],"a17":["price","Именинник"],"a18":["rep","Остаток на утро, план, факт, остаток на вечер"],"a19":["rep","Наличные и б/н"],"a20":["rep","Расходы и промо"],"a21":["rep","БС и Р/К"],"a22":["rep","Консультации"],"a23":["rep","Допы, 8 мл"],"f-hist":["facts","История парфюмерии"],"f-ingr":["facts","Из чего делают ароматы"],"f-nose":["facts","Нос и память"],"f-sell":["facts","Факты для разговора с клиентом"]};
 const nz=s=>s.replace(/\s+/g,' ').trim().toLowerCase().replace(/ё/g,'е');
 function dive(slug){
  const d=DL[slug];if(!d)return;
- const root=$('p-'+d[0]),m=nz(d[1]),c=[...root.querySelectorAll('summary,h3,[data-dl]')];
+ const root=$('p-'+d[0]),m=nz(d[1]),c=[...root.querySelectorAll('summary,h3')];
  const el=c.find(x=>nz(x.textContent)===m)||c.find(x=>nz(x.textContent).startsWith(m))||c.find(x=>nz(x.textContent).includes(m));
  if(!el)return;
  const h=document.documentElement;h.classList.add('nofx');
  for(let p=el.parentElement;p&&p!==root;p=p.parentElement)if(p.tagName==='DETAILS')p.open=true;
- const fl=el.closest('.sx-fi');if(fl)fl.setAttribute('aria-expanded','true');
  el.getBoundingClientRect();el.scrollIntoView({block:'start'});
  el.classList.remove('hit');void el.offsetWidth;el.classList.add('hit');
  setTimeout(()=>h.classList.remove('nofx'),150);setTimeout(()=>el.classList.remove('hit'),2500);
 }
 function route(h){
  let p;try{p=decodeURIComponent(h||'').split('/')}catch(e){p=['']}
- let st='';try{st=localStorage.getItem(SK)||''}catch(e){}
- const t=DL[p[1]]?DL[p[1]][0]:T.includes(p[0])?p[0]:(!p[0]&&T.includes(st)?st:'sell');tab(t);
+ const t=DL[p[1]]?DL[p[1]][0]:T.includes(p[0])?p[0]:'sell';tab(t);
  if(p[1]&&DL[p[1]]){history.replaceState(null,'','#'+t+'/'+p[1]);dive(p[1])}
 }
 document.querySelectorAll('.tabs button').forEach(b=>b.onclick=()=>tab(b.dataset.t));
@@ -920,37 +616,15 @@ addEventListener('hashchange',()=>route(location.hash.slice(1)));
 const AL='Aa Эй|Bb Би|Cc Си|Dd Ди|Ee И|Ff Эф|Gg Джи|Hh Эйч|Ii Ай|Jj Джей|Kk Кей|Ll Эл|Mm Эм|Nn Эн|Oo Оу|Pp Пи|Qq Кью|Rr Ар|Ss Эс|Tt Ти|Uu Ю|Vv Ви|Ww Дабл-ю|Xx Экс|Yy Уай|Zz Зэд'.split('|');
 $('alpha').innerHTML=AL.map(s=>{const[a,b]=s.split(' ');return`<div><b>${a}</b> ${b}</div>`}).join('');
 
-/* ---- бонусы: правила те же — кэшбэк Math.round(сумма×%), списание Math.floor(сумма×%) ---- */
-const LV=[[3,25],[5,50],[10,75]],LN=['Эксперт','Гуру','Парфюмер'];
-const STILL=matchMedia('(prefers-reduced-motion:reduce)');
-const fmt=n=>n.toLocaleString('ru-RU');
-const tw=new WeakMap();
-function tween(el,to,fx){const from=tw.has(el)?tw.get(el):0;tw.set(el,to);const f=fx||fmt;
-  if(STILL.matches||from===to||document.hidden){el.textContent=f(to);return}
-  const t0=performance.now(),D=650;cancelAnimationFrame(el._r);
-  const st=now=>{const k=Math.min(1,(now-t0)/D),e=1-Math.pow(1-k,3);el.textContent=f(Math.round(from+(to-from)*e));if(k<1)el._r=requestAnimationFrame(st)};el._r=requestAnimationFrame(st)}
-let lvl=0;
-function bonusCalc(s,i){const l=LV[i];return{cb:Math.round(s*l[0]/100),wo:Math.floor(s*l[1]/100)}}
+/* ---- бонусы ---- */
+const LV=[[3,25],[5,50],[10,75]];
 function bonus(){
-  const s=parseFloat($('bsum').value),l=LV[lvl],ok=s>0;
-  $('bCbL').textContent=`Кэшбэк (${l[0]}%)`;$('bWoL').textContent=`Можно списать (до ${l[1]}%)`;
-  $('bmsg').hidden=ok;$('bout').classList.toggle('empty',!ok);
-  const r=ok?bonusCalc(s,lvl):{cb:0,wo:0},pct=ok?Math.min(100,r.wo/s*100):0;
-  $('bres').classList.toggle('empty',!ok);
-  const n10=r.cb%10,n100=r.cb%100;$('bCbW').textContent=n10===1&&n100!==11?'бонус':n10>=2&&n10<=4&&(n100<12||n100>14)?'бонуса':'бонусов';
-  $('bWoW').textContent=r.wo%10===1&&r.wo%100!==11?'бонуса':'бонусов';
-  tween($('bCb'),r.cb);tween($('bWo'),r.wo);tween($('bPct'),ok?l[1]:0,v=>v+'%');
-  $('bArc').setAttribute('stroke-dasharray',(ok?Math.max(0,pct-.6):0).toFixed(2)+' 100');
-  $('bLb').textContent=rub(r.wo);$('bLm').textContent=rub(ok?s-r.wo:0);
-  const cs=LV.map((_,i)=>ok?bonusCalc(s,i).cb:0),mx=Math.max(1,...cs);
-  $('bCmp').innerHTML=LV.map((v,i)=>`<li class="${i===lvl?'':'off'}"><span class="sx-l">${LN[i]}</span><div class="sx-row"><span class="sx-bar" style="--max:1;--a:${cs[i]/mx};--b:${cs[i]/mx}"></span><span class="sx-v">${fmt(cs[i])} · ${v[0]}%</span></div></li>`).join('')}
-$('bsum').oninput=bonus;
-$('blvl').addEventListener('click',e=>{const b=e.target.closest('[data-l]');if(!b)return;lvl=+b.dataset.l;
-  $('blvl').querySelectorAll('[data-l]').forEach(x=>x.setAttribute('aria-checked',x===b));try{localStorage.setItem('etib-sales-lvl',lvl)}catch(e){}bonus()});
-$('blvl').addEventListener('keydown',e=>{const d=e.key==='ArrowRight'||e.key==='ArrowDown'?1:e.key==='ArrowLeft'||e.key==='ArrowUp'?-1:0;if(!d)return;e.preventDefault();
-  const n=(lvl+d+3)%3,b=$('blvl').querySelector('[data-l="'+n+'"]');b.click();b.focus()});
-try{const v=+localStorage.getItem('etib-sales-lvl');if(v>0&&v<3){lvl=v;$('blvl').querySelectorAll('[data-l]').forEach(x=>x.setAttribute('aria-checked',+x.dataset.l===v))}}catch(e){}
-bonus();
+  const s=parseFloat($('bsum').value),l=LV[$('blvl').value];
+  if(!(s>0)){$('bres').textContent='Введи сумму чека';return}
+  $('bres').innerHTML=`<div class="row"><span>Кэшбэк (${l[0]}%)</span><b>${Math.round(s*l[0]/100)} бонусов</b></div>
+  <div class="row"><span>Можно списать (до ${l[1]}%)</span><b>до ${Math.floor(s*l[1]/100)} бонусов</b></div>
+  <p class="mute">Ориентировочно. 1 бонус = 1 ₽. Не суммируется с акциями 1=2 и 2=4.</p>`}
+$('bsum').oninput=bonus;$('blvl').onchange=bonus;
 
 /* ---- напоминания об отчётах ---- */
 const RT=[[700,'11:40'],[820,'13:40'],[940,'15:40'],[1060,'17:40'],[1180,'19:40'],[1320,'22:00 итоговый']];
@@ -958,7 +632,6 @@ const left=m=>m>=60?Math.floor(m/60)+' ч '+(m%60?m%60+' мин':''):m+' мин'
 function remind(){
   const d=new Date(),m=d.getHours()*60+d.getMinutes();
   let nx=RT.findIndex(r=>r[0]>m);
-  if(typeof window.sxDayDraw==='function')sxDayDraw(m);
   $('rslots').innerHTML=RT.map((r,i)=>`<div class="slot${i===nx?' now':''}${nx<0||i<nx?' done':''}">${r[1].length>5?r[1]:r[1]+' отчёт'}</div>`).join('');
   const st=$('rstat');
   const rb=$('rrep');
@@ -992,121 +665,6 @@ function blotStatus(){
 blot();setInterval(blot,30000);setInterval(blotStatus,1000);
 
 </script>
-<script>
-/* ===== Шпаргалка: воронка этапов, карточки вопросов, шкала дня, чек-листы, факты, свайп ===== */
-(function(){
-const $=id=>document.getElementById(id),still=()=>matchMedia('(prefers-reduced-motion:reduce)').matches;
-const go=(el,blk)=>{if(el)el.scrollIntoView({block:blk||'start',behavior:still()?'auto':'smooth'})};
-const curTab=()=>{const s=document.querySelector('section[id^="p-"]:not([hidden])');return s?s.id.slice(2):'sell'};
-
-/* быстрые переходы по разделам вкладки */
-document.querySelectorAll('section.ks').forEach(sec=>{
-  const ds=[...sec.querySelectorAll(':scope>details.sec')];if(ds.length<2)return;
-  const nav=document.createElement('nav');nav.className='sx-jump';nav.setAttribute('aria-label','Разделы вкладки');
-  ds.forEach(d=>{const h=d.querySelector('h2');if(!h)return;const b=document.createElement('button');b.type='button';b.textContent=h.textContent.trim();b.setAttribute('data-ripple','');
-    b.onclick=()=>{d.open=true;go(d)};nav.appendChild(b)});
-  const ref=sec.firstElementChild&&sec.firstElementChild.classList.contains('banner')?sec.firstElementChild.nextSibling:sec.firstElementChild;
-  sec.insertBefore(nav,ref)});
-
-/* воронка 8 этапов */
-const steps=[...document.querySelectorAll('details.sx-st')];
-if(steps.length){
-  const names=steps.map(d=>{const s=d.querySelector('summary').cloneNode(true);const n=s.querySelector('.n');if(n)n.remove();s.querySelectorAll('.fav').forEach(x=>x.remove());return s.textContent.trim()});
-  const fun=$('sxFun');
-  fun.innerHTML=names.map((n,i)=>`<button type="button" data-st="${i}" style="--i:${i};--mx:${70-i*6}%" aria-label="Этап ${i+1}: ${n}"><b>${i+1}</b><span>${n}</span></button>`).join('');
-  $('sxF').hidden=false;
-  steps.forEach((d,i)=>{
-    const nav=document.createElement('div');nav.className='sx-nav';
-    nav.innerHTML=(i<steps.length-1?`<button type="button" data-next="${i+1}" data-ripple>Дальше: ${names[i+1]} →</button>`:`<button type="button" data-next="top" data-ripple>Все этапы пройдены ✓</button>`)+(i>0?`<button type="button" class="sec2" data-next="${i-1}" aria-label="Назад: ${names[i-1]}">←</button>`:'');
-    d.querySelector('summary').nextElementSibling.appendChild(nav);
-    d.addEventListener('toggle',()=>{if(d.open)steps.forEach(x=>{if(x!==d&&x.open)x.open=false});paint()})});
-  let last=-1;
-  function paint(){
-    const cur=steps.findIndex(d=>d.open);if(cur>=0)last=cur;const at=cur>=0?cur:last;
-    fun.querySelectorAll('button').forEach((b,i)=>{b.classList.toggle('on',i===cur);b.classList.toggle('done',at>=0&&i<at);b.setAttribute('aria-pressed',i===cur)});
-    steps.forEach((d,i)=>d.classList.toggle('done',at>=0&&i<at));
-    const p=at<0?0:(at+1)/steps.length*100;$('sxFp').style.setProperty('--p',p+'%');
-    $('sxFn').textContent=at<0?'0 из '+steps.length:'Этап '+(at+1)+' из '+steps.length;
-    $('sxFc').textContent=at<0?'нажми на этап':names[at]}
-  function openSt(i){const d=steps[i];if(!d)return;d.open=true;paint();requestAnimationFrame(()=>go(d.querySelector('summary')))}
-  fun.addEventListener('click',e=>{const b=e.target.closest('[data-st]');if(b)openSt(+b.dataset.st)});
-  $('sxSteps').addEventListener('click',e=>{const b=e.target.closest('[data-next]');if(!b)return;
-    if(b.dataset.next==='top'){steps.forEach(d=>d.open=false);last=steps.length-1;paint();go($('sxF'),'center');return}openSt(+b.dataset.next)});
-  paint()}
-
-/* частые вопросы: карточки-перевёртыши */
-const flips=$('sxFlips');
-if(flips){
-  flips.addEventListener('click',e=>{const b=e.target.closest('.sx-fi');if(b)b.setAttribute('aria-expanded',b.getAttribute('aria-expanded')!=='true')});
-  $('sxAll').onclick=function(){const on=this.getAttribute('aria-pressed')!=='true';this.setAttribute('aria-pressed',on);this.textContent=on?'Скрыть ответы':'Все ответы';
-    flips.querySelectorAll('.sx-fi').forEach((b,i)=>setTimeout(()=>b.setAttribute('aria-expanded',on),still()?0:i*70))}}
-
-/* шкала дня: блоттеры, отчёты, «сейчас» */
-const A=660,B=1320,pc=m=>((Math.min(B,Math.max(A,m))-A)/(B-A)*100).toFixed(2)+'%';
-window.sxDayDraw=function(m){const el=$('sxDt');if(!el||typeof SL==='undefined')return;
-  let h='<i class="base"></i>'+SL.map(([a,e,t])=>`<i class="seg2 ${t}" style="left:${pc(a)};width:calc(${pc(e)} - ${pc(a)} - 2px)"></i>`).join('');
-  h+=RT.map((r,i)=>`<i class="rp${i===RT.length-1?' fin':''}${m>=r[0]?' done':''}" style="left:${pc(r[0])}"></i>`).join('');
-  if(m>=A&&m<=B)h+=`<i class="now" style="left:${pc(m)}"></i>`;
-  for(let t=720;t<=1320;t+=120)h+=`<span class="tk" style="left:${pc(t)}">${t/60}:00</span>`;
-  el.innerHTML=h};
-{const d=new Date();sxDayDraw(d.getHours()*60+d.getMinutes())}
-
-/* памятки: чек-листы открытия и закрытия, отметки живут до конца дня */
-const CK='etib-sales-chk',today=new Date().toLocaleDateString('ru-RU');
-let ck={};try{const o=JSON.parse(localStorage.getItem(CK));if(o&&o.d===today)ck=o.v||{}}catch(e){}
-const saveCk=()=>{try{localStorage.setItem(CK,JSON.stringify({d:today,v:ck}))}catch(e){}};
-document.querySelectorAll('ol.sx-chk').forEach(ol=>{
-  const id=ol.dataset.ck,lis=[...ol.children],bar=document.createElement('div');bar.className='sx-cp';
-  bar.innerHTML='<div class="sx-tr"><i></i></div><b></b><button type="button">Сбросить</button>';ol.before(bar);
-  const set=ck[id]=ck[id]||[];
-  const paint=()=>{lis.forEach((li,i)=>{const on=set.includes(i);li.classList.toggle('ok',on);li.setAttribute('aria-checked',on)});
-    const n=set.length;bar.querySelector('i').style.setProperty('--p',n/lis.length*100+'%');bar.querySelector('b').textContent=n===lis.length?'Готово ✓':n+' из '+lis.length;bar.querySelector('button').hidden=!n};
-  lis.forEach((li,i)=>{li.setAttribute('role','checkbox');li.tabIndex=0;
-    const tg=()=>{const k=set.indexOf(i);if(k<0)set.push(i);else set.splice(k,1);saveCk();paint()};
-    li.addEventListener('click',tg);li.addEventListener('keydown',e=>{if(e.key===' '||e.key==='Enter'){e.preventDefault();tg()}})});
-  ol.setAttribute('role','group');ol.setAttribute('aria-label','Чек-лист: '+(ol.previousElementSibling.previousElementSibling||{}).textContent);
-  bar.querySelector('button').onclick=()=>{set.length=0;saveCk();paint()};paint()});
-
-/* интересные факты: факт дня и счётчики разделов */
-const fsec=$('p-facts');
-if(fsec){
-  const groups=[...fsec.querySelectorAll(':scope>details.sec')],all=[];
-  groups.forEach((g,gi)=>g.querySelectorAll('.secb>details').forEach(d=>{const p=d.querySelector('div>p');if(p)all.push({d,g,t:d.querySelector('summary').textContent.trim(),b:p.textContent.trim()})}));
-  const short=['История','Из чего','Нос и память','Для клиента'];
-  $('sxCats').innerHTML=groups.map((g,i)=>{const n=g.querySelectorAll('.secb>details').length;return`<button type="button" data-g="${i}" data-ripple><b data-count="${n}">${n}</b>${short[i]||g.querySelector('h2').textContent}</button>`}).join('');
-  $('sxCats').onclick=e=>{const b=e.target.closest('[data-g]');if(!b)return;const g=groups[+b.dataset.g];g.open=true;go(g)};
-  if(all.length){
-    const doy=Math.floor((Date.now()-new Date(new Date().getFullYear(),0,0))/864e5);let k=doy%all.length;
-    const card=$('sxFact');card.hidden=false;
-    const show=(first)=>{const f=all[k];$('sxFt').textContent=f.t;$('sxFb').textContent=f.b;card.querySelector('small').textContent=first?'Факт дня':'Ещё факт · '+(k+1)+' из '+all.length};
-    show(true);
-    $('sxFn2').onclick=()=>{k=(k+1+Math.floor(Math.random()*(all.length-1)))%all.length;
-      if(still())return show();card.classList.add('sw');setTimeout(()=>{show();card.classList.remove('sw')},220)};
-    $('sxFo').onclick=()=>{const f=all[k];f.g.open=true;f.d.open=true;const s=f.d.querySelector('summary');go(s);s.classList.remove('hit');void s.offsetWidth;s.classList.add('hit');setTimeout(()=>s.classList.remove('hit'),2500)}}}
-
-/* 3D-флакон в карточке факта — только когда вкладка открыта и слой эффектов загружен */
-let bottle=false;
-function tryBottle(){if(bottle||curTab()!=='facts'||!window.EtibFX||typeof EtibFX.bottle3D!=='function')return;
-  const box=document.querySelector('.sx-fvis');if(!box)return;bottle=true;
-  try{const c=document.createElement('canvas');c.className='fx-bottle';c.setAttribute('aria-hidden','true');box.innerHTML='';box.appendChild(c);
-    const col=getComputedStyle(fsec).getPropertyValue('--k').trim()||'#5f7035';EtibFX.bottle3D(c,{color:col})}catch(e){}}
-document.addEventListener('sx:tab',tryBottle);
-if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',tryBottle);else tryBottle();
-addEventListener('load',tryBottle);
-
-/* вкладки: стрелки клавиатуры и свайп влево/вправо */
-const tl=document.querySelector('.tabs [role=tablist]'),order=['sell','price','rep','memo','facts'];
-function step(d){const i=order.indexOf(curTab()),n=i+d;if(n<0||n>=order.length)return false;
-  document.documentElement.style.setProperty('--dx',(d>0?28:-28)+'px');$('t-'+order[n]).click();return true}
-tl.addEventListener('keydown',e=>{const d=e.key==='ArrowRight'?1:e.key==='ArrowLeft'?-1:0;if(d&&step(d)){e.preventDefault();$('t-'+curTab()).focus()}});
-let sx=null;const main=document.querySelector('main');
-main.addEventListener('touchstart',e=>{const t=e.target;
-  sx=e.touches.length===1&&!t.closest('input,select,textarea,.sx-jump,.sx-tiers,table,canvas,.al,.rp,dialog')?{x:e.touches[0].clientX,y:e.touches[0].clientY,t:Date.now()}:null},{passive:true});
-main.addEventListener('touchend',e=>{if(!sx)return;const c=e.changedTouches[0],dx=c.clientX-sx.x,dy=c.clientY-sx.y,dt=Date.now()-sx.t;sx=null;
-  if(dt<700&&Math.abs(dx)>70&&Math.abs(dy)<Math.abs(dx)*.55&&!(getSelection()+''))step(dx<0?1:-1)},{passive:true});
-main.addEventListener('touchcancel',()=>{sx=null},{passive:true});
-})();
-</script>
 <script>try{if(sessionStorage.getItem('etib-adm')==='1')document.getElementById('adm').hidden=true}catch(e){}</script>
 <script>
 function glassPill(box){
@@ -1137,7 +695,6 @@ document.getElementById('zimg').onclick=function(){document.getElementById('zbox
 document.getElementById('zx').onclick=function(){document.getElementById('zoom').close()};
 </script>
 <script>if('serviceWorker' in navigator&&location.protocol!=='file:')addEventListener('load',function(){navigator.serviceWorker.register('sw.js').catch(function(){})})</script>
-<!-- Добби (helper.js) грузится, когда страница уже показана и браузер свободен — не тормозит открытие -->
-<script>addEventListener("load",function(){(window.requestIdleCallback||setTimeout)(function(){var s=document.createElement("script");s.src="helper.js";document.body.appendChild(s)},{timeout:2000})})</script>
+<script src="helper.js" defer></script>
 </body>
 </html>

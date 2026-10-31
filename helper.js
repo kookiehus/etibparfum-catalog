@@ -444,23 +444,18 @@ function tiles(){G=document.createElement('div');G.className='hg';TILES.forEach(
 function dropTiles(){if(!G)return;var g=G;G=null;g.classList.add('go');setTimeout(function(){if(g.parentNode)g.parentNode.removeChild(g)},200)}
 function say(t,more){if(fin)fin();dropTiles();add(t,1);I.value='';HF.classList.remove('has');last=t;chips([]);
  var go=function(){var r=reply(t,more);bot(r.html,r.chips||defc())};
- if(D)go();else{var ind=dots();getD().then(function(){if(ind.parentNode)ind.parentNode.removeChild(ind);go()}).catch(function(){if(ind.parentNode)ind.parentNode.removeChild(ind);bot('Не удалось загрузить данные. Проверьте интернет и обновите страницу 🙏',defc(),0)})}}
-/* данные Добби (helper-data.json, ~350 КБ) грузятся один раз и только когда нужны: при открытии окна (или касании кнопки),
-   а если сайт уже сохранён на телефоне — заранее, когда браузер свободен. Ошибка загрузки не запоминается: следующая попытка скачает заново. */
-var DP=null;function getD(){if(D)return Promise.resolve(D);if(!DP)DP=fetch('helper-data.json').then(function(r){if(!r.ok)throw r.status;return r.json()}).then(function(d){D=d;return d},function(e){DP=null;throw e});return DP}
-function preD(){if(!D)getD().catch(function(){})}
+ if(D)go();else{var ind=dots();fetch('helper-data.json').then(function(r){return r.json()}).then(function(d){D=d;if(ind.parentNode)ind.parentNode.removeChild(ind);go()}).catch(function(){if(ind.parentNode)ind.parentNode.removeChild(ind);bot('Не удалось загрузить данные. Проверьте интернет и обновите страницу 🙏',defc(),0)})}}
 var HF=p.querySelector('#hf');I.addEventListener('input',function(){HF.classList.toggle('has',!!I.value.trim())});
 HF.onsubmit=function(e){e.preventDefault();var v=I.value.trim();if(v)say(v)};
 L.addEventListener('click',function(e){var b=e.target.closest('.hqo');if(!b||b.disabled)return;var r=ETIBHelper.answer(+b.dataset.i);[].forEach.call(b.parentNode.querySelectorAll('.hqo'),function(x,i){x.disabled=true;if(i===r.right)x.classList.add('ok');else if(x===b)x.classList.add('no')});bot(r.html,r.chips||defc(),300)});
 p.addEventListener('click',function(e){var a=e.target.closest&&e.target.closest('a[href]');if(a)setTimeout(close,0)});
 Q.addEventListener('click',function(e){if(e.target.textContent==='Показать ещё'){e.stopImmediatePropagation();Q.innerHTML='';var r=reply(last,true);bot(r.html,defc())}},true);
 var fine=false;try{fine=matchMedia('(pointer:fine)').matches}catch(e){}
-var sh0=false;function open(){preD();if(!sh0){sh0=true;try{fetch('dobby-learn.json',{cache:'no-cache'}).then(function(r){return r.ok?r.json():null}).then(function(d){if(d&&d.lessons)ETIBHelper.shared(d.lessons)}).catch(function(){})}catch(e){}}p.removeAttribute('inert');p.classList.add('on');V.classList.add('on');b.classList.add('off');
+var sh0=false;function open(){if(!sh0){sh0=true;try{fetch('dobby-learn.json',{cache:'no-cache'}).then(function(r){return r.ok?r.json():null}).then(function(d){if(d&&d.lessons)ETIBHelper.shared(d.lessons)}).catch(function(){})}catch(e){}}p.removeAttribute('inert');p.classList.add('on');V.classList.add('on');b.classList.add('off');
  if(!loaded){loaded=true;setTimeout(function(){bot(hello()+'! 🧦 Добби приветствует вас! Добби — свободный эльф, а теперь ещё и помощник ETIB. Добби подберёт аромат, найдёт ответ в шпаргалке или сыграет с вами в викторину. С чего начнём?',null,380,tiles)},280)}
  if(fine)setTimeout(function(){I.focus({preventScroll:true})},300)}
 function close(){if(fin)fin();p.classList.remove('on');V.classList.remove('on');b.classList.remove('off');p.setAttribute('inert','');if(document.activeElement===I)I.blur()}
-b.onclick=open;V.onclick=close;b.addEventListener('pointerdown',preD,{passive:true});
-try{if(navigator.serviceWorker&&navigator.serviceWorker.controller){var idle=window.requestIdleCallback||function(f){return setTimeout(f,3000)};idle(preD,{timeout:8000})}}catch(e){}p.querySelector('#hx').onclick=close;
+b.onclick=open;V.onclick=close;p.querySelector('#hx').onclick=close;
 document.addEventListener('keydown',function(e){if(e.key==='Escape'&&p.classList.contains('on'))close()});
 /* свайп вниз по шапке закрывает окно */
 var hh=p.querySelector('#hh'),y0=null,dy=0;
