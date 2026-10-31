@@ -374,6 +374,7 @@ details.sx-st.done>summary .n{background:color-mix(in srgb,var(--k) 55%,var(--ca
 .sx-cmpl .sx-rg{margin:8px 0 0;gap:8px}
 .sx-cmpl li.off .sx-bar{--c:color-mix(in srgb,var(--k) 38%,var(--card))}
 .sx-cmpl li.off .sx-l{color:var(--mute)}
+.sx-cmpl .sx-in li{grid-template-columns:6.4em 1fr}
 /* скидка 10% */
 .sx-dg{display:grid;grid-template-columns:1fr 1fr;gap:8px;align-items:start;margin:10px 0}
 .sx-dg details{margin:0}
@@ -981,6 +982,121 @@ function blotStatus(){
   st.innerHTML=`<span class="dot"></span><div class="stx"><b>${give?'Раздаём блоттеры':'Перерыв'}</b><small>${tx}</small></div><span class="tm">${String(Math.floor(left/60)).padStart(2,'0')}:${String(left%60).padStart(2,'0')}</span><i class="prog" style="--p:${p.toFixed(1)}%"></i>`}
 blot();setInterval(blot,30000);setInterval(blotStatus,1000);
 
+</script>
+<script>
+/* ===== Шпаргалка: воронка этапов, карточки вопросов, шкала дня, чек-листы, факты, свайп ===== */
+(function(){
+const $=id=>document.getElementById(id),still=()=>matchMedia('(prefers-reduced-motion:reduce)').matches;
+const go=(el,blk)=>{if(el)el.scrollIntoView({block:blk||'start',behavior:still()?'auto':'smooth'})};
+const curTab=()=>{const s=document.querySelector('section[id^="p-"]:not([hidden])');return s?s.id.slice(2):'sell'};
+
+/* быстрые переходы по разделам вкладки */
+document.querySelectorAll('section.ks').forEach(sec=>{
+  const ds=[...sec.querySelectorAll(':scope>details.sec')];if(ds.length<2)return;
+  const nav=document.createElement('nav');nav.className='sx-jump';nav.setAttribute('aria-label','Разделы вкладки');
+  ds.forEach(d=>{const h=d.querySelector('h2');if(!h)return;const b=document.createElement('button');b.type='button';b.textContent=h.textContent.trim();b.setAttribute('data-ripple','');
+    b.onclick=()=>{d.open=true;go(d)};nav.appendChild(b)});
+  const ref=sec.firstElementChild&&sec.firstElementChild.classList.contains('banner')?sec.firstElementChild.nextSibling:sec.firstElementChild;
+  sec.insertBefore(nav,ref)});
+
+/* воронка 8 этапов */
+const steps=[...document.querySelectorAll('details.sx-st')];
+if(steps.length){
+  const names=steps.map(d=>{const s=d.querySelector('summary').cloneNode(true);const n=s.querySelector('.n');if(n)n.remove();s.querySelectorAll('.fav').forEach(x=>x.remove());return s.textContent.trim()});
+  const fun=$('sxFun');
+  fun.innerHTML=names.map((n,i)=>`<button type="button" data-st="${i}" style="--i:${i};--mx:${62-i*5}%" aria-label="Этап ${i+1}: ${n}"><b>${i+1}</b><span>${n}</span></button>`).join('');
+  $('sxF').hidden=false;
+  steps.forEach((d,i)=>{
+    const nav=document.createElement('div');nav.className='sx-nav';
+    nav.innerHTML=(i<steps.length-1?`<button type="button" data-next="${i+1}" data-ripple>Дальше: ${names[i+1]} →</button>`:`<button type="button" data-next="top" data-ripple>Все этапы пройдены ✓</button>`)+(i>0?`<button type="button" class="sec2" data-next="${i-1}" aria-label="Назад: ${names[i-1]}">←</button>`:'');
+    d.querySelector('summary').nextElementSibling.appendChild(nav);
+    d.addEventListener('toggle',()=>{if(d.open)steps.forEach(x=>{if(x!==d&&x.open)x.open=false});paint()})});
+  let last=-1;
+  function paint(){
+    const cur=steps.findIndex(d=>d.open);if(cur>=0)last=cur;const at=cur>=0?cur:last;
+    fun.querySelectorAll('button').forEach((b,i)=>{b.classList.toggle('on',i===cur);b.classList.toggle('done',at>=0&&i<at);b.setAttribute('aria-pressed',i===cur)});
+    steps.forEach((d,i)=>d.classList.toggle('done',at>=0&&i<at));
+    const p=at<0?0:(at+1)/steps.length*100;$('sxFp').style.setProperty('--p',p+'%');
+    $('sxFn').textContent=at<0?'0 из '+steps.length:'Этап '+(at+1)+' из '+steps.length;
+    $('sxFc').textContent=at<0?'нажми на этап':names[at]}
+  function openSt(i){const d=steps[i];if(!d)return;d.open=true;paint();requestAnimationFrame(()=>go(d.querySelector('summary')))}
+  fun.addEventListener('click',e=>{const b=e.target.closest('[data-st]');if(b)openSt(+b.dataset.st)});
+  $('sxSteps').addEventListener('click',e=>{const b=e.target.closest('[data-next]');if(!b)return;
+    if(b.dataset.next==='top'){steps.forEach(d=>d.open=false);last=steps.length-1;paint();go($('sxF'),'center');return}openSt(+b.dataset.next)});
+  paint()}
+
+/* частые вопросы: карточки-перевёртыши */
+const flips=$('sxFlips');
+if(flips){
+  flips.addEventListener('click',e=>{const b=e.target.closest('.sx-fi');if(b)b.setAttribute('aria-expanded',b.getAttribute('aria-expanded')!=='true')});
+  $('sxAll').onclick=function(){const on=this.getAttribute('aria-pressed')!=='true';this.setAttribute('aria-pressed',on);this.textContent=on?'Скрыть ответы':'Все ответы';
+    flips.querySelectorAll('.sx-fi').forEach((b,i)=>setTimeout(()=>b.setAttribute('aria-expanded',on),still()?0:i*70))}}
+
+/* шкала дня: блоттеры, отчёты, «сейчас» */
+const A=660,B=1320,pc=m=>((Math.min(B,Math.max(A,m))-A)/(B-A)*100).toFixed(2)+'%';
+window.sxDay=function(m){const el=$('sxDt');if(!el||typeof SL==='undefined')return;
+  let h='<i class="base"></i>'+SL.map(([a,e,t])=>`<i class="seg2 ${t}" style="left:${pc(a)};width:calc(${pc(e)} - ${pc(a)} - 2px)"></i>`).join('');
+  h+=RT.map((r,i)=>`<i class="rp${i===RT.length-1?' fin':''}${m>=r[0]?' done':''}" style="left:${pc(r[0])}"></i>`).join('');
+  if(m>=A&&m<=B)h+=`<i class="now" style="left:${pc(m)}"></i>`;
+  for(let t=720;t<=1320;t+=120)h+=`<span class="tk" style="left:${pc(t)}">${t/60}:00</span>`;
+  el.innerHTML=h};
+{const d=new Date();sxDay(d.getHours()*60+d.getMinutes())}
+
+/* памятки: чек-листы открытия и закрытия, отметки живут до конца дня */
+const CK='etib-sales-chk',today=new Date().toLocaleDateString('ru-RU');
+let ck={};try{const o=JSON.parse(localStorage.getItem(CK));if(o&&o.d===today)ck=o.v||{}}catch(e){}
+const saveCk=()=>{try{localStorage.setItem(CK,JSON.stringify({d:today,v:ck}))}catch(e){}};
+document.querySelectorAll('ol.sx-chk').forEach(ol=>{
+  const id=ol.dataset.ck,lis=[...ol.children],bar=document.createElement('div');bar.className='sx-cp';
+  bar.innerHTML='<div class="sx-tr"><i></i></div><b></b><button type="button">Сбросить</button>';ol.before(bar);
+  const set=ck[id]=ck[id]||[];
+  const paint=()=>{lis.forEach((li,i)=>{const on=set.includes(i);li.classList.toggle('ok',on);li.setAttribute('aria-checked',on)});
+    const n=set.length;bar.querySelector('i').style.setProperty('--p',n/lis.length*100+'%');bar.querySelector('b').textContent=n===lis.length?'Готово ✓':n+' из '+lis.length;bar.querySelector('button').hidden=!n};
+  lis.forEach((li,i)=>{li.setAttribute('role','checkbox');li.tabIndex=0;
+    const tg=()=>{const k=set.indexOf(i);if(k<0)set.push(i);else set.splice(k,1);saveCk();paint()};
+    li.addEventListener('click',tg);li.addEventListener('keydown',e=>{if(e.key===' '||e.key==='Enter'){e.preventDefault();tg()}})});
+  ol.setAttribute('role','group');ol.setAttribute('aria-label','Чек-лист: '+(ol.previousElementSibling.previousElementSibling||{}).textContent);
+  bar.querySelector('button').onclick=()=>{set.length=0;saveCk();paint()};paint()});
+
+/* интересные факты: факт дня и счётчики разделов */
+const fsec=$('p-facts');
+if(fsec){
+  const groups=[...fsec.querySelectorAll(':scope>details.sec')],all=[];
+  groups.forEach((g,gi)=>g.querySelectorAll('.secb>details').forEach(d=>{const p=d.querySelector('div>p');if(p)all.push({d,g,t:d.querySelector('summary').textContent.trim(),b:p.textContent.trim()})}));
+  const short=['История','Из чего','Нос и память','Для клиента'];
+  $('sxCats').innerHTML=groups.map((g,i)=>{const n=g.querySelectorAll('.secb>details').length;return`<button type="button" data-g="${i}" data-ripple><b data-count="${n}">${n}</b>${short[i]||g.querySelector('h2').textContent}</button>`}).join('');
+  $('sxCats').onclick=e=>{const b=e.target.closest('[data-g]');if(!b)return;const g=groups[+b.dataset.g];g.open=true;go(g)};
+  if(all.length){
+    const doy=Math.floor((Date.now()-new Date(new Date().getFullYear(),0,0))/864e5);let k=doy%all.length;
+    const card=$('sxFact');card.hidden=false;
+    const show=(first)=>{const f=all[k];$('sxFt').textContent=f.t;$('sxFb').textContent=f.b;card.querySelector('small').textContent=first?'Факт дня':'Ещё факт · '+(k+1)+' из '+all.length};
+    show(true);
+    $('sxFn2').onclick=()=>{k=(k+1+Math.floor(Math.random()*(all.length-1)))%all.length;
+      if(still())return show();card.classList.add('sw');setTimeout(()=>{show();card.classList.remove('sw')},220)};
+    $('sxFo').onclick=()=>{const f=all[k];f.g.open=true;f.d.open=true;const s=f.d.querySelector('summary');go(s);s.classList.remove('hit');void s.offsetWidth;s.classList.add('hit');setTimeout(()=>s.classList.remove('hit'),2500)}}}
+
+/* 3D-флакон в карточке факта — только когда вкладка открыта и слой эффектов загружен */
+let bottle=false;
+function tryBottle(){if(bottle||curTab()!=='facts'||!window.EtibFX||typeof EtibFX.bottle3D!=='function')return;
+  const box=document.querySelector('.sx-fvis');if(!box)return;bottle=true;
+  try{const c=document.createElement('canvas');c.className='fx-bottle';c.setAttribute('aria-hidden','true');box.innerHTML='';box.appendChild(c);
+    const col=getComputedStyle(fsec).getPropertyValue('--k').trim()||'#5f7035';EtibFX.bottle3D(c,{color:col})}catch(e){}}
+document.addEventListener('sx:tab',tryBottle);
+if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',tryBottle);else tryBottle();
+addEventListener('load',tryBottle);
+
+/* вкладки: стрелки клавиатуры и свайп влево/вправо */
+const tl=document.querySelector('.tabs [role=tablist]'),order=['sell','price','rep','memo','facts'];
+function step(d){const i=order.indexOf(curTab()),n=i+d;if(n<0||n>=order.length)return false;
+  document.documentElement.style.setProperty('--dx',(d>0?28:-28)+'px');$('t-'+order[n]).click();return true}
+tl.addEventListener('keydown',e=>{const d=e.key==='ArrowRight'?1:e.key==='ArrowLeft'?-1:0;if(d&&step(d)){e.preventDefault();$('t-'+curTab()).focus()}});
+let sx=null;const main=document.querySelector('main');
+main.addEventListener('touchstart',e=>{const t=e.target;
+  sx=e.touches.length===1&&!t.closest('input,select,textarea,.sx-jump,.sx-tiers,table,canvas,.al,.rp,dialog')?{x:e.touches[0].clientX,y:e.touches[0].clientY,t:Date.now()}:null},{passive:true});
+main.addEventListener('touchend',e=>{if(!sx)return;const c=e.changedTouches[0],dx=c.clientX-sx.x,dy=c.clientY-sx.y,dt=Date.now()-sx.t;sx=null;
+  if(dt<700&&Math.abs(dx)>70&&Math.abs(dy)<Math.abs(dx)*.55&&!(getSelection()+''))step(dx<0?1:-1)},{passive:true});
+main.addEventListener('touchcancel',()=>{sx=null},{passive:true});
+})();
 </script>
 <script>try{if(sessionStorage.getItem('etib-adm')==='1')document.getElementById('adm').hidden=true}catch(e){}</script>
 <script>

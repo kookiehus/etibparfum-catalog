@@ -330,6 +330,9 @@ body.home a.tile.hero .go{position:relative;z-index:1;display:flex;align-items:c
 @media (prefers-reduced-motion:no-preference){.sh-train .mtr i{transition:width 1.2s var(--ease,ease) .5s}}
 .sh-train svg{flex:none;width:20px;height:20px;color:var(--k-train)}
 
+/* --- пустые «Мои закладки» (подсказка) уходят вниз, чтобы не отодвигать каталог; со списком — остаются наверху --- */
+body.home main{display:flex;flex-direction:column}
+body.home main>.favs:has(.favhint){order:5;margin-top:16px}
 /* --- поиск: витрина и панель уступают место результатам --- */
 .wrap.searching .hero,.wrap.searching .shift,.wrap.searching .quick{display:none!important}
 
