@@ -270,9 +270,9 @@ details.sx-st{position:relative;margin:10px 0;scroll-margin-top:12px}
 details.sx-st+details.sx-st::before{content:"";position:absolute;left:28px;top:-11px;height:10px;width:2px;background:color-mix(in srgb,var(--k) 45%,transparent)}
 section.ks details.sx-st[open]{border-color:var(--kd);box-shadow:0 12px 30px color-mix(in srgb,var(--k) 18%,transparent)}
 details.sx-st.done>summary .n{background:color-mix(in srgb,var(--k) 55%,var(--card))}
-.sx-nav{display:flex;flex-wrap:wrap;gap:8px;margin:14px 0 2px}
-.sx-nav button{flex:1 1 auto;position:relative;overflow:hidden;min-height:46px;padding:10px 16px;border-radius:999px;border:1px solid var(--kd);background:var(--kd);color:var(--sx-onk);font:700 14px/1.2 var(--sans);cursor:pointer}
-.sx-nav button.sec2{flex:0 0 auto;background:transparent;color:var(--ink);border-color:color-mix(in srgb,var(--k) 40%,transparent)}
+.sx-nav{display:flex;gap:8px;margin:14px 0 2px}
+.sx-nav button{flex:1 1 0;min-width:0;position:relative;overflow:hidden;min-height:46px;padding:10px 16px;border-radius:999px;border:1px solid var(--kd);background:var(--kd);color:var(--sx-onk);font:700 14px/1.2 var(--sans);cursor:pointer}
+.sx-nav button.sec2{flex:0 0 52px;order:-1;background:transparent;color:var(--ink);border-color:color-mix(in srgb,var(--k) 40%,transparent)}
 /* ---- полосы-диапазоны ---- */
 .sx-rg{list-style:none;margin:12px 0 6px;padding:0;display:grid;gap:12px}
 .sx-rg li{margin:0}
@@ -301,7 +301,7 @@ details.sx-st.done>summary .n{background:color-mix(in srgb,var(--k) 55%,var(--ca
 .sx-all{flex:none;border:1px solid color-mix(in srgb,var(--k) 40%,transparent);background:transparent;color:var(--ink);font:700 12.5px/1 var(--sans);padding:9px 12px;border-radius:999px;cursor:pointer}
 .sx-flips{display:grid;gap:10px;grid-template-columns:1fr;margin:10px 0}
 @media (min-width:620px){.sx-flips{grid-template-columns:1fr 1fr}}
-.sx-flip{perspective:1100px;scroll-margin-top:12px}
+.sx-flip{display:grid;perspective:1100px;scroll-margin-top:12px}
 .sx-fi{display:grid;width:100%;margin:0;padding:0;border:0;background:none;font:inherit;color:inherit;text-align:left;cursor:pointer;transform-style:preserve-3d;-webkit-tap-highlight-color:transparent}
 .sx-fi>span{grid-area:1/1;display:flex;flex-direction:column;justify-content:space-between;gap:10px;min-height:112px;padding:14px 16px;border-radius:18px;-webkit-backface-visibility:hidden;backface-visibility:hidden;border:1px solid color-mix(in srgb,var(--k) 30%,transparent)}
 .sx-ff{background:linear-gradient(135deg,color-mix(in srgb,var(--k) 15%,var(--card)),var(--card));box-shadow:0 6px 18px color-mix(in srgb,var(--k) 10%,transparent)}
@@ -337,7 +337,9 @@ details.sx-st.done>summary .n{background:color-mix(in srgb,var(--k) 55%,var(--ca
 .sx-tier .cap{font-size:10.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;opacity:.75}
 .sx-ring{--s:58px;width:var(--s);height:var(--s);border-radius:50%;display:grid;place-items:center;background:conic-gradient(currentColor calc(var(--p)*1%),color-mix(in srgb,currentColor 18%,transparent) 0);-webkit-mask:radial-gradient(farthest-side,transparent calc(100% - 7px),#000 calc(100% - 6px));mask:radial-gradient(farthest-side,transparent calc(100% - 7px),#000 calc(100% - 6px))}
 .sx-rw{position:relative;display:grid;place-items:center}
-.sx-rw b{position:absolute;font:800 12px/1 var(--sans)}
+.sx-rw b{position:absolute;font:800 11.5px/1 var(--sans)}
+.sx-tier:not(.t2) .sx-ring{color:var(--kd)}
+.sx-tier small{white-space:nowrap}
 .sx-flow{list-style:none;margin:12px 0;padding:0;display:grid;gap:0;counter-reset:f}
 .sx-flow li{position:relative;display:grid;grid-template-columns:34px 1fr;gap:2px 12px;margin:0;padding:0 0 14px}
 .sx-flow li:not(:last-child)::before{content:"";position:absolute;left:16px;top:34px;bottom:0;width:2px;background:linear-gradient(var(--k),color-mix(in srgb,var(--k) 25%,transparent))}
@@ -370,8 +372,8 @@ details.sx-st.done>summary .n{background:color-mix(in srgb,var(--k) 55%,var(--ca
 .sx-kpi+.sx-kpi{border-top:1px solid color-mix(in srgb,var(--ink) 10%,transparent);margin-top:6px;padding-top:8px}
 .sx-kpi small{font-size:12.5px;font-weight:700;color:var(--mute)}
 .sx-kpi b{font:800 18px/1.2 var(--sans);font-variant-numeric:tabular-nums}
-.sx-kpi b.big{font-size:28px;color:var(--ink);letter-spacing:-.01em}
-.sx-kpi b.big span{background:linear-gradient(90deg,var(--k),color-mix(in srgb,var(--k) 60%,var(--gold)));-webkit-background-clip:text;background-clip:text;color:transparent}
+.sx-kpi b.big{font-size:17px;color:var(--ink)}
+.sx-kpi b.big span{font-size:34px;letter-spacing:-.02em;color:var(--kd)}
 .sx-msg{font-weight:700;margin:12px 0 0;color:var(--mute)}
 .sx-cmpl{margin:14px 0 0;padding-top:12px;border-top:1px solid color-mix(in srgb,var(--ink) 10%,transparent)}
 .sx-cmpl .sx-rg{margin:8px 0 0;gap:8px}
@@ -404,7 +406,7 @@ details.sx-st.done>summary .n{background:color-mix(in srgb,var(--k) 55%,var(--ca
 .sx-dt .now{position:absolute;top:2px;bottom:10px;width:2px;margin-left:-1px;background:var(--warn,#8a5a00);border-radius:2px}
 .sx-dt .now::before{content:"";position:absolute;top:-3px;left:-3px;width:8px;height:8px;border-radius:50%;background:inherit}
 .sx-dt .tk{position:absolute;bottom:0;transform:translateX(-50%);font-size:10.5px;font-weight:700;color:var(--mute);font-variant-numeric:tabular-nums}
-.sx-dt .tk:first-of-type{transform:none}
+.sx-dt .tk:last-child{transform:translateX(-100%)}
 .sx-day .sx-lg{margin-top:6px;font-size:12px}
 .sx-lg i.o{background:var(--card);border:2.5px solid var(--ink);border-radius:50%;width:10px;height:10px}
 .sx-lg i.r{background:color-mix(in srgb,var(--k) 22%,transparent)}
@@ -433,7 +435,7 @@ ol.sx-chk>li:focus-visible{outline:3px solid var(--k);outline-offset:2px}
 .sx-fact small{font:800 11px/1 var(--sans);letter-spacing:.12em;text-transform:uppercase;color:var(--k)}
 .sx-fact h3{margin:8px 0 6px;font:700 18px/1.25 var(--serif)}
 .sx-fact p{margin:0;font-size:14px;line-height:1.5;color:var(--ink)}
-.sx-fbtn{display:flex;gap:8px;margin-top:12px;flex-wrap:wrap}
+.sx-fbtn{display:flex;gap:8px;margin-top:12px}
 .sx-fbtn button{position:relative;overflow:hidden;border:1px solid var(--kd);background:var(--kd);color:var(--sx-onk);font:700 13px/1 var(--sans);padding:11px 14px;border-radius:999px;cursor:pointer}
 .sx-fbtn button+button{background:transparent;color:var(--ink);border-color:color-mix(in srgb,var(--k) 40%,transparent)}
 .sx-fvis{align-self:stretch;display:grid;place-items:center}
@@ -568,7 +570,7 @@ nav.tabs .seg button[aria-selected=true]::after{opacity:1;transform:none}
 </div>
 
 </div></details><details class="sec"><summary><h2>На сколько хватает</h2></summary><div class="secb">
-<p class="sx-grp">Хватит на, месяцев</p>
+<p class="sx-grp">Хватит флакона, месяцев</p>
 <ul class="sx-rg sx-in" style="--max:12" aria-label="На сколько хватает флакона">
 <li><span class="sx-l"><i class="sx-btl" style="--h:13px" aria-hidden="true"></i>15 мл</span><div class="sx-row"><span class="sx-bar" style="--a:1;--b:1.5;--n:0"></span><span class="sx-v">1–1,5 мес.</span></div></li>
 <li><span class="sx-l"><i class="sx-btl" style="--h:17px" aria-hidden="true"></i>30 мл</span><div class="sx-row"><span class="sx-bar" style="--a:2;--b:3;--n:1"></span><span class="sx-v">2–3 мес.</span></div></li>
@@ -627,7 +629,7 @@ nav.tabs .seg button[aria-selected=true]::after{opacity:1;transform:none}
 
 </div></details><details class="sec" open><summary><h2>Бонусная система</h2></summary><div class="secb">
 <div class="sx-lvl" aria-hidden="true"><p class="sx-grp">Уровень растёт с суммой покупок</p><div class="sx-tr"><i></i><i></i><i></i></div><div class="sx-ticks"><span>0 ₽</span><span>30 000 ₽</span><span>60 000 ₽</span><span>→</span></div></div>
-<div class="sx-tiers" role="list" aria-label="Уровни бонусной системы"><div role="listitem" class="sx-tier t0" data-tilt style="--m:14%"><h4 data-depth="2">Эксперт</h4><span class="cap">Кэшбэк</span><span class="pc" data-depth="3"><span data-count="3" data-suffix="%">3%</span></span><span class="sx-rw" data-depth="2"><span class="sx-ring" style="--p:25" aria-hidden="true"></span><b>25%</b></span><span class="cap">Списание до 25%</span><small>0–29 999 ₽</small></div><div role="listitem" class="sx-tier t1" data-tilt style="--m:34%"><h4 data-depth="2">Гуру</h4><span class="cap">Кэшбэк</span><span class="pc" data-depth="3"><span data-count="5" data-suffix="%">5%</span></span><span class="sx-rw" data-depth="2"><span class="sx-ring" style="--p:50" aria-hidden="true"></span><b>50%</b></span><span class="cap">Списание до 50%</span><small>30 000–59 999 ₽</small></div><div role="listitem" class="sx-tier t2" data-tilt style="--m:0%"><h4 data-depth="2">Парфюмер</h4><span class="cap">Кэшбэк</span><span class="pc" data-depth="3"><span data-count="10" data-suffix="%">10%</span></span><span class="sx-rw" data-depth="2"><span class="sx-ring" style="--p:75" aria-hidden="true"></span><b>75%</b></span><span class="cap">Списание до 75%</span><small>от 60 000 ₽</small></div></div>
+<div class="sx-tiers" role="list" aria-label="Уровни бонусной системы"><div role="listitem" class="sx-tier t0" data-tilt style="--m:14%"><h4 data-depth="2">Эксперт</h4><span class="cap">Кэшбэк</span><span class="pc" data-depth="3"><span data-count="3" data-suffix="%">3%</span></span><span class="sx-rw" data-depth="2"><span class="sx-ring" style="--p:25" aria-hidden="true"></span><b>до 25%</b></span><span class="cap">Списание</span><small>0–29&nbsp;999&nbsp;₽</small></div><div role="listitem" class="sx-tier t1" data-tilt style="--m:34%"><h4 data-depth="2">Гуру</h4><span class="cap">Кэшбэк</span><span class="pc" data-depth="3"><span data-count="5" data-suffix="%">5%</span></span><span class="sx-rw" data-depth="2"><span class="sx-ring" style="--p:50" aria-hidden="true"></span><b>до 50%</b></span><span class="cap">Списание</span><small>30&nbsp;000–<br>59&nbsp;999&nbsp;₽</small></div><div role="listitem" class="sx-tier t2" data-tilt style="--m:0%"><h4 data-depth="2">Парфюмер</h4><span class="cap">Кэшбэк</span><span class="pc" data-depth="3"><span data-count="10" data-suffix="%">10%</span></span><span class="sx-rw" data-depth="2"><span class="sx-ring" style="--p:75" aria-hidden="true"></span><b>до 75%</b></span><span class="cap">Списание</span><small>от 60&nbsp;000&nbsp;₽</small></div></div>
 
 <h3>Калькулятор бонусов</h3>
 <div class="sx-calc">
@@ -668,7 +670,7 @@ nav.tabs .seg button[aria-selected=true]::after{opacity:1;transform:none}
 <p>Если делать иначе, клиенту могут не начислиться баллы или скидка встанет неправильно.</p></div></details>
 
 </div></details><details class="sec"><summary><h2>Скидка 10%</h2></summary><div class="secb">
-<div class="sx-pct"><b>−10%</b><span>Четыре случая. Для каждого случая нужно фото, которое прикладывается к отчёту.</span></div>
+<div class="sx-pct"><b>−10%</b><span>Четыре случая. Для каждого нужно фото, которое прикладывается к отчёту.</span></div>
 <div class="sx-dg">
 <details><summary><span class="sx-ic" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="5" y="3" width="14" height="18" rx="2"/><circle cx="12" cy="10" r="2.5"/><path d="M8.5 16.5c.8-1.6 2-2.2 3.5-2.2s2.7.6 3.5 2.2"/></svg></span>Сотрудник ТЦ</summary><div>Фото сотрудника с бейджем, пропуском, в форме или на рабочем месте.</div></details>
 <details><summary><span class="sx-ic" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3 11v2a1 1 0 0 0 1 1h2l5 4V6L6 10H4a1 1 0 0 0-1 1z"/><path d="M15 9a4 4 0 0 1 0 6M18 6a8 8 0 0 1 0 12"/></svg></span>Промоутер</summary><div>Фото промо. Обязательно проверь, что он участник чата.</div></details>
@@ -819,7 +821,7 @@ nav.tabs .seg button[aria-selected=true]::after{opacity:1;transform:none}
 
 <!-- ================= ФАКТЫ ================= -->
 <section id="p-facts" class="ks k-fact" hidden>
-<div class="sx-fact" id="sxFact" data-tilt hidden><div data-depth="2"><small>Факт дня</small><h3 id="sxFt"></h3><p id="sxFb"></p><div class="sx-fbtn"><button type="button" id="sxFn2" data-ripple>Ещё факт</button><button type="button" id="sxFo">Открыть в списке</button></div></div><div class="sx-fvis" data-depth="4"><i class="sx-b" aria-hidden="true"></i></div></div>
+<div class="sx-fact" id="sxFact" data-tilt hidden><div data-depth="2"><small>Факт дня</small><h3 id="sxFt"></h3><p id="sxFb"></p><div class="sx-fbtn"><button type="button" id="sxFn2" data-ripple>Ещё факт</button><button type="button" id="sxFo">К списку</button></div></div><div class="sx-fvis" data-depth="4"><i class="sx-b" aria-hidden="true"></i></div></div>
 <div class="sx-cats" id="sxCats"></div>
 <details class="sec"><summary><h2>История парфюмерии</h2></summary><div class="secb">
 <details><summary>Откуда слово «парфюм»</summary><div><p>Оно происходит от латинского <i>per fumum</i> — «сквозь дым». Первые ароматы были благовониями: их курили в храмах.</p></div></details>
