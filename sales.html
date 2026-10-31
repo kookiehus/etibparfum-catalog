@@ -949,7 +949,7 @@ const left=m=>m>=60?Math.floor(m/60)+' ч '+(m%60?m%60+' мин':''):m+' мин'
 function remind(){
   const d=new Date(),m=d.getHours()*60+d.getMinutes();
   let nx=RT.findIndex(r=>r[0]>m);
-  if(window.sxDay)sxDay(m);
+  if(typeof window.sxDayDraw==='function')sxDayDraw(m);
   $('rslots').innerHTML=RT.map((r,i)=>`<div class="slot${i===nx?' now':''}${nx<0||i<nx?' done':''}">${r[1].length>5?r[1]:r[1]+' отчёт'}</div>`).join('');
   const st=$('rstat');
   const rb=$('rrep');
@@ -1034,13 +1034,13 @@ if(flips){
 
 /* шкала дня: блоттеры, отчёты, «сейчас» */
 const A=660,B=1320,pc=m=>((Math.min(B,Math.max(A,m))-A)/(B-A)*100).toFixed(2)+'%';
-window.sxDay=function(m){const el=$('sxDt');if(!el||typeof SL==='undefined')return;
+window.sxDayDraw=function(m){const el=$('sxDt');if(!el||typeof SL==='undefined')return;
   let h='<i class="base"></i>'+SL.map(([a,e,t])=>`<i class="seg2 ${t}" style="left:${pc(a)};width:calc(${pc(e)} - ${pc(a)} - 2px)"></i>`).join('');
   h+=RT.map((r,i)=>`<i class="rp${i===RT.length-1?' fin':''}${m>=r[0]?' done':''}" style="left:${pc(r[0])}"></i>`).join('');
   if(m>=A&&m<=B)h+=`<i class="now" style="left:${pc(m)}"></i>`;
   for(let t=720;t<=1320;t+=120)h+=`<span class="tk" style="left:${pc(t)}">${t/60}:00</span>`;
   el.innerHTML=h};
-{const d=new Date();sxDay(d.getHours()*60+d.getMinutes())}
+{const d=new Date();sxDayDraw(d.getHours()*60+d.getMinutes())}
 
 /* памятки: чек-листы открытия и закрытия, отметки живут до конца дня */
 const CK='etib-sales-chk',today=new Date().toLocaleDateString('ru-RU');

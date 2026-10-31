@@ -443,6 +443,9 @@ section[id^="p-"]:not([hidden]){animation:tabin .42s var(--ease) backwards}
 .sims button{all:unset;box-sizing:border-box;display:flex;align-items:center;gap:10px;padding:9px 12px;border-radius:12px;border:1px solid var(--line);background:color-mix(in srgb,var(--card) 70%,transparent);font:600 13.5px var(--sans);color:var(--ink);cursor:pointer}
 .sims button b{flex:none;padding:1px 9px;border-radius:999px;background:var(--ink);color:var(--paper);font-size:12px}
 .sims button:focus-visible{outline:2px solid var(--accent)}
+.in-ph canvas{touch-action:pan-y;cursor:grab}
+.in-ph .b3d{position:absolute;left:6px;bottom:6px;padding:3px 8px;border-radius:999px;background:rgba(0,0,0,.5);color:#fff;font:700 10.5px var(--sans);pointer-events:none}
+.in-ph:not([data-zoom="1"]){cursor:default}
 </style><!--/CATVIZ-CSS-->
 </head>
 <body data-sec="cat">
@@ -870,19 +873,19 @@ function radarSVG(pf){
   return s+'</svg>'}
 
 /* ---- окно профиля ---- */
-let dlg=null,curId=null,tiltOff=null;
+let dlg=null,curId=null,tiltOff=null,bottle=null;
 function ensureDlg(){if(dlg)return dlg;dlg=document.createElement('dialog');dlg.id='dInfo';dlg.setAttribute('aria-label','Профиль аромата');document.body.appendChild(dlg);
-  dlg.addEventListener('click',onDlgClick);dlg.addEventListener('close',()=>{if(tiltOff){tiltOff();tiltOff=null}});
+  dlg.addEventListener('click',onDlgClick);dlg.addEventListener('close',()=>{if(tiltOff){tiltOff();tiltOff=null}if(bottle){try{bottle.destroy()}catch(e){}bottle=null}});
   dlg.addEventListener('keydown',e=>{if((e.key==='Enter'||e.key===' ')&&e.target.classList&&e.target.classList.contains('hit')){e.preventDefault();selAxis(e.target.parentNode.dataset.k)}});
   return dlg}
 function bottleSVG(d,ck){return `<svg viewBox="0 0 100 130" style="--liquid:${LIQ[grpType(d.fam,d.type)]||'#ddd'}" aria-hidden="true"><use href="#b-${ck}"/><text x="50" y="85" text-anchor="middle" font-size="${d.number.length>2?11:13}" font-weight="700" font-family="Manrope,sans-serif">${esc(d.number)}</text></svg>`}
 window.openInfo=function(id){
-  const d=DATA.find(x=>x.id===id);if(!d)return;curId=id;ensureDlg();
+  const d=DATA.find(x=>x.id===id);if(!d)return;curId=id;ensureDlg();if(tiltOff){tiltOff();tiltOff=null}if(bottle){try{bottle.destroy()}catch(e){}bottle=null}
   const [cn,ck]=CAT[d.category]||[d.category,'u'],ph=d.ph&&PHOTOS[d.ph],tk=d.category+'|'+d.number,tip=window.TIPS&&TIPS[tk];
   const ty=TYP[d.type]||TYP[grpType(d.fam,d.type)],pf=profile(d),py=pyramid(d);
   const chip=n=>`<button type="button" data-note="${esc(n)}" title="Найти ароматы с нотой «${esc(n)}»">${esc(n)}</button>`;
   let h=`<div class="in-head"><div><span class="tp-no">${esc(d.number)}</span><h2>${esc(d.nm)}</h2><p>${esc(cn)} · ${esc(ty[1])}</p></div><button class="x" type="button" data-close aria-label="Закрыть">×</button></div><div class="in-body">`;
-  h+=`<div class="in-top"><div class="in-ph" data-tilt data-zoom="${ph?1:0}" role="${ph?'button':'img'}" tabindex="${ph?0:-1}" aria-label="${ph?'Увеличить фото':'Условный флакон'}">${ph?`<img src="${ph}" alt="${esc(d.nm)}" data-depth="1">`:`<canvas width="340" height="453" hidden></canvas>${bottleSVG(d,ck)}`}${ph?'<span class="zm" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="10.5" cy="10.5" r="6.5"/><path d="M15.5 15.5 21 21M10.5 7.5v6M7.5 10.5h6"/></svg></span>':''}</div><div class="in-meta">`;
+  h+=`<div class="in-top"><div class="in-ph"${ph?' data-tilt="10"':''} data-zoom="${ph?1:0}"${ph?' role="button" tabindex="0" aria-label="Увеличить фото"':''}>${ph?`<img src="${ph}" alt="${esc(d.nm)}" data-depth="1">`:`<canvas width="340" height="453" hidden></canvas>${bottleSVG(d,ck)}`}${ph?'<span class="zm" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="10.5" cy="10.5" r="6.5"/><path d="M15.5 15.5 21 21M10.5 7.5v6M7.5 10.5h6"/></svg></span>':''}</div><div class="in-meta">`;
   h+=pron(d);
   h+=`<div><p class="k">Характер</p><div class="scale" role="img" aria-label="Тип аромата: ${esc(ty[1])}" style="--p:${ty[0]}%"><i></i></div><div class="scale-l"><span${ty[0]<30?' class="b"':''}>${ty[0]<30?'<b>свежий</b>':'свежий'}</span><span>${ty[0]===50?'<b>и то и другое</b>':''}</span><span>${ty[0]>70?'<b>сладкий</b>':'сладкий'}</span></div></div>`;
   h+=`<p class="when"><small>Когда уместен</small>${esc(ty[2])}<small>общая подсказка по типу аромата</small></p>`;
@@ -899,8 +902,12 @@ window.openInfo=function(id){
   dlg.className='c-'+ck;dlg.innerHTML=h;
   if(!dlg.open)dlg.showModal();dlg.querySelector('.in-body').scrollTop=0;
   const ip=dlg.querySelector('.in-ph');
-  if(!ph){const F=fx(),cv=ip.querySelector('canvas');if(F&&F.bottle3D&&cv){try{const col=(LIQ[grpType(d.fam,d.type)]||'').startsWith('#')?LIQ[grpType(d.fam,d.type)]:'#d9b7a8';F.bottle3D(cv,{color:col,label:d.number});cv.hidden=false;const sv=ip.querySelector('svg');if(sv)sv.remove()}catch(e){cv.remove()}}else if(cv)cv.remove()}
-  tiltOff=tilt(ip,true)};
+  const F=fx();
+  if(!ph){const cv=ip.querySelector('canvas');
+    if(F&&F.bottle3D&&cv){const lq=LIQ[grpType(d.fam,d.type)]||'',col=lq[0]==='#'?lq:'#d8c3b4';cv.hidden=false;bottle=F.bottle3D(cv,{color:col,label:'Условный флакон '+d.number+', можно покрутить пальцем',shape:{f:'classic',m:'tall',u:'round',p:'classic'}[ck]||'classic'});
+      if(bottle){const sv=ip.querySelector('svg');if(sv)sv.remove();ip.insertAdjacentHTML('beforeend','<span class="b3d" aria-hidden="true">3D · крутите</span>')}else cv.remove()}
+    else if(cv)cv.remove()}
+  else if(F&&F.scan)F.scan(dlg);else tiltOff=tilt(ip,true)};
 function selAxis(k){if(!dlg)return;dlg.querySelectorAll('.rtab li').forEach(li=>li.classList.toggle('sel',li.dataset.k===k));dlg.querySelectorAll('.rd g[data-k]').forEach(g=>g.classList.toggle('sel',g.dataset.k===k));
   const li=dlg.querySelector('.rtab li.sel');if(li&&li.scrollIntoView)li.scrollIntoView({block:'nearest',behavior:RM.matches?'auto':'smooth'})}
 function goSearch(v){dlg.close();$('q').value=v;cat=null;gsel.clear();render();toResults()}
@@ -917,8 +924,7 @@ document.addEventListener('keydown',e=>{if(e.key==='Enter'&&dlg&&dlg.open&&e.tar
 
 /* ---- 3D-наклон с бликом (свой лёгкий вариант; общий EtibFX подхватывается, если есть) ---- */
 function tilt(el,gyro){
-  if(RM.matches||!el)return null;const F=fx();
-  if(F&&typeof F.tilt==='function'){try{const r=F.tilt(el);return typeof r==='function'?r:null}catch(e){}}
+  if(RM.matches||!el)return null;
   el.style.transition='transform .5s var(--ease,ease)';
   const gl=document.createElement('span');gl.setAttribute('aria-hidden','true');gl.style.cssText='position:absolute;inset:0;pointer-events:none;border-radius:inherit;mix-blend-mode:soft-light;opacity:0;transition:opacity .3s';el.appendChild(gl);
   let raf=0,tx=0,ty=0;
