@@ -1,0 +1,132 @@
+/* ETIB FX — общий слой эффектов: 3D-наклон, появление при прокрутке, счётчики, инфографика, фон «аромат-туман».
+   Все классы с префиксом fx-. Цвета берутся из переменных сайта, поэтому тёмная тема работает сама. */
+
+/* ---------- токены (серии графиков проверены на дальтонизм и контраст) ---------- */
+:root{
+  --fx-s1:#a8405a;--fx-s2:#b07818;
+  --fx-text:var(--ink,#1a1215);--fx-mute:var(--mute,#54494c);
+  --fx-grid:color-mix(in srgb,var(--ink,#1a1215) 12%,transparent);
+  --fx-track:color-mix(in srgb,var(--accent,#7a2e3f) 14%,transparent);
+  --fx-surface:var(--card,var(--paper,#f7f2f1));
+  --fx-glare:rgba(255,255,255,.42);
+  --fx-ripple:color-mix(in srgb,var(--accent,#7a2e3f) 22%,transparent);
+  --fx-ease:cubic-bezier(.22,1,.36,1)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --fx-s1:#d6667f;--fx-s2:#b8861f;
+  --fx-grid:color-mix(in srgb,var(--ink,#e8e1d7) 14%,transparent);
+  --fx-track:color-mix(in srgb,var(--accent,#c98e9d) 18%,transparent);
+  --fx-glare:rgba(255,255,255,.14);
+  --fx-ripple:color-mix(in srgb,var(--accent,#c98e9d) 28%,transparent)}}
+:root[data-theme="dark"]{
+  --fx-s1:#d6667f;--fx-s2:#b8861f;
+  --fx-grid:color-mix(in srgb,var(--ink,#e8e1d7) 14%,transparent);
+  --fx-track:color-mix(in srgb,var(--accent,#c98e9d) 18%,transparent);
+  --fx-glare:rgba(255,255,255,.14);
+  --fx-ripple:color-mix(in srgb,var(--accent,#c98e9d) 28%,transparent)}
+
+.fx-rel{position:relative}
+.fx-sr{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
+
+/* ---------- 3D-наклон [data-tilt] ---------- */
+.fx-tilt{transform-style:preserve-3d;-webkit-tap-highlight-color:transparent}
+.fx-tilt.fx-live{transform:perspective(var(--fx-persp,900px)) rotateX(var(--fx-rx,0deg)) rotateY(var(--fx-ry,0deg));will-change:transform}
+.fx-tilt [data-depth]{translate:calc(var(--fx-dx,0px)*var(--fx-d,1)) calc(var(--fx-dy,0px)*var(--fx-d,1)) calc(var(--fx-d,1)*6px)}
+.fx-glare{position:absolute;inset:0;border-radius:inherit;pointer-events:none;z-index:4;
+  background:radial-gradient(120% 90% at var(--fx-gx,50%) var(--fx-gy,0%),var(--fx-glare) 0%,transparent 55%);
+  opacity:var(--fx-go,0);transition:opacity .4s ease}
+
+/* ---------- появление при прокрутке [data-reveal] (скрываем только когда JS работает) ---------- */
+.fx-js [data-reveal]:not([data-reveal="stagger"]):not(.fx-in){opacity:0;translate:0 18px}
+.fx-js [data-reveal="fade"]:not(.fx-in){translate:none}
+.fx-js [data-reveal="zoom"]:not(.fx-in){translate:none;scale:.94}
+.fx-js [data-reveal="left"]:not(.fx-in){translate:-22px 0}
+.fx-js [data-reveal="right"]:not(.fx-in){translate:22px 0}
+.fx-js [data-reveal]{transition:opacity .7s var(--fx-ease),translate .8s var(--fx-ease),scale .8s var(--fx-ease);transition-delay:var(--fx-delay,0ms)}
+.fx-js [data-reveal="stagger"]{transition:none}
+.fx-js [data-reveal="stagger"]>*{transition:opacity .6s var(--fx-ease),translate .7s var(--fx-ease);transition-delay:calc(var(--fx-i,0)*70ms)}
+.fx-js [data-reveal="stagger"]:not(.fx-in)>*{opacity:0;translate:0 16px}
+
+/* ---------- счётчики [data-count] ---------- */
+.fx-count{display:inline-block;text-align:inherit}
+.fx-counting{font-variant-numeric:tabular-nums}
+
+/* ---------- кольцо прогресса ---------- */
+.fx-ring{display:inline-flex;flex-direction:column;align-items:center;gap:6px;color:var(--fx-text);font-family:var(--sans,Manrope,system-ui,sans-serif)}
+.fx-ring svg{display:block;width:var(--fx-size,112px);height:var(--fx-size,112px);overflow:visible}
+.fx-ring .fx-ring-track{fill:none;stroke:var(--fx-track)}
+.fx-ring .fx-ring-val{fill:none;stroke:var(--fx-c,var(--fx-s1));stroke-linecap:round;stroke-dasharray:100 100;stroke-dashoffset:100;transition:stroke-dashoffset 1.3s var(--fx-ease)}
+.fx-ring.fx-on .fx-ring-val{stroke-dashoffset:var(--fx-off,100)}
+.fx-ring .fx-ring-num{fill:var(--fx-text);font:700 22px/1 var(--sans,Manrope,system-ui,sans-serif);text-anchor:middle;dominant-baseline:central}
+.fx-ring .fx-ring-sub{fill:var(--fx-mute);font:600 10px/1 var(--sans,Manrope,system-ui,sans-serif);text-anchor:middle;dominant-baseline:central}
+.fx-ring-label{font-size:13px;font-weight:600;color:var(--fx-mute);text-align:center;max-width:var(--fx-size,112px);line-height:1.25}
+
+/* ---------- горизонтальные полосы ---------- */
+.fx-bars{list-style:none;margin:0;padding:0;display:grid;gap:12px;font-family:var(--sans,Manrope,system-ui,sans-serif);color:var(--fx-text)}
+.fx-bar-lbl{display:block;font-size:14px;font-weight:600;line-height:1.3;margin-bottom:5px;color:var(--fx-text)}
+.fx-bar-row{display:flex;align-items:center;gap:8px;min-height:14px}
+.fx-bar-fill{flex:none;height:12px;width:calc((100% - 5em) * var(--fx-p,0));min-width:2px;background:var(--fx-c,var(--fx-s1));border-radius:0 4px 4px 0;transform-origin:0 50%;transform:scaleX(0);transition:transform 1s var(--fx-ease);transition-delay:calc(var(--fx-i,0)*70ms)}
+.fx-bar-val{font-size:13px;font-weight:700;color:var(--fx-mute);white-space:nowrap;opacity:0;transition:opacity .5s ease;transition-delay:calc(var(--fx-i,0)*70ms + 450ms)}
+.fx-bars.fx-on .fx-bar-fill{transform:none}
+.fx-bars.fx-on .fx-bar-val{opacity:1}
+
+/* ---------- радар (семейства нот) ---------- */
+.fx-radar{display:block;color:var(--fx-text);font-family:var(--sans,Manrope,system-ui,sans-serif)}
+.fx-radar svg{display:block;width:100%;height:auto;max-width:var(--fx-max,360px);margin:0 auto;overflow:visible}
+.fx-radar .fx-grid{fill:none;stroke:var(--fx-grid);stroke-width:1;vector-effect:non-scaling-stroke}
+.fx-radar .fx-axis-lbl{fill:var(--fx-mute);font:600 12px/1 var(--sans,Manrope,system-ui,sans-serif)}
+.fx-radar .fx-area{transform-origin:var(--fx-o,50% 50%);transform:scale(0);opacity:0;transition:transform 1.1s var(--fx-ease),opacity .6s ease;transition-delay:calc(var(--fx-i,0)*160ms)}
+.fx-radar.fx-on .fx-area{transform:none;opacity:1}
+.fx-radar .fx-area polygon{fill:var(--fx-c);fill-opacity:.12;stroke:var(--fx-c);stroke-width:2;stroke-linejoin:round}
+.fx-radar .fx-area circle{fill:var(--fx-c);stroke:var(--fx-surface);stroke-width:2}
+.fx-legend{display:flex;flex-wrap:wrap;justify-content:center;gap:6px 16px;margin:8px 0 0;padding:0;list-style:none;font-size:13px;font-weight:600;color:var(--fx-text)}
+.fx-legend li{display:inline-flex;align-items:center;gap:6px}
+.fx-legend i{width:14px;height:3px;border-radius:2px;background:var(--fx-c)}
+
+/* ---------- 3D-флакон ---------- */
+canvas.fx-bottle{display:block;width:100%;aspect-ratio:3/4;touch-action:pan-y;cursor:grab;-webkit-tap-highlight-color:transparent}
+canvas.fx-bottle:active{cursor:grabbing}
+
+/* ---------- фон «аромат-туман» ---------- */
+.fx-aurora{position:fixed;inset:0;z-index:var(--fx-z,-1);pointer-events:none;overflow:hidden;contain:strict}
+.fx-aurora::before,.fx-aurora::after{content:"";position:absolute;width:140vmax;height:140vmax;left:-20vmax;top:-30vmax;will-change:transform}
+.fx-aurora::before{
+  background:radial-gradient(closest-side at 30% 35%,color-mix(in srgb,var(--accent,#7a2e3f) 16%,transparent),transparent),
+             radial-gradient(closest-side at 72% 60%,color-mix(in srgb,var(--gold,#b8935a) 16%,transparent),transparent);
+  animation:fx-drift-a 46s ease-in-out infinite alternate}
+.fx-aurora::after{
+  background:radial-gradient(closest-side at 60% 25%,color-mix(in srgb,var(--hl,#f2d6dc) 55%,transparent),transparent),
+             radial-gradient(closest-side at 25% 75%,color-mix(in srgb,var(--accent,#7a2e3f) 9%,transparent),transparent);
+  animation:fx-drift-b 61s ease-in-out infinite alternate;opacity:.9}
+.fx-mist{position:absolute;left:0;right:0;top:0;height:200%;opacity:.5;will-change:transform;
+  background-image:radial-gradient(circle,color-mix(in srgb,var(--gold,#b8935a) 55%,transparent) 0 1px,transparent 1.6px),
+                   radial-gradient(circle,color-mix(in srgb,var(--accent,#7a2e3f) 35%,transparent) 0 1px,transparent 1.6px);
+  background-size:140px 160px,210px 190px;background-position:0 0,70px 90px;
+  -webkit-mask-image:linear-gradient(180deg,transparent,#000 30%,#000 70%,transparent);mask-image:linear-gradient(180deg,transparent,#000 30%,#000 70%,transparent);
+  animation:fx-rise 90s linear infinite}
+@keyframes fx-drift-a{from{transform:translate3d(0,0,0) rotate(0deg)}to{transform:translate3d(-8vmax,6vmax,0) rotate(24deg)}}
+@keyframes fx-drift-b{from{transform:translate3d(0,0,0) rotate(0deg)}to{transform:translate3d(7vmax,-5vmax,0) rotate(-20deg)}}
+@keyframes fx-rise{from{transform:translate3d(0,0,0)}to{transform:translate3d(0,-50%,0)}}
+
+/* ---------- волна при нажатии [data-ripple] ---------- */
+.fx-ripple-box{position:absolute;inset:0;border-radius:inherit;overflow:hidden;pointer-events:none;z-index:0}
+.fx-ripple{position:absolute;border-radius:50%;background:var(--fx-ripple);transform:scale(0);opacity:1;animation:fx-ripple .6s var(--fx-ease) forwards;pointer-events:none}
+@keyframes fx-ripple{to{transform:scale(1);opacity:0}}
+
+/* ---------- без анимаций: всё статично и сразу видно ---------- */
+@media (prefers-reduced-motion:reduce){
+  .fx-tilt.fx-live{transform:none}
+  .fx-glare{display:none}
+  .fx-js [data-reveal],.fx-js [data-reveal]>*{opacity:1!important;translate:none!important;scale:none!important;transition:none!important}
+  .fx-ring .fx-ring-val,.fx-bar-fill,.fx-bar-val,.fx-radar .fx-area{transition:none!important}
+  .fx-aurora::before,.fx-aurora::after,.fx-mist{animation:none}
+  .fx-ripple{display:none}
+}
+@media print{
+  .fx-js [data-reveal],.fx-js [data-reveal]>*{opacity:1!important;translate:none!important;scale:none!important}
+  .fx-aurora,.fx-glare{display:none}
+}
+@media (forced-colors:active){
+  .fx-aurora,.fx-glare{display:none}
+  .fx-bar-fill,.fx-legend i{background:CanvasText}
+  .fx-ring .fx-ring-val,.fx-radar .fx-area polygon{stroke:CanvasText}
+}
