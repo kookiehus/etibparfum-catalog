@@ -848,7 +848,9 @@ function profile(d){const ns=notesOf(d),by={};AX.forEach(a=>by[a[0]]=[]);const o
   return{ns,by,other,acc}}
 
 /* ---- пирамида: из черновиков подсказок (tips.js, поле pyr) ---- */
-function pyramid(d){const t=window.TIPS&&TIPS[d.category+'|'+d.number],p=t&&t.pyr;if(!p)return null;
+/* выключено: пирамида — непроверенный черновик (см. tips.js). Чтобы показать, поставьте true */
+const SHOW_PYR=false;
+function pyramid(d){if(!SHOW_PYR)return null;const t=window.TIPS&&TIPS[d.category+'|'+d.number],p=t&&t.pyr;if(!p)return null;
   const have=new Set(notesOf(d).map(nz)),tiers=[['top','Верхние ноты','первое впечатление'],['heart','Сердце','основа звучания'],['base','База','шлейф, держится дольше всего']];
   const all=tiers.flatMap(x=>p[x[0]]||[]);if(!all.length)return null;
   const ok=all.filter(n=>have.has(nz(n))).length;if(ok<all.length*.6)return null;/* состав изменили — старая пирамида не годится */
@@ -968,7 +970,7 @@ window.cvEmpty=function(){
   if(neg.length&&words.length>negW.length)acts.push(`<button class="btn sec" type="button" data-cv="neg">Убрать исключения (${esc(negW.join(' '))})</button>`);
   if(cat)acts.push(`<button class="btn sec" type="button" data-cv="cat">Искать во всех категориях</button>`);
   if(gl.length)acts.push(`<button class="btn sec" type="button" data-cv="grp">Сбросить группы</button>`);
-  if(q&&words.length>1)acts.push(`<button class="btn sec" type="button" data-cv="last">Убрать слово «${esc(words[words.length-1])}»</button>`);
+  if(q&&words.length>1&&words[words.length-1][0]!=='-')acts.push(`<button class="btn sec" type="button" data-cv="last">Убрать слово «${esc(words[words.length-1])}»</button>`);
   acts.push(`<button class="btn" type="button" data-cv="all">Сбросить всё</button>`);
   return `<div class="cv-empty" role="status"><svg viewBox="0 0 100 120" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="40" y="6" width="20" height="16" rx="3"/><path d="M45 22v8M55 22v8"/><rect x="18" y="30" width="64" height="84" rx="14"/><path d="M41 62a9 9 0 1 1 13 8c-3 2-4 3-4 7M50 88v1"/></svg><h3>Ничего не нашлось</h3><p>Сейчас включено: ${parts.join(', ')||'нет условий'}. Ни один аромат не подходит под всё сразу.</p><div class="cv-acts">${acts.join('')}</div></div>`};
 grid.addEventListener('click',e=>{const b=e.target.closest('[data-cv]');if(!b)return;const v=b.dataset.cv,w=$('q').value.trim().split(/\s+/).filter(Boolean);
@@ -984,10 +986,10 @@ let compact=false;
 function drawBar(){if(!compact){cb.hidden=true;return}
   const q=$('q').value.trim(),words=q.split(/\s+/).filter(Boolean),gl=[...gsel],nn=grid.querySelectorAll('article.card').length;
   let h=`<button type="button" class="cb-n" data-cb="up" aria-label="Наверх, к фильтрам">↑ ${nn}</button>`;
-  h+=Object.entries(CAT).map(([k,[l,ck]])=>`<button type="button" class="cb-c c-${ck}" data-cb="cat" data-v="${esc(k)}" aria-pressed="${cat===k}"><i></i>${esc(l)}</button>`).join('');
-  if(words.length||gl.length)h+='<span class="cb-sep"></span>';
   h+=words.map((w,i)=>`<button type="button" class="cb-t${w[0]==='-'?' neg':''}" data-cb="w" data-i="${i}" aria-label="Убрать из поиска: ${esc(w)}">${esc(w[0]==='-'?w.slice(1):w)}<b>×</b></button>`).join('');
   h+=gl.map(f=>`<button type="button" class="cb-t" data-cb="g" data-v="${esc(f)}" aria-label="Убрать группу ${esc(f)}">${esc(f.toLowerCase())}<b>×</b></button>`).join('');
+  if(words.length||gl.length)h+='<span class="cb-sep"></span>';
+  h+=Object.entries(CAT).map(([k,[l,ck]])=>`<button type="button" class="cb-c c-${ck}" data-cb="cat" data-v="${esc(k)}" aria-pressed="${cat===k}"><i></i>${esc(l)}</button>`).join('');
   cb.innerHTML=h;cb.hidden=false}
 cb.addEventListener('click',e=>{const b=e.target.closest('[data-cb]');if(!b)return;const k=b.dataset.cb;
   if(k==='up'){scrollTo({top:0,behavior:RM.matches?'auto':'smooth'});return}
