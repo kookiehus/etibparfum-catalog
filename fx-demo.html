@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>ETIB FX — проверка эффектов</title>
+<link rel="stylesheet" href="etib-ui.css">
+<link rel="stylesheet" href="etib-fx.css">
+<style>
+:root{--paper:#f7f2f1;--ink:#1a1215;--accent:#7a2e3f;--gold:#b8935a;--hl:#f2d6dc;--card:#fffdfa;--line:#e8ddd0;--sans:Manrope,system-ui,sans-serif;--head:'Playfair Display',Georgia,serif}
+:root[data-theme="dark"]{--paper:#110d0f;--ink:#e8e1d7;--accent:#c98e9d;--gold:#a88c5e;--hl:#3b2530;--card:#1a1417;--line:#2c2226}
+body{margin:0;color:var(--ink);font:15px/1.5 var(--sans)}
+main{max-width:720px;margin:0 auto;padding:16px}
+h1,h2{font-family:var(--head);font-weight:700}
+h1{font-size:28px;margin:8px 0 4px}h2{font-size:20px;margin:28px 0 12px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:18px}
+.tilt-card{background:linear-gradient(140deg,var(--accent),#3d1420);color:#fff;border-radius:22px;padding:22px;min-height:150px;box-shadow:0 16px 40px rgba(60,20,30,.25)}
+.tilt-card b{display:block;font:700 24px/1.1 var(--head)}
+.tilt-card .badge{display:inline-block;margin-top:14px;padding:6px 12px;border-radius:999px;background:rgba(255,255,255,.18)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:12px}
+.stat{font:700 32px/1.1 var(--sans)}.stat small{display:block;font-size:13px;font-weight:600;color:var(--mute)}
+.rings{display:flex;flex-wrap:wrap;gap:18px;justify-content:space-around}
+.btn{border:0;border-radius:14px;padding:12px 18px;background:var(--accent);color:#fff;font:700 15px var(--sans);min-height:48px}
+.btn.ghost{background:transparent;color:var(--ink);border:1px solid var(--line)}
+.row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.bottles{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.bottles canvas{background:transparent}
+.spacer{height:40vh}
+</style>
+</head>
+<body>
+<main>
+  <h1 data-reveal>ETIB FX</h1>
+  <p data-reveal="fade">Проверочная страница общего слоя эффектов.</p>
+  <div class="row" data-reveal>
+    <button class="btn" id="theme" data-ripple data-haptic>Тема: светлая/тёмная</button>
+    <button class="btn ghost" id="gyro" data-ripple>Включить гироскоп</button>
+  </div>
+
+  <h2 data-reveal>3D-наклон</h2>
+  <div class="tilt-card" data-tilt="10" data-reveal="zoom">
+    <b data-depth="3">Lanvin Éclat d'Arpège</b>
+    <span data-depth="1.5">Цветочный · фруктовый</span><br>
+    <span class="badge" data-depth="4">Хит недели</span>
+  </div>
+
+  <h2 data-reveal>3D-флакон</h2>
+  <div class="bottles" data-reveal="stagger">
+    <div class="card"><canvas id="b1"></canvas></div>
+    <div class="card"><canvas id="b2"></canvas></div>
+  </div>
+  <div class="row" style="margin-top:10px">
+    <button class="btn ghost" data-ripple onclick="window.b1&&b1.setColor('#d9a441')">Янтарь</button>
+    <button class="btn ghost" data-ripple onclick="window.b1&&b1.setColor('#7fa8c9')">Морской</button>
+    <button class="btn ghost" data-ripple onclick="window.b1&&b1.setFill(Math.random()*.8+.2)">Уровень</button>
+  </div>
+
+  <h2 data-reveal>Счётчики</h2>
+  <div class="grid" data-reveal="stagger">
+    <div class="card stat"><span data-count="1284500" data-suffix=" ₽">1 284 500 ₽</span><small>Выручка за месяц</small></div>
+    <div class="card stat"><span data-count="342">342</span><small>Продано флаконов</small></div>
+    <div class="card stat"><span data-count="4.8" data-decimals="1">4,8</span><small>Средняя оценка</small></div>
+    <div class="card stat"><span data-count="87" data-suffix="%">87%</span><small>Выполнение плана</small></div>
+  </div>
+
+  <h2 data-reveal>Кольца прогресса</h2>
+  <div class="card rings">
+    <div id="r1"></div><div id="r2"></div><div id="r3"></div>
+  </div>
+
+  <h2 data-reveal>Топ ароматов</h2>
+  <div class="card" id="bars"></div>
+
+  <h2 data-reveal>Профиль аромата</h2>
+  <div class="card"><div id="radar1"></div></div>
+  <h2 data-reveal>Сравнение двух ароматов</h2>
+  <div class="card"><div id="radar2"></div></div>
+  <div class="spacer"></div>
+</main>
+<script src="etib-fx.js"></script>
+<script src="etib-fx.js"></script><!-- второй раз — проверка защиты от двойной загрузки -->
+<script>
+(function(){
+  var FX=window.EtibFX;
+  FX.aurora();
+  window.b1=FX.bottle3D('#b1',{color:'#7a2e3f',fill:.72});
+  window.b2=FX.bottle3D('#b2',{color:'--gold',shape:'round',fill:.5,yaw:2});
+  FX.ring('#r1',87,100,{label:'План месяца',showPercent:true});
+  FX.ring('#r2',342,400,{label:'Флаконы',color:'var(--fx-s2)'});
+  FX.ring('#r3',4.8,5,{label:'Оценка',decimals:1,size:96,stroke:8});
+  FX.bars('#bars',[
+    {label:'Lanvin Éclat d\'Arpège',value:42},{label:'Chanel Chance Eau Tendre',value:37},
+    {label:'Dior Sauvage',value:31},{label:'Tom Ford Lost Cherry',value:18},{label:'Kilian Angels\' Share',value:9}
+  ],{suffix:' шт',sort:true,label:'Продажи за неделю'});
+  var fam=['Цветочные','Фруктовые','Цитрусовые','Древесные','Восточные','Гурманские','Фужерные'];
+  FX.radar('#radar1',fam.map(function(l,i){return{label:l,value:[9,7,4,5,3,6,2][i]}}),{max:10,label:'Lanvin Éclat d\'Arpège'});
+  FX.radar('#radar2',{axes:fam,series:[{name:'Lost Cherry',values:[4,9,2,6,8,9,1]},{name:'Sauvage',values:[2,3,8,7,5,1,9]}]},{max:10,label:'Сравнение'});
+  document.getElementById('theme').onclick=function(){var r=document.documentElement;r.setAttribute('data-theme',r.getAttribute('data-theme')==='dark'?'light':'dark')};
+  document.getElementById('gyro').onclick=function(){FX.enableGyro().then(function(ok){document.getElementById('gyro').textContent=ok?'Гироскоп включён':'Гироскоп недоступен'})};
+})();
+</script>
+</body>
+</html>
