@@ -363,7 +363,7 @@ h1{font-family:var(--brand);font-weight:400;font-size:clamp(19px,5.6vw,24px);let
 @media (max-width:340px){h1{font-size:17px;letter-spacing:.08em}.hd small{letter-spacing:.2em}}
 
 /* ===== шапка: логотип (Е в полумесяце) + название бренда с вытянутыми по вертикали буквами; подпись тихая ===== */
-@font-face{font-family:"Playfair SC";src:url("fonts/playfair-sc.woff") format("woff");font-weight:400;font-style:normal;font-display:swap}
+@font-face{font-family:"Playfair SC";src:url("fonts/playfair-sc.woff2") format("woff2"),url("fonts/playfair-sc.woff") format("woff");font-weight:400;font-style:normal;font-display:swap}
 :root{--brand:"Playfair SC","Playfair Display",Georgia,"Times New Roman",serif}
 .hd{padding-top:20px;padding-bottom:12px;gap:10px}
 .hd .mark{display:block;flex:none;width:42px;height:42px}

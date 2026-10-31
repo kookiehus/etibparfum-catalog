@@ -5,7 +5,7 @@
    Как обновлять:
    • поменяли страницы/картинки — ничего делать не нужно, обновится само;
    • добавили НОВЫЙ файл или поменяли этот sw.js — допишите файл в список FILES и увеличьте номер V (etib-v74, etib-v75…). */
-const V = 'etib-v73';
+const V = 'etib-v74';
 const PREFIX = 'etib-';            // удаляем только свои старые копии (на github.io у одного адреса может быть несколько сайтов)
 
 /* Что сохранить на телефон при установке. Если какого-то файла нет — он просто пропускается, установка не ломается. */
@@ -14,11 +14,12 @@ const FILES = [
   'etib-ui.css', 'etib-ui.js', 'etib-fx.css', 'etib-fx.js',
   'trainer-data.js', 'rabbit.js', 'pron.js', 'tips.js', 'helper.js', 'helper-data.json', 'dobby-learn.json',
   'fonts/fonts.css', 'fonts/manrope-cyrillic.woff2', 'fonts/manrope-latin.woff2',
-  'fonts/playfair-display-cyrillic.woff2', 'fonts/playfair-display-latin.woff2', 'fonts/playfair-sc.woff', 'fonts/playfair-sc.woff2',
-  'shop.jpg', 'staff.jpg', 'qr.jpg', 'shop.webp', 'staff.webp', 'qr.webp',
-  'welcome-9x16.png', 'welcome-9x16.webp',
+  'fonts/playfair-display-cyrillic.woff2', 'fonts/playfair-display-latin.woff2', 'fonts/playfair-sc.woff2',
+  'welcome-9x16.webp', 'shop.webp', 'staff.webp', 'qr.webp',
   'manifest.webmanifest', 'icon-192.png', 'icon-512.png', 'icon-maskable-512.png', 'apple-touch-icon.png'
 ];
+/* Старые shop.jpg, staff.jpg, qr.jpg, welcome-9x16.png, fonts/playfair-sc.woff страницы больше не используют —
+   они лежат на сайте для совместимости и сохраняются на телефон, только если их кто-то откроет. */
 /* Картинки ароматов из каталога (папка img/) перечислены в img/list.json — его пишет perf-extract-catalog-images.py. */
 const IMG_LIST = 'img/list.json';
 

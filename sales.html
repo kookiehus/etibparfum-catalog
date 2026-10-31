@@ -4,10 +4,11 @@
 <meta charset="utf-8"><meta name="color-scheme" content="light"><script>document.documentElement.setAttribute("data-theme","light")</script>
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#e9e1da" media="(prefers-color-scheme:light)"><meta name="theme-color" content="#211e1c" media="(prefers-color-scheme:dark)">
-<link rel="manifest" href="manifest.webmanifest"><link rel="icon" href="favicon.svg" type="image/svg+xml"><link rel="apple-touch-icon" href="apple-touch-icon.png"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="ETIB">
+<link rel="manifest" href="manifest.webmanifest"><link rel="apple-touch-icon" href="apple-touch-icon.png"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="ETIB">
 <title>ETIB PARFUM — шпаргалка сотрудника</title>
-<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400..800&family=Playfair+Display:wght@500..800&display=swap" rel="stylesheet">
+<link rel="preload" href="fonts/manrope-cyrillic.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="fonts/manrope-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="fonts/fonts.css">
 <style>
 :root{--paper:#f7f2f1;--ink:#1a1215;--mute:#6b5f62;--line:#e0d3d2;--card:#fffdfc;--tint:#f0e6e5;--accent:#7a2e3f;--hl:#f2d6dc;--gold:#b8935a;--ok:#2f6b4a;--warn:#8a5a00;--warnbg:#fbf0d8;
 --serif:'Playfair Display',Georgia,'Times New Roman',serif;--sans:Manrope,system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;
@@ -482,7 +483,7 @@ nav.tabs .seg button[aria-selected=true]::after{opacity:1;transform:none}
 </style>
 </head>
 <body>
-<div id="etibSplash" aria-hidden="true"><img src="welcome-9x16.png" alt=""></div>
+<div id="etibSplash" aria-hidden="true"><img src="welcome-9x16.webp" alt=""></div>
 <style>#etibSplash{position:fixed;inset:0;z-index:99999;display:flex;align-items:center;justify-content:center;background:var(--page-bg,linear-gradient(160deg,#ede6df 0%,#e2d9cf 50%,#d8cec3 100%));background-color:var(--paper,#e9e1da);transition:opacity .45s ease}#etibSplash.out{opacity:0;pointer-events:none}#etibSplash img{width:100%;height:100%;object-fit:cover;display:block}</style>
 <script>(function(){var d=document.getElementById("etibSplash");if(!d)return;try{if(sessionStorage.getItem("etibSplash")){d.remove();return}sessionStorage.setItem("etibSplash","1")}catch(e){}var t=Date.now(),done=0;function hide(){if(done)return;done=1;setTimeout(function(){d.classList.add("out");setTimeout(function(){d.remove()},500)},Math.max(0,800-(Date.now()-t)))}if(document.readyState==="complete")hide();else addEventListener("load",hide);setTimeout(hide,4000)})();</script>
 
@@ -718,7 +719,7 @@ nav.tabs .seg button[aria-selected=true]::after{opacity:1;transform:none}
 <!-- ================= ПАМЯТКИ ================= -->
 <section id="p-memo" class="ks k-memo" hidden>
 <details class="sec"><summary><h2>Открытие и закрытие магазина</h2></summary><div class="secb">
-<button type="button" class="pic" data-z aria-label="Открыть крупнее"><img loading="lazy" decoding="async" src="shop.jpg" alt="Памятка: открытие и закрытие магазина"></button><p class="hint">Нажми на картинку, чтобы открыть её крупнее.</p>
+<button type="button" class="pic" data-z aria-label="Открыть крупнее"><img loading="lazy" decoding="async" src="shop.webp" alt="Памятка: открытие и закрытие магазина"></button><p class="hint">Нажми на картинку, чтобы открыть её крупнее.</p>
 <h3>Открытие смены</h3>
 <ol class="sx-chk" data-ck="open">
 <li>Включить свет.</li>
@@ -743,7 +744,7 @@ nav.tabs .seg button[aria-selected=true]::after{opacity:1;transform:none}
 </div></details>
 
 <details class="sec"><summary><h2>Рабочий день сотрудника</h2></summary><div class="secb">
-<button type="button" class="pic" data-z aria-label="Открыть крупнее"><img loading="lazy" decoding="async" src="staff.jpg" alt="Памятка: рабочий день сотрудника"></button><p class="hint">Нажми на картинку, чтобы открыть её крупнее.</p>
+<button type="button" class="pic" data-z aria-label="Открыть крупнее"><img loading="lazy" decoding="async" src="staff.webp" alt="Памятка: рабочий день сотрудника"></button><p class="hint">Нажми на картинку, чтобы открыть её крупнее.</p>
 <div class="quote">Порядок сегодня — это высокий результат завтра.</div>
 <h3>В начале рабочего дня</h3>
 <ol>
@@ -792,7 +793,7 @@ nav.tabs .seg button[aria-selected=true]::after{opacity:1;transform:none}
 </div></details>
 
 <details class="sec"><summary><h2>Дресс-код</h2></summary><div class="secb">
-<button type="button" class="pic" data-z aria-label="Открыть крупнее"><img loading="lazy" decoding="async" src="qr.jpg" alt="Памятка: дресс-код"></button><p class="hint">Нажми на картинку, чтобы открыть её крупнее.</p>
+<button type="button" class="pic" data-z aria-label="Открыть крупнее"><img loading="lazy" decoding="async" src="qr.webp" alt="Памятка: дресс-код"></button><p class="hint">Нажми на картинку, чтобы открыть её крупнее.</p>
 <div class="quote">Парфюм как роскошь, так презентуй её роскошно одетой(ым).</div>
 <h3>Летний вариант</h3>
 <p class="mute">Лёгкий, стильный, аккуратный.</p>
@@ -1136,6 +1137,7 @@ document.getElementById('zimg').onclick=function(){document.getElementById('zbox
 document.getElementById('zx').onclick=function(){document.getElementById('zoom').close()};
 </script>
 <script>if('serviceWorker' in navigator&&location.protocol!=='file:')addEventListener('load',function(){navigator.serviceWorker.register('sw.js').catch(function(){})})</script>
-<script src="helper.js" defer></script>
+<!-- Добби (helper.js) грузится, когда страница уже показана и браузер свободен — не тормозит открытие -->
+<script>addEventListener("load",function(){(window.requestIdleCallback||setTimeout)(function(){var s=document.createElement("script");s.src="helper.js";document.body.appendChild(s)},{timeout:2000})})</script>
 </body>
 </html>
