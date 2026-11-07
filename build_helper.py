@@ -27,5 +27,14 @@ for m in re.finditer(r'<h2>(.*?)</h2>|<details(?: [^>]*)?><summary>((?:(?!<h2>).
     sl = bt.get(cur)
     qa.append({'q': q, 'a': a, 'sec': cur, 'u': ('sales.html#%s/%s' % (sl[1], sl[0])) if sl else 'sales.html'})
 print(len(qa), 'вопросов-ответов из шпаргалки')
-json.dump({'aromas': ar, 'sections': sec, 'qa': qa}, open('helper-data.json', 'w', encoding='utf-8'), ensure_ascii=False, separators=(',', ':'))
+talk = json.load(open('dobby-talk.json', encoding='utf-8'))
+for t in talk['talk'] + talk['gifts']: re.compile(t['re'])  # ошибка в регулярке видна сразу, а не на сайте
+json.dump({'aromas': ar, 'sections': sec, 'qa': qa, 'talk': talk['talk'], 'gifts': talk['gifts']}, open('helper-data.json', 'w', encoding='utf-8'), ensure_ascii=False, separators=(',', ':'))
 print(len(ar), 'ароматов,', len(sec), 'разделов'); print(sorted({a['t'] for a in ar}), sorted({a['c'] for a in ar}))
+# версия кэша в sw.js: +1, чтобы телефоны сотрудников подтянули новые данные
+sw = open('sw.js', encoding='utf-8').read()
+m = re.search(r"const V='etib-v(\d+)'", sw)
+if m:
+    v = int(m.group(1)) + 1
+    open('sw.js', 'w', encoding='utf-8').write(sw.replace(m.group(0), "const V='etib-v%d'" % v, 1))
+    print('sw.js: версия кэша etib-v%d' % v)
