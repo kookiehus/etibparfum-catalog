@@ -438,10 +438,13 @@ const aliasPre=t=>{if(t.length<2||isNum(t))return[];
 const LK={a:'а',c:'с',e:'е',o:'о',p:'р',x:'х',y:'у',k:'к',m:'м',t:'т',h:'н',b:'в'};
 /* слово из смеси кириллицы и похожих латинских букв («кaро» с латинской a) приводим к кириллице */
 const mixfix=t=>/[а-я]/.test(t)&&/[a-z]/.test(t)?t.replace(/[a-z]/g,c=>LK[c]||c):t;
+/* ноты, которые в составе записаны другим словом: «полынь» — это давана (вид полыни) */
+const NOTE_SYN=[[/^(полын|артемиз)/,['давана']]];
+const noteSyn=t=>{const m=NOTE_SYN.find(a=>a[0].test(t));return m?m[1].filter(x=>x!==t):[]};
 function parse(q){const tok=[],neg=[],ex=[];
   norm(q).split(/[\s,;]+/).filter(Boolean).map(mixfix).forEach(t=>{
     if(t[0]==='-'){if(t.length>1)neg.push(rx(alias(t.slice(1))))}
-    else{const t0=t;t=alias(t);const n=isNum(t);tok.push({w:t,r:rx(t),s:n?'':sk(t),l:latin(t),k:n?'':pk(t),al:t===t0?aliasPre(t).map(rx):[]});if(n)ex.push(new RegExp('^['+(CY[t[0]]||t[0])+']'+t.slice(1)+'$'))}});
+    else{const t0=t;t=alias(t);const n=isNum(t);tok.push({w:t,r:rx(t),s:n?'':sk(t),l:latin(t),k:n?'':pk(t),al:(t===t0?aliasPre(t).map(rx):[]).concat(noteSyn(t).map(rx))});if(n)ex.push(new RegExp('^['+(CY[t[0]]||t[0])+']'+t.slice(1)+'$'))}});
   return{tok,neg,ex}}
 const test=(r,s)=>{r.lastIndex=0;return r.test(s)};
 function hl(text,regs,extra=[]){
