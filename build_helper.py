@@ -4,12 +4,18 @@ def js(f, pre):
     t = open(f, encoding='utf-8').read()
     return json.loads(t[t.index(pre) + len(pre):].rstrip().rstrip(';'))
 tips = js('tips.js', 'window.TIPS='); tr = js('trainer-data.js', 'window.TR='); pron = js('pron.js', 'window.PRON=')
+# группы ароматов из каталога: «РАЗДЕЛ|Группа»
+cat = open('catalog.html', encoding='utf-8').read()
+base = json.loads(cat[cat.index('/*DATA_START*/') + 14:cat.index('/*DATA_END*/')])
+grp = {(x['category'], x['number']): x.get('families', []) for x in base}
 ar = []
 for a in tr:
     t = tips.get(a['c'] + '|' + a['n'], {})
     ar.append({'n': a['n'], 'nm': a['nm'], 'ru': pron.get(a['nm'], ''), 'c': a['c'], 't': a['t'],
                'top': a['top'], 'heart': a['heart'], 'base': a['base'],
-               'how': t.get('how', ''), 'whom': t.get('whom', ''), 'pitch': t.get('pitch', ''), 'hooks': t.get('hooks', []), 'sim': t.get('sim', [])})
+               'how': t.get('how', ''), 'whom': t.get('whom', ''), 'pitch': t.get('pitch', ''), 'hooks': t.get('hooks', []), 'sim': t.get('sim', []),
+               'g': sorted({k.split('|', 1)[-1] for k in grp.get((a['c'], a['n']), [])}),
+               'gs': sorted({k.split('|', 1)[0] for k in grp.get((a['c'], a['n']), []) if '|' in k})})
 h = open('index.html', encoding='utf-8').read()
 i = h.index('const IDX=') + 10
 dec = json.JSONDecoder(); idx, _ = dec.raw_decode(h[i:])
@@ -27,5 +33,14 @@ for m in re.finditer(r'<h2>(.*?)</h2>|<details(?: [^>]*)?><summary>((?:(?!<h2>).
     sl = bt.get(cur)
     qa.append({'q': q, 'a': a, 'sec': cur, 'u': ('sales.html#%s/%s' % (sl[1], sl[0])) if sl else 'sales.html'})
 print(len(qa), 'вопросов-ответов из шпаргалки')
-json.dump({'aromas': ar, 'sections': sec, 'qa': qa}, open('helper-data.json', 'w', encoding='utf-8'), ensure_ascii=False, separators=(',', ':'))
+talk = json.load(open('dobby-talk.json', encoding='utf-8'))
+for t in talk['talk'] + talk['gifts'] + talk.get('objections', []): re.compile(t['re'])  # ошибка в регулярке видна сразу, а не на сайте
+json.dump({'aromas': ar, 'sections': sec, 'qa': qa, 'talk': talk['talk'], 'gifts': talk['gifts'], 'obj': talk.get('objections', [])}, open('helper-data.json', 'w', encoding='utf-8'), ensure_ascii=False, separators=(',', ':'))
 print(len(ar), 'ароматов,', len(sec), 'разделов'); print(sorted({a['t'] for a in ar}), sorted({a['c'] for a in ar}))
+# версия кэша в sw.js: +1, чтобы телефоны сотрудников подтянули новые данные
+sw = open('sw.js', encoding='utf-8').read()
+m = re.search(r"const V='etib-v(\d+)'", sw)
+if m:
+    v = int(m.group(1)) + 1
+    open('sw.js', 'w', encoding='utf-8').write(sw.replace(m.group(0), "const V='etib-v%d'" % v, 1))
+    print('sw.js: версия кэша etib-v%d' % v)

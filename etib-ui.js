@@ -82,6 +82,13 @@ var F=[
 ];
 var IDS=F.filter(function(f){return f[0]!=='h'}).map(function(f){return f[0]});
 function today(){return new Date().toLocaleDateString('ru-RU')}
+/* смайлик дня: у всех отчётов за один день один и тот же, каждый день другой — так видно, что отчёт собран на сайте */
+var EMO=['🦊','🐝','🌵','🍉','🦋','🐙','🍒','🌻','🐳','🍋','🦉','🍄','🐢','🌈','🍓','🐬','🌙','🦄','🍀','🐞','🥥','🦜','🍇','🐧','🌷','🦔','🍑','🐌','🌶️','🦩','🍐','🐠','🥝','🦀','🌰','🐿️','🫐','🦭','🌼','🐊','🍍','🦚','🥨','🐨','🍁'];
+function emoDay(){var d=new Date(),k='etib'+d.getFullYear()+'-'+(d.getMonth()+1)+'-'+d.getDate(),h=2166136261;for(var i=0;i<k.length;i++){h^=k.charCodeAt(i);h=Math.imul(h,16777619)>>>0}return EMO[h%EMO.length]}
+/* без этих граф отчёт не копируется (б/н считается сам: факт − нал) */
+var REQ=[['r-m','остаток на утро'],['r-pl','план'],['r-f','факт'],['r-n','нал']];
+var OPT=[['r-t','торговая точка'],['r-name','ФИО'],['r-e','расход'],['r-p','промо'],['r-i','инкассация'],['r-bs','БС'],['r-rk','Р/К'],['r-a','акция'],['r-o','одиночные'],['r-c','консультации'],['r-d','доп']];
+function empty(id){return String(val(id)).trim()===''}
 function hm(){return new Date().toLocaleTimeString('ru-RU',{hour:'2-digit',minute:'2-digit'})}
 function rub(n){n=Math.round((n+Number.EPSILON)*100)/100;return n.toLocaleString('ru-RU',{minimumFractionDigits:Number.isInteger(n)?0:2,maximumFractionDigits:2})+' ₽'}
 function load(){try{return JSON.parse(localStorage.getItem(DK))||null}catch(e){return null}}
@@ -95,18 +102,21 @@ function save(){if(!root)return;var o={d:today(),t:hm()};IDS.forEach(function(id
 function note(t){if(root)root.querySelector('.rp-top small').textContent=t}
 function text(){var m=num('r-m'),f=num('r-f'),n=num('r-n'),e=num('r-e'),p=num('r-p'),i=num('r-i');
  var ost=m+n-e-p-i,bn=f-n,s=function(id){return val(id).trim()},q=function(id){return String(num(id))},D=function(id){var x=s(id);return x?' ('+x+')':''};
- var L=[new Date().toLocaleDateString('ru-RU'),'','Торговая точка: '+s('r-t'),'ФИО: '+s('r-name'),
+ var L=[new Date().toLocaleDateString('ru-RU')+' '+emoDay(),'','Торговая точка: '+s('r-t'),'ФИО: '+s('r-name'),
   'Остаток на утро: '+rub(m),'План: '+rub(num('r-pl')),'Факт: '+rub(f),'Нал: '+rub(n),'Б/н: '+rub(bn),
   'Расход: '+rub(e)+D('r-ed'),'БС: '+q('r-bs'),'Р/К: '+q('r-rk'),'Промо: '+rub(p),
   'Доп: '+s('r-d'),'Инкассация: '+rub(i)+D('r-id'),'Акция: '+q('r-a'),
   'Одиночные: '+q('r-o'),'Консультации: '+q('r-c'),'Остаток на вечер: '+rub(ost)];
  return{text:L.join('\n'),ost:ost,bn:bn}}
-function calc(){var r=text(),w=[];
+function calc(){var r=text(),w=[],miss=REQ.filter(function(x){return empty(x[0])}),rest=OPT.filter(function(x){return empty(x[0])});
  var e=inp['r-e'].value!==''&&num('r-e')>0||inp['r-ed'].value.trim()!=='',i=num('r-i')>0||inp['r-id'].value.trim()!=='';
  inp['r-ed'].parentNode.hidden=!e;inp['r-id'].parentNode.hidden=!i;
  if(num('r-e')>0&&!inp['r-ed'].value.trim())w.push('Укажи, на что расход.');
  if(num('r-i')>0&&!inp['r-id'].value.trim())w.push('Добавь описание инкассации.');
  root.querySelector('.rp-sum').innerHTML='<span>Остаток на вечер <b class="big">'+rub(r.ost)+'</b></span><span>Б/н <b>'+rub(r.bn)+'</b></span>';
+ var cb=root.querySelector('[data-a="copy"]');cb.disabled=miss.length>0;
+ if(miss.length)w.unshift('Чтобы скопировать отчёт, заполни: '+miss.map(function(x){return x[1]}).join(', ')+'.');
+ else if(rest.length)w.push('Не заполнено: '+rest.map(function(x){return x[1]}).join(', ')+'.');
  root.querySelector('.rp-warn').textContent=w.join(' ')}
 var SVG_X='<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>';
 function build(){
@@ -120,7 +130,7 @@ function build(){
  root.innerHTML=h;document.body.appendChild(root);
  IDS.forEach(function(id){var el=root.querySelector('[data-k="'+id+'"]');inp[id]=el;el.addEventListener('input',function(){calc();save()})});
  root.querySelector('.rp-x').onclick=close;
- root.querySelector('[data-a="copy"]').onclick=function(ev){var b=ev.currentTarget,t=text().text;
+ root.querySelector('[data-a="copy"]').onclick=function(ev){var b=ev.currentTarget;if(REQ.some(function(x){return empty(x[0])})){calc();return}var t=text().text;
   function ok(m){b.textContent=m;setTimeout(function(){b.textContent='Скопировать отчёт'},1800)}
   if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(t).then(function(){ok('Скопировано')},fb)}else fb();
   function fb(){var a=document.createElement('textarea');a.value=t;a.style.cssText='position:fixed;opacity:0';document.body.appendChild(a);a.select();var r=false;try{r=document.execCommand('copy')}catch(e){}a.remove();ok(r?'Скопировано':'Не удалось скопировать')}};

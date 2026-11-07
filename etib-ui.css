@@ -233,6 +233,7 @@ details.sec>summary h2{padding-right:96px}
 .rp-btns{display:grid;grid-template-columns:2fr 1fr;gap:8px;margin-top:8px}
 .rp-btns button{min-height:48px;padding:11px 14px;border-radius:999px;font:700 15px var(--sans);cursor:pointer;border:1px solid var(--g-bd,var(--line));background:var(--g-bg,var(--card));color:var(--ink)}
 .rp-btns .main{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.rp-btns button:disabled{opacity:.4;cursor:not-allowed}
 
 /* кнопка итогового отчёта под таблицей отчётов: днём нейтральная, когда ближайший отчёт итоговый (22:00), окрашивается как выделенная ячейка, за 15 минут до него, как строка статуса */
 .rbtn{display:block;width:100%;min-height:52px;margin:8px 0;padding:12px 18px;border-radius:var(--r-pill,999px);border:1.5px solid var(--g-bd,var(--line));background:var(--g-bg,var(--card));color:var(--ink);font:700 15px var(--sans);text-align:center;cursor:pointer;box-shadow:var(--g-sh,none);transition:background-color .5s,border-color .5s,color .5s}
