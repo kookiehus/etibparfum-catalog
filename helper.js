@@ -10,8 +10,8 @@ var STOP=toks('что кто как мне нам для надо нужно х�
 var SYN0={'сколь':[],'держ':['хват','стойк'],'стойк':['хват','держ'],'хват':['держ','стойк'],'одеж':['одев','внешн'],'одев':['внешн','форма'],'дорог':['возра','цена','скидк'],'возра':['возра'],'десер':['ванил','карам','шокол','пралин','кофе'],'гурма':['ванил','карам','шокол','пралин'],'сладк':[],'свеж':['цитру','бергам','лимон','мандар','грейп','морск'],
  'летн':['цитру','бергам','лимон','мандар','морск'],'зимн':['ванил','амбра','пряно','корица','табак'],'вечер':['ванил','амбра','мускус','табак','пачул'],'дерев':['сандал','кедр','ветив','дубов','древе'],
  'цвето':['роза','жасми','пион','лилия','ирис'],'мускус':['мускус'],'шоко':['шокол'],'кофе':['кофе'],'пряно':['корица','кардам','гвозд','перец'],'табач':['табак'],'сигар':['табак']};
-var FEM=toks('жена жене жены мама маме мамы девушка девушке девушки сестра сестре дочь дочери женщина женщине бабушка подруга подруге женский женские женское');
-var MAS=toks('муж мужу мужа папа папе папы парень парню брат брату отец отцу мужчина мужчине дедушка друг другу мужской мужские мужское');
+var FEM=toks('дочка дочке дочки доченьке девочке внучке теще свекрови тете бабушке жена жене жены мама маме мамы девушка девушке девушки сестра сестре дочь дочери женщина женщине бабушка подруга подруге женский женские женское');
+var MAS=toks('сыну сына мальчику внуку деду дедушке свекру тестю дяде муж мужу мужа папа папе папы парень парню брат брату отец отцу мужчина мужчине дедушка друг другу мужской мужские мужское');
 var EM0={'ванил':'🍦','роза':'🌹','цитру':'🍋','лимон':'🍋','кофе':'☕','шокол':'🍫','жасми':'🌼','сандал':'🪵','мускус':'☁️','яблок':'🍎','персик':'🍑','клубн':'🍓','мандар':'🍊','кокос':'🥥','мята':'🌿','пион':'🌸'};
 function mk(o){var r={};Object.keys(o).forEach(function(k){r[st(k)]=Array.isArray(o[k])?o[k].map(function(x){return st(x)}):o[k]});return r}
 var SYN=mk(SYN0),EM=mk(EM0);
@@ -19,7 +19,7 @@ var S_FRESH=st('свежий'),S_SWEET=st('сладкий');
 var PR=['тёплый, уютный выбор','клиенты это обожают','хит, который редко подводит','всегда находит своих поклонников','с этого легко начать презентацию'];
 var OUT=['Хотите уточнить — для мужчины, свежее, на вечер? Просто напишите 😊','Добби может подобрать ещё: напишите ноту, повод или номер аромата 🌸','Не то? Скажите чуть подробнее, и найдём лучше ✨'];
 function pick(a){return a[Math.floor(Math.random()*a.length)]}
-function prep(d){talkLoad(d);if(d._p)return;d.aromas.forEach(function(a){a._n={};['top','heart','base'].forEach(function(k){a[k].forEach(function(p){toks(p).forEach(function(t){a._n[t]=Math.max(a._n[t]||0,k==='top'?2:3)})})});
+function prep(d){talkLoad(d);d.obj=d.obj||[];if(d._p)return;d.aromas.forEach(function(a){a._n={};['top','heart','base'].forEach(function(k){a[k].forEach(function(p){toks(p).forEach(function(t){a._n[t]=Math.max(a._n[t]||0,k==='top'?2:3)})})});
  a._m={};toks(a.nm+' '+a.ru+' '+a.n).forEach(function(t){a._m[t]=1});a._t={};toks(a.how+' '+a.whom+' '+a.hooks.join(' ')).forEach(function(t){a._t[t]=1})});
  d.qa=d.qa||[];d.sections.forEach(function(s){s._n={};toks(s.n).forEach(function(t){s._n[t]=1});s._k={};toks(s.k).forEach(function(t){s._k[t]=1});s._x={};toks(s.x).forEach(function(t){s._x[t]=1})});d._p=1}
 function code(q){var m=String(q).trim().toUpperCase().match(/^([A-ZА-Я])\s?-?(\d{1,2})$/);if(!m)return null;return(LK[m[1]]||m[1])+m[2]}
@@ -149,7 +149,7 @@ function sub(q,n,p,A){var w={pitch:/продат|сказат|фраз|питч|
  if(k==='whom')return{html:a.whom?h+': '+esc(a.whom)+L:'Про '+h+' описание «для кого» пока не заполнено 🙈'};
  return{html:a.ru?'Читается так: <b>«'+esc(a.ru)+'»</b> 🗣️':'Подсказка по произношению для '+h+' пока не добавлена 🙈'}}
 var FS=['История парфюмерии','Из чего делают ароматы','Нос и память','Факты для разговора с клиентом'];
-var RT=[[/дорог|возражен|сомнева|подумаю/,'obj'],[/держится|стойк|шлейф|как долго/,'types'],[/хватает|надолго хватит/,'last'],[/этап/,'stages'],[/одеват|одежд|внешн вид|дресс|форма/,'dress'],[/клубн|селектив/,'club'],[/алфавит/,'alpha'],[/инкасс/,'inkass'],[/промоутер/,'promo'],[/регистр.*клиент|клиент.*регистр/,'reg'],[/приложени|кошел/,'app'],[/обед|перерыв/,'lunch'],[/мотивац|настрой/,'motiv'],
+var RT=[[/дорого( |$)|возражен|сомнева|подумаю/,'obj'],[/держится|стойк|шлейф|как долго/,'types'],[/хватает|надолго хватит/,'last'],[/этап/,'stages'],[/одеват|одежд|внешн вид|дресс|форма/,'dress'],[/клубн|селектив/,'club'],[/алфавит/,'alpha'],[/инкасс/,'inkass'],[/промоутер/,'promo'],[/регистр.*клиент|клиент.*регистр/,'reg'],[/приложени|кошел/,'app'],[/обед|перерыв/,'lunch'],[/мотивац|настрой/,'motiv'],
  [/истори.*парфюм|парфюм.*истори|кёльн|кельн|одеколон|грасс/,{n:'История парфюмерии',u:'sales.html#facts/f-hist'}],[/из чего делают|как делают аромат/,{n:'Из чего делают ароматы',u:'sales.html#facts/f-ingr'}],[/нос и память|обоняни/,{n:'Нос и память',u:'sales.html#facts/f-nose'}]];
 function route(n){for(var i=0;i<RT.length;i++)if(RT[i][0].test(n)){var t=RT[i][1];if(typeof t==='string'){var x=D.sections.filter(function(z){return z.s===t})[0];if(x)return x}else return{n:t.n,u:t.u,x:'',k:''}}return null}
 function factR(){var L=D.qa.filter(function(i){return FS.indexOf(i.sec)>=0}),it=rnd(L);return{html:nr('fa',['Знаете ли вы? 🤓','Интересный факт! ✨','Держите факт для разговора с клиентом 💬'])+'<div class="hc"><b>'+esc(it.q)+'</b><small>'+esc(it.sec)+'</small><p>'+esc(cut(it.a,520))+'</p><a href="'+esc(it.u)+'">Открыть в шпаргалке</a></div>',chips:['Ещё факт','Викторина','Подбодри меня']}}
@@ -240,6 +240,7 @@ function reply0(q,more){if(!D)return{html:'Секундочку, Добби до
  if(CR.test(n))return{html:'Добби очень сочувствует, что вам так тяжело 💛 Вы не одни. Пожалуйста, поговорите сейчас с близким человеком или обратитесь на горячую линию помощи или в экстренную службу вашей страны. Если вы в опасности, звоните немедленно.'};
  var tf=teachFlow(q,n,more);if(tf)return tf;if(!more&&n.length>=4&&!YES.test(n)&&!NO.test(n)&&!CONT.test(n)&&!FBK.test(n))CUR=String(q).trim();
  if(QZ&&/^(дальше|еще|следующий|продолжить|давай еще)/.test(n))return qzNext();if(/^(хватит|стоп|закончить|выход|не хочу больше)/.test(n)&&QZ)return qzEnd();
+ var ob=objR(n);if(ob)return ob;
  var g=/^(привет|здравствуйте|здравствуй|добрый день|доброе утро|добрый вечер|хай|салют|приветик)\s+/,n2=n.replace(g,'');if(n2!==n&&n2.split(' ').length>=2){pre=hello()+'! 😊 ';n=n2;q=n2}
  if(/(любим|лучш|нравится).{0,15}(аромат|духи|парфюм)|какой (аромат|парфюм|запах) (тебе|ты|у тебя)|что бы ты (выбрал|носил|посоветовал себе)/.test(n)&&/(тебе|ты|твой|у тебя)/.test(n)){var rf=reply('удиви меня');rf.html='Добби выбирает сердцем: мой любимчик на сегодня 💖'+rf.html.replace(/^[^<]*/,'');return rf}
  var ch=chat(n);if(ch)return ch;var ls=learned(n);if(ls)return ls;var sa=smartA(q,n);if(sa)return sa;var t=talk(n);if(t)return{html:t,chips:TM&&TM.c?TM.c:defc()};
@@ -255,18 +256,125 @@ function reply0(q,more){if(!D)return{html:'Секундочку, Добби до
    if(AA.length&&Object.keys(AA[0].hit).length){CTX.offer=ob;return{html:nr('lk',['Ещё как! 🧦 Добби к этому неравнодушен.','Конечно, любит! ✨ Это так вкусно пахнет.','О, Добби в восторге от такого! 😊'])+' В ароматах это есть. Показать?',chips:['Да','Нет','Удиви меня']}}
    CTX.offer='расскажи свою историю';return{html:nr('lg2',['Добби любит многое: носки, ароматы, добрые слова 🧦 А что любите вы?','Про это Добби подумает ✨ Зато точно знает: он любит носки, ваниль и людей с улыбкой.','Добби не уверен, что хорошо знает это 🙈 Зато про носки может говорить часами!']),chips:['Расскажи свою историю','Что ты любишь?','Шутка','Удиви меня']}}
  if((/(^| )(ты|тебя|тебе|тобой|твой|твоя|твое|твои|вас|вам)( |$)|про себя|о себе/.test(n))&&!/аромат|нот[аыуе]|духи|парфюм|скидк|бонус|отчет|блоттер|клиент|смен|продаж|возраж|цен[аыуео]|доступн|стоит|подар/.test(n)){KEEP=true;CTX.ti=null;CTX.topic=null;CTX.offer='расскажи свою историю';return{html:nr('pp',PERSONA),chips:['Расскажи свою историю','Какой ты?','Что ты любишь?','Загадай загадку']}}
+ var sm=similar(q,n);if(sm){sm.html=pre+sm.html;return sm}var sp=smart(q,n,more);if(sp){sp.html=pre+sp.html;return sp}
  var c=code(q),p=parse(q),A=null;if(/подар|(^| )дар(ю|им)( |$)/.test(n)&&p.f.cat)p.w=p.w.filter(function(x){return!/^(дух|парф|флак|арома|запах)/.test(x.s)});if(c){var a2=D.aromas.filter(function(x){return x.n===c})[0];if(a2){CTX.a=a2;return{html:pre+'Нашёлся! ✨ Вот что стоит знать:'+card({a:a2,hit:{}},true),chips:['Как продать','Похожие','Ноты']}}}
  A=findA(p);A.forEach(function(x){x.m=0;p.w.forEach(function(y){if(x.a._m[y.s])x.m++})});var sb=sub(q,n,p,A);if(sb){sb.html=pre+sb.html;sb.chips=sb.chips||['Как продать','Похожие','Ноты'];return sb}
  var need=Math.ceil(p.w.length*.5),Q=(p.w.length?findQ(p):[]).filter(function(r){return cov(r.it.q+' '+r.it.a,p)>=need}),S=(p.w.length?findS(p):[]).filter(function(r){return cov(r.s.n+' '+r.s.k+' '+r.s.x,p)>=need}),bs=A.length?A[0].sc:0,qs=Q.length?Q[0].sc:0,ss=S.length?S[0].sc:0,nh=A.length&&Object.keys(A[0].hit).length>0,asked=/аромат|пахн|нот|для (муж|жен|нее|него)|подар|свеж|сладк|унисекс|духи/.test(n)||p.f.cat||p.f.t.length,giftQ=/подар|(^| )дар(ю|им)( |$)/.test(n)&&!!p.f.cat,sig=!!(nh||asked||p.f.cat||p.f.t.length||(A.length&&A[0].m>0));
  var fact=/факт|что такое|расскажи|правда ли|откуда|почему|зачем|истори|как делают|из чего/.test(n);var skipQS=giftQ||(!!(p.f.cat||p.f.t.length)&&!/факт|что такое|правда ли|откуда|почему|зачем|истори|как делают|из чего|скидк|бонус|отчет|смен|блоттер|цен/.test(n));
  if(!skipQS&&Q.length&&(fact||!A.length||(nh?qs>=bs*4:(!asked&&qs>=4)||qs>=bs)))return{html:pre+qaCard(Q,p),chips:defc()};
  if(!skipQS&&S.length&&(!A.length||(nh?ss>=bs*4:(!asked&&ss>bs*1.5)||(ss>=6&&bs<3))))return{html:pre+secCard(S,p),chips:defc()};
- if(A.length&&sig){CTX.a=A[0].a;var k=more?8:4,list=A.slice(0,k),e='✨',nm=p.w[0]?p.w[0].raw:'';p.w.forEach(function(x){if(EM[x.s]&&e==='✨')e=EM[x.s]});
+ if(A.length&&sig){CTX.a=A[0].a;var k=more?8:4,list=A.slice(0,k),_pk=(CTX.pick={s:{cat:p.f.cat,ty:p.f.t.length?(p.f.t.indexOf(S_FRESH)>=0?['Свежий','Свежий/Сладкий']:['Сладкий','Свежий/Сладкий']):null,no:[],nolab:[],sea:null,occ:null,cmp:[],w:p.w.filter(notJunk)},shown:list.map(function(r){return r.a.n+r.a.c}),age:0}),e='✨',nm=p.w[0]?p.w[0].raw:'';p.w.forEach(function(x){if(EM[x.s]&&e==='✨')e=EM[x.s]});
   if(p.w[0]){var t0=exp(p.w[0].s);['base','heart','top'].forEach(function(z){A[0].a[z].forEach(function(x){if(t0.indexOf(toks(x)[0])===0||toks(x).indexOf(p.w[0].s)>=0)nm=x})})}
   var intro=p.w.length&&!nh?'Такой ноты в пирамидах нет 🤔 Но вот близкое по настроению:':p.w.length&&EM[p.w[0].s]&&nh?e+' '+nm.charAt(0).toUpperCase()+nm.slice(1)+' — '+nr('pr',PR)+'! Вот что стоит показать:':nr('in',['Отличный запрос! ','Есть из чего выбрать! ','С огромным удовольствием, Добби подберёт! ','Класс, смотрим! '])+e+' Вот что подойдёт:';
   return{html:pre+intro+list.map(function(r){return card(r)}).join('')+(A.length>k?'<p class="ot">Всего подходит '+A.length+'.</p>':'')+'<p class="ot">'+nr('ou',OUT)+'</p>',more:A.length>k,chips:A.length>k?['Показать ещё']:['Как продать','Похожие','Ноты']}}
  if(Q.length)return{html:pre+qaCard(Q,p),chips:defc()};if(S.length)return{html:pre+secCard(S,p),chips:defc()};
  if(CTX.ti!=null||CTX.offer||CTX.topic)return{html:nr('ak',ACK),chips:CTX.ti!=null?['Расскажи ещё'].concat(defc().slice(0,3)):defc()};var sb2=smartB(q,n);if(sb2)return sb2;return unknown(q,pre)}
+/* ===== Подбор по смыслу. Пол, тип, сезон, повод и «без/не» разбираются отдельно, а не ищутся как слова ===== */
+var SEAS=[['лето','☀️ лето',/(^| )(лет(о|а|ом|ний|няя|нее|ние|него|нюю|нем)|жар[аоуы]?|жарк\S*|зно[йя]|пляж\S*|море|отпуск\S*)( |$)/],
+ ['зима','❄️ зима',/(^| )(зим[аоуы]?|зимн\S*|зимой|холод[аоу]?|мороз\S*|новый год|новогодн\S*)( |$)/],
+ ['весна','🌷 весна',/(^| )(весн\S*|весенн\S*)( |$)/],['осень','🍂 осень',/(^| )(осен\S*)( |$)/]];
+var OCCS=[['вечер','🌙 на вечер',/(^| )((на )?вечер|вечерн\S*|вечером|свидани\S*|ресторан\S*|праздник\S*|торжеств\S*|на выход|театр\S*|вечеринк\S*)( |$)/],
+ ['день','☕ на каждый день',/(^| )((на )?каждый день|каждодневн\S*|повседневн\S*|офис\S*|на работу|для работы|на учебу|дневн\S*|днем)( |$)/],
+ ['спорт','🏃 спорт',/(^| )(спорт\S*|в зал|трениров\S*|фитнес\S*)( |$)/]];
+function sts(a){return a.map(st)}
+var PROF={
+ 'лето':{g:/свеж|цитрус|зелен|чистот|чист|нежн|легк|приятн/,x:/восточн|ванил|гурман|^сладкие|на вечер/,t:{'Свежий':1.5,'Свежий/Сладкий':.5},n:sts(['цитрус','бергамот','лимон','мандарин','грейпфрут','морская','мята','апельсин','лайм'])},
+ 'зима':{g:/восточн|ванил|гурман|сладк|пряны|древесн|на вечер/,x:/свеж|цитрус|чист/,t:{'Сладкий':1.5,'Свежий/Сладкий':.5},n:sts(['ваниль','амбра','корица','табак','пачули','тонка','кардамон'])},
+ 'весна':{g:/цветоч|нежн|легк|приятн|зелен|фрукт|ягод/,x:/восточные выраж|гурман/,t:{'Свежий/Сладкий':1,'Свежий':.5},n:sts(['пион','ландыш','сирень','жасмин','роза','груша'])},
+ 'осень':{g:/пряны|древесн|шипр|терпк|восточн|пудров/,x:/цитрус/,t:{'Свежий/Сладкий':.5,'Сладкий':.5},n:sts(['корица','кардамон','пачули','кожа','ветивер','сандал'])},
+ 'вечер':{g:/на вечер|восточн|статн|ванил|гурман|^сладкие|пудров/,x:/свеж|чист|нежн|легк/,t:{'Сладкий':1},n:sts(['амбра','ваниль','табак','мускус','пачули'])},
+ 'день':{g:/нежн|легк|приятн|свеж|чист|на каждый день|классическ/,x:/на вечер|восточные выраж|гурман/,t:{'Свежий':1,'Свежий/Сладкий':.5},n:[]},
+ 'спорт':{g:/свеж|цитрус|чист|зелен/,x:/сладк|восточн|гурман|ванил/,t:{'Свежий':2},n:sts(['цитрус','морская','мята','грейпфрут','лимон'])},
+ 'строго':{g:/классическ|статн|солидн|шипр|фужер|древесн/,x:/гурман|ягод|сладковат/,t:{},n:[]},
+ 'ярко':{g:/на вечер|восточные выраж|восточн|пряны/,x:/нежн|легк/,t:{},n:[]}};
+var CMP=[[/(^| )(посвежее|свежее|полегче|легче|прохладнее|не такое сладкое)( |$)/,'fresh'],[/(^| )(послаще|слаще|потеплее|теплее|поуютнее)( |$)/,'sweet'],
+ [/(^| )(построже|строже|посерьезнее|посолиднее|классическ\S*|солидн\S*|статн\S*)( |$)/,'строго'],[/(^| )(поярче|ярче|насыщеннее|шлейфов\S*|с шлейфом)( |$)/,'ярко']];
+var NEGRX=/(^| )(без|кроме|только не|но не|не|никаких|никакой|никакого|чтобы не было|чтоб не было|не люблю|не нравится|не нравятся|не переносит|не переношу|ненавижу|аллергия на)( очень| слишком| сильно| такой| такое| такого| совсем)? ([а-яa-z]+)/g;
+var NEGSKIP=/^(знаю|хочу|надо|нужно|могу|нрав\S*|подход\S*|понрав\S*|важно|уверен\S*|понял\S*|то|тот|та|это|так|был\S*|очень|для|на|в|с|за|про|мой|моя|мое|его|ее|их|дорог\S*|дешев\S*|получается|помню|подошел|подошло|пахнет|работает)$/;
+var BIZX=/отчет|смен[аыуе]|касс|бонус|скидк|блоттер|обед|инкасс|дресс|одежд|форм[аеуы]( |$)|график|выручк|этап|возраж|акци[яию]/;
+var AROMAISH=/аромат|дух[иа]?( |$)|духов|парфюм|запах|пахн|туалетн|что.нибудь|что.то|посоветуй|подбери|подобрать|выбрать|подар|для (него|нее|себя|мам|пап|жен|муж|девушк|парн|подруг|друг|сестр|брат|дочер|сын)/;
+var JUNK={};toks('аромат ароматы ароматом духи духов парфюм парфюмерия запах запахи пахнет пахло туалетная флакон подарок подарить подарочек вода воду день рождения вариант варианты подобрать подбери посоветовать посоветуй посоветуешь выбрать выбор нравится нравятся себе себя люблю знаю нужно нужен нужна хочу хотим типа нибудь какой какое мужчине женщине девушке').forEach(function(t){JUNK[t]=1});
+function notJunk(x){return!JUNK[x.s]&&!JUNK[st(x.raw)]}
+var SEX={'ЖЕНСКИЕ':'👩 женский','МУЖСКИЕ':'👨 мужской','УНИСЕКС':'🫧 унисекс','ПРЕМИУМ':'💎 премиум'};
+function sx(n){var s={cat:null,ty:null,no:[],nolab:[],sea:null,occ:null,cmp:[],w:[],soft:false,any:false,mod:false},r=' '+n+' ',m;
+ NEGRX.lastIndex=0;var cut=[];
+ while((m=NEGRX.exec(r))){var w=m[4],soft=!!m[3],lead=m[2];if(NEGSKIP.test(w)){continue}
+  if(/^(сладк|слащ|притор|сахар|конфетн)/.test(w)){s.ty=soft?['Свежий','Свежий/Сладкий']:['Свежий'];s.nolab.push(soft?'не очень сладкий':'не сладкий')}
+  else if(/^(свеж|холодн|морск|прохладн)/.test(w)){s.ty=soft?['Сладкий','Свежий/Сладкий']:['Сладкий'];s.nolab.push(soft?'не очень свежий':'не свежий')}
+  else if(/^(тяжел|резк|навязчив|душн|громк|удушл)/.test(w)){s.occ=s.occ||'день';s.nolab.push('не '+w)}
+  else if(/^(мужск|женск|унисекс)/.test(w)||(lead==='не'&&w.length<4)){continue}
+  else{var t=st(w);s.no.push(exp(t));s.nolab.push((/^(без|кроме|никак)/.test(lead)?'без ':'не ')+w)}
+  cut.push(m[0].slice(m[1].length))}
+ cut.forEach(function(c){r=r.replace(c,' ')});
+ SEAS.forEach(function(x){if(x[2].test(r)){s.sea=x[0];r=r.replace(x[2],' ')}});
+ OCCS.forEach(function(x){if(x[2].test(r)){s.occ=x[0];r=r.replace(x[2],' ')}});
+ CMP.forEach(function(x){if(x[0].test(r)){r=r.replace(x[0],' ');if(x[1]==='fresh')s.ty=['Свежий','Свежий/Сладкий'].filter(function(t){return!(s.ty&&s.ty.length===1&&s.ty[0]==='Свежий')||t==='Свежий'});else if(x[1]==='sweet')s.ty=['Сладкий','Свежий/Сладкий'];else s.cmp.push(x[1])}});
+ r=r.replace(/(^| )(с|со|типа|вроде)(?= )/g,' ').replace(/ (не|знаю|очень|чуть|немного|слегка|более|менее|побольше|поменьше|чтобы|был|была|было|еще|ещё|лучше|тогда|можно|давай|только|ну|и|а|но|у|вас|есть|нибудь|какой|какое|какие|который|чтоб|так|же)(?= )/g,' ');
+ var p=parse(r.trim());s.cat=p.f.cat;if(p.f.t.length&&!s.ty){var fr=p.f.t.indexOf(S_FRESH)>=0,sw=p.f.t.indexOf(S_SWEET)>=0;s.ty=fr&&sw?['Свежий/Сладкий']:fr?['Свежий','Свежий/Сладкий']:['Сладкий','Свежий/Сладкий']}
+ s.w=p.w.filter(notJunk);
+ s.mod=!!(s.cat||s.ty||s.no.length||s.sea||s.occ||s.cmp.length);s.any=!!(s.no.length||s.sea||s.occ||s.cmp.length||s.nolab.length);return s}
+function sxMerge(a,b){var o={cat:b.cat||a.cat,ty:b.ty||a.ty,no:a.no.concat(b.no),nolab:a.nolab.concat(b.nolab),sea:b.sea||a.sea,occ:b.occ||a.occ,cmp:b.cmp.length?b.cmp:a.cmp,w:a.w.concat(b.w.filter(function(x){return!a.w.some(function(y){return y.s===x.s})}))};
+ /* «а с ванилью» после «без ванили» — снимаем запрет на эту ноту */
+ b.w.forEach(function(x){o.no=o.no.filter(function(e,i){var k=e.indexOf(x.s)<0;if(!k)o.nolab[i]=null;return k})});o.nolab=o.nolab.filter(Boolean);
+ if(b.ty)o.nolab=o.nolab.filter(function(l){return!/сладк|свеж/.test(l)}).concat(b.nolab.filter(function(l){return/сладк|свеж/.test(l)}));return o}
+function gsec(a,cat){return a.c===cat||(a.c==='ПРЕМИУМ'&&(a.gs||[]).indexOf(cat)>=0)}
+function hasNo(a,e){var G={};(a.g||[]).forEach(function(g){toks(g).forEach(function(t){G[t]=1})});return e.some(function(t){return a._n[t]||G[t]})}
+function prof(a,k){var P=PROF[k];if(!P)return 0;var sc=0,G=(a.g||[]).map(function(x){return x.toLowerCase()});
+ sc+=Math.min(G.filter(function(x){return P.g.test(x)}).length,2)*1.2;if(G.some(function(x){return P.x.test(x)}))sc-=1.5;sc+=P.t[a.t]||0;
+ var c=0;P.n.forEach(function(t){if(a._n[t])c++});return sc+Math.min(c,3)*.4}
+function sxFind(s,skip){var r=[];D.aromas.forEach(function(a,i){
+  if(s.cat&&s.cat!=='ПРЕМИУМ'&&!gsec(a,s.cat))return;if(s.cat==='ПРЕМИУМ'&&a.c!=='ПРЕМИУМ')return;
+  if(s.ty&&s.ty.indexOf(a.t)<0)return;if(s.no.some(function(e){return hasNo(a,e)}))return;if(skip&&skip.indexOf(a.n+a.c)>=0)return;
+  var x=s.w.length?scoreA(a,{w:s.w}):{sc:0,hit:{}};if(s.w.length&&x.sc<=0)return;
+  var sc=x.sc*2+prof(a,s.sea)+prof(a,s.occ);s.cmp.forEach(function(k){sc+=prof(a,k)});r.push({a:a,sc:sc,hit:x.hit,i:i})});
+ r.sort(function(x,y){return y.sc-x.sc||x.i-y.i});return r}
+function sxLabel(s){var L=[];if(s.cat)L.push(SEX[s.cat]);if(s.ty&&!s.nolab.some(function(l){return/сладк|свеж/.test(l)}))L.push(s.ty.length===1?s.ty[0].toLowerCase():s.ty[0]==='Свежий'?'свежий':'сладкий');
+ L=L.concat(s.nolab);if(s.sea)SEAS.forEach(function(x){if(x[0]===s.sea)L.push(x[1])});if(s.occ)OCCS.forEach(function(x){if(x[0]===s.occ)L.push(x[1])});
+ s.cmp.forEach(function(k){L.push(k==='строго'?'классический':'яркий')});s.w.forEach(function(x){L.push(x.raw)});return L}
+function sxShow(s,more,page){var skip=page?CTX.pick.shown:null,A=sxFind(s,skip),lost='';
+ if(!A.length&&s.w.length&&!page){lost=s.w.map(function(x){return x.raw}).join(', ');s=sxMerge(s,{cat:null,ty:null,no:[],nolab:[],sea:null,occ:null,cmp:[],w:[]});s.w=[];A=sxFind(s)}
+ var k=more?8:4,list=A.slice(0,k),L=sxLabel(s);
+ CTX.pick={s:s,shown:(page?CTX.pick.shown:[]).concat(list.map(function(r){return r.a.n+r.a.c})),age:0};KEEP=true;
+ var head=(L.length?'<p class="ot">Понял так: <b>'+L.map(esc).join(' · ')+'</b></p>':'')+(lost?'<p class="ot">Про «'+esc(lost)+'» Добби не знает, подобрал без этого.</p>':'');
+ if(!list.length)return{html:head+(page?'Больше вариантов с такими условиями нет 🙈 Можно убрать одно из условий.':'С такими условиями Добби ничего не нашёл 🙈 Попробуйте убрать одно из условий, например: «а можно сладкое?» или «без ограничений».'),chips:['Без ограничений','Удиви меня']};
+ CTX.a=list[0].a;var ch=[];if(!s.ty)ch.push('Посвежее','Послаще');if(!s.occ)ch.push(s.sea?'На вечер':'На каждый день');if(A.length>k)ch.unshift('Ещё варианты');ch.push('Как продать');
+ return{html:head+nr('in2',['Вот что подойдёт ✨','Добби подобрал 🧦','Смотрите, что есть 👇'])+list.map(function(r){return card(r)}).join('')+(A.length>k?'<p class="ot">Подходит всего '+plA(A.length)+'. Можно уточнить: «а без розы?», «а мужское?», «посвежее».</p>':''),chips:ch.slice(0,4)}}
+function smart(q,n,more){if(CTX.pick)CTX.pick.age++;var pk=CTX.pick&&CTX.pick.age<=4?CTX.pick:null;
+ if(BIZX.test(n))return null;
+ if(pk&&/^(без ограничений|сбросить|заново|сначала)$/.test(n)){var s0={cat:null,ty:null,no:[],nolab:[],sea:null,occ:null,cmp:[],w:pk.s.w};return sxShow(s0,more)}
+ if(pk&&/^((а |покажи |давай |можно )?(ещ[её]|други[ей]|другое|еще варианты|ещё варианты|еще что.нибудь|не то|не нравится)( варианты| что.нибудь)?\??)$/.test(n))return sxShow(pk.s,more,true);
+ var s=sx(n),FU=/^(а|и|но|только|лучше|можно|давай|тогда|ну)( |$)/.test(n),short=n.split(' ').length<=3;
+ var kinds=(s.cat?1:0)+(s.ty?1:0)+(s.no.length?1:0)+(s.sea?1:0)+(s.occ?1:0)+(s.cmp.length?1:0);
+ if(pk&&((FU&&(s.mod||s.w.length))||(short&&kinds===1&&!s.w.length&&!AROMAISH.test(n))))return sxShow(sxMerge(pk.s,s),more);
+ if(s.any&&(AROMAISH.test(n)||s.cat||s.ty||s.w.length))return sxShow(s,more);
+ if((s.ty||s.cat)&&AROMAISH.test(n))return sxShow(s,more);
+ return null}
+/* ===== «Похожее на…»: отдельный путь для запросов с брендом или названием ===== */
+var SIMRX=/(^| )(похож\S*( на| как)?|аналог\S*( для)?|вместо|наподобие|в стиле|напомина\S*|замен[ауы]( для)?|типа|что.то вроде|что.то как|хочу как|нужно как|как у)( |$)(.*)$/;
+function simA(a,lim){lim=lim||4;var out=[];(a.sim||[]).forEach(function(x){var c=x.split(' ')[0],b=D.aromas.filter(function(z){return z.n===c})[0];if(b&&out.indexOf(b)<0)out.push(b)});
+ if(out.length<lim){var me=Object.keys(a._n),G=a.g||[];D.aromas.map(function(b){if(b===a||out.indexOf(b)>=0)return null;var c=0;me.forEach(function(t){if(b._n[t])c++});
+   var g=(b.g||[]).filter(function(x){return G.indexOf(x)>=0}).length;return{b:b,sc:c/Math.sqrt(1+Object.keys(b._n).length)+g*.5+(b.t===a.t?.5:0)+(b.c===a.c?.3:0)}}).filter(Boolean).sort(function(x,y){return y.sc-x.sc}).slice(0,Math.max(3,lim)-out.length).forEach(function(x){out.push(x.b)})}
+ return out.slice(0,lim)}
+function nameHit(X){var T=toks(X).filter(function(t){return!/^(дух|арома|парф|запа|туал|воду|вода|мне|нуж|ваш|у|есть|что|то|нибу|чего|тот|этот|такое|похо)/.test(t)});if(!T.length)return{T:T,R:[]};
+ var R=D.aromas.map(function(a){var c=0;T.forEach(function(t){if(a._m[t])c++});return{a:a,c:c}}).filter(function(x){return x.c>0});var b=R.reduce(function(m,x){return Math.max(m,x.c)},0);
+ return{T:T,R:R.filter(function(x){return x.c===b}).map(function(x){return x.a}),b:b}}
+function similar(q,n){var m=n.match(SIMRX);if(!m)return null;var X=(m[7]||'').trim(),sp=X.split(/ (?:но|только|и чтобы|чтобы|и|а) /),M=sp.length>1?sx(sp.slice(1).join(' ')):null;X=sp[0].trim().replace(/^(у|на|для|от) /,'');if(X&&sx(X).mod)return null;
+ var c=code(X.replace(/^(на|для) /,'')),a=c?D.aromas.filter(function(z){return z.n===c})[0]:null;
+ if(!a){if(!X)return null;var h=nameHit(X);if(!h.T.length)return null;
+  if(!h.R.length){var hasNote=h.T.some(function(t){return D.aromas.some(function(z){return z._n[t]})});if(hasNote)return null;KEEP=true;
+   return{html:'Аромата «'+esc(X)+'» в каталоге ETIB нет 🙈 Расскажите, что в нём нравится: свежесть, сладость, какие ноты? Добби подберёт близкое по настроению.',chips:['Свежее для мужчины','Сладкий женский','Удиви меня']}}
+  if(h.R.length>1){var cards=h.R.slice(0,4).map(function(z){return'<p><a href="catalog.html#n='+encodeURIComponent(z.n)+'">'+esc(z.n+' · '+z.nm)+'</a></p>'}).join('');KEEP=true;
+   CTX.offer=null;return{html:(h.b<h.T.length?'Точно «'+esc(X)+'» в каталоге нет. Может, один из этих? 👇':'По «'+esc(X)+'» у нас несколько ароматов 👇 Уточните, какой из них, и Добби найдёт похожие.')+'<div class="hc">'+cards+'</div>',chips:h.R.slice(0,3).map(function(z){return'Похожее на '+z.n})}}
+  a=h.R[0]}
+ CTX.a=a;var S=simA(a,M&&M.mod?20:4),ML=M&&M.mod?sxLabel(M):[];if(M&&M.mod){S=S.filter(function(b){return(!M.ty||M.ty.indexOf(b.t)>=0)&&(!M.cat||gsec(b,M.cat))&&!M.no.some(function(e){return hasNo(b,e)})}).slice(0,4)}KEEP=true;
+ if(!S.length)return{html:'Это у нас <b>'+esc(a.n+' · '+a.nm)+'</b>. Похожих с условием «'+esc(ML.join(', '))+'» Добби не нашёл 🙈',chips:['Ещё похожие','Как продать']};
+ return{html:'Это у нас <b>'+esc(a.n+' · '+a.nm)+'</b>. Похожее по настроению'+(ML.length?' ('+esc(ML.join(', '))+')':'')+' 👇'+S.map(function(b){return card({a:b,hit:{}})}).join(''),chips:['Как продать','Ноты','Ещё похожие']}}
+/* ===== Короткие скрипты на возражения ===== */
+function objR(n){var O=D.obj||[];if(/^(возражени[яей]|работа с возражениями|как работать с возражениями)$/.test(n))return null;
+ for(var i=0;i<O.length;i++){var o=O[i],re;try{re=new RegExp(o.re)}catch(e){continue}if(!re.test(n))continue;KEEP=true;CTX.ti=null;CTX.offer=null;
+  var other=O.filter(function(x){return x!==o}).slice(0,3).map(function(x){return x.title.replace(/[«»]/g,'')});
+  return{html:'💬 '+esc(o.title)+' — можно ответить так:'+o.say.map(function(t){return'<p class="ps">'+esc(t)+'</p>'}).join('')+'<a class="hs" href="sales.html#sell/obj"><b>Работа с возражениями</b><small>Все пять шагов в шпаргалке</small></a>',chips:other}}
+ return null}
 root.ETIBHelper={reply:reply,answer:qzAnswer,load:function(d){D=d},shared:function(l){SHARED=(l||[]).filter(function(x){return x&&x.p&&x.a}).slice(0,300)},lessons:lessons};
 if(typeof document==='undefined')return;
 var css=[
