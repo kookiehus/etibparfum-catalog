@@ -696,5 +696,12 @@ document.getElementById('zx').onclick=function(){document.getElementById('zoom')
 </script>
 <script>if('serviceWorker' in navigator&&location.protocol!=='file:')addEventListener('load',function(){navigator.serviceWorker.register('sw.js').catch(function(){})})</script>
 <script src="helper.js" defer></script>
+<style>img{-webkit-touch-callout:none;-webkit-user-select:none;user-select:none;-webkit-user-drag:none;user-drag:none}</style>
+<script>(function(){function im(e){var t=e.target;return t&&t.closest&&t.closest('img,picture,.ph,#zImg')}
+document.addEventListener('contextmenu',function(e){if(im(e))e.preventDefault()},true);
+document.addEventListener('dragstart',function(e){if(im(e))e.preventDefault()},true);
+document.addEventListener('selectstart',function(e){if(im(e))e.preventDefault()},true);
+function lock(r){(r.querySelectorAll?r.querySelectorAll('img'):[]).forEach(function(i){i.draggable=false})}
+lock(document);new MutationObserver(function(m){m.forEach(function(x){x.addedNodes.forEach(function(n){if(n.nodeType===1){if(n.tagName==='IMG')n.draggable=false;lock(n)}})})}).observe(document.documentElement,{childList:true,subtree:true})})();</script>
 </body>
 </html>
