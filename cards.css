@@ -35,3 +35,15 @@
 #cats .chip[data-v="NEW"]{color:#a8701a}
 #cats .chip[data-v="NEW"][aria-pressed="true"]{background:#a8701a;color:#fff}
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]) #dCard{color-scheme:light}}
+/* v149: правки по проверке дизайна */
+.nc:focus,.nc:focus-visible{outline:none}
+.nc-top h2{font-weight:700;letter-spacing:-.025em;line-height:1.02;right:72px;text-wrap:balance}
+.nc-bt{max-width:36%;height:clamp(240px,64vw,320px);top:clamp(-170px,-40vw,-130px);right:clamp(10px,7vw,44px);filter:drop-shadow(0 4px 6px rgba(0,0,0,.16))}
+.nc-info{padding-right:38%;min-height:0}
+.nc-mk p{text-align:left;hyphens:manual}
+@media (min-width:520px){.nc-mk p{text-align:justify;hyphens:auto}}
+.nc-act .btn{font-size:15px;font-weight:700;padding:12px 18px}
+.nc-new{box-shadow:0 2px 8px rgba(0,0,0,.18)}
+.cardbtn{font-size:14px;white-space:nowrap;padding:8px 12px;background:color-mix(in srgb,var(--cc,#7a2e3f) 80%,#000)}
+.newtog{margin-top:8px}
+.newtog[aria-pressed="true"]{background:#8a5a12;color:#fff;border-color:#8a5a12}
