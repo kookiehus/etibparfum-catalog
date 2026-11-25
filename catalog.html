@@ -538,6 +538,11 @@ function card(d,regs,qs){
    :`<svg viewBox="0 0 100 130" style="--liquid:${LIQ[d.type]||'#ddd'}" role="img" aria-label="Флакон ${esc(d.number)}"><use href="#b-${ck}"/><text x="50" y="85" text-anchor="middle" font-size="${d.number.length>2?11:13}" font-weight="700" font-family="Manrope,sans-serif">${esc(d.number)}</text></svg>`;
   const act=admin?`<div class="act"><button class="btn sec" type="button" data-act="e" data-id="${d.id}">Изменить</button><button class="btn danger" type="button" data-act="d" data-id="${d.id}">Удалить</button></div>`:'';
   const grp=d.fn.length?`<p class="grp">${d.fn.map(f=>hl(f.toLowerCase(),regs)).join(' · ')}</p>`:'';
+  if(hc&&hc.ph&&hc.ph.length){
+    const k3=esc(ck2),tiles=[0,1,2].map(i=>hc.ph[i]?`<img src="${esc(hc.ph[i])}" alt="" loading="lazy">`:'<i></i>').join('');
+    return `<article class="card ncard c-${ck}"><div class="art"><div class="nl-ph" data-card="${k3}">${tiles}</div><h3>${hl(d.nm,regs,fzRanges(d.nm,qs,false))}</h3>${hc.new?'<span class="newb">Новинка</span>':''}${hc.bt?`<img class="nl-bt" src="${esc(hc.bt)}" alt="Флакон ${esc(d.number)}" loading="lazy" data-card="${k3}">`:''}</div>`
+     +`<div class="body"><p class="no">${hl(d.number,regs)}</p><div class="nl-info"><p><b>Направление:</b> ${esc(hc.dir)}</p>${hc.brand?`<p><b>Производитель:</b> ${esc(hc.brand)}</p>`:''}<p><b>Пол:</b> ${esc(hc.sex)}</p></div>${pron(d)}${compBlock(d,regs,qs)}`
+     +`<div class="bot"><button class="cardbtn" type="button" data-card="${k3}">Карточка аромата</button>${tipBox(d)}</div></div>${act}</article>`}
   return `<article class="card c-${ck}"><div class="art">${art}<span class="no">${hl(d.number,regs)}</span></div><div class="body"><h3>${hl(d.nm,regs,fzRanges(d.nm,qs,false))}</h3>${pron(d)}<p class="cat">${cn}</p>${grp}${compBlock(d,regs,qs)}<div class="bot">${hc?`<button class="cardbtn" type="button" data-card="${esc(ck2)}">Карточка аромата</button>`:''}${tipBox(d)}</div></div>${act}</article>`}
 
 $('grid').addEventListener('click',e=>{const t=e.target.closest('.cmp-t');if(!t)return;

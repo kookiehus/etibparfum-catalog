@@ -35,3 +35,27 @@
 #cats .chip[data-v="NEW"]{color:#a8701a}
 #cats .chip[data-v="NEW"][aria-pressed="true"]{background:#a8701a;color:#fff}
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]) #dCard{color-scheme:light}}
+/* ---- список ароматов в стиле карточек «Новинки», два в ряд ---- */
+#grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+@media (min-width:700px){#grid{grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:16px}}
+.card.ncard{background:var(--nc-paper);color:var(--nc-ink);border:0;border-radius:18px;box-shadow:0 6px 18px rgba(40,25,20,.12);overflow:hidden;color-scheme:light;-webkit-backdrop-filter:none;backdrop-filter:none}
+.ncard .art{aspect-ratio:auto;height:clamp(150px,44vw,230px);background:#1b1416;display:block;overflow:visible;z-index:1}
+.ncard .nl-ph{position:absolute;inset:0;display:grid;grid-template-columns:repeat(3,1fr);overflow:hidden;border-radius:18px 18px 0 0;cursor:pointer}
+.ncard .nl-ph img{width:100%;height:100%;object-fit:cover;display:block}
+.ncard .nl-ph i{background:linear-gradient(160deg,#c9bfb4,#8a7d70)}
+.ncard .art::before{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;border-radius:18px 18px 0 0;background:linear-gradient(180deg,rgba(0,0,0,.45),rgba(0,0,0,0) 55%)}
+.ncard .art h3{position:absolute;z-index:2;left:10px;right:54px;top:9px;margin:0;color:#fff;font:800 clamp(14px,4.3vw,19px)/1.02 var(--sans,Manrope,sans-serif)!important;letter-spacing:-.035em;text-shadow:0 2px 10px rgba(0,0,0,.4);overflow-wrap:anywhere;pointer-events:none}
+.ncard .art h3 mark{color:inherit}
+.ncard .nl-bt{position:absolute;z-index:2;right:4px;bottom:clamp(-70px,-17vw,-48px);height:clamp(130px,38vw,200px);width:auto;max-width:56%;object-fit:contain;filter:drop-shadow(0 8px 10px rgba(0,0,0,.3));cursor:pointer}
+.ncard .newb{z-index:3;left:8px;bottom:8px;font-size:9px;padding:2px 7px}
+.ncard .art .fav,.ncard .art button{z-index:3}
+.ncard .body{position:relative;padding:8px 10px 12px;background:transparent!important}
+.ncard .no{position:static;display:block;margin:0 0 4px;padding:0;background:none!important;color:var(--nc-ink)!important;border-radius:0;font:800 clamp(30px,9.5vw,44px)/.95 var(--sans,Manrope,sans-serif);letter-spacing:-.04em;min-height:clamp(52px,17vw,74px);padding-right:52%}
+.ncard .no mark{color:inherit}
+.ncard .nl-info{font-size:12.5px;line-height:1.38}
+.ncard .nl-info p{margin:0}.ncard .nl-info b{font-weight:800}
+.ncard .pron{font-size:12px;margin:6px 0 0;color:#5c5254}
+.ncard .cmp{margin-top:8px}
+.ncard .bot{margin-top:auto;padding-top:8px;display:flex;flex-direction:column;gap:6px}
+.ncard .cardbtn{margin:0;font-size:13.5px;padding:6px 10px;background:#2b1d1f;color:#fff}
+.ncard .tipbtn{font-size:13.5px}
