@@ -4,7 +4,7 @@
 #dCard[open]{display:flex;flex-direction:column}
 @media (max-width:699px){#dCard{margin:auto 0 0;width:100%;max-width:none;max-height:94vh;border-radius:22px 22px 0 0}#dCard[open]{animation:sheetin .42s var(--ease) backwards}}
 .nc{overflow:auto;padding-bottom:calc(16px + env(safe-area-inset-bottom,0px))}
-.nc-top{position:relative;height:clamp(210px,58vw,300px)}
+.nc-top{position:relative;height:clamp(240px,66vw,330px)}
 .nc-ph{position:absolute;inset:0;display:grid;grid-template-columns:repeat(3,1fr)}
 .nc-ph img{width:100%;height:100%;object-fit:cover;display:block}
 .nc-ph i{background:linear-gradient(160deg,#c9bfb4,#8a7d70)}
@@ -13,9 +13,9 @@
 .nc .x{position:absolute;z-index:3;right:10px;top:10px;background:rgba(255,255,255,.85);color:#151112;border-radius:50%}
 .nc-new{position:absolute;z-index:3;left:16px;bottom:12px;padding:4px 11px;border-radius:999px;background:#fff;color:#151112;font:800 11px var(--sans,Manrope,sans-serif);letter-spacing:.14em;text-transform:uppercase}
 .nc-mid{position:relative;display:grid;grid-template-columns:1fr auto;gap:4px 12px;padding:10px 16px 6px}
-.nc-bt{position:absolute;right:14px;top:clamp(-150px,-30vw,-110px);height:clamp(170px,46vw,230px);width:auto;max-width:42%;object-fit:contain;filter:drop-shadow(0 10px 14px rgba(0,0,0,.28));z-index:2;cursor:zoom-in}
+.nc-bt{position:absolute;right:8px;top:clamp(-200px,-46vw,-150px);height:clamp(290px,78vw,370px);width:auto;max-width:46%;object-fit:contain;filter:drop-shadow(0 10px 14px rgba(0,0,0,.28));z-index:2;cursor:zoom-in}
 .nc-no{font:800 clamp(58px,17vw,78px)/.95 var(--sans,Manrope,sans-serif);letter-spacing:-.04em;margin:0}
-.nc-info{grid-column:1/-1;margin:2px 0 0;font-size:15px;line-height:1.45}
+.nc-info{grid-column:1/-1;margin:2px 0 0;padding-right:min(50%,260px);min-height:clamp(70px,22vw,110px);font-size:15px;line-height:1.45}
 .nc-info p{margin:0}.nc-info b,.nc-pyr b{font-weight:800}
 .nc-pyr{grid-column:1/-1;margin:10px 0 0;padding:10px 0 0;border-top:1px solid rgba(21,17,18,.14);font-size:15px;line-height:1.45}
 .nc-pyr p{margin:0 0 2px}
