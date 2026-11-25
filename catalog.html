@@ -551,13 +551,13 @@ function render(){
   const isEx=d=>ex.some(r=>r.test(norm(d.number)));
   const rows=[];
   DATA.forEach((d,i)=>{
-    if((cat&&(cat==='NEW'?!(window.CARDS&&(CARDS[d.category+'|'+d.number]||{}).new):d.category!==cat))||(typ&&d.type!==typ)||(gl.length&&!gl.every(f=>hasG(d,f)))||neg.some(r=>test(r,d.hay)))return;
+    if((cat&&d.category!==cat)||(window.onlyNew&&!(window.CARDS&&(CARDS[d.category+'|'+d.number]||{}).new))||(typ&&d.type!==typ)||(gl.length&&!gl.every(f=>hasG(d,f)))||neg.some(r=>test(r,d.hay)))return;
     let s=0,nm=0;for(const t of tok){const [x,h]=tscore2(t,d,false);if(x===Infinity){s=Infinity;break}s+=x;nm|=h}
     if(s<Infinity)rows.push([s,i,d,nm||!tok.length?0:1])});
   RELAX=false;
   if(!rows.length&&tok.length&&tok.every(t=>t.k)){/* ничего не нашлось — показываем самые похожие, а не пустую страницу */
     DATA.forEach((d,i)=>{
-      if((cat&&(cat==='NEW'?!(window.CARDS&&(CARDS[d.category+'|'+d.number]||{}).new):d.category!==cat))||(typ&&d.type!==typ)||(gl.length&&!gl.every(f=>hasG(d,f)))||neg.some(r=>test(r,d.hay)))return;
+      if((cat&&d.category!==cat)||(window.onlyNew&&!(window.CARDS&&(CARDS[d.category+'|'+d.number]||{}).new))||(typ&&d.type!==typ)||(gl.length&&!gl.every(f=>hasG(d,f)))||neg.some(r=>test(r,d.hay)))return;
       let s=0;for(const t of tok){const x=tscore(t,d,true);if(x===Infinity){s=Infinity;break}s+=x}
       if(s<Infinity)rows.push([s,i,d,0])});
     if(rows.length){RELAX=true;rows.sort((a,b)=>a[0]-b[0]||a[1]-b[1]);rows.length=Math.min(rows.length,8)}}
@@ -587,7 +587,7 @@ function notes(){
     const t=norm($('q').value).split(/[\s,;]+/).filter(Boolean),n=norm(w);
     $('q').value=(t.includes(n)?t.filter(x=>x!==n):[...t,n]).join(' ');render()})}
 notes();
-chips($('cats'),[['Все',''],['Новинки','NEW'],...Object.entries(CAT).map(([k,v])=>[v[0],k])],v=>{cat=v||null;
+chips($('cats'),[['Все',''],...Object.entries(CAT).map(([k,v])=>[v[0],k])],v=>{cat=v||null;
   [...gsel].forEach(f=>{if(f[0]!=='*'&&!famSecs().includes(gSec(f)))gsel.delete(f)});drawFams();render()});
 /* группы: при выбранных «Женские/Мужские/Унисекс» — только свои, иначе все три раздела с подписями */
 function famSecs(){return GROUPS[cat]?[cat]:SECS}
