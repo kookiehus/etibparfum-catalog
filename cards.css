@@ -1,0 +1,37 @@
+/* Карточка аромата в стиле «Новинки» (как в документе «Маркетинговое описание») */
+:root{--nc-paper:#f3efe7;--nc-ink:#151112;--nc-green:#d6e2d5;--nc-yellow:#efe2bd;--nc-pink:#f6cfd2;--nc-brown:#e6d4c3;--nc-mauve:#e4d1d1}
+#dCard{padding:0;width:min(560px,100vw);max-height:92vh;overflow:hidden;background:var(--nc-paper);color:var(--nc-ink);border:0}
+#dCard[open]{display:flex;flex-direction:column}
+@media (max-width:699px){#dCard{margin:auto 0 0;width:100%;max-width:none;max-height:94vh;border-radius:22px 22px 0 0}#dCard[open]{animation:sheetin .42s var(--ease) backwards}}
+.nc{overflow:auto;padding-bottom:calc(16px + env(safe-area-inset-bottom,0px))}
+.nc-top{position:relative;height:clamp(240px,66vw,330px)}
+.nc-ph{position:absolute;inset:0;display:grid;grid-template-columns:repeat(3,1fr)}
+.nc-ph img{width:100%;height:100%;object-fit:cover;display:block}
+.nc-ph i{background:linear-gradient(160deg,#c9bfb4,#8a7d70)}
+.nc-top::before{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(180deg,rgba(0,0,0,.38),rgba(0,0,0,0) 46%)}
+.nc-top h2{position:absolute;z-index:2;left:16px;right:58px;top:14px;margin:0;color:#fff;font:800 clamp(24px,7.4vw,36px)/.98 var(--sans,Manrope,sans-serif);letter-spacing:-.045em;text-shadow:0 2px 14px rgba(0,0,0,.35);overflow-wrap:anywhere}
+.nc .x{position:absolute;z-index:3;right:10px;top:10px;background:rgba(255,255,255,.85);color:#151112;border-radius:50%}
+.nc-new{position:absolute;z-index:3;left:16px;bottom:12px;padding:4px 11px;border-radius:999px;background:#fff;color:#151112;font:800 11px var(--sans,Manrope,sans-serif);letter-spacing:.14em;text-transform:uppercase}
+.nc-mid{position:relative;display:grid;grid-template-columns:1fr auto;gap:4px 12px;padding:10px 16px 6px}
+.nc-bt{position:absolute;right:8px;top:clamp(-200px,-46vw,-150px);height:clamp(290px,78vw,370px);width:auto;max-width:46%;object-fit:contain;filter:drop-shadow(0 10px 14px rgba(0,0,0,.28));z-index:2;cursor:zoom-in}
+.nc-no{font:800 clamp(58px,17vw,78px)/.95 var(--sans,Manrope,sans-serif);letter-spacing:-.04em;margin:0}
+.nc-info{grid-column:1/-1;margin:2px 0 0;padding-right:min(50%,260px);min-height:clamp(70px,22vw,110px);font-size:15px;line-height:1.45}
+.nc-info p{margin:0}.nc-info b,.nc-pyr b{font-weight:800}
+.nc-pyr{grid-column:1/-1;margin:10px 0 0;padding:10px 0 0;border-top:1px solid rgba(21,17,18,.14);font-size:15px;line-height:1.45}
+.nc-pyr p{margin:0 0 2px}
+.nc-box{margin:12px 12px 0;padding:16px 16px 18px;border-radius:18px;background:var(--nc-c)}
+.nc-two{display:grid;grid-template-columns:1fr;gap:14px}
+@media (min-width:520px){.nc-two{grid-template-columns:1fr 1.15fr}}
+.nc-box h3{margin:0 0 6px;font:800 15px var(--sans,Manrope,sans-serif);letter-spacing:.01em;text-transform:uppercase}
+.nc-box p{margin:0 0 3px;font-size:14.5px;line-height:1.5}
+.nc-mk{margin-top:18px}.nc-mk h3{text-align:center}.nc-mk p{text-align:justify;hyphens:auto}
+.nc-dr{margin:10px 16px 0;font-size:12px;color:#5c5254}
+.nc-act{display:flex;gap:10px;flex-wrap:wrap;padding:14px 16px 0}
+.nc-act .btn{flex:1}
+.c-green{--nc-c:var(--nc-green)}.c-yellow{--nc-c:var(--nc-yellow)}.c-pink{--nc-c:var(--nc-pink)}.c-brown{--nc-c:var(--nc-brown)}.c-mauve{--nc-c:var(--nc-mauve)}
+/* кнопка в карточке списка и метка «Новинка» */
+.cardbtn{display:inline-flex;align-items:center;justify-content:center;gap:6px;min-height:48px;padding:8px 18px;border-radius:999px;border:0;background:var(--cc,#7a2e3f);color:var(--c-on,#fff);font:700 15px var(--sans,Manrope,sans-serif);cursor:pointer;width:100%;margin-bottom:8px}
+.art .newb{position:absolute;left:10px;bottom:10px;padding:3px 9px;border-radius:999px;background:#fff;color:#151112;font:800 10.5px var(--sans,Manrope,sans-serif);letter-spacing:.12em;text-transform:uppercase;box-shadow:0 2px 8px rgba(0,0,0,.18)}
+#cats .chip[data-v="NEW"]{color:#a8701a}
+#cats .chip[data-v="NEW"][aria-pressed="true"]{background:#a8701a;color:#fff}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) #dCard{color-scheme:light}}
